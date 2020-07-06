@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 
 
-<jsp:include page="/template/header.jsp"></jsp:include>
-
-
 <div align="center">
 
 	<img src="<%=request.getContextPath()%>/img/403ERROR.png">

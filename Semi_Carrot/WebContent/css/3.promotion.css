@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.promotion {
+    padding-top: 185px;
+    width: 100%;
+    z-index: 0;
+}
+
+.swiper-container {
+    width: inherit;
+    height: auto;
+    /*    min-height: 200px;
+                  max-height: 300px;*/
+}
+
+.swiper-container .swiper-slide,
+.swiper-container .swiper-slide > img {
+    margin-top: auto;
+    width: 100%;
+    height: 100%;
+}

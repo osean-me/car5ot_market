@@ -9,46 +9,50 @@
 }
 
 html {
-    width: 1903px;
+    width: 100%;
     text-align: center;
 }
 
 main {
-    width: 1903px;
+    width: 100%;
     height: auto;
     text-align: center;
 }
 
 header {
-    width: 1903px;
+    width: 100%;
+    display: flex;
     position: fixed;
     background-color: white;
+}
+
+.logo,
+.sign {
+    flex: 1;
+}
+
+.search {
+    flex: 3;
 }
 
 .logo,
 .search,
 .sign {
     margin: 20px 0px 0px 0px;
-    display: inline-block;
-}
-
-.logo {
-    margin-left: 300px;
-    float: left;
 }
 
 .search {
     text-align: center;
-    width: 40%;
-    padding: 0px 15px;
+    width: 100%;
+    padding: 0px;
 }
 
 .search-bar {
-    width: 80%;
+    width: 60%;
     height: 45px;
     font-size: 24px;
     padding-left: 30px;
-    margin-top: 8px;
+    margin: 8px 0px 0px 0px;
 
     border: 4px solid orange;
     border-top-left-radius: 15px;
@@ -70,7 +74,7 @@ header {
     border-bottom-left-radius: 0px;
     border-left: 0px;
 
-    background-image: url(../img/search.png);
+    background-image: url(../3.img/search.png);
     background-color: white;
     background-size: 35px;
     background-repeat: no-repeat;
@@ -78,10 +82,8 @@ header {
 }
 
 .sign {
-    margin-left: 40px;
-    margin-right: 110px;
-    width: 25%;
     float: right;
+    width: 25%;
 }
 
 .sign,

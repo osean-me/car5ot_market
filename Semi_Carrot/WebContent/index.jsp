@@ -10,13 +10,13 @@
 					<div class="swiper-wrapper">
 						<!-- 배치되는 이미지 혹은 화면 (슬라이더) -->
 						<div class="swiper-slide">
-							<img src="./img/banner-HM-1903X300.jpg">
-						</div>
-						<div class="swiper-slide">
-							<img src="./img/1903x300.jpg">
-						</div>
-						<div class="swiper-slide">
 							<img src="./img/banner_1903x300.png">
+						</div>
+						<div class="swiper-slide">
+							<img src="./img/banner_1903x300_2.png">
+						</div>
+						<div class="swiper-slide">
+							<img src="./img/banner_1903x300_3.png">
 						</div>
 					</div>
 					<!-- pagination 이 필요하다면 (선택) -->

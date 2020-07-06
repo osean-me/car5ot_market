@@ -62,7 +62,7 @@ public class MemberDAO {
 		ps.setString(3, mdto.getMember_pw());
 		ps.setLong(4, mdto.getMember_addr_no());
 		ps.setString(5, mdto.getMember_nick());
-		ps.setLong(6, mdto.getMember_phone());
+		ps.setString(6, mdto.getMember_phone());
 
 		ps.execute();
 
@@ -116,4 +116,34 @@ public class MemberDAO {
 		
 		return list;
 	}
+	//아이디 찾기 메소드
+		public String findId(MemberDTO mdto) throws Exception{
+			Connection con = getConnection();
+			
+			String sql = "SELECT member_id FROM member "
+					+ "WHERE member_nick=? and member_phone=?";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, mdto.getMember_nick());
+			ps.setString(2, mdto.getMember_phone());
+			ResultSet rs = ps.executeQuery();
+			
+
+			String member_id;
+			if(rs.next()) {
+				member_id = rs.getString("member_id");
+			}
+			else {
+				member_id = null;
+			}
+			
+			con.close();
+			
+			return member_id;
+		}
+	
+	
+	
+	
 }
+

@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String member_pw;
 	private long member_addr_no;
 	private String member_nick;
-	private long member_phone;
+	private String member_phone;
 	private String member_auth;
 	private String member_join;
 	private String member_login;
@@ -23,7 +23,7 @@ public class MemberDTO {
 		this.setMember_pw(rs.getString("MEMBER_PW"));
 		this.setMember_addr_no(rs.getLong("MEMBER_ADDR_NO"));
 		this.setMember_nick(rs.getString("MEMBER_NICK"));
-		this.setMember_phone(rs.getLong("MEMBER_PHONE"));
+		this.setMember_phone(rs.getString("MEMBER_PHONE"));
 		this.setMember_auth(rs.getString("MEMBER_AUTH"));
 		this.setMember_join(rs.getString("MEMBER_JOIN"));
 		this.setMember_login(rs.getString("MEMBER_LOGIN"));
@@ -69,11 +69,11 @@ public class MemberDTO {
 		this.member_nick = member_nick;
 	}
 
-	public long getMember_phone() {
+	public String getMember_phone() {
 		return member_phone;
 	}
 
-	public void setMember_phone(long member_phone) {
+	public void setMember_phone(String member_phone) {
 		this.member_phone = member_phone;
 	}
 

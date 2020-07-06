@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<!-- template head-->
 
 <div align="center">
 	
@@ -13,7 +13,7 @@
 				<tr>
 				
 					<td>
-						<input type="text" name="member_id"placeholder="아이디"size=30 required>
+						<input type="text" name="member_id"placeholder="이메일"size=30 required>
 					</td>
 				</tr>
 				<tr>
@@ -25,22 +25,26 @@
 			</tbody>
 			<tfoot>
 				<tr align="center">
-					<td colspan="2">
+					<td colspan="1">
 						<input type="button" value="Login"size=100>
 					</td>
 				</tr>
 				<tr align="center">
-					<td colspan="2">
-						<a href="find_id.jsp">아이디가 기억나지 않습니다</a>
+				<td colspan="1">
+				<input type = "checkbox">
+				<a>이메일 유지</a>
+					<tr align="center">
+					<td colspan="0">
+						<a href="find_id_pw.jsp">이메일/비밀번호 찾기</a>
+						<a href="join.jsp">/회원 가입</a>
 						<br>
-						<a href="#">비밀번호가 기억나지 않습니다</a>
 					</td>
 				</tr>
 			</tfoot>
 		</table>
 	</form>	
 	
-	
+</div>
 
-
+	<!-- template footer-->
 

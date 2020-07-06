@@ -46,7 +46,7 @@ public class JoinServlet extends HttpServlet {
 			String member_pw = req.getParameter("member_pw");
 			String member_nick = req.getParameter("member_nick");
 			long member_addr_no = addr_no.longValue();
-			long member_phone = Long.parseLong(req.getParameter("member_phone"));
+			String member_phone = req.getParameter("member_phone");
 			
 			// Member Constructor
 			MemberDTO mdto = new MemberDTO();

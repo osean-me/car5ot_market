@@ -93,57 +93,97 @@ public class MemberDAO {
 
 		return mdto;
 	}
-	
+
 	// [4] 전체 회원 조회
 	public List<MemberDTO> getMember() throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "SELECT * FROM MEMBER";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+
+		while (rs.next()) {
+			MemberDTO mdto = new MemberDTO(rs);
+
+			list.add(mdto);
+		}
+
+		con.close();
+
+		return list;
+	}
+
+	// [5] 아이디 찾기 메소드
+	public String findId(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT member_id FROM member " + "WHERE member_nick=? and member_phone=?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_nick());
+		ps.setString(2, mdto.getMember_phone());
+		ResultSet rs = ps.executeQuery();
+
+		String member_id;
+		if (rs.next()) {
+			member_id = rs.getString("member_id");
+		} else {
+			member_id = null;
+		}
+
+		con.close();
+
+		return member_id;
+	}
+
+	// [6] 로그인 메소드
+	public MemberDTO login(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		
+		ps.setString(1, mdto.getMember_id());
+		ps.setString(2, mdto.getMember_pw());
+		
 		ResultSet rs = ps.executeQuery();
-		
-		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		
-		while(rs.next()) {
-			MemberDTO mdto = new MemberDTO(rs);
+
+		if (rs.next()) {// 데이터가 있으면
 			
-			list.add(mdto);
+			mdto = new MemberDTO(rs);
+
+		} else {
+			
+			mdto = null;
+			
 		}
+
+		con.close();
+
+		return mdto;
+	}
+
+	// [7]로그인 갱신
+	public int updateLoginTime(String member_id, String member_pw) throws Exception {
 		
+		Connection con = getConnection();
+
+		String sql = "UPDATE MEMBER SET MEMBER_LOGIN = SYSDATE WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, member_id);
+		ps.setString(2, member_pw);
+		
+		int result = ps.executeUpdate();
+
 		con.close();
 		
-		return list;
+		return result;
 	}
-	//아이디 찾기 메소드
-		public String findId(MemberDTO mdto) throws Exception{
-			Connection con = getConnection();
-			
-			String sql = "SELECT member_id FROM member "
-					+ "WHERE member_nick=? and member_phone=?";
-
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, mdto.getMember_nick());
-			ps.setString(2, mdto.getMember_phone());
-			ResultSet rs = ps.executeQuery();
-			
-
-			String member_id;
-			if(rs.next()) {
-				member_id = rs.getString("member_id");
-			}
-			else {
-				member_id = null;
-			}
-			
-			con.close();
-			
-			return member_id;
-		}
-	
-	
-	
-	
 }
-

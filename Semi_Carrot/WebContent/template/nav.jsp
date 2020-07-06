@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+	
+	<%
+		String path = request.getContextPath();
+	%>
 		<nav>
-			<img src="./img/menu.png" id="nav-icon" onclick="navSwitch();">
+			<img src="<%=path %>/img/menu.png" id="nav-icon" onclick="navSwitch();">
 			<div class="nav-menu">
 				<ul>
 					<li class="medium-menu"><a href="" class="category">동네 중고</a>

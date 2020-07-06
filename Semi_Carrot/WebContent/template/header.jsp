@@ -1,8 +1,10 @@
+<%@page import="carrot.bean.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	
 	<%
 		String path = request.getContextPath();
+		MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 	%>
 	
 <!DOCTYPE html>
@@ -28,10 +30,9 @@
 
 <body>
 	<main>
-
 		<header>
 			<div class="logo">
-				<a href=""><img src="./img/logo.png"></a>
+				<a href="<%=path%>"><img src="<%=path %>/img/logo.png"></a>
 			</div>
 			<div class="search">
 				<form>
@@ -41,10 +42,16 @@
 				</form>
 			</div>
 			<div class="sign">
-				<img src="./img/user_icon.png" class="user-icon">
+				<img src="<%=path %>/img/user_icon.png" class="user-icon">
 				<ul>
-					<li><a href="">로그인</a></li>
-					<li><a href="">회원가입</a></li>
+					<li>
+					<%if(mdto == null) { %>
+					<a href="<%=path%>/user/login.jsp">로그인</a>
+					<%} else { %>
+					<a href="<%=path%>/user/logout.do">로그아웃</a>
+					<%} %>
+					</li>
+					<li><a href="<%=path%>/user/join.jsp">회원가입</a></li>
 				</ul>
 			</div>
 		</header>

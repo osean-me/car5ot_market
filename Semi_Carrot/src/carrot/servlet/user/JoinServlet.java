@@ -31,13 +31,13 @@ public class JoinServlet extends HttpServlet {
 
 			// Address Method
 			Long addr_no = adao.findAddrNo(addr_base);
-			if(addr_no == null) {
+			if (addr_no == null) {
 				addr_no = adao.getAddrNo();
 				adto.setAddr_no(addr_no);
 				adto.setAddr_state(addr_state);
 				adto.setAddr_city(addr_city);
 				adto.setAddr_base(addr_base);
-				
+
 				adao.insertAddr(adto);
 			}
 
@@ -47,25 +47,26 @@ public class JoinServlet extends HttpServlet {
 			String member_nick = req.getParameter("member_nick");
 			long member_addr_no = addr_no.longValue();
 			String member_phone = req.getParameter("member_phone");
-			
+
 			// Member Constructor
 			MemberDTO mdto = new MemberDTO();
 			MemberDAO mdao = new MemberDAO();
-			
+
 			// Member Method
 			long member_no = mdao.getMemberNo();
-			
+
 			mdto.setMember_no(member_no);
-			mdto.setMember_id(member_id);;
+			mdto.setMember_id(member_id);
+			;
 			mdto.setMember_pw(member_pw);
 			mdto.setMember_addr_no(member_addr_no);
 			mdto.setMember_nick(member_nick);
 			mdto.setMember_phone(member_phone);
-			
+
 			mdao.join(mdto);
-			
+
 			resp.sendRedirect("https://www.naver.com/");
-			
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

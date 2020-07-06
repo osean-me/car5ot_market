@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 
 import carrot.bean.dto.MemberDTO;
 
-
 public class MemberDAO {
 
 	private static DataSource src;
@@ -94,73 +93,97 @@ public class MemberDAO {
 
 		return mdto;
 	}
-	
+
 	// [4] 전체 회원 조회
 	public List<MemberDTO> getMember() throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "SELECT * FROM MEMBER";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ResultSet rs = ps.executeQuery();
-		
+
 		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		
-		while(rs.next()) {
+
+		while (rs.next()) {
 			MemberDTO mdto = new MemberDTO(rs);
-			
+
 			list.add(mdto);
 		}
-		
+
 		con.close();
-		
+
 		return list;
 	}
-	//로그인 메소드
-	public MemberDTO login(MemberDTO mdto)throws Exception{
+
+	// [5] 아이디 찾기 메소드
+	public String findId(MemberDTO mdto) throws Exception {
 		Connection con = getConnection();
-	
-		String sql = "SELECT * FROM member WHERE member_id=? AND member_pw=?";
+
+		String sql = "SELECT member_id FROM member " + "WHERE member_nick=? and member_phone=?";
+
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_nick());
+		ps.setString(2, mdto.getMember_phone());
+		ResultSet rs = ps.executeQuery();
+
+		String member_id;
+		if (rs.next()) {
+			member_id = rs.getString("member_id");
+		} else {
+			member_id = null;
+		}
+
+		con.close();
+
+		return member_id;
+	}
+
+	// [6] 로그인 메소드
+	public MemberDTO login(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
 		ps.setString(1, mdto.getMember_id());
 		ps.setString(2, mdto.getMember_pw());
-		ResultSet rs=ps.executeQuery();
 		
-		MemberDTO user;
-		if(rs.next()) {//데이터가 있으면
-			mdto = new MemberDTO();
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {// 데이터가 있으면
 			
-			mdto.setMember_no(rs.getLong("member_no"));
-			mdto.setMember_id(rs.getString("member_id"));
-			mdto.setMember_pw(rs.getString("member_pw"));
-			mdto.setMember_addr_no(rs.getLong("member_addr_no"));
-			mdto.setMember_nick(rs.getString("member_nick"));
-			mdto.setMember_phone(rs.getString("member_phone"));
-			mdto.setMember_auth(rs.getString("member_auth"));
-			mdto.setMember_join(rs.getString("member_join"));
-			mdto.setMember_login(rs.getString("member_login"));
-			mdto.setMember_join(rs.getString("member_buy"));
-			mdto.setMember_join(rs.getString("member_sell"));
-			mdto.setMember_join(rs.getString("member_like"));
+			mdto = new MemberDTO(rs);
+
+		} else {
+			
+			mdto = null;
+			
 		}
-		else {
-			user = null;
-		}
-		
+
 		con.close();
-		
+
 		return mdto;
-}
-//로그인 갱신
-	public void updateLoginTime(String id) throws Exception{
-		Connection con =getConnection();
+	}
+
+	// [7]로그인 갱신
+	public int updateLoginTime(String member_id, String member_pw) throws Exception {
 		
-		String sql ="UPDATE MEMBER SET MEMBER_login=sysdate WHERE member_id=? , member_pw=?";
-		PreparedStatement ps =con.prepareStatement(sql);
-		ps.setString(1, id);
-		ps.execute();
+		Connection con = getConnection();
+
+		String sql = "UPDATE MEMBER SET MEMBER_LOGIN = SYSDATE WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
 		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, member_id);
+		ps.setString(2, member_pw);
+		
+		int result = ps.executeUpdate();
+
 		con.close();
+		
+		return result;
 	}
-	}
+}

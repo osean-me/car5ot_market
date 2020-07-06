@@ -26,7 +26,7 @@
 			<tfoot>
 				<tr align="center">
 					<td colspan="1">
-						<input type="button" value="Login"size=100>
+						<input type="submit" value="Login"size=100>
 					</td>
 				</tr>
 				<tr align="center">

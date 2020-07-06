@@ -129,20 +129,20 @@ public class MemberDAO {
 		
 		MemberDTO user;
 		if(rs.next()) {//데이터가 있으면
-			user = new MemberDTO();
+			mdto = new MemberDTO();
 			
-			user.setMember_no(rs.getLong("member_no"));
-			user.setMember_id(rs.getString("member_id"));
-			user.setMember_pw(rs.getString("member_pw"));
-			user.setMember_addr_no(rs.getLong("member_addr_no"));
-			user.setMember_nick(rs.getString("member_nick"));
-			user.setMember_phone(rs.getString("member_phone"));
-			user.setMember_auth(rs.getString("member_auth"));
-			user.setMember_join(rs.getString("member_join"));
-			user.setMember_login(rs.getString("member_login"));
-			user.setMember_join(rs.getString("member_buy"));
-			user.setMember_join(rs.getString("member_sell"));
-			user.setMember_join(rs.getString("member_like"));
+			mdto.setMember_no(rs.getLong("member_no"));
+			mdto.setMember_id(rs.getString("member_id"));
+			mdto.setMember_pw(rs.getString("member_pw"));
+			mdto.setMember_addr_no(rs.getLong("member_addr_no"));
+			mdto.setMember_nick(rs.getString("member_nick"));
+			mdto.setMember_phone(rs.getString("member_phone"));
+			mdto.setMember_auth(rs.getString("member_auth"));
+			mdto.setMember_join(rs.getString("member_join"));
+			mdto.setMember_login(rs.getString("member_login"));
+			mdto.setMember_join(rs.getString("member_buy"));
+			mdto.setMember_join(rs.getString("member_sell"));
+			mdto.setMember_join(rs.getString("member_like"));
 		}
 		else {
 			user = null;
@@ -150,13 +150,13 @@ public class MemberDAO {
 		
 		con.close();
 		
-		return user;
+		return mdto;
 }
 //로그인 갱신
 	public void updateLoginTime(String id) throws Exception{
 		Connection con =getConnection();
 		
-		String sql ="UPDATE member SET member_login=sysdate WHERE member_id=?";
+		String sql ="UPDATE MEMBER SET MEMBER_login=sysdate WHERE member_id=? , member_pw=?";
 		PreparedStatement ps =con.prepareStatement(sql);
 		ps.setString(1, id);
 		ps.execute();

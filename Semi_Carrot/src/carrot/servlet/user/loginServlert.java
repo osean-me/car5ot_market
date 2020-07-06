@@ -32,7 +32,7 @@ try {
 				}
 			else {//로그인 성공
 				mdao.updateLoginTime(user.getMember_id());
-				req.getSession().setAttribute("userinfo", user);
+				req.getSession().setAttribute("mdto", user);
 						resp.sendRedirect(req.getContextPath());
 			}
 		}

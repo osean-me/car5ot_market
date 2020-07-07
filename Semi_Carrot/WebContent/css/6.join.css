@@ -67,22 +67,22 @@
 }
 
 #email {
-    background-image: url(./img/new-post-32.png);
+    background-image: url(../img/new-post-32.png);
 }
 
 /* 비밀번호 입력 폼 */
 input[name=member_pw] {
-    background-image: url(./img/key-32.png);
+    background-image: url(../img/key-32.png);
 }
 
 /* 닉네임 입력 폼 */
 input[name=member_nick] {
-    background-image: url(./img/rename-32.png);
+    background-image: url(../img/rename-32.png);
 }
 
 /* 휴대전화 입력 폼 */
 input[name=member_phone] {
-    background-image: url(./img/phone-2-32.png);
+    background-image: url(../img/phone-2-32.png);
 }
 
 /* 주소 입력 폼 */
@@ -111,13 +111,13 @@ input[name=member_phone] {
     border: 1px solid transparent;
 
     background-color: transparent;
-    background-image: url(./img/search.png);
+    background-image: url(../img/search.png);
     background-size: 24px;
     background-position: 0px 11px
 }
 
 #state {
-    background-image: url(./img/map-marker-2-32.png);
+    background-image: url(../img/map-marker-2-32.png);
 }
 
 /* submit 폼 디자인 */

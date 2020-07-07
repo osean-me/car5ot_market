@@ -8,14 +8,15 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script type="text/javascript" src="<%=path%>/js/join.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="<%=path %>/css/6.join.css" type="text/css" rel="stylesheet">
 
         <article class="join-article">
-            <form action="" method="post" class="join-form">
+            <form action="join.do" method="post" class="join-form">
                 <div class="email-form">
-                    <input type="text" name="member_id" placeholder="이메일" id="email">@
+                    <input type="text" name="email_id" placeholder="이메일" id="email" required="required">@
                     <span class="a"></span>
-                    <select name="member_id_email" onchange="changeTextBar();" id="selectEmail">
+                    <select name="email" onchange="changeTextBar();" id="selectEmail" required="required">
                         <option>선택</option>
                         <option value="@google.com">google.com</option>
                         <option value="@naver.com">naver.com</option>
@@ -26,19 +27,19 @@
                     </select>
                 </div>
                 <div>
-                    <input type="password" name="member_pw" placeholder="비밀번호">
+                    <input type="password" name="member_pw" placeholder="비밀번호" required="required">
                 </div>
                 <div>
-                    <input type="text" name="member_nick" placeholder="닉네임">
+                    <input type="text" name="member_nick" placeholder="닉네임" required="required">
                 </div>
                 <div id="addr">
-                    <input type="text" name="addr_state" placeholder="시 / 도" id="state" readonly>
-                    <input type="text" name="addr_city" placeholder="구 / 시" id="city" readonly>
-                    <input type="text" name="addr_base" placeholder="동 / 읍 / 면" id="base" readonly>
+                    <input type="text" name="addr_state" placeholder="시 / 도" id="state" readonly required="required">
+                    <input type="text" name="addr_city" placeholder="구 / 시" id="city" readonly required="required">
+                    <input type="text" name="addr_base" placeholder="동 / 읍 / 면" id="base" readonly required="required">
                     <input type="button" onclick="findAddr(); " value="">
                 </div>
                 <div>
-                    <input type="text" name="member_phone" placeholder="휴대전화">
+                    <input type="text" name="member_phone" placeholder="휴대전화" required="required">
                 </div>
                 <div id="checkList">
                     <div id="allAgree">
@@ -47,15 +48,15 @@
                     </div>
                     <div id="selectAgree">
                         <div>
-                            <input type="checkbox" id="first" class="selectBox">
+                            <input type="checkbox" id="first" class="selectBox" required="required">
                             <label for="first"><a style="color: red;">(필수)</a> 당근마켓 이용약관 동의</label>
                             <img src="<%=path %>/img/arrow-204-32.png" onclick="termsSwitch(1);">
                         </div>
                         <div class="terms">
-                            <textarea readonly></textarea>
+                            <textarea readonly>이용 약관1</textarea>
                         </div>
                         <div>
-                            <input type="checkbox" id="second" class="selectBox">
+                            <input type="checkbox" id="second" class="selectBox" required="required">
                             <label for="second"><a style="color: red;">(필수)</a> 개인정보 처리 방침 동의</label>
                             <img src="<%=path %>/img/arrow-204-32.png" onclick="termsSwitch(2);">
                         </div>

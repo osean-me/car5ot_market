@@ -43,7 +43,7 @@ function changeTextBar() {
     if (inputEmail == null) {
         if (selectEmail.value == "직접 입력") {
             var input = document.createElement("input");
-            input.setAttribute("name", "member_id_email2");
+            input.setAttribute("name", "email_2");
             input.setAttribute("id", "inputEmail");
             input.setAttribute("placeholder", "이메일 주소")
             a.appendChild(input);

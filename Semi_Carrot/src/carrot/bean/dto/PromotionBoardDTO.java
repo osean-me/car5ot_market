@@ -1,10 +1,10 @@
 package carrot.bean.dto;
 
-public class PromotionBoardDto {
+public class PromotionBoardDTO {
 	private long promotion_cate_num;
 	private String promotion_cate_title;
 	private long  board_no;
-	public PromotionBoardDto() {
+	public PromotionBoardDTO() {
 		super();
 	}
 	public long getPromotion_cate_num() {

@@ -1,9 +1,9 @@
 package carrot.bean.dto;
 
-public class BoardDto {
+public class BoardDTO {
 	private long board_no;
 	private  String board_title;
-	public BoardDto() {
+	public BoardDTO() {
 		super();
 	}
 	public long getBoard_no() {

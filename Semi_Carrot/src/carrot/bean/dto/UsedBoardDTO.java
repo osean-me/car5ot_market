@@ -1,10 +1,10 @@
 package carrot.bean.dto;
 
-public class UsedBoardDto {
+public class UsedBoardDTO {
 	private long used_cate_num;
 	private String used_cate_title;
 	private long board_no;
-	public UsedBoardDto() {
+	public UsedBoardDTO() {
 		super();
 	}
 	public long getUsed_cate_num() {

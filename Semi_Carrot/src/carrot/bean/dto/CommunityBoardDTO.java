@@ -1,10 +1,10 @@
 package carrot.bean.dto;
 
-public class CommunityBoardDto {
+public class CommunityBoardDTO {
 	private long community_cate_num;
 	private String community_cate_title;
 	private long board_no;
-	public CommunityBoardDto() {
+	public CommunityBoardDTO() {
 		super();
 	}
 	public long getCommunity_cate_num() {

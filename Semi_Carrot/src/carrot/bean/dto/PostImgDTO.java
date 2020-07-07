@@ -1,11 +1,11 @@
 package carrot.bean.dto;
 
-public class PostImgDto {
+public class PostImgDTO {
 	private long post_no;
 	private String post_img_name;
 	private String post_img;
 	private long post_img_size;
-	public PostImgDto() {
+	public PostImgDTO() {
 		super();
 	}
 	public long getPost_no() {

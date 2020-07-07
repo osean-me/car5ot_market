@@ -1,6 +1,6 @@
 package carrot.bean.dto;
 
-public class CommunityPostDto {
+public class CommunityPostDTO {
 	private int post_no;
 	
 	private String post_title;
@@ -72,7 +72,7 @@ public class CommunityPostDto {
 	public void setPost_img_no(long post_img_no) {
 		this.post_img_no = post_img_no;
 	}
-	public CommunityPostDto() {
+	public CommunityPostDTO() {
 		super();
 	}
 }

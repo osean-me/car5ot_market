@@ -168,7 +168,7 @@ public class MemberDAO {
 		return mdto;
 	}
 
-	// [7]로그인 갱신
+	// [7] 로그인 갱신
 	public int updateLoginTime(String member_id, String member_pw) throws Exception {
 		
 		Connection con = getConnection();
@@ -182,6 +182,24 @@ public class MemberDAO {
 		
 		int result = ps.executeUpdate();
 
+		con.close();
+		
+		return result;
+	}
+	
+	// [8] 회원 탈퇴
+	public int exitMember(long member_no) throws Exception {
+		
+		Connection con = getConnection();
+		
+		String sql = "DELETE MEMBER WHERE MEMBER_NO = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setLong(1, member_no);
+		
+		int result = ps.executeUpdate();
+		
 		con.close();
 		
 		return result;

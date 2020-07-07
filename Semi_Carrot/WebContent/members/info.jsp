@@ -59,7 +59,7 @@
 	
 	<h5><a href="check.jsp?go=change_password.jsp">비밀번호 변경하기</a></h5>
 	<h5><a href="check.jsp?go=change_info.jsp">개인정보 변경하기</a></h5>
-	<h5><a href="check.jsp?go=gone.do">회원탈퇴</a></h5>
+	<h5><a href="check.jsp?go=exit.do">회원탈퇴</a></h5>
 	
 </div>
 

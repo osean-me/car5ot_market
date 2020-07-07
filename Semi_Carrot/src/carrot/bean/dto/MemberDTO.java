@@ -1,6 +1,7 @@
 package carrot.bean.dto;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class MemberDTO {
 	private long member_no;
@@ -17,7 +18,7 @@ public class MemberDTO {
 		super();
 	}
 
-	public MemberDTO(ResultSet rs) throws Exception {
+	public MemberDTO(ResultSet rs) throws SQLException {
 		this.setMember_no(rs.getLong("MEMBER_NO"));
 		this.setMember_id(rs.getString("MEMBER_ID"));
 		this.setMember_pw(rs.getString("MEMBER_PW"));
@@ -100,5 +101,6 @@ public class MemberDTO {
 	public void setMember_login(String member_login) {
 		this.member_login = member_login;
 	}
-
+	
+	
 }

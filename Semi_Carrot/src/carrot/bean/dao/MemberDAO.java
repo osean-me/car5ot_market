@@ -186,4 +186,36 @@ public class MemberDAO {
 		
 		return result;
 	}
+	//(관리자)회원 검색 기능
+	public List<MemberDTO>search(String member_id)throws Exception{
+		
+		Connection con = getConnection();		
+		String sql="SELECT*FROM member WHERE instr(member_id,?)>0 ORDER BY member_id ASC";
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setString(1, member_id);
+		ResultSet rs=ps.executeQuery();
+		
+		List<MemberDTO>list = new ArrayList<MemberDTO>();
+		while(rs.next()) {
+			MemberDTO mdto = new MemberDTO(rs);
+			
+			list.add(mdto);
+			
+		}
+		
+		
+		
+		con.close();
+		return list;
+	
+	
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 }

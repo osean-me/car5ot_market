@@ -50,10 +50,11 @@
 					<%if(mdto == null) { %>
 					<a href="<%=path%>/user/login.jsp">로그인</a>
 					<%} else { %>
-					<a href="<%=path%>/user/logout.do">로그아웃</a>
+					<a href="<%=path%>/member/logout.do">로그아웃</a>
 					<%} %>
 					</li>
 					<li><a href="<%=path%>/user/join.jsp">회원가입</a></li>
+					<li><a href="<%=path%>/member/info.jsp">마이페이지</a></li>
 				</ul>
 			</div>
 		</header>

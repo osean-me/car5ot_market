@@ -18,7 +18,10 @@ import carrot.bean.dto.MemberDTO;
 public class JoinServlet extends HttpServlet {
    @Override
    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      try {
+	   
+	   req.setCharacterEncoding("UTF-8");
+	   
+	   try {
 
          // Address Table Data
          String addr_state = req.getParameter("addr_state");

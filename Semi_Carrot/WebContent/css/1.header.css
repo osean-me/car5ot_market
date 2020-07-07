@@ -8,6 +8,12 @@
     box-sizing: border-box;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
+
 html {
     width: 100%;
     text-align: center;

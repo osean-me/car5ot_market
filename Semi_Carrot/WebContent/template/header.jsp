@@ -15,6 +15,8 @@
 <script src="<%=path %>/js/swiper.min.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0"></script>
+	
+<script type="text/javascript" src="<%=path %>/js/join.js"></script>
 <link
 	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
 	rel="stylesheet">

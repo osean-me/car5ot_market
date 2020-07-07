@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.MemberDTO;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns="/user/find_id.do")
 public class UserFindIdServlet extends HttpServlet {
 

@@ -48,15 +48,13 @@
 					<img src="<%=path %>/img/user_icon.png" class="user-icon">
 				<%} %>
 				<ul>
-					<li>
 					<%if(mdto == null) { %>
-					<a href="<%=path%>/user/login.jsp">로그인</a>
-					<%} else { %>
-					<a href="<%=path%>/member/logout.do">로그아웃</a>
-					<%} %>
-					</li>
+					<li><a href="<%=path%>/user/login.jsp">로그인</a></li>
 					<li><a href="<%=path%>/user/join.jsp">회원가입</a></li>
+					<%} else { %>
+					<li><a href="<%=path%>/member/logout.do">로그아웃</a></li>
 					<li><a href="<%=path%>/member/info.jsp">마이페이지</a></li>
+					<%} %>
 				</ul>
 			</div>
 		</header>

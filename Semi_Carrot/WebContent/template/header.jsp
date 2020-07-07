@@ -42,7 +42,9 @@
 				</form>
 			</div>
 			<div class="sign">
-				<img src="<%=path %>/img/user_icon.png" class="user-icon">
+				<%if(mdto != null) { %>
+					<img src="<%=path %>/img/user_icon.png" class="user-icon">
+				<%} %>
 				<ul>
 					<li>
 					<%if(mdto == null) { %>

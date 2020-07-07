@@ -8,9 +8,9 @@
 			<img src="<%=path %>/img/menu.png" id="nav-icon" onclick="navSwitch();">
 			<div class="nav-menu">
 				<ul>
-					<li class="medium-menu"><a href="" class="category">동네 중고</a>
+					<li class="medium-menu"><a href="<%=path%>/board/post_list.jsp" class="category">동네 중고</a>
 						<ul>
-							<li><a href="">디지털 / 가전</a></li>
+							<li><a href="<%=path%>/board/post_list.jsp?">디지털 / 가전</a></li>
 							<li><a href="">가구 / 인테리어</a></li>
 							<li><a href="">유아동 / 유아도서</a></li>
 							<li><a href="">생활 / 가공식품</a></li>

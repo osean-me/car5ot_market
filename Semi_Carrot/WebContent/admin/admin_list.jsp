@@ -24,6 +24,7 @@
 <div align="center" style="padding-top: 200px">
 	<h2>회원 검색</h2>
 	
+<<<<<<< HEAD
 	<form action="admin_list.jsp" method="get">
 			<select name="type">
 			<option value="member_id">아이디</option>
@@ -34,6 +35,15 @@
 		<input type="text" name="keyword" required placeholder="검색어">		
 		<input type="submit" value="검색">
 		
+=======
+	<form action="list.do" method="get">
+	<%if(member_id==null){ %>
+	<input type="text" name="member_id" required> 
+	<%}else{ %>	
+	<input type="text" name="member_id" required value="<%=member_id %>"> 			
+	<%} %>
+	<input type="submit" value="검색">
+>>>>>>> branch 'yejin_관리자' of https://github.com/dip0cean/Semi_Carrot
 	</form>
 	
 	<hr>

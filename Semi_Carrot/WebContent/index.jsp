@@ -1,7 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+		String path = request.getContextPath();
+	%>
 	
 <jsp:include page="/template/header.jsp"></jsp:include>	
+
+<!-- Java Script -->
+<script src="<%=path %>/js/swiper.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0"></script>
+<script type="text/javascript" src="<%=path%>/js/index.js"></script>
+<!-- css -->	
+<link href="<%=path %>/css/swiper.min.css" type="text/css" rel="stylesheet">
+<link href="<%=path %>/css/3.promotion.css" type="text/css" rel="stylesheet">
+<link href="<%=path %>/css/4.article.css" type="text/css" rel="stylesheet">
+	
 		<aside>
 			<!-- 이미지 슬라이더 영역 -->
 			<div class="promotion">

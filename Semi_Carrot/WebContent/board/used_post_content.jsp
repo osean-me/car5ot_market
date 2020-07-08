@@ -44,6 +44,12 @@
 .left-item20{
 	width:20%;
 }
+.left-item16{
+	width:16.666%;
+}
+.left-item10{
+	width:10%;
+}
 .right-item34 {
 	width: 34%;
 }
@@ -52,6 +58,9 @@
 }
 .right-item75 {
 	width: 75%;
+}
+.right-item90 {
+	width: 90%;
 }
 /*폰트크기*/
 
@@ -99,9 +108,17 @@
 	float: right;
 }
 
+.reply-nick-font{
+	color:dimgray;
+	font-size:15px;
+}
+
 /*패딩*/
 .padding-top10{
 	padding-top:10px;
+}
+.padding-top25{
+	padding-top:25px;
 }
 
 .padding-top30{
@@ -109,6 +126,9 @@
 }
 .padding-top40{
 	padding-top:40px;
+}
+.padding-top50{
+	padding-top:50px;
 }
 .padding15 {
 	padding-bottom: 15px;
@@ -155,12 +175,12 @@
 	padding:10px;
 }
 .reply-div-padding{
-	padding-top:20px;
+	padding-top:15px;
 }
-
-.reply-list-margin{
-	margin
-}
+/*마진*/
+.reply-margin20{
+	margin:30px 0px 20px 0px;
+	}
 
 .like-button {
 	background-color: #CCCCCC;
@@ -209,6 +229,11 @@
 	 width: 100px;
    	 height:100px;
 	border-radius: 50px;
+}
+.reply-pic-circle{
+	 width: 50px;
+   	 height:50px;
+	border-radius: 25px;
 }
 textarea{
             resize:none;
@@ -260,35 +285,39 @@ textarea{
 
 
 	<div>
-		<p class="font20">연관상품<p>
+		<p class="font20 padding15 padding-top40">연관상품<p>
 		
 		<div class="padding40">
 			<div class="float-box float-left">
-				<div class="left-item20">
+				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/nature">
 					<p class="font17">사진1</p>
 				</div>
-				<div class="left-item20">
+				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/tech" >
 					<p class="font17">사진2</p>
 				</div>
-				<div class="left-item20">
+				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/people" >
 					<p class="font17">사진3</p>
 				</div>
-				<div class="left-item20">
+				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/animals" >
 					<p class="font17">사진4</p>
 				</div>
-				<div class="left-item20">
+				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
 					<p class="font17">사진5</p>
+				</div>
+				<div class="left-item16">
+					<img src="https://placeimg.com/150/150/architecture" >
+					<p class="font17">사진6</p>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="padding-top10">
+	<div class="padding-top50">
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
 				<div class="padding15">
@@ -338,8 +367,52 @@ textarea{
 					</div>
 				</div>
 				
-				<div>
-					
+			<div class="padding-top25 ">	
+					<div class="float-box float-left reply-margin20">
+						<div class="left-item10">
+							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+						</div>
+						<div class="right-item90">
+							<div class="reply-nick-font">
+								<span>닉네임뭐할까</span>
+								<span class="right-float gray-font">2분전</span>
+							</div>
+							<div class="font17 padding-top10">
+								가방 구매하고싶은데 팔렸나요?
+							</div>	
+						</div>
+					</div>
+					<hr>
+									<div class="float-box float-left reply-margin20">
+						<div class="left-item10">
+							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+						</div>
+						<div class="right-item90">
+							<div class="reply-nick-font">
+								<span>나는야부자</span>
+								<span class="right-float gray-font">5분전</span>
+							</div>
+							<div class="font17 padding-top10">
+								어머머 가방 너무 예쁘네요~^^
+							</div>	
+						</div>
+					</div>
+					<hr>
+					<div class="float-box float-left reply-margin20">
+						<div class="left-item10">
+							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+						</div>
+						<div class="right-item90">
+							<div class="reply-nick-font">
+								<span>욜로롤로</span>
+								<span class="right-float gray-font">15분전</span>
+							</div>
+							<div class="font17 padding-top10">
+								아~~~ 사고싶다 ㅜㅜ
+							</div>	
+						</div>
+					</div>
+					<hr>
 				</div>
 			</div>
 			

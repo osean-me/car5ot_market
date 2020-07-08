@@ -24,7 +24,7 @@
                     <span style="color: #7b7b7b;">@</span>
                     <span class="a"></span>
                     <select name="email" onchange="changeTextBar();" id="selectEmail" required="required">
-                        <option>선택</option>
+                        <option value="">선택</option>
                         <option value="@google.com">google.com</option>
                         <option value="@naver.com">naver.com</option>
                         <option value="@daum.net">daum.net</option>
@@ -35,13 +35,13 @@
                 </div>
                 <div id="idInfo"></div>
                 <div>
-                    <input type="password" name="member_pw" placeholder="비밀번호" required="required" oninput="checkPw();">
+                    <input type="password" name="member_pw" placeholder="비밀번호" required="required" maxlength="15" oninput="checkPw();">
                 </div>
-                <div id="pwInfo">
-                </div>
+                <div id="pwInfo"></div>
                 <div>
-                    <input type="text" name="member_nick" placeholder="닉네임" required="required">
+                    <input type="text" name="member_nick" placeholder="닉네임" required="required" maxlength="10" oninput="checkNick();">
                 </div>
+                <div id="nickInfo"></div>
                 <div id="addr">
                     <input type="text" name="addr_state" placeholder="시 / 도" id="state" readonly required="required">
                     <input type="text" name="addr_city" placeholder="구 / 시" id="city" readonly required="required">
@@ -49,8 +49,9 @@
                     <input type="button" onclick="findAddr(); " value="">
                 </div>
                 <div>
-                    <input type="text" name="member_phone" placeholder="휴대전화" required="required">
+                    <input type="text" name="member_phone" placeholder="휴대전화" required="required" maxlength="11" oninput="checkPhone();">
                 </div>
+                <div id="phoneInfo"></div>
                 <div id="checkList">
                     <div id="allAgree">
                         <input type="checkbox" id="all" onchange="allCheck();">

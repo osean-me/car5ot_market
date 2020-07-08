@@ -4,6 +4,7 @@
 
 	<article>
 			<img src="<%=request.getContextPath()%>/img/404ERROR.png">
+			 <h1><a href="/Carrot_Task/index.jsp">홈으로</a></h1>
 	</article>
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>

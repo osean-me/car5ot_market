@@ -6,6 +6,7 @@
 <article>
 <div align="center">
 <img src="<%=request.getContextPath()%>/img/403ERROR.png">
+ <h1><a href="/Carrot_Task/index.jsp">홈으로</a></h1>
 </div>
 </article>
 

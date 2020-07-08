@@ -93,6 +93,32 @@ public class MemberDAO {
 
 		return mdto;
 	}
+	
+	
+	//회원정보-상세조회(string>long으로 변환)
+	public MemberDTO get(String member_id) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_id= ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, member_id);
+
+		ResultSet rs = ps.executeQuery();
+
+		MemberDTO mdto;
+
+		if (rs.next()) {
+			mdto = new MemberDTO(rs);
+		} else {
+			mdto = null;
+		}
+
+		con.close();
+
+		return mdto;
+	}
 
 	// [4] 전체 회원 조회
 	public List<MemberDTO> getMember() throws Exception {
@@ -187,27 +213,49 @@ public class MemberDAO {
 		return result;
 	}
 
-	// (관리자)회원 검색 기능
-	public List<MemberDTO> search(String member_id) throws Exception {
-
-		Connection con = getConnection();
-		String sql = "SELECT*FROM member WHERE instr(member_id,?)>0 ORDER BY member_id ASC";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, member_id);
-		ResultSet rs = ps.executeQuery();
-
-		List<MemberDTO> list = new ArrayList<MemberDTO>();
-		while (rs.next()) {
-			MemberDTO mdto = new MemberDTO(rs);
-
-			list.add(mdto);
-
+	//(관리자) 회원 검색 기능
+		public List<MemberDTO> search(String member_id) throws Exception{
+			Connection con = getConnection();
+			
+			String sql = "SELECT * FROM MEMBER WHERE instr(member_id,?) > 0 ORDER BY member_id ASC";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MemberDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDTO mdto = new MemberDTO(rs);
+				list.add(mdto);
+			}
+			con.close();
+			return list;
 		}
-
-		con.close();
-		return list;
-
-	}
+		
+		//회원검색(타입추가)
+		
+		public List<MemberDTO> search(String type, String keyword) throws Exception{
+			Connection con = getConnection();
+			
+			String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
+			sql = sql.replace("#1", type);
+			System.out.println("sql = " + sql);
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+			
+					List<MemberDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDTO mdto = new MemberDTO(rs);
+				list.add(mdto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
+		
+		
 
 	// [8] 회원 탈퇴
 	public int exitMember(long member_no) throws Exception {

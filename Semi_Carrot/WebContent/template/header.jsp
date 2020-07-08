@@ -40,8 +40,8 @@
 					<li><a href="<%=path%>/user/login.jsp">로그인</a></li>
 					<li><a href="<%=path%>/user/join.jsp">회원가입</a></li>
 					<%} else { %>
-					<li><a href="<%=path%>/members/logout.do">로그아웃</a></li>
-					<li><a href="<%=path%>/members/info.jsp">마이페이지</a></li>
+					<li><a href="<%=path%>/member/logout.do">로그아웃</a></li>
+					<li><a href="<%=path%>/member/info.jsp">마이페이지</a></li>
 					<%} %>
 				</ul>
 			</div>

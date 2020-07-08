@@ -60,9 +60,9 @@ public class AddrDAO {
 		ps.setString(2, adto.getAddr_state());
 		ps.setString(3, adto.getAddr_city());
 		ps.setString(4, adto.getAddr_base());
-		
+
 		ps.execute();
-		
+
 		con.close();
 	}
 
@@ -79,7 +79,7 @@ public class AddrDAO {
 		ResultSet rs = ps.executeQuery();
 
 		Long addr_no;
-		
+
 		if (rs.next()) {
 			addr_no = rs.getLong(1);
 		} else {

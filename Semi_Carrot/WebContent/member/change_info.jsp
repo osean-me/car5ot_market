@@ -33,7 +33,7 @@
  				<tr>
  					<th>닉네임</th>
  					<td colspan="10">
- 						<input type="text" name="member_nick" value="<%=member.getMember_nick()%>" required>
+ 						<input type="text" name="member_nick" value="<%=member.getMember_nick()%>">
  					</td>
  				</tr>
  				<tr>

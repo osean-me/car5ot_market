@@ -17,7 +17,8 @@
             		<img src="<%=path %>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
             	</div>
                 <div class="email-form">
-                    <input type="text" name="email_id" placeholder="이메일" id="email" required="required">@
+                    <input type="text" name="email_id" placeholder="이메일" id="email" required="required">
+                    <span style="color: #7b7b7b;">@</span>
                     <span class="a"></span>
                     <select name="email" onchange="changeTextBar();" id="selectEmail" required="required">
                         <option>선택</option>

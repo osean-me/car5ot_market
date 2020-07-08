@@ -13,6 +13,9 @@
 
         <article class="join-article">
             <form action="join.do" method="post" class="join-form">
+           		<div>
+            		<img src="<%=path %>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
+            	</div>
                 <div class="email-form">
                     <input type="text" name="email_id" placeholder="이메일" id="email" required="required">@
                     <span class="a"></span>

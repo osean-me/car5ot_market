@@ -8,7 +8,13 @@
 
 .join-form {
     /*            border: 1px solid black;*/
-    padding-top: 100px;
+    padding-top: 220px;
+}
+
+/* 로고 이미지 */
+#logo_icon {
+	width: 150px;
+	height: auto;
 }
 
 /* input 폼 */
@@ -51,6 +57,7 @@
 
 /* 이메일 입력 폼 */
 .email-form {
+	margin-top: 0px;
     display: inline-block;
     width: auto;
 }
@@ -64,6 +71,8 @@
     margin-right: 0px;
     margin-bottom: 0px;
     border: 1px solid transparent;
+    background-color: transparent;
+    color: #7b7b7b;
 }
 
 #email {
@@ -123,7 +132,7 @@ input[name=member_phone] {
 /* submit 폼 디자인 */
 #join-submit {
     margin: 60px 0px 0px 0px;
-    height: 100px;
+    height: 70Spx;
     font-size: 28px;
     color: rgba(255, 137, 0, 0.87);
     cursor: pointer;

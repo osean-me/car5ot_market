@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.AddrDAO"%>
+<%@page import="carrot.bean.dto.AddrDTO"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -10,6 +12,19 @@
 	Long member_no = member.getMember_no();
 	MemberDAO mdao = new MemberDAO();
 	MemberDTO mdto = mdao.get(member_no);
+	
+	/*
+		현재 회원번호 가지고 있음.
+		회원번호를 가지고 있으면 회원의 주소 고유번호를 알 수 있어요.
+		
+		근데 나는 이 회원의 주소 고유번호를 이용해서 어드레스의 이 번호에 대한 주소(데이터) 를 보고 싶어요.
+	*/
+	
+	long member_addr_no = mdto.getMember_addr_no();
+	
+	AddrDAO adao = new AddrDAO();
+	
+	AddrDTO adto = adao.get(member_addr_no);
 
 %>
 
@@ -25,7 +40,7 @@
 		<tbody>
 			<tr>
 
-				<td colspan="3" align="center">마이 페이지 정보</td>
+				<td colspan="50" align="center">마이 페이지 정보</td>
 			</tr>
 
 			<tr>
@@ -37,8 +52,10 @@
 				<td><%=mdto.getMember_nick()%></td>
 			</tr>
 			<tr>
-				<th>주소</th>
-				<td><%=mdto.getMember_addr_no()%></td>
+				<th >주소</th>
+				<td><%=adto.getAddr_state()%>
+				<%=adto.getAddr_city()%>
+				<%=adto.getAddr_base()%></td>
 			</tr>
 			<tr>
 				<th>전화번호</th>

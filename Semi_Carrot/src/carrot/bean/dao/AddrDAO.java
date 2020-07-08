@@ -90,4 +90,29 @@ public class AddrDAO {
 
 		return addr_no;
 	}
+
+	// [4] 주소 고유 번호를 이용해서 주소 조회 (주소 고유 번호로 단일 조회)
+	public AddrDTO get(long member_addr_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM ADDRESS WHERE ADDR_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_addr_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		AddrDTO adto;
+
+		if (rs.next()) {
+			adto = new AddrDTO(rs);
+		} else {
+			adto = null;
+		}
+
+		con.close();
+		
+		return adto;
+	}
 }

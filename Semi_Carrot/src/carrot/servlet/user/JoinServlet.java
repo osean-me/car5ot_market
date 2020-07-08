@@ -17,8 +17,11 @@ import carrot.bean.dto.MemberDTO;
 @WebServlet(urlPatterns = "/user/join.do")
 public class JoinServlet extends HttpServlet {
    @Override
-   protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      try {
+   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	   
+	   req.setCharacterEncoding("UTF-8");
+	   
+	   try {
 
          // Address Table Data
          String addr_state = req.getParameter("addr_state");
@@ -41,8 +44,21 @@ public class JoinServlet extends HttpServlet {
             adao.insertAddr(adto);
          }
 
-         // Member Table Data
-         String member_id = req.getParameter("member_id");
+         // Member Table Data      
+         
+         // Member ID 검열
+         String email_id = req.getParameter("email_id");
+         String email = req.getParameter("email");
+         
+         String member_id;
+         
+         if(email != null) {
+        	 member_id = email_id + email;
+         } else {
+             String email_2 = req.getParameter("email_2");
+        	 member_id = email_id + email_2;
+         }
+                 
          String member_pw = req.getParameter("member_pw");
          String member_nick = req.getParameter("member_nick");
          long member_addr_no = addr_no.longValue();
@@ -64,7 +80,7 @@ public class JoinServlet extends HttpServlet {
 
          mdao.join(mdto);
 
-         resp.sendRedirect("https://www.naver.com/");
+         resp.sendRedirect(req.getContextPath());
 
       } catch (Exception e) {
          // TODO Auto-generated catch block

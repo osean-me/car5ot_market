@@ -12,7 +12,6 @@ import javax.sql.DataSource;
 
 import carrot.bean.dto.MemberDTO;
 
-
 public class MemberDAO {
 
 	private static DataSource src;
@@ -146,22 +145,22 @@ public class MemberDAO {
 		Connection con = getConnection();
 
 		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, mdto.getMember_id());
 		ps.setString(2, mdto.getMember_pw());
-		
+
 		ResultSet rs = ps.executeQuery();
 
 		if (rs.next()) {// 데이터가 있으면
-			
+
 			mdto = new MemberDTO(rs);
 
 		} else {
-			
+
 			mdto = null;
-			
+
 		}
 
 		con.close();
@@ -169,39 +168,56 @@ public class MemberDAO {
 		return mdto;
 	}
 
-	// [7]로그인 갱신
+	// [7] 로그인 갱신
 	public int updateLoginTime(String member_id, String member_pw) throws Exception {
-		
+
 		Connection con = getConnection();
 
 		String sql = "UPDATE MEMBER SET MEMBER_LOGIN = SYSDATE WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, member_id);
 		ps.setString(2, member_pw);
-		
+
 		int result = ps.executeUpdate();
 
 		con.close();
-		
+
 		return result;
 	}
-	//[8]정보 변경 메소드
-		public void changeInfo(MemberDTO mdto) throws Exception {
-			Connection con = getConnection();
-			
-			String sql = "UPDATE member SET "
-					+ "member_nick=?, member_addr_no=?, member_phone=?"
-					+ "WHERE member_id=?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, mdto.getMember_nick());
-			ps.setLong(2, mdto.getMember_addr_no());
-			ps.setString(3, mdto.getMember_phone());
-			ps.setString(4, mdto.getMember_id());
-			ps.execute();
-			
-			con.close();
-		}
+
+	// [8]정보 변경 메소드
+	public void changeInfo(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "UPDATE member SET " + "member_nick=?, member_addr_no=?, member_phone=?" + "WHERE member_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mdto.getMember_nick());
+		ps.setLong(2, mdto.getMember_addr_no());
+		ps.setString(3, mdto.getMember_phone());
+		ps.setString(4, mdto.getMember_id());
+		ps.execute();
+
+		con.close();
+	}
+
+	// [8] 회원 탈퇴
+	public int exitMember(long member_no) throws Exception {
+
+		Connection con = getConnection();
+
+		String sql = "DELETE MEMBER WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		int result = ps.executeUpdate();
+
+		con.close();
+
+		return result;
+	}
+
 }
-		

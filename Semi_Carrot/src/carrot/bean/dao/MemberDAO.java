@@ -212,8 +212,23 @@ public class MemberDAO {
 
 		return result;
 	}
+  
+	// [8]정보 변경 메소드
+	public void changeInfo(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
 
-	//(관리자) 회원 검색 기능
+		String sql = "UPDATE member SET " + "member_nick=?, member_addr_no=?, member_phone=? " + "WHERE member_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, mdto.getMember_nick());
+		ps.setLong(2, mdto.getMember_addr_no());
+		ps.setString(3, mdto.getMember_phone());
+		ps.setLong(4, mdto.getMember_no());
+		ps.execute();
+
+		con.close();
+	}
+   	//(관리자) 회원 검색 기능
 		public List<MemberDTO> search(String member_id) throws Exception{
 			Connection con = getConnection();
 			
@@ -254,8 +269,6 @@ public class MemberDAO {
 			
 			return list;
 		}
-		
-		
 
 	// [8] 회원 탈퇴
 	public int exitMember(long member_no) throws Exception {

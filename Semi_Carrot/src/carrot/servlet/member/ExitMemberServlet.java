@@ -12,7 +12,7 @@ import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/members/exit.do")
+@WebServlet(urlPatterns = "/members/gone.do")
 public class ExitMemberServlet extends HttpServlet {
 
 	@Override

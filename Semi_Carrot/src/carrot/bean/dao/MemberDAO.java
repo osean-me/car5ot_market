@@ -145,22 +145,22 @@ public class MemberDAO {
 		Connection con = getConnection();
 
 		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, mdto.getMember_id());
 		ps.setString(2, mdto.getMember_pw());
-		
+
 		ResultSet rs = ps.executeQuery();
 
 		if (rs.next()) {// 데이터가 있으면
-			
+
 			mdto = new MemberDTO(rs);
 
 		} else {
-			
+
 			mdto = null;
-			
+
 		}
 
 		con.close();
@@ -168,54 +168,63 @@ public class MemberDAO {
 		return mdto;
 	}
 
-	// [7]로그인 갱신
+	// [7] 로그인 갱신
 	public int updateLoginTime(String member_id, String member_pw) throws Exception {
-		
+
 		Connection con = getConnection();
 
 		String sql = "UPDATE MEMBER SET MEMBER_LOGIN = SYSDATE WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, member_id);
 		ps.setString(2, member_pw);
-		
+
 		int result = ps.executeUpdate();
 
 		con.close();
-		
+
 		return result;
 	}
-	//(관리자)회원 검색 기능
-	public List<MemberDTO>search(String member_id)throws Exception{
-		
-		Connection con = getConnection();		
-		String sql="SELECT*FROM member WHERE instr(member_id,?)>0 ORDER BY member_id ASC";
-		PreparedStatement ps=con.prepareStatement(sql);
+
+	// (관리자)회원 검색 기능
+	public List<MemberDTO> search(String member_id) throws Exception {
+
+		Connection con = getConnection();
+		String sql = "SELECT*FROM member WHERE instr(member_id,?)>0 ORDER BY member_id ASC";
+		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, member_id);
-		ResultSet rs=ps.executeQuery();
-		
-		List<MemberDTO>list = new ArrayList<MemberDTO>();
-		while(rs.next()) {
+		ResultSet rs = ps.executeQuery();
+
+		List<MemberDTO> list = new ArrayList<MemberDTO>();
+		while (rs.next()) {
 			MemberDTO mdto = new MemberDTO(rs);
-			
+
 			list.add(mdto);
-			
+
 		}
-		
-		
-		
+
 		con.close();
 		return list;
-	
-	
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
+
+	// [8] 회원 탈퇴
+	public int exitMember(long member_no) throws Exception {
+
+		Connection con = getConnection();
+
+		String sql = "DELETE MEMBER WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		int result = ps.executeUpdate();
+
+		con.close();
+
+		return result;
+	}
+
 }

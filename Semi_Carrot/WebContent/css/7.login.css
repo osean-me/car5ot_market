@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+/* 로그인 기본 아티클 */
+#login-article {
+    height: auto;
+}
+
+/* 로그인 기본 폼 */
+#login-form {
+    padding-top: 220px;
+    padding-bottom: 50px;
+    font-size: 18px;
+}
+
+/* 로고 이미지 사이즈 */
+#login-form > div > img {
+    margin-bottom: 50px;
+    width: 150px;
+    height: auto;
+}
+
+
+/* Input 타입 기본 폼 */
+#id,
+#pw,
+#submit {
+    width: 500px;
+    height: 55px;
+    margin: 15px;
+}
+
+
+/* 이메일 / 비밀번호 */
+#id,
+#pw {
+    padding-left: 60px;
+
+    font-size: 18px;
+    border: 1px solid transparent;
+    border-bottom: 3px solid #ff8900;
+
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 32px;
+    background-position: 5px 0.5rem;
+}
+
+#id {
+    background-image: url(../img/new-post-32.png);
+}
+
+#pw {
+    background-image: url(../img/key-32.png);
+}
+
+/* 로그인 부가 옵션 기본 폼 */
+#login-tool {
+    width: 500px;
+    height: auto;
+    display: inline-block;
+    margin-top: 25px;
+}
+
+
+/* 로그인 부가 옵션 자식 태그 기본 폼 */
+#login-tool > input[type=checkbox],
+#login-tool > label,
+#login-tool > span > a {
+    position: relative;
+    font-size: 12px;
+    color: #7b7b7b;
+}
+
+
+/* 자동 로그인 */
+#login-tool > input[type=checkbox],
+#login-tool > label {
+    float: left;
+}
+
+
+#login-tool > input[type=checkbox] {
+    top: 5px;
+    margin: 0px 10px;
+}
+
+#login-tool > label {
+    top: 2px;
+    margin-left: 5px;
+}
+
+
+/* 찾기 / 회원가입 */
+#login-tool > span {
+    float: right;
+    margin-left: 130px;
+}
+
+#login-tool > span > a {
+    top: -4px;
+    text-decoration: none;
+    margin: 0px 10px;
+
+}
+
+/* 로그인 부가 옵션 hover */
+#login-tool > span > a:hover,
+#login-tool > label:hover {
+    color: #ff8900;
+}
+
+/* Submit(전송버튼) */
+#submit {
+    margin-top: 100px;
+    height: 70px;
+    cursor: pointer;
+
+    font-size: 28px;
+    color: rgba(255, 137, 0, 0.87);
+    border: 3px solid rgba(255, 137, 0, 0.87);
+    border-radius: 15px;
+
+    background-color: transparent;
+}
+
+#submit:hover {
+    border: 1px solid transparent;
+    background-color: rgba(255, 137, 0, 0.87);
+    color: white;
+}

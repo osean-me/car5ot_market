@@ -15,7 +15,7 @@ List<MemberDTO>list=mdao.search(member_id);
 <div align="center" style="padding-top: 200px;">
 	<h2>회원검색</h2>
 	
-	<form action="list.jsp" method="get">
+	<form action="list.do" method="get">
 	<%if(member_id==null){ %>
 	<input type="text" name="member_id" required> 
 	<%}else{ %>	

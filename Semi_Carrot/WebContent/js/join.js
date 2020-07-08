@@ -46,6 +46,7 @@ function changeTextBar() {
             input.setAttribute("name", "email_2");
             input.setAttribute("id", "inputEmail");
             input.setAttribute("placeholder", "이메일 주소")
+			input.setAttribute("oninput","checkId();")
             a.appendChild(input);
         }
     } else {
@@ -92,6 +93,53 @@ function termsSwitch(num) {
         } else {
             terms[2].classList.remove("active");
         }
-
     }
+}
+
+function checkId() {
+	var inputEmail = document.querySelector("#inputEmail").value;
+	
+	var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	
+	var idInfo = document.querySelector("#idInfo");
+	var idInfoText = document.querySelector("#idInfoText");
+		
+	if (inputEmail != null) {
+		if(inputEmail.match(regex) == null && idInfoText == null) {
+			
+			var idInfoText = document.createElement("div");
+			idInfoText.textContent = "이메일 형식을 입력해주세요.";
+			idInfoText.setAttribute("id","idInfoText");
+			idInfoText.setAttribute("style","color: red; font-size: 12px;");
+			idInfo.appendChild(idInfoText);
+		
+		} else if(inputEmail.match(regex) != null && idInfoText != null) {
+		
+			idInfo.removeChild(idInfo.childNodes[0]);
+			
+		}
+	}	
+}
+
+function checkPw() {
+	var pw = document.querySelector("input[name=member_pw]").value;
+	
+	var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/;
+	
+	var pwInfo = document.querySelector("#pwInfo");
+	var pwInfoText = document.querySelector("#pwInfoText");
+	
+	if(pw.match(regex) == null && pwInfoText == null) {
+		
+		var pwInfoText = document.createElement("div");
+		pwInfoText.textContent = "8~15자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
+		pwInfoText.setAttribute("id","pwInfoText");
+		pwInfoText.setAttribute("style","color: red; font-size: 12px;");
+		pwInfo.appendChild(pwInfoText);
+		
+	} else if(pw.match(regex) != null && pwInfoText != null) {
+		
+		pwInfo.removeChild(pwInfo.childNodes[0]);
+		
+	}
 }

@@ -40,9 +40,7 @@ public class loginServlert extends HttpServlet {
 				req.getSession().setAttribute("memberinfo", memberinfo);
 
 				resp.sendRedirect(req.getContextPath());
-				
-				System.out.println("member_id = " + memberinfo.getMember_id());
-				System.out.println("session =" + req.getSession().getAttribute("memberinfo"));
+
 			} else {
 				resp.sendRedirect(req.getContextPath() + "/user/login.jsp?failed");
 			}

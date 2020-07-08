@@ -93,6 +93,32 @@ public class MemberDAO {
 
 		return mdto;
 	}
+	
+	
+	//회원정보-상세조회(string>long으로 변환)
+	public MemberDTO get(String member_id) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_id= ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, member_id);
+
+		ResultSet rs = ps.executeQuery();
+
+		MemberDTO mdto;
+
+		if (rs.next()) {
+			mdto = new MemberDTO(rs);
+		} else {
+			mdto = null;
+		}
+
+		con.close();
+
+		return mdto;
+	}
 
 	// [4] 전체 회원 조회
 	public List<MemberDTO> getMember() throws Exception {
@@ -145,22 +171,22 @@ public class MemberDAO {
 		Connection con = getConnection();
 
 		String sql = "SELECT * FROM MEMBER WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, mdto.getMember_id());
 		ps.setString(2, mdto.getMember_pw());
-		
+
 		ResultSet rs = ps.executeQuery();
 
 		if (rs.next()) {// 데이터가 있으면
-			
+
 			mdto = new MemberDTO(rs);
 
 		} else {
-			
+
 			mdto = null;
-			
+
 		}
 
 		con.close();
@@ -168,22 +194,98 @@ public class MemberDAO {
 		return mdto;
 	}
 
-	// [7]로그인 갱신
+	// [7] 로그인 갱신
 	public int updateLoginTime(String member_id, String member_pw) throws Exception {
-		
+
 		Connection con = getConnection();
 
 		String sql = "UPDATE MEMBER SET MEMBER_LOGIN = SYSDATE WHERE MEMBER_ID = ? AND MEMBER_PW = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, member_id);
 		ps.setString(2, member_pw);
-		
+
 		int result = ps.executeUpdate();
 
 		con.close();
-		
+
 		return result;
 	}
+  
+	// [8]정보 변경 메소드
+	public void changeInfo(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "UPDATE member SET " + "member_nick=?, member_addr_no=?, member_phone=? " + "WHERE member_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, mdto.getMember_nick());
+		ps.setLong(2, mdto.getMember_addr_no());
+		ps.setString(3, mdto.getMember_phone());
+		ps.setLong(4, mdto.getMember_no());
+		ps.execute();
+
+		con.close();
+	}
+   	//(관리자) 회원 검색 기능
+		public List<MemberDTO> search(String member_id) throws Exception{
+			Connection con = getConnection();
+			
+			String sql = "SELECT * FROM MEMBER WHERE instr(member_id,?) > 0 ORDER BY member_id ASC";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			ResultSet rs = ps.executeQuery();
+			
+			List<MemberDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDTO mdto = new MemberDTO(rs);
+				list.add(mdto);
+			}
+			con.close();
+			return list;
+		}
+		
+		//회원검색(타입추가)
+		
+		public List<MemberDTO> search(String type, String keyword) throws Exception{
+			Connection con = getConnection();
+			
+			String sql = "SELECT * FROM member WHERE instr(#1, ?) > 0 ORDER BY #1 ASC";
+			sql = sql.replace("#1", type);
+			System.out.println("sql = " + sql);
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+			
+					List<MemberDTO> list = new ArrayList<>();
+			while(rs.next()) {
+				MemberDTO mdto = new MemberDTO(rs);
+				list.add(mdto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
+
+	// [8] 회원 탈퇴
+	public int exitMember(long member_no) throws Exception {
+
+		Connection con = getConnection();
+
+		String sql = "DELETE MEMBER WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		int result = ps.executeUpdate();
+
+		con.close();
+
+		return result;
+	}
+
 }

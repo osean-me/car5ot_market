@@ -12,18 +12,8 @@
 <head>
 <meta charset="UTF-8">
 <title>어서오세요! 당근마켓!</title>
-<script src="<%=path %>/js/swiper.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0"></script>
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
-	rel="stylesheet">
-<link href="<%=path %>/css/swiper.min.css" type="text/css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link href="<%=path %>/css/1.header.css" type="text/css" rel="stylesheet">
-<link href="<%=path %>/css/2.nav.css" type="text/css" rel="stylesheet">
-<link href="<%=path %>/css/3.promotion.css" type="text/css" rel="stylesheet">
-<link href="<%=path %>/css/4.article.css" type="text/css" rel="stylesheet">
-<link href="<%=path %>/css/5.footer.css" type="text/css" rel="stylesheet">
 <style>
 </style>
 </head>
@@ -46,14 +36,13 @@
 					<img src="<%=path %>/img/user_icon.png" class="user-icon">
 				<%} %>
 				<ul>
-					<li>
 					<%if(mdto == null) { %>
-					<a href="<%=path%>/user/login.jsp">로그인</a>
-					<%} else { %>
-					<a href="<%=path%>/user/logout.do">로그아웃</a>
-					<%} %>
-					</li>
+					<li><a href="<%=path%>/user/login.jsp">로그인</a></li>
 					<li><a href="<%=path%>/user/join.jsp">회원가입</a></li>
+					<%} else { %>
+					<li><a href="<%=path%>/member/logout.do">로그아웃</a></li>
+					<li><a href="<%=path%>/member/info.jsp">마이페이지</a></li>
+					<%} %>
 				</ul>
 			</div>
 		</header>

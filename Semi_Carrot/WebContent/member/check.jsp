@@ -7,14 +7,12 @@
     <%String go = request.getParameter("go");
     %>
     
+      
+<jsp:include page="/template/header.jsp"></jsp:include>
     
-    
-    
-    <!-- header -->
-    
-    <div align ="center">
+    <div align ="center"style="padding-top:200px;">
     <h2> 비밀번호 를 입력 해 주세요</h2>
-    
+
     <form action="check.do"method="post">
     
     <input type="hidden"name="go"value=<%=go %>>
@@ -31,4 +29,4 @@
     
     
     
-    <!-- footer -->
+<jsp:include page="/template/footer.jsp"></jsp:include>

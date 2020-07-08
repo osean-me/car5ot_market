@@ -1,12 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+		String path = request.getContextPath();
+	%>
+	
 <jsp:include page="/template/header.jsp"></jsp:include>
-<%
-	String path = request.getContextPath();
-%>
-<link href="<%=path%>/css/6.board_content.css" type="text/css"
-	rel="stylesheet">
+
 <style>
+	/* test 상태일 때 테두리를 설정 */
+body[test] main, 
+body[test] header, 
+body[test] nav, 
+body[test] section, 
+body[test] footer,
+body[test] article, 
+body[test] div, 
+body[test] span, 
+body[test] p, 
+body[test] label, 
+body[test] aside{
+    border:1px dotted black;
+}
 .float-box:after {
 	content: "";
 	display: block;
@@ -239,8 +253,8 @@ textarea{
             resize:none;
             border: none;
         }
+	
 </style>
-
 <article style="padding-top: 220px">
 	<div class="padding50">
 		<div class="float-box float-left">

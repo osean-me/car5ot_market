@@ -24,7 +24,8 @@
 <link href="<%=path %>/css/3.promotion.css" type="text/css" rel="stylesheet">
 <link href="<%=path %>/css/4.article.css" type="text/css" rel="stylesheet">
 <link href="<%=path %>/css/5.footer.css" type="text/css" rel="stylesheet">
-<link href="<%=path %>/css/6.board.css" type="text/css" rel="stylesheet">
+
+
 <style>
 </style>
 </head>

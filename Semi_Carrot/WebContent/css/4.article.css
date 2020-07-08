@@ -1,11 +1,10 @@
 @charset "UTF-8";
 
 article {
-	width: 1200px;
+	width: auto;
 	height: auto;
 	margin: 0px 350px;
 	text-align: center;
-	width: 1200px;
 }
 
 

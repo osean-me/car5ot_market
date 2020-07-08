@@ -29,7 +29,7 @@
 </style>
 </head>
 
-<body test>
+<body>
 	<main>
 		<header>
 			<div class="logo">

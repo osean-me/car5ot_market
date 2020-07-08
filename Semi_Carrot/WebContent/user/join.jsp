@@ -17,6 +17,9 @@
             		<img src="<%=path %>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
             	</div>
                 <div class="email-form">
+                <%
+                	
+                %>
                     <input type="text" name="email_id" placeholder="이메일" id="email" required="required">
                     <span style="color: #7b7b7b;">@</span>
                     <span class="a"></span>
@@ -30,8 +33,11 @@
                         <option id="writeEmail">직접 입력</option>
                     </select>
                 </div>
+                <div id="idInfo"></div>
                 <div>
-                    <input type="password" name="member_pw" placeholder="비밀번호" required="required">
+                    <input type="password" name="member_pw" placeholder="비밀번호" required="required" oninput="checkPw();">
+                </div>
+                <div id="pwInfo">
                 </div>
                 <div>
                     <input type="text" name="member_nick" placeholder="닉네임" required="required">

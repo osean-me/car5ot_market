@@ -2,6 +2,8 @@ package carrot.bean.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DetailListDTO {
 	private long post_no;
@@ -120,6 +122,29 @@ public class DetailListDTO {
 	public void setAddr_base(String addr_base) {
 		this.addr_base = addr_base;
 	}
+	
+	public String getPost_time() { //시간
+//		String today="오늘";
+		return post_date.substring(11, 16);
+//		return today;
+	}
+	
+	public String getPost_day() { //날짜
+		return post_date.substring(0, 10);
+	}
+	
+	public String getPost_autotime() {
+
+		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		if(!(getPost_date().equals(today))) {//오늘 작성한 글이라면
+			return getPost_time();
+		}
+		else {//아니라면
+			return getPost_day();
+		}
+	}
+	
+	
 	public DetailListDTO(ResultSet rs) throws SQLException{
 	      this.setPost_no(rs.getLong("post_no"));
 	      this.setPost_title(rs.getString("post_title"));

@@ -31,9 +31,13 @@ public class changeInfoServlet extends HttpServlet {
 			// Address Constructor
 			AddrDTO adto = new AddrDTO();
 			AddrDAO adao = new AddrDAO();
+			
+			adto.setAddr_state(addr_state);
+			adto.setAddr_city(addr_city);
+			adto.setAddr_base(addr_base);
 
 			// Address Method
-			Long addr_no = adao.findAddrNo(addr_base);
+			Long addr_no = adao.findAddrNo(adto);
 			if (addr_no == null) {
 				addr_no = adao.getAddrNo();
 				adto.setAddr_no(addr_no);

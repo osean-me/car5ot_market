@@ -67,14 +67,16 @@ public class AddrDAO {
 	}
 
 	// [3] 동으로 주소 고유 번호 조회
-	public Long findAddrNo(String addr_base) throws Exception {
+	public Long findAddrNo(AddrDTO adto) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT ADDR_NO FROM ADDRESS WHERE ADDR_BASE = ?";
+		String sql = "SELECT ADDR_NO FROM ADDRESS WHERE ADDR_STATE = ? AND ADDR_CITY = ? AND ADDR_BASE = ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.setString(1, addr_base);
+		ps.setString(1, adto.getAddr_state());
+		ps.setString(2, adto.getAddr_city());
+		ps.setNString(3, adto.getAddr_base());
 
 		ResultSet rs = ps.executeQuery();
 

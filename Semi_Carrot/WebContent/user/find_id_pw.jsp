@@ -36,12 +36,11 @@
 	</form>
 	
 	
-	<!-- error에 대한 처리 -->
-	<%if(request.getParameter("error") != null){ %>
-	<h6><font color="red">해당하는 정보로 아이디를 찾지 못했습니다</font></h6>
-	<%} %>
-	
-	<h2>비밀번호 찾기</h2>
+
+
+
+
+<h2>비밀번호 찾기</h2>
 	
 	<form action="find_pw.do" method="post">
 		<table>
@@ -76,18 +75,13 @@
 		</table>
 	</form>
 	
-	
-	<!-- error에 대한 처리 -->
+	<!-- 아이디 그리고 비번 error에 대한 처리 -->
 	<%if(request.getParameter("error") != null){ %>
-	<h6><font color="red">해당하는 정보로 비밀번호를 찾지 못했습니다</font></h6>
+	<h6><font color="red">해당하는 정보로  찾지 못했습니다</font></h6>
 	<%} %>
 	
 	
+	</div>
 	
-	
-	
-	
-</div>
-
 
 <!-- 풋터연결 -->

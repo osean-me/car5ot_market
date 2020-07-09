@@ -104,7 +104,8 @@ public class UsedPostDAO {
 		String sql = "SELECT a.*, b.addr_state, b.addr_city, b.addr_base "
 							+ "FROM used_post a "
 							+ "INNER JOIN address b "
-							+ "ON a.addr_no = b.addr_no";
+							+ "ON a.addr_no = b.addr_no "
+							+ "ORDER BY post_no DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();

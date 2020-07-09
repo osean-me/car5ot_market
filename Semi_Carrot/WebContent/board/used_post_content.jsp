@@ -58,7 +58,7 @@
 				<div class="item font17 gray-font padding25">
 					<span class="padding-right05">♥ <%=updto.getPost_like() %></span> <span
 						class="short-border">조회수 <%=updto.getPost_view() %></span> 
-						<span class="padding-left05"><%=updto.getPost_date() %></span> 
+						<span class="padding-left05"><%=updto.getUsedPost_autotime()%></span> 
 						<span class="right-float">☎신고하기</span>
 				</div>
 				<div class="item font15 padding15">
@@ -123,7 +123,7 @@
 				</div>
 				<hr>
 				<div class="padding-top40 padding40 product-info-border ">
-					<p class="gray-font font20"><%=updto.getPost_content() %></p>
+					<p class="font18"><%=updto.getPost_content() %></p>
 				</div>
 				<hr>
 				<div class="padding-top40">
@@ -194,32 +194,33 @@
 				</div>
 			</div>
 			
-			<div class="right-item34  padding-right30 padding-left30 left-font">
-				<div class="padding15 ">
+			<div class="right-item34  padding-right30 padding-left30 ">
+				<div class="padding15 left-font">
 					<p class=" font23">상점정보</p>
 				</div>
 				<hr>
 				<div class="padding-top30">
 					<div class="float-box float-left">
-						<div class="left-item25">
-							<img class="pic-circle" src="https://placeimg.com/300/250/tech" >
+						<div class="left-item25  pic-align left-font">
+							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
 						</div>
-						<div class="right-item75 padding-left30">
-								<div class="padding25">
+						<div class="right-item75">
+								<div class="top-margin10 left-font">
 									<!-- 작성자 -->
 									<%if(updto.getMember_no( ) != 0){ %>
-							<p class="font20"> <%=mdto.getMember_nick() %></p>
+										<p class="font20"> <%=mdto.getMember_nick() %></p>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>
 								</div>
-								<div>
-									
-									<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">
-								</div>
+
 						</div>
 					</div>
+					
 				</div>
+					<div class="left-font manner-margin ">
+						<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">
+					</div>
 			</div>
 			
 		</div>

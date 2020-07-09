@@ -82,6 +82,10 @@ body[test] aside{
 	font-size: 15px;
 }
 
+.font18 {
+	font-size: 18px;
+}
+
 .font20 {
 	font-size: 20px;
 }
@@ -100,12 +104,6 @@ body[test] aside{
 .gray-font {
 	color: #999999;
 }
-.dimgray-font{
-	color: dimgray;
-}
-.red-font{
-	color: orangered;;
-}
 
 .purple-font {
 	color: #6247EE;
@@ -120,6 +118,9 @@ body[test] aside{
 	text-align: left;
 }
 
+.pic-align{
+	text-align:center;
+}
 .right-float {
 	float: right;
 }
@@ -197,6 +198,12 @@ body[test] aside{
 .reply-margin20{
 	margin:30px 0px 20px 0px;
 	}
+.top-margin10{
+	margin:10px 0px 0px 0px;
+}
+.manner-margin{
+	margin:10px 0px 0px 15px
+}
 
 .like-button {
 	background-color: #CCCCCC;
@@ -241,11 +248,7 @@ body[test] aside{
 	border-right:1px solid lightgray;
 	border-bottom:1px solid lightgray;
 }
-.pic-circle{
-	 width: 100px;
-   	 height:100px;
-	border-radius: 50px;
-}
+
 .reply-pic-circle{
 	 width: 50px;
    	 height:50px;

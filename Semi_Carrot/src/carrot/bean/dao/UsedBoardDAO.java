@@ -9,9 +9,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import carrot.bean.dto.UsedPostDTO;
+import carrot.bean.dto.UsedBoardDTO;
 
-public class UsedPostConDAO {
+public class UsedBoardDAO {
 	
 	private static DataSource src;
 	static {
@@ -29,18 +29,18 @@ public class UsedPostConDAO {
 	}
 	
 	//단일조회
-	public UsedPostDTO get(long post_no)throws Exception{
-		Connection con=getConnection();
+	public UsedBoardDTO get(long used_cate_num)throws Exception{
+		Connection con = getConnection();
 		
-		String sql="Select*from used_post where post_no=?";
+		String sql="Select*from used_board where used_cate_num=?";
 		PreparedStatement ps=con.prepareStatement(sql);
-		ps.setLong(1, post_no);
+		ps.setLong(1, used_cate_num);
 		ResultSet rs=ps.executeQuery();
 		
-		UsedPostDTO updto = rs.next() ? new UsedPostDTO(rs) : null;
+		UsedBoardDTO ubdto = rs.next() ? new UsedBoardDTO(rs) : null;
 		
 		con.close();
 		
-		return updto;
+		return ubdto;
 	}
 }

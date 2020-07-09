@@ -82,7 +82,7 @@ if (type == null || keyword == null) {
 				<td><a
 					href="admin_detail.jsp?member_id=<%=mdto.getMember_id()%>">상세</a> <a
 					href="admin_edit.jsp?member_id=<%=mdto.getMember_id()%>">수정</a> <a
-					href="<%=request.getContextPath() %>/member/check.jsp?go=<%=request.getContextPath() %>/admin/drop.do?member_id=<%=mdto.getMember_id()%>">탈퇴</a></td>
+					href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/admin/drop.do?member_id=<%=mdto.getMember_id()%>">탈퇴</a></td>
 
 				<%
 					}

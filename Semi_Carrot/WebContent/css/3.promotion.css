@@ -15,7 +15,7 @@
 
 .swiper-container .swiper-slide,
 .swiper-container .swiper-slide > img {
-    margin-top: auto;
+    margin-top: 0px;
     width: 100%;
     height: 100%;
 }

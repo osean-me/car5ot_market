@@ -46,15 +46,15 @@
 <article>
 	<div class="hot-title">우리 동네 둘러보기!</div>
 	<div class="dongnae">
-		<div class="swiper-container" id="product" style="height: 460px;">
+		<div id="map-area">
+			<div id="map"></div>
+		</div>
+		<div class="swiper-container" id="product">
 			<!-- 필수 영역 -->
 			<div class="swiper-wrapper">
 				<!-- 배치되는 이미지 혹은 화면 (슬라이더) -->
 				<div class="swiper-slide" id="slide-1">
 					<div id="banner-1">
-						<div id="banner-1-left">
-							<div id="map"></div>
-						</div>
 						<div id="banner-1-right">
 							<div id="banner-1-right-top">
 								<span>우리 동네 인기 물건을 만나보세요!</span>
@@ -123,7 +123,7 @@
 										<div id="img">
 											<img src="http://placeimg.com/100/100/tech">
 										</div>
-										<div id="title">마르지엘라 지갑 급처@</div>
+										<div id="title">당산역급처</div>
 										<div id="like">18</div>
 									</div>
 									<div class="hot-product">
@@ -222,7 +222,7 @@
 					</div>
 				</div>
 			</div>
-<!-- 			<div class="swiper-pagination"></div> -->
+			<!-- 			<div class="swiper-pagination"></div> -->
 		</div>
 	</div>
 </article>

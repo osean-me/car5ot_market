@@ -11,29 +11,29 @@ import javax.servlet.http.HttpServletResponse;
 import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.MemberDTO;
 
-@WebServlet(urlPatterns="/member/change_password.do")
-public class changePassWordServlet extends HttpServlet{
-@Override
-protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	try {
-	MemberDTO mdto=(MemberDTO)req.getSession().getAttribute("memberinfo");
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/member/change_password.do")
+public class changePassWordServlet extends HttpServlet {
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
+
+			
+
+			String member_pw = req.getParameter("member_pw");
+
+			MemberDTO member = new MemberDTO();
 	
-String member_id = mdto.getMember_id();
+			member.setMember_pw(member_pw);
 
-String member_pw =req.getParameter("member_pw");
+			MemberDAO mdao = new MemberDAO();
+			mdao.changePassword(member);
 
-MemberDTO member = new MemberDTO();
-member.setMember_id(member_id);
-member.setMember_pw(member_pw);
-
-MemberDAO mdao = new MemberDAO();
-mdao.changePassword(member);
-
-resp.sendRedirect("change_password_result.jsp");
-}
-catch(Exception e) {
-	e.printStackTrace();
-	resp.sendError(500);
-}
-}
+			resp.sendRedirect("change_password_result.jsp");
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
+	}
 }

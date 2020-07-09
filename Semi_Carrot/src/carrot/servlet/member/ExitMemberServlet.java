@@ -12,7 +12,7 @@ import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/members/gone.do")
+@WebServlet(urlPatterns = "/member/gone.do")
 public class ExitMemberServlet extends HttpServlet {
 
 	@Override
@@ -20,20 +20,19 @@ public class ExitMemberServlet extends HttpServlet {
 		try {
 
 			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
+			String member_id = mdto.getMember_id();
+
+			// 처리a
 			MemberDAO mdao = new MemberDAO();
+			mdao.drop(member_id);
 
-			int result = mdao.exitMember(mdto.getMember_no());
-
-			if (result == 1) {
-				resp.sendRedirect(req.getContextPath());
-			} else {
-				resp.sendRedirect(req.getContextPath() + "?failed");
-			}
+			req.getSession().removeAttribute("memberinfo");
+			
+			resp.sendRedirect(req.getContextPath() + "/member/gone.jsp");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
-
 	}
 }

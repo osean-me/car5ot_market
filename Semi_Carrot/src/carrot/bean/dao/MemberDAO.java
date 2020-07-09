@@ -272,21 +272,19 @@ public class MemberDAO {
 		}
 
 	// [8] 회원 탈퇴
-	public int exitMember(long member_no) throws Exception {
+	public void drop(String member_id) throws Exception {
 
 		Connection con = getConnection();
 
-		String sql = "DELETE MEMBER WHERE MEMBER_NO = ?";
+		String sql = "DELETE MEMBER WHERE MEMBER_id = ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.setLong(1, member_no);
+		ps.setString(1, member_id);
 
-		int result = ps.executeUpdate();
-
+		ps.execute();
+		
 		con.close();
-
-		return result;
 	}
 	//[9]비밀번호 변경 메소드
 		public void changePassword(MemberDTO mdto) throws Exception{

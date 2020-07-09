@@ -20,9 +20,10 @@
     <input type="submit"value="확인">
    
     </form>
-    <%if(request.getParameter("error")!=null) { %>
-    <!-- 비번이 틀릴경우 메시지 송출 -->
-    <h6><font color = "red">저런~!비밀번호가 옳지않아요</font></h6>
+   <%if(request.getParameter("error")!=null) {%>
+		<script>
+			alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+		</script>
     <%} %>
     
     </div>

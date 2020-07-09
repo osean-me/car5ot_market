@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import carrot.bean.dao.MemberDAO;
 
 @WebServlet(urlPatterns = "/admin/drop.do")
+
+@SuppressWarnings("serial")
 public class AdminDropServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

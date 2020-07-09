@@ -1,8 +1,21 @@
+<%@page import="carrot.bean.dao.MemberDAO"%>
+<%@page import="carrot.bean.dao.UsedPostConDAO"%>
+<%@page import="carrot.bean.dto.MemberDTO"%>
+<%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%
 		String path = request.getContextPath();
+	
+	long post_no = 1;
+	UsedPostConDAO upcdao = new UsedPostConDAO();
+	UsedPostDTO updto = upcdao.get(post_no);
+	
+	//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
+	MemberDAO mdao = new MemberDAO();
+	MemberDTO mdto = mdao.get(updto.getMember_no());
 	%>
+	
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
@@ -15,7 +28,7 @@
 			</div>
 			<div class="right-item60 left-font padding-left35">
 				<div class="font23 padding25">
-					<span>카메라 팝니다^ㅁ^</span>
+					<span><%=updto.getPost_title() %></span>
 				</div>
 				<div class="item padding25">
 					<span class="font45">60,000</span> <span class=font20>원</span>
@@ -136,7 +149,7 @@
 			<div class="padding-top25 ">	
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+							<img class="reply-pic-circle" src="<%=path %>/img/manner_sample.jpg">
 						</div>
 						<div class="right-item90">
 							<div class="reply-nick-font">
@@ -197,8 +210,8 @@
 									<p>기마름이야</p>
 								</div>
 								<div>
-									<p class="gray-font">매너지수</p>
-									<img src="https://placeimg.com/300/250/animal" width="100" height="25">
+									
+									<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">
 								</div>
 						</div>
 					</div>

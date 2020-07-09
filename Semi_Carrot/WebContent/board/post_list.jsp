@@ -34,7 +34,6 @@
 
 .product_title {
 	margin: 5px;
-	padding-bottom: 10px;
 	font-size: 20px;
 	margin-left: 15px;
 	}
@@ -44,6 +43,12 @@
 	font-size: 20px;
 	margin-left: 15px;
 	color: orange;
+}
+.product_time {
+	float:right;
+	color:gray;
+	font-size:16px;
+	font-weight:normal;
 }
 
 .post_location {
@@ -69,15 +74,27 @@
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
+
+.last {
+	font-size: 18px;
+}
+.popular {
+	float:right;
+	margin-left:10px;
+	font-size: 18px;
+
+}
+.sort_list {
+	margin-right:20px;
+}
+
 .hr_style {
 	border: 0;
 	height: 1px;
 	background: lightgray;
 }
 </style>
-
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 + like개수 추가하기 @@@@@@@@@ -->
-
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 추가 + 사진 추가하기 @@@@@@@@@ -->
 <%
 	UsedPostDAO updao = new UsedPostDAO();
 	MemberDAO mdao = new MemberDAO();
@@ -92,6 +109,11 @@
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">중고거래</span> 상품목록
 		</h2>
+		<div class="sort_list" align="right">
+			<div class="popular"><a href="">인기순</a></div>
+
+			<div class="last"><a href=""> 최신순</a></div>
+		</div>
 		<br>
 	</div>
 	<div align="left">
@@ -122,6 +144,9 @@
               				 String commaNum = NumberFormat.getInstance().format(price);
                			%>
 						<%=commaNum%>원
+							<div class="product_time">
+								<%=dldto.getPost_autotime()%>							
+							</div>
 						</div>
 						<hr class="hr_style">
 						<div class="product_like">

@@ -96,11 +96,11 @@ public class MemberDAO {
 	}
 	
 	
-	//회원정보-상세조회(string>long으로 변환)
+	//회원정보-상세조회(long>string으로 변환)
 	public MemberDTO get(String member_id) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT * FROM MEMBER WHERE MEMBER_id= ?";
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_id=?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -229,6 +229,28 @@ public class MemberDAO {
 
 		con.close();
 	}
+	
+	
+	// [8]정보 변경 메소드//관리자모드
+	public void changeInfoadmin(MemberDTO mdto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "UPDATE member SET " + "member_nick=?, member_addr_no=?, member_phone=? " + "WHERE member_no=?"+"WHERE member_auth=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, mdto.getMember_nick());
+		ps.setLong(2, mdto.getMember_addr_no());
+		ps.setString(3, mdto.getMember_phone());
+		ps.setLong(4, mdto.getMember_no());
+		ps.setString(5, mdto.getMember_auth());
+		ps.execute();
+
+		con.close();
+	}
+	
+
+	
+	
    	//(관리자) 회원 검색 기능
 		public List<MemberDTO> search(String member_id) throws Exception{
 			Connection con = getConnection();
@@ -298,4 +320,25 @@ public class MemberDAO {
 			
 			con.close();
 		}
+
+	// [8] 관리자가 회원 탈퇴 (long>string으로 변환)
+		public int exitMember(String member_id) throws Exception {
+
+			Connection con = getConnection();
+
+			String sql = "DELETE MEMBER WHERE MEMBER_ID = ?";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, member_id);
+
+			int result = ps.executeUpdate();
+
+			con.close();
+
+			return result;
+		}
+
+	
+
 }

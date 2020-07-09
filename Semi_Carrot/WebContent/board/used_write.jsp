@@ -128,6 +128,13 @@
 .used_text {
 	 display: inline-block;
 }
+
+.hr_style2 {
+	border: 0;
+	height: 3px;
+	background:orange;
+}
+
 </style>
 <script>
 	function calculateCount() {
@@ -143,6 +150,11 @@
 	}
 </script>
 
+
+<%
+	
+
+%>
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 
@@ -152,10 +164,14 @@
 			중고거래 글쓰기 &nbsp; <span class="must">	*필수항목 </span>
 		</h1>
 		<br><br>
-		<hr style="border-width: 3px;">
+		<hr class="hr_style2">
 		<br><br>
 
-		<form action="write.do" method="post" enctype="multipart/form-data">
+		<!--  
+			 준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
+		-->
+
+		<form action="used_post_write.do" method="post" >
 			<ul class="used_container" >
 
 				<!--  이미지 등록 -->
@@ -182,7 +198,7 @@
 				<li class="used_title" style="list-style: none;">
 					<div class="used_text">
 						제목 <span class="must">*</span> 
-						<input class="form-title" type="text" placeholder="상품 제목을 입력해주세요.">
+						<input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." required>
 					</div>
 				</li>
 				<hr>
@@ -192,22 +208,21 @@
 				<li class="used_cate" >
 					<div class="used_text">
 						카테고리 <span class="must">*</span>
-						<select class="used_cate_style" name="category">
+						<select class="used_cate_style" name="used_cate_num">
 							<option value="">카테고리 선택</option>
-							<option value="디지털/가전">디지털/가전</option>
-							<option value="가구/인테리어">가구/인테리어</option>
-							<option value="유아동/유아도서">유아동/유아도서</option>
-							<option value="생활/가공식품">생활/가공식품</option>
-							<option value="스포츠/레저">스포츠/레저</option>
-							<option value="여성/잡화">여성/잡화</option>
-							<option value="여성 의류">여성 의류</option>
-							<option value="남성패션/잡화">남성패션/잡화</option>
-							<option value="게임/취미">게임/취미</option>
-							<option value="뷰티/미용">뷰티/미용</option>
-							<option value="반려동물">반려동물</option>
-							<option value="도서/티켓/음반">도서/티켓/음반</option>
-							<option value="기타">기타</option>
-							
+							<option value="1">디지털/가전</option>
+							<option value="2">가구/인테리어</option>
+							<option value="3">유아동/유아도서</option>
+							<option value="4">생활/가공식품</option>
+							<option value="5">스포츠/레저</option>
+							<option value="6">여성/잡화</option>
+							<option value="7">여성 의류</option>
+							<option value="8">남성패션/잡화</option>
+							<option value="9">게임/취미</option>
+							<option value="10">뷰티/미용</option>
+							<option value="11">반려동물</option>
+							<option value="12">도서/티켓/음반</option>
+							<option value="13">기타</option>						
 						</select>
 					</div>
 				</li>
@@ -217,7 +232,7 @@
 				<li class="used_price">
 					<div class="used_text">
 						가격 <span class="must">*</span> 
-						<input class="form-price" type="text" placeholder="숫자만 입력해주세요">원
+						<input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요">원
 					</div>
 					<div class="used_text">
 						<label for="freesShipping" id="free"> 
@@ -238,7 +253,7 @@
 						</div>
 						<div class="content">
 							<div>
-								<textarea class="first" oninput="calculateCount();"></textarea>
+								<textarea class="first" name="post_content" oninput="calculateCount();"></textarea>
 								<div align="right" class="countNum">
 									<span class="letter-count">0</span>/2000
 								</div>

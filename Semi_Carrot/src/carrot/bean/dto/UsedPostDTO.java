@@ -1,5 +1,8 @@
 package carrot.bean.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class UsedPostDTO {
 	private long post_no;
 	private String post_title;
@@ -68,10 +71,10 @@ public class UsedPostDTO {
 	public void setMember_no(long member_no) {
 		this.member_no = member_no;
 	}
-	public long getmember_img_no() {
+	public long getMember_img_no() {
 		return member_img_no;
 	}
-	public void setmember_img_no(long member_img_no) {
+	public void setMember_img_no(long member_img_no) {
 		this.member_img_no = member_img_no;
 	}
 	public long getAddr_no() {
@@ -96,4 +99,19 @@ public class UsedPostDTO {
 	public UsedPostDTO() {
 		super();
 	}
+	public UsedPostDTO(ResultSet rs) throws SQLException{
+	      this.setPost_no(rs.getLong("post_no"));
+	      this.setPost_title(rs.getString("post_title"));
+	      this.setPost_content(rs.getString("post_content"));
+	      this.setPost_price(rs.getLong("post_price"));
+	      this.setPost_date(rs.getString("post_date"));
+	      this.setPost_view(rs.getLong("post_view"));
+	      this.setPost_like(rs.getLong("post_like"));
+	      this.setUsed_cate_num(rs.getLong("used_cate_num"));
+	      this.setMember_no(rs.getLong("member_no"));
+	      //this.setMember_img_no(rs.getLong("member_img_no"));
+	      this.setAddr_no(rs.getLong("addr_no"));
+	     // this.setPost_img_no(rs.getLong("post_img_no"));
+	      this.setPost_state(rs.getString("post_state"));
+	   }
 }

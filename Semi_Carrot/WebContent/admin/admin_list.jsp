@@ -81,14 +81,15 @@ if (type == null || keyword == null) {
 				<td><%=mdto.getMember_auth()%></td>
 				<td><a
 					href="admin_detail.jsp?member_id=<%=mdto.getMember_id()%>">상세</a> <a
-					href="#">수정</a> <a
-					href="drop.do?member_id=<%=mdto.getMember_id()%>">탈퇴</a></td>
+					href="admin_edit.jsp?member_id=<%=mdto.getMember_id()%>">수정</a> <a
+					href="<%=request.getContextPath() %>/member/check.jsp?go=<%=request.getContextPath() %>/admin/drop.do?member_id=<%=mdto.getMember_id()%>">탈퇴</a></td>
 
 				<%
 					}
 				%>
 			
 		</tbody>
+		
 
 	</table>
 	<%

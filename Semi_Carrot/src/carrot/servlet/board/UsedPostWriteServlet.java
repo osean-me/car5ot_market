@@ -23,23 +23,25 @@ public class UsedPostWriteServlet extends HttpServlet{
 		try {
 			req.setCharacterEncoding("UTF-8");
 			
-			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("userinfo");
+			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
 			long member_no = mdto.getMember_no();
+			long member_addr_no = mdto.getMember_addr_no();
 			
 			UsedPostDTO updto = new UsedPostDTO();
 			updto.setUsed_cate_num(Long.parseLong(req.getParameter("used_cate_num")));
 			updto.setPost_title(req.getParameter("post_title"));
-			updto.setPost_title(req.getParameter("post_content"));
-			updto.setPost_title(req.getParameter("post_price"));
-			updto.setPost_title(req.getParameter("post_state"));
-			// updto.setMember_no(member_no);
+			updto.setPost_content(req.getParameter("post_content"));
+			updto.setPost_price(Long.parseLong(req.getParameter("post_price")));
+			updto.setMember_no(member_no);
+			updto.setAddr_no(member_addr_no);
 			
 			UsedPostDAO updao = new UsedPostDAO();
-//			int post_no = updao.getSequence(); //번호 먼저 추출
-//			updto.setPost_no(post_no); // 들어갈 번호 설정 후
-//			updao.write(updto); // 등록
+			int post_no = updao.getSequence(); //번호 먼저 추출
 			
-//			resp.sendRedirect("post_list,jsp?post_no="+post_no); // 일단은 리스트로 보내기  + 나중에 상세페이지 완성되면 완성 페이지로 전송 
+			updto.setPost_no(post_no); // 들어갈 번호 설정 후
+			updao.write(updto); // 등록
+			
+			resp.sendRedirect("post_list.jsp"); // 일단은 리스트로 보내기  + 나중에 상세페이지 완성되면 완성 페이지로 전송 
 			
 			
 		}

@@ -2,6 +2,8 @@ package carrot.bean.dto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class UsedPostDTO {
 	private long post_no;
@@ -115,4 +117,21 @@ public class UsedPostDTO {
 	public UsedPostDTO() {
 		super();
 	}
+	//작성시간 관련 메소드 추가
+	 public String getUsedPost_time() {
+		 return post_date.substring(11,16);
+	 }
+	 public String getUsedPost_day() {
+		 return post_date.substring(0,10);
+	 }
+	 public String getUsedPost_autotime() {
+		 String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		 if(getUsedPost_day().contentEquals(today)) {
+			 return getUsedPost_time();
+		 }
+		 else {
+			 return getUsedPost_day();
+		 }
+	 }
+	 
 }

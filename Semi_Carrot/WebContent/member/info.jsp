@@ -29,6 +29,7 @@
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+<script type="text/javascript" src="<%=path%>/js/mypage.js"></script>
     <link href="<%=path %>/css/8-1.mypage-top.css" type="text/css" rel="stylesheet">
     <link href="<%=path %>/css/8-2.mypage-bottom.css" type="text/css" rel="stylesheet">
 

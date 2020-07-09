@@ -89,6 +89,9 @@ body[test] aside{
 .font23 {
 	font-size: 23px;
 }
+.font30 {
+	font-size: 30px;
+}
 
 .font45 {
 	font-size: 45px;
@@ -96,6 +99,12 @@ body[test] aside{
 
 .gray-font {
 	color: #999999;
+}
+.dimgray-font{
+	color: dimgray;
+}
+.red-font{
+	color: orangered;;
 }
 
 .purple-font {

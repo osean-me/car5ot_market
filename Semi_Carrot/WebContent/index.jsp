@@ -19,6 +19,7 @@
 		<aside>
 			<!-- 이미지 슬라이더 영역 -->
 			<div class="promotion">
+			
 				<div class="swiper-container" id="promotion">
 					<!-- 필수 영역 -->
 					<div class="swiper-wrapper">

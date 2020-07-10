@@ -26,7 +26,7 @@
 					</script>
 			<%} else if(find.equals("pw")) { %>
 					<script>
-						alert("비밀번를 찾을 수 없습니다.");
+						alert("비밀번호를 찾을 수 없습니다.");
 					</script>
 			<%} %>
 	<%	} %>

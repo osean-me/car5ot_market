@@ -166,12 +166,12 @@
 		<br><br>
 		<hr class="hr_style2">
 		<br><br>
-
+ 
 		<!--  
 			 준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
 		-->
 
-		<form action="used_post_write.do" method="post" >
+		<form action="used_post_write.do" method="post"  enctype="multipart/form-data">
 			<ul class="used_container" >
 
 				<!--  이미지 등록 -->
@@ -181,7 +181,7 @@
 					</div>
 					<div class="used_photo_img">
 						<img src="../img/regist.PNG" width="200" height="200"	style="margin-right: 20px;">
-
+						<input class="form-input" type="file" name="used_post_img" multiple accept=".jpg, .png, .gif">
 						<div class="used_photo_explain" >
 							* 상품 이미지는 640x640에 최적화 되어 있습니다.<br> 
 							- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br> 

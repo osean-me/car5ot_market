@@ -21,7 +21,7 @@
 .product {
 	border: 1px solid lightgray;
 	float: left;
-	width: 220px;
+	width: 220px; 
 	margin: 5px;
 	margin-right: 13px;
 	margin-bottom: 10px;
@@ -52,11 +52,11 @@
 }
 
 .post_location {
-	font-size: 18px;
+	font-size: 15px;
 	color: #adadad;
 	text-align: left;
 	margin-left: 15px;
-	font-weight: normal;
+	font-weight: light;
 }
 
 .post_post {
@@ -94,6 +94,7 @@
 	background: lightgray;
 }
 </style>
+
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 추가 + 사진 추가하기 @@@@@@@@@ -->
 <%
 	UsedPostDAO updao = new UsedPostDAO();
@@ -112,7 +113,7 @@
 		<div class="sort_list" align="right">
 			<div class="popular"><a href="">인기순</a></div>
 
-			<div class="last"><a href=""> 최신순</a></div>
+			<div class="last"><a href="">최신순</a></div>
 		</div>
 		<br>
 	</div>

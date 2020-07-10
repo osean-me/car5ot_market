@@ -15,7 +15,7 @@ import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/change_info.do")
-public class changeInfoServlet extends HttpServlet {
+public class ChangeInfoServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

@@ -85,7 +85,7 @@
 }
 
 /* 비밀번호 입력 폼 */
-input[name=member_pw] {
+input[type=password] {
     background-image: url(../img/key-32.png);
 }
 

@@ -28,66 +28,80 @@ public class ChangeInfoServlet extends HttpServlet {
 
 			String member_pw = req.getParameter("member_pw");
 			String check_pw = req.getParameter("check_pw");
+			String member_nick = req.getParameter("member_nick");
+			String member_phone = req.getParameter("member_phone");
+			String addr_state = req.getParameter("addr_state");
+			String addr_city = req.getParameter("addr_city");
+			String addr_base = req.getParameter("addr_base");
 
 			boolean diffrent = !check_pw.equals(member_pw);
 
 			// 세션 비밀번호와 입력한 비밀번호 비교
 			if (member_pw.equals(memberinfo_pw)) {
 
-				// 현재 비밀번호와 새로운 비밀번호 비교
-				if (diffrent) {
+				// Address Constructor
+				AddrDTO adto = new AddrDTO();
+				AddrDAO adao = new AddrDAO();
 
-					// Address Table Data
-					String addr_state = req.getParameter("addr_state");
-					String addr_city = req.getParameter("addr_city");
-					String addr_base = req.getParameter("addr_base");
-					// Address Constructor
-					AddrDTO adto = new AddrDTO();
-					AddrDAO adao = new AddrDAO();
+				adto.setAddr_state(addr_state);
+				adto.setAddr_city(addr_city);
+				adto.setAddr_base(addr_base);
 
+				// Address Method
+				Long addr_no = adao.findAddrNo(adto);
+				if (addr_no == null) {
+					addr_no = adao.getAddrNo();
+					adto.setAddr_no(addr_no);
 					adto.setAddr_state(addr_state);
 					adto.setAddr_city(addr_city);
 					adto.setAddr_base(addr_base);
 
-					// Address Method
-					Long addr_no = adao.findAddrNo(adto);
-					if (addr_no == null) {
-						addr_no = adao.getAddrNo();
-						adto.setAddr_no(addr_no);
-						adto.setAddr_state(addr_state);
-						adto.setAddr_city(addr_city);
-						adto.setAddr_base(addr_base);
+					adao.insertAddr(adto);
+				}
 
-						adao.insertAddr(adto);
-					}
+				// 위의 데이터를 기준으로 회원정보 수정 (파라미터로 데이터 받아옴)
+				MemberDTO mdto = new MemberDTO();
+				MemberDAO mdao = new MemberDAO();
 
-					// 위의 데이터를 기준으로 회원정보 수정 (파라미터로 데이터 받아옴)
-					MemberDTO mdto = new MemberDTO();
-					MemberDAO mdao = new MemberDAO();
+				long member_no = memberinfo.getMember_no();
+				long member_addr_no = addr_no.longValue();
 
-					long member_no = memberinfo.getMember_no();
-					long member_addr_no = addr_no.longValue();
-					String member_nick = req.getParameter("member_nick");
-					String member_phone = req.getParameter("member_phone");
+				mdto.setMember_nick(member_nick);
+				mdto.setMember_addr_no(member_addr_no);
+				mdto.setMember_phone(member_phone);
+				mdto.setMember_no(member_no);
 
-					mdto.setMember_nick(member_nick);
-					mdto.setMember_addr_no(member_addr_no);
-					mdto.setMember_phone(member_phone);
-					mdto.setMember_no(member_no);
+				// 현재 비밀번호와 새로운 비밀번호 비교 > 다른 경우 !!비밀번호 수정!!
+				if (diffrent && check_pw != null) {
+					mdto.setMember_pw(check_pw);
 					// 처리
+					mdao.changeInfoWithPw(mdto);
+
+					// 정보 수정 성공 후 마이페이지로 이동
+					resp.sendRedirect("info.jsp?member_no=" + member_no);
+
+				} else if (!diffrent && check_pw == null) {
+					// 변경할 비밀번호가 없는 경우
 					mdao.changeInfo(mdto);
 
-					// 출력
+					// 정보 수정 성공 후 마이페이지로 이동
 					resp.sendRedirect("info.jsp?member_no=" + member_no);
 
 				} else {
-					// 현재 비밀번호와 새로운 비밀번호가 다를 시
+					// 현재 비밀번호와 새로운 비밀번호가 같은 경우
 					resp.sendRedirect("change_info.jsp?error_no=1&member_no=" + memberinfo.getMember_no());
+
 				}
+				
+				// 세션 정보 변경 
+				req.getSession().removeAttribute("memberinfo");
+				req.getSession().setAttribute("memberinfo", mdto);
+				
 			} else {
-				// 현재 비밀번호가 세션 비밀번호와 다를 시 
+				// 현재 비밀번호가 세션 비밀번호와 다를 시
 				resp.sendRedirect("change_info.jsp?error_no=2&member_no=" + memberinfo.getMember_no());
 			}
+
 		} catch (Exception e) {
 
 			e.printStackTrace();

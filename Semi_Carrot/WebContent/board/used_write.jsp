@@ -6,6 +6,11 @@
 	box-sizing: border-box;
 }
 
+#used-write-form {
+	width: auto;
+	padding: 0px 15%;
+}
+
 .form-title {
 	margin-top: 40px;
 	margin-bottom: 40px;
@@ -158,7 +163,7 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 
-<article style="padding-top: 200px;">
+<article style="padding-top: 200px;" id="used-write-form">
 	<div align="left">
 		<h1 align="left" style="font-size: 30px; font-weight: normal;">
 			중고거래 글쓰기 &nbsp; <span class="must">	*필수항목 </span>

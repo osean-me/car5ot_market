@@ -12,7 +12,7 @@
 	
 	
 	<h5><a href="login.jsp">로그인 하러가기</a></h5>
-	<h5><a href="find_pw.jsp">비밀번호가 기억나지 않아요</a></h5>
+	<h5><a href="find_id_pw.jsp">비밀번호가 기억나지 않아요</a></h5>
 	
 </div>
 <!-- 풋터연결 -->

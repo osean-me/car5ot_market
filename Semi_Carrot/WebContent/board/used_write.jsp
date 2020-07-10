@@ -180,8 +180,8 @@
 						상품이미지 <span class="must">*</span>
 					</div>
 					<div class="used_photo_img">
-						<img src="../img/regist.PNG" width="200" height="200"	style="margin-right: 20px;">
 						<input class="form-input" type="file" name="used_post_img" multiple accept=".jpg, .png, .gif">
+						<img src="../img/regist.PNG" width="200" height="200"	style="margin-right: 20px;">
 						<div class="used_photo_explain" >
 							* 상품 이미지는 640x640에 최적화 되어 있습니다.<br> 
 							- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br> 

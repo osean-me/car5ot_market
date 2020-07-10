@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+#mypage-nav,
+#mypage-board {
+    width: 100%;
+}
+
+#mypage-nav {
+    height: 10%;
+    display: flex;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#mypage-nav > div {
+    display: inline-block;
+    padding-top: 10px;
+    flex: 1;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+#mypage-nav > div:hover {
+    background-color: bisque;
+}
+
+#mypage-nav > div:hover > lable > span {
+    color: #ff8900;
+}
+
+#mypage-board {
+    height: 90%;
+    border-radius: 15px;
+    background-color: bisque;
+}
+
+/*
+        #mypage-board.set-color {
+            background-color: bisque;
+        }
+*/
+
+#mypage-board.set-left {
+    border-top-left-radius: 0px;
+}
+
+#mypage-board.set-right {
+    border-top-right-radius: 0px;
+}
+
+#mypage-nav input[type=radio] {
+    display: none;
+}
+
+div.area {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+div.area.on {
+    display: block;
+}
+
+#mypage-nav div > label {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+
+    color: white;
+    font-size: 24px;
+}
+
+/* 게시판 별 게시글 리스트 */
+.mypage-board-table {
+    border: 1px solid red;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage-post-search {
+    flex: 1;
+    width: 100%;
+    text-align: right;
+}
+
+.mypage-post-search > form {
+    display: inline-block;
+}
+
+.mypage-post-list {
+    display: flex;
+    flex: 8;
+    width: 100%;
+    height: 45%;
+}
+
+.mypage-post-list.column {
+    flex-direction: column;
+}
+
+.mypage-pagination {
+    flex: 1;
+}
+
+.product {
+    flex: 1;
+    width: 20%;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid pink;
+}
+
+.product.column {
+    width: 100%;
+    padding: 0px;
+    display: flex;
+}
+
+.probuct.column > div {
+    display: inline-block;
+}
+
+.no,
+.view {
+    flex: 1;
+}
+
+.cate,
+.date {
+    flex: 2;
+}
+
+.title {
+    flex: 4;
+}

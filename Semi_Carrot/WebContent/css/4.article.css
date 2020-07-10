@@ -1,59 +1,58 @@
 @charset "UTF-8";
 
 article {
-	padding-top: 185px;
-	width: 1200px;
-	height: auto;
-	margin: 0px 350px;
-	text-align: center;
-	width: 1200px;
+    width: 1200px;
+    height: auto;
+    margin: 0px 350px;
+    text-align: center;
+    border-radius: 15px;
 }
 
-
-
 .hot-title {
-	text-align: left;
-	font-size: 62px;
-	color: #ff8900;
-	margin: 150px 0px 50px 0px;
+    text-align: left;
+    font-size: 62px;
+    color: #ff8900;
+    margin: 150px 0px 50px 0px;
 }
 
 .dongnae {
-	display: inline;
+    display: inline;
 }
 
-#product-list, #promotion-list {
-	margin: 0px;
-	display: inline-block;
-	position: relative;
+#product-list,
+#promotion-list {
+    margin: 0px;
+    display: inline-block;
+    position: relative;
 }
 
 #product-list {
-	left: 200px;
-	width: 800px;
-	height: 400px;
+    left: 200px;
+    width: 800px;
+    height: 400px;
 }
 
 #promotion-list {
-	width: 1200px;
-	height: 400px;
+    width: 1200px;
+    height: 400px;
 }
 
+
 #map {
-	position: absolute;
-	margin: 0px;
-	width: 400px;
-	height: 400px;
-	z-index: 0;
+    position: absolute;
+    margin: 0px;
+    width: 400px;
+    height: 400px;
+    z-index: 0;
 }
 
 .hot-product {
-	display: inline-block;
-	padding: 5px 15px;
-	margin: 20px 25px;
+    display: inline-block;
+    padding: 5px 15px;
+    margin: 20px 25px;
 }
 
 .list-title {
-	color: #ff8900;
-	font-size: 24px;
+    color: #ff8900;
+    font-size: 24px;
 }

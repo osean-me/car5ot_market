@@ -1,5 +1,10 @@
 package carrot.bean.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class UsedPostDTO {
 	private long post_no;
 	private String post_title;
@@ -12,8 +17,22 @@ public class UsedPostDTO {
 	private long member_no;
 	private long member_img_no;
 	private long addr_no;
-	private long post_img_no;
 	private String post_state;
+	
+	public UsedPostDTO(ResultSet rs) throws SQLException{
+		this.setPost_no(rs.getLong("post_no"));
+		this.setPost_title(rs.getString("post_title"));
+		this.setPost_content(rs.getString("post_content"));
+		this.setPost_price(rs.getLong("post_price"));
+		this.setPost_date(rs.getString("post_date"));
+		this.setPost_view(rs.getLong("post_view"));
+		this.setPost_like(rs.getLong("post_like"));
+		this.setUsed_cate_num(rs.getLong("used_cate_num"));
+		this.setMember_no(rs.getLong("member_no"));
+		this.setMember_img_no(rs.getLong("member_img_no"));
+		this.setAddr_no(rs.getLong("addr_no"));
+		this.setPost_state(rs.getString("post_state"));
+	}
 	public long getPost_no() {
 		return post_no;
 	}
@@ -68,10 +87,10 @@ public class UsedPostDTO {
 	public void setMember_no(long member_no) {
 		this.member_no = member_no;
 	}
-	public long getmember_img_no() {
+	public long getMember_img_no() {
 		return member_img_no;
 	}
-	public void setmember_img_no(long member_img_no) {
+	public void setMember_img_no(long member_img_no) {
 		this.member_img_no = member_img_no;
 	}
 	public long getAddr_no() {
@@ -80,12 +99,7 @@ public class UsedPostDTO {
 	public void setAddr_no(long addr_no) {
 		this.addr_no = addr_no;
 	}
-	public long getPost_img_no() {
-		return post_img_no;
-	}
-	public void setPost_img_no(long post_img_no) {
-		this.post_img_no = post_img_no;
-	}
+	
 	public String getPost_state() {
 		return post_state;
 	}
@@ -96,4 +110,21 @@ public class UsedPostDTO {
 	public UsedPostDTO() {
 		super();
 	}
+	//작성시간 관련 메소드 추가
+	 public String getUsedPost_time() {
+		 return post_date.substring(11,16);
+	 }
+	 public String getUsedPost_day() {
+		 return post_date.substring(0,10);
+	 }
+	 public String getUsedPost_autotime() {
+		 String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		 if(getUsedPost_day().contentEquals(today)) {
+			 return getUsedPost_time();
+		 }
+		 else {
+			 return getUsedPost_day();
+		 }
+	 }
+	 
 }

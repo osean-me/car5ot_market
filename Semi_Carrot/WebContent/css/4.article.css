@@ -1,28 +1,29 @@
 @charset "UTF-8";
 
 article {
-	width: auto;
+	width: 100%;
 	height: auto;
-	margin: 0px 350px;
-	text-align: center;
+	text-align: left;
 	border-radius: 15px;
 }
 
 .hot-title {
-	text-align: left;
-	font-size: 62px;
+	display: inline-block;
+	width: 100%;
+	margin: 5% 85% 0px 15%;
+	font-size: 48px;
 	color: #ff8900;
-	margin: 70px 0px 50px 0px;
 }
 
 .dongnae {
+	margin: 0px 15%;
 	display: flex;
-	width: 100%;
+	width: 70%;
 	height: 460px;
 	border-radius: 15px;
-	background-color: rgba(128,128,128,0.10);
-	
-/* 	border: 1px solid green; */
+	background-color: rgba(128, 128, 128, 0.10);
+
+	/* 	border: 1px solid green; */
 }
 
 #map-area {
@@ -59,7 +60,7 @@ article {
 
 #banner-1-right {
 	flex: 1;
-/* 	border: 1px solid blue; */
+	/* 	border: 1px solid blue; */
 	display: flex;
 	flex-direction: column;
 }
@@ -88,7 +89,7 @@ article {
 }
 
 .layer {
-/* 	border: 1px solid green; */
+	/* 	border: 1px solid green; */
 	width: 100%;
 	height: 50%;
 	flex: 1;
@@ -101,14 +102,14 @@ article {
 	flex: 1;
 	width: 20%;
 	height: 100%;
-/* 	border: 1px solid red; */
-	margin: 0px 10px;
+	/* 	border: 1px solid red; */
+	margin: 0px 15px;
 	padding: 5px 0px;
 }
 
 #img, #title, #like {
 	width: 100%;
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 }
 
 #img {
@@ -141,12 +142,12 @@ article {
 
 /* banner 2 영역 */
 #banner-2 {
-/* 	border: 1px solid black; */
+	/* 	border: 1px solid black; */
 	flex-direction: column;
 }
 
 #banner-2-top {
-/* 	border: 1px solid red; */
+	/* 	border: 1px solid red; */
 	flex: 1;
 	height: 10%;
 	text-align: right;
@@ -161,5 +162,5 @@ article {
 #banner-2-bottom {
 	flex: 9;
 	height: 90%;
-/* 	border: 1px solid blue; */
+	/* 	border: 1px solid blue; */
 }

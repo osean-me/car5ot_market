@@ -8,11 +8,12 @@
 
 <%
 	String path = request.getContextPath();
-
-	// 세션으로 로그인한 회원 정보 받아오기 
-	MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+	long member_no = Long.parseLong(request.getParameter("member_no"));
+	// 회원 번호로 회원 정보 받아오기 
+	MemberDAO mdao = new MemberDAO();
+	MemberDTO mdto = mdao.get(member_no);
 	
-	// 세션을 이용해 회원 주소 받아오기 
+	// .get() 메소드를 이용해 회원 주소 받아오기 
 	AddrDAO adao = new AddrDAO();
 	AddrDTO adto = adao.get(mdto.getMember_addr_no());
 	
@@ -32,8 +33,24 @@
 
 <!-- 회원가입 CSS -->
 <link href="<%=path %>/css/6.join.css" type="text/css" rel="stylesheet">
+
+<!-- 비밀번호 비교 -->
+<%if(request.getParameter("error_no") != null) { %>
+
+	<%int error_no = Integer.parseInt(request.getParameter("error_no")); %>
+	
+	<%if(error_no == 1) { %>
+		<script>
+			alert("현재 비밀번호와 같습니다. 다시 입력해주세요.");
+		</script>
+	<%} else if(error_no == 2) { %>
+		<script>
+			alert("현재 비밀번호가 틀렸습니다. 다시 입력해주세요.");
+		</script>
+	<%} %>
+<%} %>
         <article class="join-article">
-            <form action="" method="post" class="join-form" id="edit-form" onsubmit="return editSubmit();">
+            <form action="change_info.do" method="get" class="join-form" id="edit-form" onsubmit="return editSubmit();">
                 <div>
             		<img src="<%=path %>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
             	</div>

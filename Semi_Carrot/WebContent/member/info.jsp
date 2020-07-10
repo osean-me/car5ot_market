@@ -7,12 +7,18 @@
 <%
 	String path = request.getContextPath();
 
+	MemberDAO mdao = new MemberDAO();
 	MemberDTO member = (MemberDTO) session.getAttribute("memberinfo");
 
-	Long member_no = member.getMember_no();
-	MemberDAO mdao = new MemberDAO();
-	MemberDTO mdto = mdao.get(member_no);
+	long member_no = member.getMember_no();
 	
+	// 회원 번호가 있을 경우
+	if(request.getParameter("member_no") != null) {
+		member_no = Long.parseLong(request.getParameter("member_no"));
+	}
+	
+	MemberDTO mdto = mdao.get(member_no);
+	System.out.println("주소 번호 : " + mdto.getMember_addr_no());
 	/*
 		현재 회원번호 가지고 있음.
 		회원번호를 가지고 있으면 회원의 주소 고유번호를 알 수 있어요.
@@ -25,6 +31,8 @@
 	AddrDAO adao = new AddrDAO();
 	
 	AddrDTO adto = adao.get(member_addr_no);
+	
+	System.out.println("회원 번호 : " + member.getMember_no());
 
 %>
 
@@ -42,9 +50,9 @@
                         </div>
                         <div id="mypage-top-left-down">
                             <div>
-                                <button><a href="">비밀번호 변경</a></button>
-                                <button><a href="">회원정보 수정</a></button>
-                                <button><a href="">회원 탈퇴</a></button>
+                                <a href=""><button>비밀번호 변경</button></a>
+                                <a href="change_info.jsp?member_no=<%=member_no%>"><button>회원정보 수정</button></a>
+                                <a href=""><button>회원 탈퇴</button></a>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,4 @@
-package carrot.servlet.member;
+package carrot.servlet.admin;
 
 import java.io.IOException;
 
@@ -14,8 +14,8 @@ import carrot.bean.dto.AddrDTO;
 import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/member/change_info.do")
-public class changeInfoServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/admin/change_info.do")
+public class changeInfoAdminServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -31,11 +31,11 @@ public class changeInfoServlet extends HttpServlet {
 			// Address Constructor
 			AddrDTO adto = new AddrDTO();
 			AddrDAO adao = new AddrDAO();
-			
+
 			adto.setAddr_state(addr_state);
 			adto.setAddr_city(addr_city);
 			adto.setAddr_base(addr_base);
-
+			
 			// Address Method
 			Long addr_no = adao.findAddrNo(adto);
 			if (addr_no == null) {

@@ -14,6 +14,12 @@
 	
 }
 
+#used-post-list-form {
+	width: auto;
+	margin: 0px 15%;
+	min-width: 1000px;
+}
+
 .detail {
 	
 }
@@ -105,7 +111,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px;">
+<article style="padding-top: 200px;" id="used-post-list-form">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">중고거래</span> 상품목록

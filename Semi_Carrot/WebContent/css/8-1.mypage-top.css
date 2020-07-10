@@ -2,242 +2,244 @@
 
 /* 마이페이지 기본 폼 */
 #mypage-article {
-    width: auto;
-    min-width: 800px;
-    height: 1200px;
-    /*    border: 1px solid black;*/
+	margin: 0px auto;
+	width: 60%;
+	text-align: center;
+	min-width: 1000px;
+	height: 1200px;
+	/*    border: 1px solid black;*/
 }
 
 #mypage-form {
-    width: inherit;
-    height: inherit;
-    padding-top: 270px;
+	width: 100%;
+	height: inherit;
+	padding-top: 270px;
 
-    /*    border: 1px solid red;*/
+	/*    border: 1px solid red;*/
 }
 
-#mypage-top,
-#mypage-bottom {
-    width: 100%;
-    background-color: rgba(255, 165, 0, 0.47);
+#mypage-top, #mypage-bottom {
+	width: 100%;
+	background-color: rgba(255, 165, 0, 0.47);
 }
 
 #mypage-top {
-    height: 40%;
-    display: flex;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+	height: 40%;
+	display: flex;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
 }
 
 #mypage-bottom {
-    height: 60%;
-    padding-top: 10px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+	height: 60%;
+	padding-top: 10px;
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
 
-    /*    border: 1px solid blue;*/
+	/*    border: 1px solid blue;*/
 }
 
-#mypage-top-left,
-#mypage-top-right {
-    width: 50%;
-    flex: 1;
+#mypage-top-left, #mypage-top-right {
+	width: 50%;
+	flex: 1;
 }
-
 
 /* 마이페이지 top-left 영역 */
 #mypage-top-left-up {
-    height: 75%;
+	height: 75%;
 }
 
-#mypage-top-left-up > img {
-    width: 40%;
-    height: auto;
-    margin-top: 15px;
-    border-radius: 100%;
-    box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
+#mypage-top-left-up>img {
+	width: 40%;
+	height: auto;
+	margin-top: 15px;
+	border-radius: 100%;
+	box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
 }
 
 #mypage-top-left-down {
-    height: 25%;
+	height: 25%;
 }
 
-#mypage-top-left-down > div {
-    background-color: bisque;
-    border-radius: 15px;
-    display: flex;
-    width: 85%;
-    height: 80%;
-    margin: 0px 40px;
-    box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
+#mypage-top-left-down>div {
+	background-color: bisque;
+	border-radius: 15px;
+	display: flex;
+	width: 85%;
+	height: 40%;
+	margin: 6% 40px;
+	box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
 }
 
-#mypage-top-left-down > div > button {
-    flex: 1;
-    background-color: transparent;
-    border: 1px solid transparent;
+#mypage-top-left-down>div>a {
+	display: block;
+	flex: 1;
 }
 
-#mypage-top-left-down > div > button > a {
-    color: white;
-    font-size: 18px;
-    text-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
-    text-decoration: none;
+#mypage-top-left-down>div>a>button {
+	position: relative;
+	top: 15%;
+	background-color: transparent;
+	border: 1px solid transparent;
 }
 
-#mypage-top-left-down > div > button:hover > a {
-    color: #ff8900;
+#mypage-top-left-down>div>a>button {
+	color: white;
+	font-size: 18px;
+	text-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
+	text-decoration: none;
+}
+
+#mypage-top-left-down>div>a:hover>button {
+	color: #ff8900;
 }
 
 /* 마이페이지 top-right 영역 */
 #mypage-top-right-up {
-    height: 20%;
-    display: flex;
-    margin-bottom: 2%;
+	height: 20%;
+	display: flex;
+	margin-bottom: 2%;
 }
 
-#nickname,
-#manner {
-    display: inline-block;
-    flex: 1;
-    width: 50%;
-    height: auto;
+#nickname, #manner {
+	display: inline-block;
+	flex: 1;
+	width: 50%;
+	height: auto;
 }
 
 /* 닉네임 영역 */
 #nickname {
-    text-align: left;
+	text-align: left;
 }
 
-#nickname > div {
-    margin-top: 10%;
-    margin-left: 20%;
-    font-size: 24px;
-    color: white;
-    text-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
-    cursor: pointer;
-    position: relative;
-    z-index: 0;
+#nickname>div {
+	margin-top: 10%;
+	margin-left: 20%;
+	font-size: 24px;
+	color: white;
+	text-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
+	cursor: pointer;
+	position: relative;
+	z-index: 0;
 }
 
-#nickname > div:hover {
-    color: #ff8900;
+#nickname>div:hover {
+	color: #ff8900;
 }
 
 /* 닉네임 호버 영역 */
-#nickname > div:hover > ul {
-    display: block;
+#nickname>div:hover>ul {
+	display: block;
 }
 
-#nickname > div > ul {
-    top: 10%;
-    left: 65%;
-    width: 40%;
-    height: auto;
-    display: none;
-    position: absolute;
-    background-color: white;
-    border-radius: 10%;
-    box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
-    z-index: -2;
+#nickname>div>ul {
+	top: 10%;
+	left: 65%;
+	width: 40%;
+	height: auto;
+	display: none;
+	position: absolute;
+	background-color: white;
+	border-radius: 10%;
+	box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
+	z-index: -2;
 }
 
-#nickname > div > ul > li {
-    list-style: none;
+#nickname>div>ul>li {
+	list-style: none;
 }
 
-#nickname > div > ul > li > a {
-    text-decoration: none;
-    margin: 10% 0px 10% 10%;
-    font-size: 15px;
-    color: #7b7b7b;
-    text-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
+#nickname>div>ul>li>a {
+	text-decoration: none;
+	margin: 10% 0px 10% 10%;
+	font-size: 15px;
+	color: #7b7b7b;
+	text-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
 }
 
-#nickname > div > ul > li > a:hover {
-    color: #ff8900;
+#nickname>div>ul>li>a:hover {
+	color: #ff8900;
 }
-
 
 /* 매너 지수 영역 */
 #manner {
-    text-align: right;
-    z-index: -1;
+	text-align: right;
+	z-index: -1;
 }
 
-#manner > div > input[type=range] {
-    margin-top: 13%;
-    margin-right: 20%;
+#manner>div>input[type=range] {
+	margin-top: 13%;
+	margin-right: 20%;
 }
 
 #mypage-top-right-down {
-    height: 80%;
+	height: 80%;
 }
 
 /* 마이페이지 top-right-down 영역 */
 #mypage-top-right-down-in {
-    margin: 0px 5%;
-    width: 90%;
-    height: 90%;
-    background-color: bisque;
-    border-radius: 15px;
-    box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
+	margin: 0px 5%;
+	width: 90%;
+	height: 90%;
+	background-color: bisque;
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
 }
 
 #intro-top {
-    display: flex;
-    box-shadow: 0px 3px 0px 0px rgba(128, 128, 128, 0.45);
+	display: flex;
+	box-shadow: 0px 3px 0px 0px rgba(128, 128, 128, 0.45);
 }
 
-#post-count,
-#reply-count {
-    display: inline-block;
-    flex: 1;
-    margin: 10px 0px;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: 20px;
-    background-position: 25% 2px;
-    color: #ff8900;
+#post-count, #reply-count {
+	display: inline-block;
+	flex: 1;
+	margin: 10px 0px;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: 20px;
+	background-position: 25% 2px;
+	color: #ff8900;
 }
 
 #post-count {
-    background-image: url(../img/mypage-carrot-48.png);
+	background-image: url(../img/mypage-carrot-48.png);
 }
 
 #reply-count {
-    background-image: url(../img/mypage-chat-bubble-48.png);
+	background-image: url(../img/mypage-chat-bubble-48.png);
 }
 
 #intro-bottom {
-    height: 85%;
+	height: 85%;
 }
 
-#intro-bottom > form {
-    height: 100%;
+#intro-bottom>form {
+	height: 100%;
 }
 
-#intro-bottom > form > textarea {
-    width: 100%;
-    height: 80%;
+#intro-bottom>form>textarea {
+	width: 100%;
+	height: 80%;
 }
 
-#intro-bottom > form > textarea {
-    font-size: 15px;
-    border: 1px solid transparent;
-    background-color: transparent;
-    resize: none;
-    padding: 20px;
-    color: gray;
+#intro-bottom>form>textarea {
+	font-size: 15px;
+	border: 1px solid transparent;
+	background-color: transparent;
+	resize: none;
+	padding: 20px;
+	color: gray;
 }
 
-#intro-bottom > form > input[type=submit] {
-    background-color: transparent;
-    border: 1px solid transparent;
-    border-radius: 10%;
-    box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
-    color: #ff8900;
-    float: right;
-    margin-top: 10px;
-    margin-right: 20px;
+#intro-bottom>form>input[type=submit] {
+	background-color: transparent;
+	border: 1px solid transparent;
+	border-radius: 10%;
+	box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
+	color: #ff8900;
+	float: right;
+	margin-top: 10px;
+	margin-right: 20px;
 }

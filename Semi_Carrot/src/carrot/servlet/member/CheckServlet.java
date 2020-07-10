@@ -14,7 +14,7 @@ import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/check.do")
-public class checkServlet extends HttpServlet {
+public class CheckServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

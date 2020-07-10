@@ -23,6 +23,9 @@ public class ChangeInfoServlet extends HttpServlet {
 
 			// 로그인 회원 정보 가지고 오기
 			MemberDTO memberinfo = (MemberDTO) req.getSession().getAttribute("memberinfo");
+			System.out.println("null = " + req.getParameter("check_pw"));
+			System.out.println(memberinfo.getMember_id() + " = 로그인 회원 아이디");
+			System.out.println(memberinfo.getMember_pw() + " = 로그인 회원 비번");
 
 			String memberinfo_pw = memberinfo.getMember_pw();
 
@@ -33,8 +36,6 @@ public class ChangeInfoServlet extends HttpServlet {
 			String addr_state = req.getParameter("addr_state");
 			String addr_city = req.getParameter("addr_city");
 			String addr_base = req.getParameter("addr_base");
-
-			boolean diffrent = !check_pw.equals(member_pw);
 
 			// 세션 비밀번호와 입력한 비밀번호 비교
 			if (member_pw.equals(memberinfo_pw)) {
@@ -72,31 +73,42 @@ public class ChangeInfoServlet extends HttpServlet {
 				mdto.setMember_no(member_no);
 
 				// 현재 비밀번호와 새로운 비밀번호 비교 > 다른 경우 !!비밀번호 수정!!
-				if (diffrent && check_pw != null) {
-					mdto.setMember_pw(check_pw);
-					// 처리
-					mdao.changeInfoWithPw(mdto);
+				if (!check_pw.isEmpty()) {
 
-					// 정보 수정 성공 후 마이페이지로 이동
-					resp.sendRedirect("info.jsp?member_no=" + member_no);
+					// 현재 비밀번호와 새로운 비밀번호가 같은지 비교
+					// 다르면 성공 / 같으면 실패
+					if (!member_pw.equals(check_pw)) {
 
-				} else if (!diffrent && check_pw == null) {
+						mdto.setMember_pw(check_pw);
+
+						mdao.changeInfoWithPw(mdto);
+
+						// 정보 수정 성공 후 마이페이지로 이동
+						resp.sendRedirect("info.jsp?member_no=" + member_no);
+
+					} else if (member_pw.equals(check_pw)) {
+						
+						// 바꾸려는 비밀번호와 현재 비밀번호가 같으니 다시 입력
+						resp.sendRedirect("change_info.jsp?error_no=1&member_no=" + memberinfo.getMember_no());
+					}
+
+				} else if (check_pw.isEmpty()) {
+					
 					// 변경할 비밀번호가 없는 경우
 					mdao.changeInfo(mdto);
 
 					// 정보 수정 성공 후 마이페이지로 이동
 					resp.sendRedirect("info.jsp?member_no=" + member_no);
 
-				} else {
-					// 현재 비밀번호와 새로운 비밀번호가 같은 경우
-					resp.sendRedirect("change_info.jsp?error_no=1&member_no=" + memberinfo.getMember_no());
-
 				}
-				
-				// 세션 정보 변경 
+
+				// 세션 정보 변경
 				req.getSession().removeAttribute("memberinfo");
 				req.getSession().setAttribute("memberinfo", mdto);
+				MemberDTO session = (MemberDTO) req.getSession().getAttribute("memberinfo");
 				
+				System.out.println("이메일 : " + session.getMember_id());
+
 			} else {
 				// 현재 비밀번호가 세션 비밀번호와 다를 시
 				resp.sendRedirect("change_info.jsp?error_no=2&member_no=" + memberinfo.getMember_no());

@@ -30,6 +30,7 @@ header {
     display: flex;
     position: fixed;
     background-color: white;
+    z-index: 100;
 }
 
 .logo,

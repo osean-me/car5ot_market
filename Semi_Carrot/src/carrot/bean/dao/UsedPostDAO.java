@@ -11,7 +11,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import carrot.bean.dto.AddrDTO;
 import carrot.bean.dto.DetailListDTO;
 import carrot.bean.dto.UsedPostDTO;
 

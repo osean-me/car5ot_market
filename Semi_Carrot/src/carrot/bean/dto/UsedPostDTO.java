@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UsedPostDTO {
+
 	private long post_no;
 	private String post_title;
 	private String post_content;
@@ -128,3 +129,4 @@ public class UsedPostDTO {
 	 }
 	 
 }
+

@@ -1,6 +1,7 @@
 package carrot.bean.dto;
 
 public class PromotionPostDTO {
+
    private long post_no;
    private String post_title;
    private String post_content;
@@ -91,3 +92,4 @@ public class PromotionPostDTO {
    }
    
 }
+

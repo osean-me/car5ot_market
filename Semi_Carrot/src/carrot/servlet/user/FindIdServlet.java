@@ -34,7 +34,7 @@ public class FindIdServlet extends HttpServlet {
 				req.getSession().setAttribute("member_id", member_id);
 				resp.sendRedirect("find_id_result.jsp");
 			} else {// 결과가 없으면
-				resp.sendRedirect("find_id_pw.jsp?error");
+				resp.sendRedirect("find_id_pw.jsp?not_find=id");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

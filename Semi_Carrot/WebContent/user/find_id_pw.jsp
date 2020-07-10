@@ -1,11 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%
+	String find = request.getParameter("not_find");
+
+	if(find != null) {
+		if(find.equals("id")) {
+		} else if(find.equals("pw")) {
+			
+		}
+	}
+
+%>
+
 
 <!-- 헤더연결 -->
 
 
 <div align="center">
+
+	<%	if(find != null) { %>
+			<%if(find.equals("id")) { %>
+					<script>
+						alert("아이디를 찾을 수 없습니다.");
+					</script>
+			<%} else if(find.equals("pw")) { %>
+					<script>
+						alert("비밀번를 찾을 수 없습니다.");
+					</script>
+			<%} %>
+	<%	} %>
 
 <h2>아이디 찾기</h2>
 	

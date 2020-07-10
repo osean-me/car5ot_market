@@ -39,7 +39,7 @@ public class FindPwServlet extends HttpServlet {
 
 			} else {
 
-				resp.sendRedirect("find_pw_fail.jsp");
+				resp.sendRedirect("find_id_pw.jsp?not_find=pw");
 			}
 
 		} catch (Exception e) {

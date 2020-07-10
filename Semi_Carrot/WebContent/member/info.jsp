@@ -50,7 +50,6 @@
                         </div>
                         <div id="mypage-top-left-down">
                             <div>
-                                <a href=""><button>비밀번호 변경</button></a>
                                 <a href="change_info.jsp?member_no=<%=member_no%>"><button>회원정보 수정</button></a>
                                 <a href=""><button>회원 탈퇴</button></a>
                             </div>
@@ -60,7 +59,7 @@
                         <div id="mypage-top-right-up">
                             <div id="nickname">
                                 <div>
-                                    여기는 닉네임
+                                    <%=mdto.getMember_nick() %>
                                     <ul>
                                         <li><a href="">쪽지 보내기</a></li>
                                         <li><a href="">좋아요</a></li>

@@ -32,8 +32,14 @@
 			
 			
 			//게시글 조회수 중복 방지 코드 만들어야함 ★★
+			MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
 			UsedPostDAO updaoo = new UsedPostDAO();
 			updaoo.plusViewCount(post_no, 1);
+			
+			//내글
+			boolean isMine= memberinfo.getMember_no() == updto.getMember_no();
+			//관리자
+			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
 			
 	%>
 	
@@ -87,12 +93,17 @@
 					<div class="left-item33">
 						<button class="like-button">♥ 찜 <%=updto.getPost_like() %></button>
 					</div>
+					<%if(isAdmin || isMine){ %>
+					<!-- 수정 삭제 버튼은 "내 댓글" 또는 "관리자"인 경우만 표시 -->
 					<div class="left-item33">
+						<a href="used_post_edit.jsp?post_no=<%=post_no%>">
 						<button class="edit-button">수정</button>
+						</a>
 					</div>
 					<div class="left-item33">
 						<button class="delete-button">삭제</button>
 					</div>
+					<%} %>
 					</div>
 				</div>
 			</div>

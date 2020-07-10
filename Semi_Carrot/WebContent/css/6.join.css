@@ -3,7 +3,9 @@
 /* 회원가입 기본 폼 */
 .join-article {
 	width: auto;
+	min-width: 1000px;
     height: auto;
+    text-align: center;
     /*            border: 1px solid red;*/
 }
 
@@ -135,7 +137,7 @@ input[name=member_phone] {
 /* submit 폼 디자인 */
 #join-submit {
     margin: 60px 0px 0px 0px;
-    height: 70Spx;
+    height: 55px;
     font-size: 28px;
     color: rgba(255, 137, 0, 0.87);
     cursor: pointer;

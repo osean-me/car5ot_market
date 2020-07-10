@@ -2,8 +2,10 @@
 
 /* 로그인 기본 아티클 */
 #login-article {
-	width: auto;
+	width: 100%;
+	min-width: 1000px;
     height: auto;
+    text-align: center;
 }
 
 /* 로그인 기본 폼 */

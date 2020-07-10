@@ -3,7 +3,7 @@
 /* 마이페이지 기본 폼 */
 #mypage-article {
     width: auto;
-    min-width: 800px;
+    min-width: 1000px;
     height: 1200px;
     /*    border: 1px solid black;*/
 }

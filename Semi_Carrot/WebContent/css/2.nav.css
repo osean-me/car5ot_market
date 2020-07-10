@@ -2,6 +2,7 @@
 
 nav {
     width: 100%;
+    min-width: 1000px;
     height: 100px;
     border-bottom: 2px solid rgb(209, 209, 209);
     float: left;
@@ -9,14 +10,18 @@ nav {
     margin-top: 85px;
     background-color: white;
     z-index: 100;
+    display: flex;
+}
+
+#menu-area {
+	width: 10%;
+	flex: 1;
 }
 
 #nav-icon {
     width: 50px;
     height: auto;
     margin-top: 20px;
-    margin-left: 298px;
-    float: left;
     cursor: pointer;
 }
 
@@ -44,12 +49,11 @@ nav {
 }
 
 .nav-menu {
-    width: auto;
+    width: 90%;
     display: inline-block;
     opacity: 0;
     margin-top: 20px;
-    margin-left: 17rem;
-    float: left;
+    flex: 9;
 }
 
 .nav-menu > ul {

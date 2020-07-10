@@ -19,6 +19,8 @@ article {
 	margin: 0px 15%;
 	display: flex;
 	width: 70%;
+	min-width: 1000px;
+	max-width: 1200px;
 	height: 460px;
 	border-radius: 15px;
 	background-color: rgba(128, 128, 128, 0.10);

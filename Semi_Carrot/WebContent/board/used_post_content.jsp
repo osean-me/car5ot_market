@@ -1,3 +1,5 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
 <%@page import="carrot.bean.dao.AddrDAO"%>
@@ -12,7 +14,7 @@
 	<%
 		String path = request.getContextPath();
 			
-			long post_no = 1;
+			int post_no = Integer.parseInt(request.getParameter("post_no"));
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
 			
@@ -27,6 +29,12 @@
 			//"주소 시군구동" 뽑아내기위해
 			AddrDAO addao = new AddrDAO();
 			AddrDTO addto = addao.get(updto.getAddr_no());
+			
+			
+			//게시글 조회수 중복 방지 코드 만들어야함 ★★
+			UsedPostDAO updaoo = new UsedPostDAO();
+			updaoo.plusViewCount(post_no, 1);
+			
 	%>
 	
 	
@@ -75,7 +83,17 @@
 					</div>
 				</div>
 				<div>
-					<button class="like-button">♥ 찜 <%=updto.getPost_like() %></button>
+				<div class="float-box float-left">
+					<div class="left-item33">
+						<button class="like-button">♥ 찜 <%=updto.getPost_like() %></button>
+					</div>
+					<div class="left-item33">
+						<button class="edit-button">수정</button>
+					</div>
+					<div class="left-item33">
+						<button class="delete-button">삭제</button>
+					</div>
+					</div>
 				</div>
 			</div>
 		</div>

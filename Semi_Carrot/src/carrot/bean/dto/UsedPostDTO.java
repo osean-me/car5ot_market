@@ -17,7 +17,6 @@ public class UsedPostDTO {
 	private long member_no;
 	private long member_img_no;
 	private long addr_no;
-	private long post_img_no;
 	private String post_state;
 	
 	public UsedPostDTO(ResultSet rs) throws SQLException{
@@ -32,7 +31,6 @@ public class UsedPostDTO {
 		this.setMember_no(rs.getLong("member_no"));
 		this.setMember_img_no(rs.getLong("member_img_no"));
 		this.setAddr_no(rs.getLong("addr_no"));
-		this.setPost_img_no(rs.getLong("post_img_no"));
 		this.setPost_state(rs.getString("post_state"));
 	}
 	public long getPost_no() {
@@ -101,12 +99,7 @@ public class UsedPostDTO {
 	public void setAddr_no(long addr_no) {
 		this.addr_no = addr_no;
 	}
-	public long getPost_img_no() {
-		return post_img_no;
-	}
-	public void setPost_img_no(long post_img_no) {
-		this.post_img_no = post_img_no;
-	}
+	
 	public String getPost_state() {
 		return post_state;
 	}

@@ -3,7 +3,7 @@
 nav {
     width: 100%;
     min-width: 1000px;
-    height: 100px;
+    height: 70px;
     border-bottom: 2px solid rgb(209, 209, 209);
     float: left;
     position: fixed;
@@ -51,13 +51,13 @@ nav {
 .nav-menu {
     width: 90%;
     display: inline-block;
+    padding-top: 25px;
     opacity: 0;
-    margin-top: 20px;
     flex: 9;
 }
 
 .nav-menu > ul {
-    display: inline-block;
+    display: flex;
 }
 
 .nav-menu > ul > li {
@@ -66,6 +66,7 @@ nav {
     list-style: none;
     font-size: 32px;
     margin-right: 8rem;
+    flex: 1;
 }
 
 .nav-menu > ul > li > a {
@@ -82,8 +83,8 @@ nav {
 .nav-menu > ul > li ul {
     display: none;
     position: absolute;
-    width: 220%;
-    left: 0px;
+    width: 250px;
+    left: 25%;
     top: 100%;
     list-style: none;
     background-color: white;

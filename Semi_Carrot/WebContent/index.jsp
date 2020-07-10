@@ -32,7 +32,7 @@
 				</div>
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_2.png">
-				</div>
+				</div>s
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_3.png">
 				</div>

@@ -91,11 +91,13 @@ header {
 .sign {
     float: right;
     width: 25%;
+    display: flex;
 }
 
 .sign,
 .sign > ul > li {
     display: inline-block;
+    flex: 1;
 }
 
 .sign > .user-icon {

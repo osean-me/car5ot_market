@@ -1,17 +1,14 @@
 @charset "UTF-8";
 
 .promotion {
-    padding-top: 185px;
+    padding-top: 155px;
     width: 100%;
-   	min-width: 1000px;
     z-index: 0;
 }
 
 .swiper-container {
     width: inherit;
     height: auto;
-    /*    min-height: 200px;
-                  max-height: 300px;*/
 }
 
 .swiper-container .swiper-slide,

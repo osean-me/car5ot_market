@@ -29,7 +29,7 @@ public class UsedPostDTO {
       this.setPost_like(rs.getLong("post_like"));
       this.setUsed_cate_num(rs.getLong("used_cate_num"));
       this.setMember_no(rs.getLong("member_no"));
-      this.setMember_img_no(rs.getLong("member_img_no"));
+      //this.setMember_img_no(rs.getLong("member_img_no"));
       this.setAddr_no(rs.getLong("addr_no"));
       this.setPost_state(rs.getString("post_state"));
    }

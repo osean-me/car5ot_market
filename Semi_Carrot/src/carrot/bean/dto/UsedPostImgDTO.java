@@ -4,8 +4,8 @@ public class UsedPostImgDTO {
 	private long post_img_no;
 	private long post_no;
 	private String post_img_name;
-	private long post_img_size;
 	private String post_img_type;
+	private long post_img_size;
 	
 	public long getPost_no() {
 		return post_no;

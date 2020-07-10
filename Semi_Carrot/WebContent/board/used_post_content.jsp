@@ -1,8 +1,48 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="carrot.bean.dto.AddrDTO"%>
+<%@page import="carrot.bean.dao.AddrDAO"%>
+<%@page import="carrot.bean.dto.UsedBoardDTO"%>
+<%@page import="carrot.bean.dao.UsedBoardDAO"%>
+<%@page import="carrot.bean.dao.MemberDAO"%>
+<%@page import="carrot.bean.dao.UsedPostDAO"%>
+<%@page import="carrot.bean.dto.MemberDTO"%>
+<%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%
 		String path = request.getContextPath();
+			
+			int post_no = Integer.parseInt(request.getParameter("post_no"));
+			UsedPostDAO updao = new UsedPostDAO();
+			UsedPostDTO updto = updao.get(post_no);
+			
+			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
+			MemberDAO mdao = new MemberDAO();
+			MemberDTO mdto = mdao.get(updto.getMember_no());
+			
+			//"카테고리 이름" 뽑아내기위해
+			UsedBoardDAO ubdao = new UsedBoardDAO();
+			UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
+			
+			//"주소 시군구동" 뽑아내기위해
+			AddrDAO addao = new AddrDAO();
+			AddrDTO addto = addao.get(updto.getAddr_no());
+			
+			
+			//게시글 조회수 중복 방지 코드 만들어야함 ★★
+			MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
+			UsedPostDAO updaoo = new UsedPostDAO();
+			updaoo.plusViewCount(post_no, 1);
+			
+			//내글
+			boolean isMine= memberinfo.getMember_no() == updto.getMember_no();
+			//관리자
+			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
+			
 	%>
+	
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
@@ -14,36 +54,57 @@
 				<img src="https://placeimg.com/300/250/tech" width="100%">
 			</div>
 			<div class="right-item60 left-font padding-left35">
+				<!-- 글 제목 -->
 				<div class="font23 padding25">
-					<span>카메라 팝니다^ㅁ^</span>
+					<span><%=updto.getPost_title() %></span>
 				</div>
+				<!-- 상품 금액 -->
 				<div class="item padding25">
-					<span class="font45">60,000</span> <span class=font20>원</span>
+					<!-- 3자리마다 콤마 찍기 -->
+					<%long price = updto.getPost_price();
+					String commaNum = NumberFormat.getInstance().format(price);
+					%>
+					<span class="font45"><%=commaNum %></span> <span class=font20>원</span>
 				</div>
 				<div class="item padding25">
 					<hr>
 				</div>
 				<div class="item font17 gray-font padding25">
-					<span class="padding-right05">♥ 180</span> <span
-						class="short-border">조회수30</span> 
-						<span class="padding-left05">3시간전</span> 
+					<span class="padding-right05">♥ <%=updto.getPost_like() %></span> <span
+						class="short-border">조회수 <%=updto.getPost_view() %></span> 
+						<span class="padding-left05"><%=updto.getUsedPost_autotime()%></span> 
 						<span class="right-float">☎신고하기</span>
 				</div>
 				<div class="item font15 padding15">
 					<div class="padding15">
-						<span class="gray-font">&middot; 카테고리</span><span>&emsp;디지털/가전</span>
+						<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=ubdto.getUsed_cate_title() %></span>
 					</div>
 					<div class="padding15">
 						<span class="gray-font">&middot; 상품상태</span><span
-							class="purple-font">&emsp;중고</span>
+							class="purple-font">&emsp;<%=updto.getPost_state() %></span>
 					</div>
 					<div class="padding15">
 						<span class="gray-font">&middot; 거래지역</span><span
-							class="green-font">&emsp;서울특별시 영등포구 당산동</span>
+							class="green-font">&emsp;<%=addto.getAddr_state() %> <%=addto.getAddr_city() %> <%=addto.getAddr_base() %></span>
 					</div>
 				</div>
 				<div>
-					<button class="like-button">♥ 찜 180</button>
+				<div class="float-box float-left">
+					<div class="left-item33">
+						<button class="like-button">♥ 찜 <%=updto.getPost_like() %></button>
+					</div>
+					<%if(isAdmin || isMine){ %>
+					<!-- 수정 삭제 버튼은 "내 댓글" 또는 "관리자"인 경우만 표시 -->
+					<div class="left-item33">
+						<a href="used_post_edit.jsp?post_no=<%=post_no%>">
+						<button class="edit-button">수정</button>
+						</a>
+					</div>
+					<div class="left-item33">
+						<button class="delete-button">삭제</button>
+					</div>
+					<%} %>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -87,31 +148,11 @@
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
 				<div class="padding15">
-					<p class="font20">상품정보</p>
+					<p class="font23">상품정보</p>
 				</div>
 				<hr>
 				<div class="padding-top40 padding40 product-info-border ">
-				✅연락가능 시간 : 24시간<br>
-				(부재시 곧연락드립니다)<br>
-				<br>
-				⚠️샤넬모든제품 문의환영/해외구매대행 문의 환영⚠️<br>
-				⬇️번개장터: 코카크크 바로가기⬇️<br>
-				👉https://stuv4.app.goo.gl/ZRfSt<br>
-				<br>
-				🔔코카크크만 있는 페이백 이벤트🔔<br>
-				👉후기작성 해주시면 10,000원을 돌려드립니다👌<br>
-				<br>
-				➡️ 사진과 틀리다면 200% 보상해드리겠습니다.<br>
-				➡️ "싸다", "우리가갑이다." , "비교인증" 그런말안해요.<br>
-				➡️ "코카크크" 만의 차별화된 서비스로 보여드립니다.<br>
-				<br>
-				😉항상 고객님께 최선을 다하겠습니다😉<br>
-				✔무리한 조건을 걸지않겠습니다.<br>
-				✔제품을 허위로 판매하는건 불법입니다.<br>
-				✔거짓없이 제대로 설명드리며 구매에대해 <br>
-				      방향성을 잡아드립니다.<br>
-				<br>
-				❤해외배송 구매과정❤
+					<p class="font18"><%=updto.getPost_content() %></p>
 				</div>
 				<hr>
 				<div class="padding-top40">
@@ -136,7 +177,7 @@
 			<div class="padding-top25 ">	
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+							<img class="reply-pic-circle" src="<%=path %>/img/manner_sample.jpg">
 						</div>
 						<div class="right-item90">
 							<div class="reply-nick-font">
@@ -182,27 +223,33 @@
 				</div>
 			</div>
 			
-			<div class="right-item34  padding-right30 padding-left30 left-font">
-				<div class="padding15 ">
-					<p class=" font20">상점정보</p>
+			<div class="right-item34  padding-right30 padding-left30 ">
+				<div class="padding15 left-font">
+					<p class=" font23">상점정보</p>
 				</div>
 				<hr>
 				<div class="padding-top30">
 					<div class="float-box float-left">
-						<div class="left-item25">
-							<img class="pic-circle" src="https://placeimg.com/300/250/tech" >
+						<div class="left-item25  pic-align left-font">
+							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
 						</div>
-						<div class="right-item75 padding-left30">
-								<div class="padding25">
-									<p>기마름이야</p>
+						<div class="right-item75">
+								<div class="top-margin10 left-font">
+									<!-- 작성자 -->
+									<%if(updto.getMember_no( ) != 0){ %>
+										<p class="font20"> <%=mdto.getMember_nick() %></p>
+									<%} else{%>
+											<p class="gray-font font20">탈퇴한 회원</p>
+									<%} %>
 								</div>
-								<div>
-									<p class="gray-font">매너지수</p>
-									<img src="https://placeimg.com/300/250/animal" width="100" height="25">
-								</div>
+
 						</div>
 					</div>
+					
 				</div>
+					<div class="left-font manner-margin ">
+						<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">
+					</div>
 			</div>
 			
 		</div>

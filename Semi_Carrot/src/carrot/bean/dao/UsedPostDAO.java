@@ -43,4 +43,17 @@ public class UsedPostDAO {
 		
 		return updto;
 	}
+	
+	//조회수 증가
+	public void plustViewCount(long post_no, long member_no)throws Exception{
+		Connection con = getConnection();
+		
+		String sql="update used_post set post_view = post_view+1 where post_no=? and member_no != ?";
+		PreparedStatement ps=con.prepareStatement(sql);
+		ps.setLong(1, post_no);
+		ps.setLong(2, member_no);
+		ps.execute();
+		
+		con.close();
+	}
 }

@@ -2,14 +2,16 @@
 
 /* 마이페이지 기본 폼 */
 #mypage-article {
-    width: auto;
+	margin: 0px auto;
+    width: 60%;
+    text-align: center;
     min-width: 1000px;
     height: 1200px;
     /*    border: 1px solid black;*/
 }
 
 #mypage-form {
-    width: inherit;
+    width: 100%;
     height: inherit;
     padding-top: 270px;
 

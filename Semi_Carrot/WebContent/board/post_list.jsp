@@ -33,7 +33,7 @@
 	margin-bottom: 10px;
 }
 
-.product_photo>img {
+.product_photo>a>img {
 	width: 220px;
 	height: 220px;
 }
@@ -133,7 +133,7 @@
 				%>
 				<div class="product">
 					<div class="product_photo">
-						<img src="../img/ㅎㅎ.jpg">
+						<a href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>"><img src="../img/ㅎㅎ.jpg"></a>
 					</div>
 					<div class="product_title">
 						<div class="hideText">

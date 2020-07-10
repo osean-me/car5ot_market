@@ -27,7 +27,7 @@
                         <option value="@daum.net">daum.net</option>
                         <option value="@kakao.com">kakao.com</option>
                         <option value="@nate.com">nate.com</option>
-                        <option id="writeEmail">직접 입력</option>
+                        <option value="직접 입력" id="writeEmail">직접 입력</option>
                     </select>
                 </div>
                 <div id="idInfo"></div>

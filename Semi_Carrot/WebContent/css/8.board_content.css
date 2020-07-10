@@ -1,19 +1,19 @@
 @charset "UTF-8";
 
-	/* test 상태일 때 테두리를 설정 */
-body[test] main, 
-body[test] header, 
-body[test] nav, 
-body[test] section, 
-body[test] footer,
-body[test] article, 
-body[test] div, 
-body[test] span, 
-body[test] p, 
-body[test] label, 
-body[test] aside{
-    border:1px dotted black;
+/* test 상태일 때 테두리를 설정 */
+body[test] main, body[test] header, body[test] nav, body[test] section,
+	body[test] footer, body[test] article, body[test] div, body[test] span,
+	body[test] p, body[test] label, body[test] aside {
+	border: 1px dotted black;
 }
+
+
+/* aritcle 기본 폼 */
+#used-post-content-form {
+	width: auto;
+	margin: 0px 15%;
+}
+
 .float-box:after {
 	content: "";
 	display: block;
@@ -35,12 +35,15 @@ body[test] aside{
 .float-box>.float-right {
 	float: right;
 }
-.left-item66{
-	width:66%;
+
+.left-item66 {
+	width: 66%;
 }
-.left-item50{
-	width:50%;
+
+.left-item50 {
+	width: 50%;
 }
+
 .left-item40 {
 	width: 40%;
 }
@@ -49,35 +52,42 @@ body[test] aside{
 	width: 33.333%;
 }
 
-.left-item25{
-	width:25%;
+.left-item25 {
+	width: 25%;
 }
-.left-item20{
-	width:20%;
+
+.left-item20 {
+	width: 20%;
 }
-.left-item16{
-	width:16.666%;
+
+.left-item16 {
+	width: 16.666%;
 }
-.left-item10{
-	width:10%;
+
+.left-item10 {
+	width: 10%;
 }
+
 .right-item34 {
 	width: 34%;
 }
+
 .right-item60 {
 	width: 60%;
 }
+
 .right-item75 {
 	width: 75%;
 }
+
 .right-item90 {
 	width: 90%;
 }
 /*폰트크기*/
-
 .font12 {
 	font-size: 12px;
 }
+
 .font15 {
 	font-size: 15px;
 }
@@ -97,6 +107,7 @@ body[test] aside{
 .font23 {
 	font-size: 23px;
 }
+
 .font30 {
 	font-size: 30px;
 }
@@ -118,39 +129,43 @@ body[test] aside{
 }
 
 .left-font {
-	
 	text-align: left;
 }
 
-.pic-align{
-	text-align:center;
+.pic-align {
+	text-align: center;
 }
+
 .right-float {
 	float: right;
 }
 
-.reply-nick-font{
-	color:dimgray;
-	font-size:15px;
+.reply-nick-font {
+	color: dimgray;
+	font-size: 15px;
 }
 
 /*패딩*/
-.padding-top10{
-	padding-top:10px;
-}
-.padding-top25{
-	padding-top:25px;
+.padding-top10 {
+	padding-top: 10px;
 }
 
-.padding-top30{
-	padding-top:30px;
+.padding-top25 {
+	padding-top: 25px;
 }
-.padding-top40{
-	padding-top:40px;
+
+.padding-top30 {
+	padding-top: 30px;
 }
-.padding-top50{
-	padding-top:50px;
+
+.padding-top40 {
+	padding-top: 40px;
 }
+
+.padding-top50 {
+	padding-top: 50px;
+}
+
 .padding15 {
 	padding-bottom: 15px;
 }
@@ -170,9 +185,11 @@ body[test] aside{
 .padding-left05 {
 	padding-left: 0.5rem;
 }
+
 .padding-left30 {
 	padding-left: 30px;
 }
+
 .padding-left35 {
 	padding-left: 35px;
 }
@@ -180,33 +197,41 @@ body[test] aside{
 .padding-right05 {
 	padding-right: 0.5rem;
 }
-.padding-right10{
-	padding-right:10px;
+
+.padding-right10 {
+	padding-right: 10px;
 }
-.padding-right30{
-	padding-right:30px;
+
+.padding-right30 {
+	padding-right: 30px;
 }
-.text-padding{
-	padding:20px;
+
+.text-padding {
+	padding: 20px;
 }
-.text-padding15{
-	padding:15px;
+
+.text-padding15 {
+	padding: 15px;
 }
-.text-padding10{
-	padding:10px;
+
+.text-padding10 {
+	padding: 10px;
 }
-.reply-div-padding{
-	padding-top:15px;
+
+.reply-div-padding {
+	padding-top: 15px;
 }
 /*마진*/
-.reply-margin20{
-	margin:30px 0px 20px 0px;
-	}
-.top-margin10{
-	margin:10px 0px 0px 0px;
+.reply-margin20 {
+	margin: 30px 0px 20px 0px;
 }
-.manner-margin{
-	margin:10px 0px 0px 15px
+
+.top-margin10 {
+	margin: 10px 0px 0px 0px;
+}
+
+.manner-margin {
+	margin: 10px 0px 0px 15px
 }
 
 .like-button {
@@ -217,8 +242,9 @@ body[test] aside{
 	outline: none;
 	width: 90%;
 	padding: 0.5rem;
-	float:left;
+	float: left;
 }
+
 .edit-button {
 	background-color: orange;
 	color: white;
@@ -227,8 +253,9 @@ body[test] aside{
 	outline: none;
 	width: 90%;
 	padding: 0.5rem;
-	margin:0px 11px 0px 11px;
+	margin: 0px 11px 0px 11px;
 }
+
 .delete-button {
 	background-color: #F70000;
 	color: white;
@@ -237,17 +264,16 @@ body[test] aside{
 	outline: none;
 	width: 90%;
 	padding: 0.5rem;
-	float:right;
+	float: right;
 }
 
-.reply-button{
+.reply-button {
 	background-color: white;
 	color: #999999;
 	font-size: 15px;
 	border: 1px solid #999999;
 	outline: none;
-	width:50px;
-	
+	width: 50px;
 }
 /*테두리*/
 .short-border {
@@ -256,31 +282,33 @@ body[test] aside{
 	padding: 0.5rem;
 }
 
-.product-info-border{
-	
-	border-left:1px solid transparent;
-	border-right:1px solid transparent;
-}
-.info-border{
-	
-	border-left:1px solid transparent;
-	border-right:1px solid darkgray;
-}
-.reply-border{
-	border:1px solid lightgray;
-}
-.reply-num-border{
-	border-left:1px solid lightgray;
-	border-right:1px solid lightgray;
-	border-bottom:1px solid lightgray;
+.product-info-border {
+	border-left: 1px solid transparent;
+	border-right: 1px solid transparent;
 }
 
-.reply-pic-circle{
-	 width: 50px;
-   	 height:50px;
+.info-border {
+	border-left: 1px solid transparent;
+	border-right: 1px solid darkgray;
+}
+
+.reply-border {
+	border: 1px solid lightgray;
+}
+
+.reply-num-border {
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+}
+
+.reply-pic-circle {
+	width: 50px;
+	height: 50px;
 	border-radius: 25px;
 }
-textarea{
-            resize:none;
-            border: none;
-        }
+
+textarea {
+	resize: none;
+	border: none;
+}

@@ -149,5 +149,30 @@ public class UsedPostDAO {
 	      
 	      con.close();
 	   }
+	   
+	   // 회원 번호로 게시물 조회
+	   public List<UsedPostDTO> getMemberUsedPost(long member_no) throws Exception {
+		   Connection con = getConnection();
+		   
+		   String sql = "SELECT * FROM USED_POST WHERE MEMBER_NO = ?";
+		   
+		   PreparedStatement ps = con.prepareStatement(sql);
+		   
+		   ps.setLong(1, member_no);
+		   
+		   ResultSet rs = ps.executeQuery();
+		   
+		   List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+		   
+		   while(rs.next()) {
+			   UsedPostDTO updto = new UsedPostDTO(rs);
+			   
+			   list.add(updto);
+		   }
+		   
+		   con.close();
+		   
+		   return list;
+	   }
 
 }

@@ -47,7 +47,7 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 
-<article style="padding-top: 220px">
+<article style="padding-top: 220px" id="used-post-content-form">
 	<div class="padding50">
 		<div class="float-box float-left">
 			<div class="left-item40">

@@ -6,7 +6,7 @@
 	width: 60%;
 	text-align: center;
 	min-width: 1000px;
-	height: 1200px;
+	height: 1400px;
 	/*    border: 1px solid black;*/
 }
 
@@ -20,18 +20,17 @@
 
 #mypage-top, #mypage-bottom {
 	width: 100%;
-	background-color: rgba(255, 165, 0, 0.47);
 }
 
 #mypage-top {
-	height: 40%;
+	height: 30%;
 	display: flex;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
 }
 
 #mypage-bottom {
-	height: 60%;
+	height: 70%;
 	padding-top: 10px;
 	border-bottom-left-radius: 15px;
 	border-bottom-right-radius: 15px;
@@ -45,6 +44,11 @@
 }
 
 /* 마이페이지 top-left 영역 */
+#mypage-top-left {
+	border-top-left-radius: 15px;
+	border-bottom-left-radius: 15px;
+	background-color: bisque;
+}
 #mypage-top-left-up {
 	height: 75%;
 }
@@ -62,13 +66,10 @@
 }
 
 #mypage-top-left-down>div {
-	background-color: bisque;
-	border-radius: 15px;
 	display: flex;
 	width: 85%;
 	height: 40%;
 	margin: 6% 40px;
-	box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
 }
 
 #mypage-top-left-down>div>a {
@@ -84,7 +85,7 @@
 }
 
 #mypage-top-left-down>div>a>button {
-	color: white;
+	color: gray;
 	font-size: 18px;
 	text-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
 	text-decoration: none;
@@ -117,7 +118,7 @@
 	margin-top: 10%;
 	margin-left: 20%;
 	font-size: 24px;
-	color: white;
+	color: gray;
 	text-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
 	cursor: pointer;
 	position: relative;
@@ -200,7 +201,7 @@
 	background-repeat: no-repeat;
 	background-size: 20px;
 	background-position: 25% 2px;
-	color: #ff8900;
+	color: gray;
 }
 
 #post-count {
@@ -238,7 +239,7 @@
 	border: 1px solid transparent;
 	border-radius: 10%;
 	box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
-	color: #ff8900;
+	color: gray;
 	float: right;
 	margin-top: 10px;
 	margin-right: 20px;

@@ -10,10 +10,10 @@ public class PromotionPostDTO {
 	private long post_view;
 	private long post_like;
 	private long promotion_cate_num;
+	private long member_no;
+	private long member_img_no;
+	private long addr_no;
 	
-	public PromotionPostDTO() {
-		super();
-	}
 	public long getPost_no() {
 		return post_no;
 	}
@@ -65,9 +65,29 @@ public class PromotionPostDTO {
 	public long getPromotion_cate_num() {
 		return promotion_cate_num;
 	}
-	
 	public void setPromotion_cate_num(long promotion_cate_num) {
 		this.promotion_cate_num = promotion_cate_num;
+	}
+	public long getMember_no() {
+		return member_no;
+	}
+	public void setMember_no(long member_no) {
+		this.member_no = member_no;
+	}
+	public long getMember_img_no() {
+		return member_img_no;
+	}
+	public void setMember_img_no(long member_img_no) {
+		this.member_img_no = member_img_no;
+	}
+	public long getAddr_no() {
+		return addr_no;
+	}
+	public void setAddr_no(long addr_no) {
+		this.addr_no = addr_no;
+	}
+	public PromotionPostDTO() {
+		super();
 	}
 	
 }

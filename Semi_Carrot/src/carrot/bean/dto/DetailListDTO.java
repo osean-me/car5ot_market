@@ -137,10 +137,10 @@ public class DetailListDTO {
 
 		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		if(!(getPost_date().equals(today))) {//오늘 작성한 글이라면
-			return getPost_time();
+			return getPost_day();
 		}
 		else {//아니라면
-			return getPost_day();
+			return getPost_time();
 		}
 	}
 	

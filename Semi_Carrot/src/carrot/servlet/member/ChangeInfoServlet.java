@@ -22,8 +22,11 @@ public class ChangeInfoServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 
 			// 로그인 회원 정보 가지고 오기
-			MemberDTO memberinfo = (MemberDTO) req.getSession().getAttribute("memberinfo");
+			MemberDAO mdao = new MemberDAO();
+			long member_no = Long.parseLong(req.getParameter("member_no"));
+			MemberDTO memberinfo = mdao.get(member_no);
 			System.out.println("null = " + req.getParameter("check_pw"));
+			System.out.println(req.getSession().getAttribute("memberinfo"));
 			System.out.println(memberinfo.getMember_id() + " = 로그인 회원 아이디");
 			System.out.println(memberinfo.getMember_pw() + " = 로그인 회원 비번");
 
@@ -62,9 +65,8 @@ public class ChangeInfoServlet extends HttpServlet {
 
 				// 위의 데이터를 기준으로 회원정보 수정 (파라미터로 데이터 받아옴)
 				MemberDTO mdto = new MemberDTO();
-				MemberDAO mdao = new MemberDAO();
 
-				long member_no = memberinfo.getMember_no();
+//				long member_no = memberinfo.getMember_no();
 				long member_addr_no = addr_no.longValue();
 
 				mdto.setMember_nick(member_nick);
@@ -82,36 +84,35 @@ public class ChangeInfoServlet extends HttpServlet {
 						mdto.setMember_pw(check_pw);
 
 						mdao.changeInfoWithPw(mdto);
+						
+//						req.getSession().removeAttribute("memberinfo");
+//						req.getSession().setAttribute("memberinfo", mdto);
 
 						// 정보 수정 성공 후 마이페이지로 이동
-						resp.sendRedirect("info.jsp?member_no=" + member_no);
+						resp.sendRedirect("info.jsp?no=" + member_no);
 
 					} else if (member_pw.equals(check_pw)) {
 						
 						// 바꾸려는 비밀번호와 현재 비밀번호가 같으니 다시 입력
-						resp.sendRedirect("change_info.jsp?error_no=1&member_no=" + memberinfo.getMember_no());
+						resp.sendRedirect("change_info.jsp?error_no=1&no=" + memberinfo.getMember_no());
 					}
 
 				} else if (check_pw.isEmpty()) {
 					
 					// 변경할 비밀번호가 없는 경우
 					mdao.changeInfo(mdto);
-
+					
+//					req.getSession().removeAttribute("memberinfo");
+//					req.getSession().setAttribute("memberinfo", mdto);
+					
 					// 정보 수정 성공 후 마이페이지로 이동
-					resp.sendRedirect("info.jsp?member_no=" + member_no);
+					resp.sendRedirect("info.jsp?no=" + member_no);
 
 				}
 
-				// 세션 정보 변경
-				req.getSession().removeAttribute("memberinfo");
-				req.getSession().setAttribute("memberinfo", mdto);
-				MemberDTO session = (MemberDTO) req.getSession().getAttribute("memberinfo");
-				
-				System.out.println("이메일 : " + session.getMember_id());
-
 			} else {
 				// 현재 비밀번호가 세션 비밀번호와 다를 시
-				resp.sendRedirect("change_info.jsp?error_no=2&member_no=" + memberinfo.getMember_no());
+				resp.sendRedirect("change_info.jsp?error_no=2&no=" + memberinfo.getMember_no());
 			}
 
 		} catch (Exception e) {

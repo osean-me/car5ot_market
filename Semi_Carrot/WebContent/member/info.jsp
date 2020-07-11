@@ -1,3 +1,11 @@
+<%@page import="carrot.bean.dto.PromotionPostDTO"%>
+<%@page import="carrot.bean.dao.BoardDAO"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="carrot.bean.dao.UsedPostDAO"%>
+<%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@page import="carrot.bean.dao.AddrDAO"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
@@ -8,17 +16,11 @@
 	String path = request.getContextPath();
 
 	MemberDAO mdao = new MemberDAO();
-	MemberDTO member = (MemberDTO) session.getAttribute("memberinfo");
+	
+	long member_no = Long.parseLong(request.getParameter("no"));
 
-	long member_no = member.getMember_no();
-	
-	// 회원 번호가 있을 경우
-	if(request.getParameter("member_no") != null) {
-		member_no = Long.parseLong(request.getParameter("member_no"));
-	}
-	
 	MemberDTO mdto = mdao.get(member_no);
-	System.out.println("주소 번호 : " + mdto.getMember_addr_no());
+
 	/*
 		현재 회원번호 가지고 있음.
 		회원번호를 가지고 있으면 회원의 주소 고유번호를 알 수 있어요.
@@ -32,8 +34,26 @@
 	
 	AddrDTO adto = adao.get(member_addr_no);
 	
-	System.out.println("회원 번호 : " + member.getMember_no());
+	//////////////////////////////
+	///		회원 게시글		  ///
+	////////////////////////////
+	
+	UsedPostDAO updao = new UsedPostDAO();
+	BoardDAO bdao = new BoardDAO();
+	
+	// 게시글 테이블 이름 얻기
+	String[] name = bdao.getPostTableName();
+	
+	// 게시글 테이블 이름 + 회원 번호로 해당 게시판의 회원 게시물 불러오
+	List<Object> used_post = bdao.getPostList(name[0], member_no);
+	List<Object> promotion_post = bdao.getPostList(name[1], member_no);
+	List<Object> community_post = bdao.getPostList(name[2], member_no);
+	
+	// 작성 게시글 개수
+	int post_count = used_post.size() + promotion_post.size() + community_post.size();
 
+	
+	
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -78,7 +98,7 @@
                             <div id="mypage-top-right-down-in">
                                 <div id="intro-top">
                                     <div id="post-count">
-                                        게시글 수 : 10
+                                        게시글 수 : <%=post_count %>
                                     </div>
                                     <div id="reply-count">
                                         댓글 수 : 150
@@ -128,53 +148,102 @@
                     </div>
 
                     <div id="mypage-board">
+                    <!-- 중고 거래 게시판 -->
                         <div class="area on" id="select-1-area">
                             <div class="mypage-board-table">
                                 <div class="mypage-post-search">
                                     <form>
                                         <input type="text" placeholder="검색">
-                                        <input type="submit" value="검색">
+                                        <input type="submit" value=" ">
                                     </form>
                                 </div>
-                                <div class="mypage-post-list">
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                </div>
-                                <div class="mypage-post-list">
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        중고 거래 게시글 리스트
-                                    </div>
-                                </div>
+                                
+                                <%if(used_post.isEmpty()) { %>
+                                	<div style="flex: 9; width: 100%; heigth: 90%;">
+                                		게시물이 없습니다.
+                                	</div>
+                                <%} else { %>
+	                                <div class="mypage-post-list">
+	                                <%
+	                                	int count = 0;
+	                                	for(Object used : used_post) {
+	                                		
+	                                		UsedPostDTO post = (UsedPostDTO) used;
+	                                		
+	                                		if(count == 5) {
+	                         					break;
+	                         				}
+	                                		
+	                                %>
+	                                    <div class="product">
+	                                        <div class="product-inner">
+	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
+	                                        	<div class="map">
+	                                        		<div>
+		                                        		<%=adto.getAddr_state() %>  
+		                                        		<%=adto.getAddr_city() %>  
+		                                        		<%=adto.getAddr_base() %>
+	                                        		</div>
+	                                        	</div>
+	                                        	<div class="price-date">
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+	                                        		<div class="date"><%=post.getUsedPost_day() %></div>
+	                                        	</div>
+	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        </div>
+	                                    </div>
+	                                    <%
+	                                	    count++;
+	                                    } 
+	                                    %>
+	                                </div>
+	                                <div class="mypage-post-list">
+	                                <%
+	                                	int count2 = 0;
+	                                	for(Object used : used_post) {
+	                                		
+	                                		UsedPostDTO post = (UsedPostDTO) used;
+	                                		
+	                                		if(count2 == 10) {
+	                         					break;
+	                         				}
+	                                		if(count2 > 4) {
+	                                %>
+	                                    <div class="product">
+	                                        <div class="product-inner">
+	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
+	                                        	<div class="map">
+	                                        		<div>
+	                                        			<%=adto.getAddr_state() %>  
+	                                        			<%=adto.getAddr_city() %>  
+	                                        			<%=adto.getAddr_base() %>
+	                                        		</div>
+	                                        	</div>
+	                                        	<div class="price-date">
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+	                                        		<div class="date"><%=post.getUsedPost_day() %></div>
+	                                        	</div>
+	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        </div>
+	                                    </div>
+	                                    <%
+	                                		}    
+	                                    	count2++;
+	                                    } 
+	                                    %>
+	                                </div>
+                                <%} %>
                                 <div class="mypage-pagination">
-                                    1 2 3 4 5 6 7 8 9 10
+                                	<div>
+                                    	1 2 3 4 5 6 7 8 9 10
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!--홍보 게시판 -->
                         <div class="area" id="select-2-area">
                             <div class="mypage-board-table">
                                 <div class="mypage-post-search">
@@ -183,40 +252,83 @@
                                         <input type="submit" value="검색">
                                     </form>
                                 </div>
-                                <div class="mypage-post-list">
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                </div>
-                                <div class="mypage-post-list">
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                    <div class="product">
-                                        홍보 게시글 리스트
-                                    </div>
-                                </div>
+                                <%if(promotion_post.isEmpty()) { %>
+                                	<div style="flex: 9; width: 100%; heigth: 90%;">
+                                		게시물이 없습니다.
+                                	</div>
+                                <%} else { %>
+	                                 <div class="mypage-post-list">
+	                                <%
+	                                	int count3 = 0;
+	                                	for(Object promotion : promotion_post) {
+	                                		
+	                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+	                                		
+	                                		if(count3 == 5) {
+	                         					break;
+	                         				}
+	                                		
+	                                %>
+	                                    <div class="product">
+	                                        <div class="product-inner">
+	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
+	                                        	<div class="map">
+	                                        		<div>
+		                                        		<%=adto.getAddr_state() %>  
+		                                        		<%=adto.getAddr_city() %>  
+		                                        		<%=adto.getAddr_base() %>
+	                                        		</div>
+	                                        	</div>
+	                                        	<div class="price-date">
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+	                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+	                                        	</div>
+	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        </div>
+	                                    </div>
+	                                    <%
+	                                	    count3++;
+	                                    } 
+	                                    %>
+	                                </div>
+	                                <div class="mypage-post-list">
+	                                <%
+	                                	int count4 = 0;
+	                                	for(Object promotion : promotion_post) {
+	                                		
+	                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+	                                		
+	                                		if(count4 == 10) {
+	                         					break;
+	                         				}
+	                                		if(count4 > 4) {
+	                                %>
+	                                    <div class="product">
+	                                        <div class="product-inner">
+	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
+	                                        	<div class="map">
+	                                        		<div>
+	                                        			<%=adto.getAddr_state() %>  
+	                                        			<%=adto.getAddr_city() %>  
+	                                        			<%=adto.getAddr_base() %>
+	                                        		</div>
+	                                        	</div>
+	                                        	<div class="price-date">
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+	                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+	                                        	</div>
+	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        </div>
+	                                    </div>
+	                                    <%
+	                                		}    
+	                                    	count4++;
+	                                    } 
+	                                    %>
+	                                </div>
+                                <%} %>
                                 <div class="mypage-pagination">
                                     1 2 3 4 5 6 7 8 9 10
                                 </div>
@@ -231,77 +343,77 @@
                                     </form>
                                 </div>
                                 <div class="mypage-post-list column">
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
@@ -310,7 +422,9 @@
                                     </div>
                                 </div>
                                 <div class="mypage-pagination">
-                                    1 2 3 4 5 6 7 8 9 10
+                                	<div>
+                                  	  1 2 3 4 5 6 7 8 9 10
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -323,77 +437,77 @@
                                     </form>
                                 </div>
                                 <div class="mypage-post-list column">
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
-                                    <div class="product column">
+                                    <div class="commu-post">
                                         <div class="no">번호</div>
                                         <div class="cate">말머리</div>
                                         <div class="title">제목</div>

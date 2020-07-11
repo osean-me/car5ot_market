@@ -1,7 +1,42 @@
+<%@page import="carrot.bean.dto.AddrDTO"%>
+<%@page import="carrot.bean.dao.AddrDAO"%>
+<%@page import="carrot.bean.dao.MemberDAO"%>
+<%@page import="carrot.bean.dto.MemberDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="carrot.bean.dao.UsedPostDAO"%>
+<%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+	
+	// 회원 번호 불러오기
+	MemberDAO mdao = new MemberDAO();
+	MemberDTO mdto = (MemberDTO)session.getAttribute("memberinfo");
+	
+	// 최신 중고 게시물 불러오기
+	UsedPostDAO updao = new UsedPostDAO();
+	List<UsedPostDTO> list = updao.newUsedPost();
+	
+	// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
+	if(mdto != null) {
+		// 최신 회원 정보 얻기
+		
+		MemberDTO member = mdao.get(mdto.getMember_no());
+		
+		AddrDAO adao = new AddrDAO();
+		AddrDTO adto = adao.get(member.getMember_addr_no());
+		
+		list = updao.newUsedPost(member.getMember_addr_no());
+		
+		if(list.isEmpty()) {
+			
+			list = updao.newUsedPost();
+			
+		}
+		
+	}
+	
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -61,84 +96,55 @@
 							</div>
 							<div id="banner-1-right-bottom">
 								<div class="layer">
+								<%
+									int count = 0;
+									for(UsedPostDTO newpost : list) { 
+										if(count >= 5) {
+											break;
+										}
+								%> 
 									<div class="hot-product">
 										<div id="img">
 											<img src="http://placeimg.com/100/100/tech">
 										</div>
-										<div id="title">맥북 프로 팔아요!</div>
-										<div id="like">5</div>
+										<div id="title"><%=newpost.getPost_title().substring(0, 10) %> ..</div>
+										<div id="like"><%=newpost.getPost_like() %></div>
 									</div>
+								<%
+										count++;
+									}
+									
+								%>
+							</div>
+							<div class="layer">
+								<%
+									int count2 = 0;
+									for(UsedPostDTO newpost : list) { 
+										if(count2 >= 10) {
+											break;
+										}
+										
+										if(count2 > 4) {
+								%> 
 									<div class="hot-product">
 										<div id="img">
 											<img src="http://placeimg.com/100/100/tech">
 										</div>
-										<div id="title">강아지 옷 팔아요!</div>
-										<div id="like">10</div>
+										<div id="title"><%=newpost.getPost_title().substring(0, 10) %> ..</div>
+										<div id="like"><%=newpost.getPost_like() %></div>
 									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">세탁기 팔아요!</div>
-										<div id="like">32</div>
-									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">멋있는 장난감 팔아요!</div>
-										<div id="like">11</div>
-									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">미개봉 아이폰 50</div>
-										<div id="like">45</div>
-									</div>
-								</div>
-								<div class="layer">
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">와우! 엄청난 가격!</div>
-										<div id="like">8</div>
-									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">고양이 사료 나눔!</div>
-										<div id="like">87</div>
-									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">구찌 지갑 팔아요!</div>
-										<div id="like">8</div>
-									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">당산역급처</div>
-										<div id="like">18</div>
-									</div>
-									<div class="hot-product">
-										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
-										</div>
-										<div id="title">티비 급처합니다!</div>
-										<div id="like">25</div>
-									</div>
-								</div>
+								<%
+										}
+										count2++;
+									}
+									
+								%>	
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="swiper-slide" id="slide-2">
+			</div>
+			<div class="swiper-slide" id="slide-2">
 					<div id="banner-2">
 						<div id="banner-2-top">
 							<span>우리 동네의 멋진 가게들!</span>
@@ -222,7 +228,7 @@
 					</div>
 				</div>
 			</div>
-			<!-- 			<div class="swiper-pagination"></div> -->
+						<div class="swiper-pagination"></div>
 		</div>
 	</div>
 </article>

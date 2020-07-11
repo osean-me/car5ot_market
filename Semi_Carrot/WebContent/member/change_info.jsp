@@ -51,6 +51,7 @@
 <%} %>
         <article class="join-article">
             <form action="change_info.do" method="get" class="join-form" id="edit-form" onsubmit="return editSubmit();">
+            <input type="hidden" name="member_no" value="<%=member_no %>">
                 <div>
             		<img src="<%=path %>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
             	</div>

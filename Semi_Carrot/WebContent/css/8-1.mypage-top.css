@@ -96,6 +96,13 @@
 }
 
 /* 마이페이지 top-right 영역 */
+
+#mypage-top-right {
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+	background-color: rgba(128,128,128,0.10);
+}
+
 #mypage-top-right-up {
 	height: 20%;
 	display: flex;

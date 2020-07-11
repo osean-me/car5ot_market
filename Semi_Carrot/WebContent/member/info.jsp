@@ -165,11 +165,13 @@
                                     <div class="product">
                                         <div class="product-inner">
                                         	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
-                                        	<div class="product-title"><%=updto.getPost_title().substring(0, 10) %>...</div>
+                                        	<div class="product-title"><%=updto.getPost_title() %>...</div>
                                         	<div class="map">
-                                        		<%=adto.getAddr_state() %>  
-                                        		<%=adto.getAddr_city() %>  
-                                        		<%=adto.getAddr_base() %>
+                                        		<div>
+	                                        		<%=adto.getAddr_state() %>  
+	                                        		<%=adto.getAddr_city() %>  
+	                                        		<%=adto.getAddr_base() %>
+                                        		</div>
                                         	</div>
                                         	<div class="price-date">
                                         		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(updto.getPost_price()) %></div>
@@ -198,9 +200,11 @@
                                         	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
                                         	<div class="product-title"><%=updto.getPost_title().substring(0, 10) %>...</div>
                                         	<div class="map">
-                                        		<%=adto.getAddr_state() %>  
-                                        		<%=adto.getAddr_city() %>  
-                                        		<%=adto.getAddr_base() %>
+                                        		<div>
+                                        			<%=adto.getAddr_state() %>  
+                                        			<%=adto.getAddr_city() %>  
+                                        			<%=adto.getAddr_base() %>
+                                        		</div>
                                         	</div>
                                         	<div class="price-date">
                                         		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(updto.getPost_price()) %></div>
@@ -243,9 +247,11 @@
                                         	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
                                         	<div class="product-title"><%=updto.getPost_title().substring(0, 10) %>...</div>
                                         	<div class="map">
-                                        		<%=adto.getAddr_state() %>  
-                                        		<%=adto.getAddr_city() %>  
-                                        		<%=adto.getAddr_base() %>
+                                        		<div>
+	                                        		<%=adto.getAddr_state() %>  
+	                                        		<%=adto.getAddr_city() %>  
+	                                        		<%=adto.getAddr_base() %>
+                                        		</div>
                                         	</div>
                                         	<div class="price-date">
                                         		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(updto.getPost_price()) %></div>
@@ -272,11 +278,13 @@
                                     <div class="product">
                                         <div class="product-inner">
                                         	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
-                                        	<div class="product-title"><%=updto.getPost_title().substring(0, 10) %>...</div>
+                                        	<div class="pr788oduct-title"><%=updto.getPost_title().substring(0, 10) %>...</div>
                                         	<div class="map">
-                                        		<%=adto.getAddr_state() %>  
-                                        		<%=adto.getAddr_city() %>  
-                                        		<%=adto.getAddr_base() %>
+                                        		<div>
+	                                        		<%=adto.getAddr_state() %>  
+	                                        		<%=adto.getAddr_city() %>  
+	                                        		<%=adto.getAddr_base() %>
+                                        		</div>
                                         	</div>
                                         	<div class="price-date">
                                         		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(updto.getPost_price()) %></div>

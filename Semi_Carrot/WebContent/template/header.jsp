@@ -46,7 +46,7 @@
 					<li><a href="<%=path%>/user/join.jsp">회원가입</a></li>
 					<%} else { %>
 					<li><a href="<%=path%>/member/logout.do">로그아웃</a></li>
-					<li><a href="<%=path%>/member/info.jsp">마이페이지</a></li>
+					<li><a href="<%=path%>/member/info.jsp?no=<%=mdto.getMember_no()%>">마이페이지</a></li>
 					<%} %>
 				</ul>
 			</div>

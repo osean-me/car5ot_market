@@ -174,5 +174,27 @@ public class UsedPostDAO {
 		   
 		   return list;
 	   }
+	   
+	   
+	   // 마이페이지에서 작성자 게시글 개수 조회
+	   public long getUsedPostCount(long member_no) throws Exception {
+		   Connection con = getConnection();
+		   
+		   String sql = "SELECT COUNT(*) FROM USED_POST WHERE MEMBER_NO = ?";
+		   
+		   PreparedStatement ps = con.prepareStatement(sql);
+		   
+		   ps.setLong(1, member_no);
+		   
+		   ResultSet rs = ps.executeQuery();
+		   
+		   rs.next();
+		   
+		   long result = rs.getLong(1);
+		   
+		   con.close();
+		   
+		   return result;
+	   }
 
 }

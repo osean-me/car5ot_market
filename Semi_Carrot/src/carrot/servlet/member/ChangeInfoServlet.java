@@ -89,12 +89,12 @@ public class ChangeInfoServlet extends HttpServlet {
 //						req.getSession().setAttribute("memberinfo", mdto);
 
 						// 정보 수정 성공 후 마이페이지로 이동
-						resp.sendRedirect("info.jsp?member_no=" + member_no);
+						resp.sendRedirect("info.jsp?no=" + member_no);
 
 					} else if (member_pw.equals(check_pw)) {
 						
 						// 바꾸려는 비밀번호와 현재 비밀번호가 같으니 다시 입력
-						resp.sendRedirect("change_info.jsp?error_no=1&member_no=" + memberinfo.getMember_no());
+						resp.sendRedirect("change_info.jsp?error_no=1&no=" + memberinfo.getMember_no());
 					}
 
 				} else if (check_pw.isEmpty()) {
@@ -106,13 +106,13 @@ public class ChangeInfoServlet extends HttpServlet {
 //					req.getSession().setAttribute("memberinfo", mdto);
 					
 					// 정보 수정 성공 후 마이페이지로 이동
-					resp.sendRedirect("info.jsp?member_no=" + member_no);
+					resp.sendRedirect("info.jsp?no=" + member_no);
 
 				}
 
 			} else {
 				// 현재 비밀번호가 세션 비밀번호와 다를 시
-				resp.sendRedirect("change_info.jsp?error_no=2&member_no=" + memberinfo.getMember_no());
+				resp.sendRedirect("change_info.jsp?error_no=2&no=" + memberinfo.getMember_no());
 			}
 
 		} catch (Exception e) {

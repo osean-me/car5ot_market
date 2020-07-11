@@ -15,8 +15,7 @@
 	display: inline-block;
 	padding-top: 10px;
 	flex: 1;
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
+	border-radius: 15px;
 }
 
 #mypage-nav>div:hover {
@@ -70,7 +69,7 @@ div.area.on {
 
 /* 게시판 별 게시글 리스트 */
 .mypage-board-table {
-/* 	border: 1px solid red; */
+	/* 	border: 1px solid red; */
 	width: 100%;
 	height: 100%;
 	padding: 20px;
@@ -81,11 +80,44 @@ div.area.on {
 .mypage-post-search {
 	flex: 1;
 	width: 100%;
+	display: block;
 	text-align: right;
 }
 
 .mypage-post-search>form {
-	display: inline-block;
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+.mypage-post-search>form>input[type=text], .mypage-post-search>form>input[type=submit]
+	{
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: 2px solid #ff8900;
+	margin: 0px;
+	height: 30px;
+}
+
+.mypage-post-search>form>input[type="text"] {
+	font-size: 16px;
+	width: 180px;
+	border-right: 0px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding-left: 20px;
+	margin-left: 20px;
+}
+
+.mypage-post-search>form>input[type="submit"] {
+	width: 30px; border-left : 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	background-image: url("../img/search.png");
+	background-size: 15px;
+	background-position: 5px 5px;
+	position: absolute;
+	border-left: 0px;
 }
 
 .mypage-post-list {
@@ -105,7 +137,7 @@ div.area.on {
 	max-width: 20%;
 	height: 100%;
 	max-height: 100%;
-/* 	border: 1px solid pink; */
+	/* 	border: 1px solid pink; */
 	display: inline-block;
 }
 
@@ -144,7 +176,7 @@ div.area.on {
 .photo {
 	flex: 6;
 	height: 60%;
-/* 	border: 1px solid red; */
+	/* 	border: 1px solid red; */
 }
 
 .photo>img {
@@ -217,11 +249,10 @@ div.area.on {
 /* 페이지네이션 */
 .mypage-pagination {
 	flex: 1;
-/* 	border: 1px solid orange; */
+	/* 	border: 1px solid orange; */
 }
 
 .mypage-pagination>div {
-/* 	border: 1px solid purple; */
-	
+	/* 	border: 1px solid purple; */
 	margin-top: 1rem;
 }

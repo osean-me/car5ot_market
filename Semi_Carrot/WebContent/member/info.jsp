@@ -154,7 +154,7 @@
                                 <div class="mypage-post-search">
                                     <form>
                                         <input type="text" placeholder="검색">
-                                        <input type="submit" value="검색">
+                                        <input type="submit" value=" ">
                                     </form>
                                 </div>
                                 

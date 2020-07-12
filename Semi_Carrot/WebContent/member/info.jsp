@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dao.IntroDAO"%>
 <%@page import="carrot.bean.dto.PromotionPostDTO"%>
 <%@page import="carrot.bean.dao.BoardDAO"%>
 <%@page import="java.util.Locale"%>
@@ -34,9 +35,9 @@
 	
 	AddrDTO adto = adao.get(member_addr_no);
 	
-	//////////////////////////////
-	///		회원 게시글		  ///
-	////////////////////////////
+	//////////////////////////
+	///		회원 게시글	  ///
+	////////////////////////
 	
 	UsedPostDAO updao = new UsedPostDAO();
 	BoardDAO bdao = new BoardDAO();
@@ -52,14 +53,20 @@
 	// 작성 게시글 개수
 	int post_count = used_post.size() + promotion_post.size() + community_post.size();
 
+	//////////////////////////
+	///		자기 소개 		  ///
+	////////////////////////
 	
+	IntroDAO idao = new IntroDAO();
+	
+	String intro = idao.getIntro(member_no);
 	
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script type="text/javascript" src="<%=path%>/js/mypage.js"></script>
-    <link href="<%=path %>/css/8-1.mypage-top.css" type="text/css" rel="stylesheet">
-    <link href="<%=path %>/css/8-2.mypage-bottom.css" type="text/css" rel="stylesheet">
+    <link href="<%=path %>/css/8-1.mypage-top.css?ver=1" type="text/css" rel="stylesheet">
+    <link href="<%=path %>/css/8-2.mypage-bottom.css?ver=1" type="text/css" rel="stylesheet">
 
         <article id="mypage-article">
             <div id="mypage-form">
@@ -105,12 +112,28 @@
                                     </div>
                                 </div>
                                 <div id="intro-bottom">
-                                    <form action="" method="get">
-                                        <textarea maxlength="800">
-
+                                <%if(request.getParameter("edit_intro") != null) { %>
+                                    <form action="edit_intro.do" method="post">
+                                    	<input type="hidden" name="member_no" value="<%=member_no %>">
+                                        <textarea maxlength="800" name="intro">
+											멋진 자기소개를 작성해주세요!
                                         </textarea>
-                                        <input type="submit" value="소개글 등록">
+                                        <input type="submit" value="">
                                     </form>
+                                 <%} else {%> 
+                                 	<%if(intro != null) { %>
+                                		<div id="intro-content">
+                                			<%=intro %>
+                                		</div>
+                                	<%} else {%>
+                                		<div id="intro-content">
+                                			자기소개가 없어요! 
+                                		</div>
+                                		<div id="write-intro">
+                                			<a href="info.jsp?no=<%=member_no%>&edit_intro"><button></button></a>
+                                		</div>
+                                	<%} %>
+                                 <%} %>  
                                 </div>
                             </div>
                         </div>
@@ -124,14 +147,14 @@
                                 <span>중고</span>
                             </label>
                         </div>
-
-                        <div id="nav-2" onmouseover="radiusEdit(this);">
-                            <label for="select-2">
-                                <input type="radio" name="board" id="select-2" onchange="toggleTabAuto(this);">
-                                <span>홍보</span>
-                            </label>
-                        </div>
-
+						<%if(mdto.getMember_auth().equals("업체")) { %>
+	                        <div id="nav-2" onmouseover="radiusEdit(this);">
+	                            <label for="select-2">
+	                                <input type="radio" name="board" id="select-2" onchange="toggleTabAuto(this);">
+	                                <span>홍보</span>
+	                            </label>
+	                        </div>
+						<%} %>
                         <div id="nav-3" onmouseover="radiusEdit(this);">
                             <label for="select-3">
                                 <input type="radio" name="board" id="select-3" onchange="toggleTabAuto(this);">
@@ -181,7 +204,7 @@
 	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
 	                                        	<div class="map">
 	                                        		<div>
-		                                        		<%=adto.getAddr_state() %>  
+		                                        		<%=adto.getAddr_state().substring(0, 2) %>  
 		                                        		<%=adto.getAddr_city() %>  
 		                                        		<%=adto.getAddr_base() %>
 	                                        		</div>

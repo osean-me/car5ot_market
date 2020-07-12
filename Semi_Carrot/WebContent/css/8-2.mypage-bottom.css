@@ -110,7 +110,8 @@ div.area.on {
 }
 
 .mypage-post-search>form>input[type="submit"] {
-	width: 30px; border-left : 0px;
+	width: 30px;
+	border-left: 0px;
 	border-top-right-radius: 10px;
 	border-bottom-right-radius: 10px;
 	background-image: url("../img/search.png");
@@ -191,7 +192,7 @@ div.area.on {
 	padding-top: 2%;
 }
 
-.product-title {
+.product-title{
 	width: 100%;
 	white-space: nowrap;
 	overflow: hidden;
@@ -213,6 +214,7 @@ div.area.on {
 
 .map>div {
 	margin-left: 20%;
+	padding: 0px;
 	float: left;
 	color: #adadad;
 }
@@ -236,6 +238,8 @@ div.area.on {
 }
 
 .price {
+	text-align: left;
+	padding-left: 5%;
 	font-size: 18px;
 	color: #ff8900;
 }

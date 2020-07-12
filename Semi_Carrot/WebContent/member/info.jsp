@@ -74,7 +74,7 @@
                     <div id="mypage-top-left">
                         <div id="mypage-top-left-up">
                             <img alt="user_profile" src="<%=path %>/img/user_profile.jpg">
-                            <a href="" id="profile-img"><button></button></a>
+                            <a a href="profile_img_edit.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=300px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img"><button></button></a>
                         </div>
                         <div id="mypage-top-left-down">
                             <div>

@@ -1,4 +1,4 @@
-package carrot.servlet.member;
+package carrot.servlet;
 
 public class test {
 

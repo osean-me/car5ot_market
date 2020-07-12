@@ -17,6 +17,8 @@ MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 // 최신 중고 게시물 불러오기
 UsedPostDAO updao = new UsedPostDAO();
 List<UsedPostDTO> list = updao.newUsedPost();
+String address = null;
+String base = null;
 
 // 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
 if (mdto != null) {
@@ -26,7 +28,11 @@ if (mdto != null) {
 
 	AddrDAO adao = new AddrDAO();
 	AddrDTO adto = adao.get(member.getMember_addr_no());
-
+	
+	// 자바스크립트로 보내기 위한 주소 변수
+	address = adto.getAddr_state() + " " + adto.getAddr_city() + " " + adto.getAddr_base();
+	base = adto.getAddr_base();
+	
 	list = updao.newUsedPost(member.getMember_addr_no());
 
 	if (list.isEmpty()) {
@@ -42,8 +48,7 @@ if (mdto != null) {
 
 <!-- Java Script -->
 <script src="<%=path%>/js/swiper.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0&libraries=services"></script>
 <script type="text/javascript" src="<%=path%>/js/index.js"></script>
 <!-- css -->
 <link href="<%=path%>/css/swiper.min.css" type="text/css"
@@ -52,6 +57,10 @@ if (mdto != null) {
 	rel="stylesheet">
 <link href="<%=path%>/css/4.article.css" type="text/css"
 	rel="stylesheet">
+
+<!-- 회원 주소 데이터 자바스크립트로 보내기 -->
+<input type="hidden" value="<%=address %>" id="member_address">
+<input type="hidden" value="<%=base %>" id="member_base">
 
 <aside>
 	<!-- 이미지 슬라이더 영역 -->
@@ -230,7 +239,7 @@ if (mdto != null) {
 					</div>
 				</div>
 			</div>
-			<div class="swiper-pagination"></div>
+			<!-- <div class="swiper-pagination"></div> -->
 		</div>
 	</div>
 </article>

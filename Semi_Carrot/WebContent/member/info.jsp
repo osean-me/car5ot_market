@@ -116,7 +116,11 @@
                                     <form action="edit_intro.do" method="post">
                                     	<input type="hidden" name="member_no" value="<%=member_no %>">
                                         <textarea maxlength="800" name="intro">
-											멋진 자기소개를 작성해주세요!
+											<%if(intro != null) { %>
+												<%=intro %>
+											<%} else {%>
+												멋진 자기소개를 작성해주세요!
+											<%} %>
                                         </textarea>
                                         <input type="submit" value="">
                                     </form>
@@ -124,6 +128,9 @@
                                  	<%if(intro != null) { %>
                                 		<div id="intro-content">
                                 			<%=intro %>
+                                		</div>
+                                		<div id="write-intro">
+                                			<a href="info.jsp?no=<%=member_no%>&edit_intro"><button></button></a>
                                 		</div>
                                 	<%} else {%>
                                 		<div id="intro-content">
@@ -272,7 +279,7 @@
                                 <div class="mypage-post-search">
                                     <form>
                                         <input type="text" placeholder="검색">
-                                        <input type="submit" value="검색">
+                                        <input type="submit" value="">
                                     </form>
                                 </div>
                                 <%if(promotion_post.isEmpty()) { %>
@@ -362,7 +369,7 @@
                                 <div class="mypage-post-search">
                                     <form>
                                         <input type="text" placeholder="검색">
-                                        <input type="submit" value="검색">
+                                        <input type="submit" value="">
                                     </form>
                                 </div>
                                 <div class="mypage-post-list column">
@@ -456,7 +463,7 @@
                                 <div class="mypage-post-search">
                                     <form>
                                         <input type="text" placeholder="검색">
-                                        <input type="submit" value="검색">
+                                        <input type="submit" value="">
                                     </form>
                                 </div>
                                 <div class="mypage-post-list column">

@@ -67,7 +67,7 @@ window.onload = function() {
 	if (memberAddr == "null") {
 		console.log(memberAddr);
 		memberAddr = "제주특별자치도 제주시 첨단로 242";
-		memberBase = "회원가입을 하고 많은 정보를 얻어가세요!";
+		memberBase = "환영해요!";
 
 	}
 

@@ -24,6 +24,11 @@
 	background-color: red;
 }
 
+img {
+	width: 300px;
+	height: 300px;
+}
+
 input[type=file] {
 	width: 300px;
 	height: 50px;
@@ -36,7 +41,7 @@ input[type=file] {
 		<form action="" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_no" value="<%=member_no %>">
 			<div id="thumb">
-				<img src="" alt="profile_img">
+				<img src="../img/logo_icon.png" alt="profile_img">
 			</div>
 			<input type="file">
 		</form>

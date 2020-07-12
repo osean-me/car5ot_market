@@ -9,34 +9,33 @@
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	
-	// 회원 번호 불러오기
-	MemberDAO mdao = new MemberDAO();
-	MemberDTO mdto = (MemberDTO)session.getAttribute("memberinfo");
-	
-	// 최신 중고 게시물 불러오기
-	UsedPostDAO updao = new UsedPostDAO();
-	List<UsedPostDTO> list = updao.newUsedPost();
-	
-	// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
-	if(mdto != null) {
-		// 최신 회원 정보 얻기
-		
-		MemberDTO member = mdao.get(mdto.getMember_no());
-		
-		AddrDAO adao = new AddrDAO();
-		AddrDTO adto = adao.get(member.getMember_addr_no());
-		
-		list = updao.newUsedPost(member.getMember_addr_no());
-		
-		if(list.isEmpty()) {
-			
-			list = updao.newUsedPost();
-			
-		}
-		
+
+// 회원 번호 불러오기
+MemberDAO mdao = new MemberDAO();
+MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+
+// 최신 중고 게시물 불러오기
+UsedPostDAO updao = new UsedPostDAO();
+List<UsedPostDTO> list = updao.newUsedPost();
+
+// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
+if (mdto != null) {
+	// 최신 회원 정보 얻기
+
+	MemberDTO member = mdao.get(mdto.getMember_no());
+
+	AddrDAO adao = new AddrDAO();
+	AddrDTO adto = adao.get(member.getMember_addr_no());
+
+	list = updao.newUsedPost(member.getMember_addr_no());
+
+	if (list.isEmpty()) {
+
+		list = updao.newUsedPost();
+
 	}
-	
+
+}
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -67,7 +66,8 @@
 				</div>
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_2.png">
-				</div>s
+				</div>
+				s
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_3.png">
 				</div>
@@ -96,55 +96,57 @@
 							</div>
 							<div id="banner-1-right-bottom">
 								<div class="layer">
-								<%
-									int count = 0;
-									for(UsedPostDTO newpost : list) { 
-										if(count >= 5) {
+									<%
+										int count = 0;
+									for (UsedPostDTO newpost : list) {
+										if (count >= 5) {
 											break;
 										}
-								%> 
+									%>
 									<div class="hot-product">
 										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
+											<img src="<%=path%>/img/logo_icon.png">
 										</div>
-										<div id="title"><%=newpost.getPost_title().substring(0, 10) %> ..</div>
-										<div id="like"><%=newpost.getPost_like() %></div>
+										<div id="title"><%=newpost.getPost_title().substring(0, 10)%>
+											..
+										</div>
+										<div id="like"><%=newpost.getPost_like()%></div>
 									</div>
-								<%
+									<%
 										count++;
 									}
-									
-								%>
-							</div>
-							<div class="layer">
-								<%
-									int count2 = 0;
-									for(UsedPostDTO newpost : list) { 
-										if(count2 >= 10) {
+									%>
+								</div>
+								<div class="layer">
+									<%
+										int count2 = 0;
+									for (UsedPostDTO newpost : list) {
+										if (count2 >= 10) {
 											break;
 										}
-										
-										if(count2 > 4) {
-								%> 
+
+										if (count2 > 4) {
+									%>
 									<div class="hot-product">
 										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
+											<img src="<%=path%>/img/logo_icon.png">
 										</div>
-										<div id="title"><%=newpost.getPost_title().substring(0, 10) %> ..</div>
-										<div id="like"><%=newpost.getPost_like() %></div>
+										<div id="title"><%=newpost.getPost_title().substring(0, 10)%>
+											..
+										</div>
+										<div id="like"><%=newpost.getPost_like()%></div>
 									</div>
-								<%
+									<%
 										}
-										count2++;
+									count2++;
 									}
-									
-								%>	
+									%>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="swiper-slide" id="slide-2">
+				<div class="swiper-slide" id="slide-2">
 					<div id="banner-2">
 						<div id="banner-2-top">
 							<span>우리 동네의 멋진 가게들!</span>
@@ -228,7 +230,7 @@
 					</div>
 				</div>
 			</div>
-						<div class="swiper-pagination"></div>
+			<div class="swiper-pagination"></div>
 		</div>
 	</div>
 </article>

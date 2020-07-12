@@ -38,7 +38,7 @@ input[type=file] {
 </head>
 <body>
 	<div>
-		<form action="" method="post" enctype="multipart/form-data">
+		<form action="reg_profile_img.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="member_no" value="<%=member_no %>">
 			<div id="thumb">
 				<img src="../img/logo_icon.png" alt="profile_img">

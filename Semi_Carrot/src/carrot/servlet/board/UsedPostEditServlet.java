@@ -11,11 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import carrot.bean.dao.UsedPostDAO;
 import carrot.bean.dto.UsedPostDTO;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/board/usedpostedit.do")
 public class UsedPostEditServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			resp.setCharacterEncoding("UTF-8");
+			
 			UsedPostDTO updto = new UsedPostDTO();
 			updto.setPost_no(Long.parseLong(req.getParameter("post_no")));
 			updto.setPost_title(req.getParameter("post_title"));

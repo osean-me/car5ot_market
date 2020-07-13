@@ -9,7 +9,7 @@ nav {
     position: fixed;
     margin-top: 78px;
     background-color: white;
-    z-index: 100;
+    z-index: 2;
     display: flex;
 }
 

@@ -10,6 +10,7 @@ public class CommunityPostDTO {
    private long member_no;
    private long member_img_no;
    private long addr_no;
+   private long board_no;
 
    public int getPost_no() {
       return post_no;
@@ -66,7 +67,13 @@ public class CommunityPostDTO {
       this.addr_no = addr_no;
    }
    
-   public CommunityPostDTO() {
+   public long getBoard_no() {
+	return board_no;
+}
+public void setBoard_no(long board_no) {
+	this.board_no = board_no;
+}
+public CommunityPostDTO() {
       super();
    }
 }

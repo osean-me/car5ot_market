@@ -14,6 +14,7 @@ public class PromotionPostDTO {
    private long member_no;
    private long member_img_no;
    private long addr_no;
+   private long board_no;
    
    public long getPost_no() {
       return post_no;
@@ -87,7 +88,14 @@ public class PromotionPostDTO {
    public void setAddr_no(long addr_no) {
       this.addr_no = addr_no;
    }
-   public PromotionPostDTO() {
+   
+   public long getBoard_no() {
+	return board_no;
+}
+public void setBoard_no(long board_no) {
+	this.board_no = board_no;
+}
+public PromotionPostDTO() {
       super();
    }
    

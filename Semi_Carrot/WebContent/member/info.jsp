@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
 <%@page import="carrot.bean.dao.IntroDAO"%>
 <%@page import="carrot.bean.dto.PromotionPostDTO"%>
 <%@page import="carrot.bean.dao.BoardDAO"%>
@@ -18,6 +20,8 @@
 
 	MemberDAO mdao = new MemberDAO();
 	
+	MemberDTO loginMember = (MemberDTO)session.getAttribute("memberinfo");
+	
 	long member_no = Long.parseLong(request.getParameter("no"));
 
 	MemberDTO mdto = mdao.get(member_no);
@@ -34,6 +38,8 @@
 	AddrDAO adao = new AddrDAO();
 	
 	AddrDTO adto = adao.get(member_addr_no);
+	
+	
 	
 	//////////////////////////
 	///		회원 게시글	  ///
@@ -53,14 +59,24 @@
 	// 작성 게시글 개수
 	int post_count = used_post.size() + promotion_post.size() + community_post.size();
 
-	//////////////////////////
-	///		자기 소개 		  ///
-	////////////////////////
+	
+	
+	/////////////////////////
+	///		자기 소개 	 ///
+	///////////////////////
 	
 	IntroDAO idao = new IntroDAO();
 	
 	String intro = idao.getIntro(member_no);
 	
+	
+	
+	/////////////////////////////
+	/// 	회원 프로필 	 ///
+	///////////////////////////
+	
+	ProfileImgDAO pidao = new ProfileImgDAO();
+	Long member_img_no = pidao.getProfileImgNo(member_no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -73,13 +89,35 @@
                 <div id="mypage-top">
                     <div id="mypage-top-left">
                         <div id="mypage-top-left-up">
-                            <img alt="user_profile" src="<%=path %>/img/user_profile.jpg">
-                            <a a href="profile_img_edit.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=300px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img"><button></button></a>
+                        	<%if(member_img_no != null) { %>
+                       			<!-- 회원 이미지가 있을 경우 -->
+                       			<img alt="<%=mdto.getMember_nick() %>" src="profile_img_down.do?member_img_no=<%=member_img_no%>">
+                       		<%} else {%>
+                       			<!-- 회원 이미지가 없을 경우 -->
+                            	<img alt="user_profile_none" src="<%=path %>/img/user_profile.jpg">
+                       		<%} %>
+                           	<label id="profile-edit" for="profile-check">
+                          		<input type="checkbox" id="profile-check" class="profile-check" onchange="profileImgButton();">
+                           		<span class="profileimg-button">
+	                           		<%if(member_no == loginMember.getMember_no()) { %>
+	                           			<!-- 마이페이지 회원이 자신일 경우 -->
+	                           		
+	                           			<%if(member_img_no != null) { %>
+	                           				<!-- 회원 이미지가 있을 경우 -->
+	                           				<a href="profile_img_edit.jsp?no=<%=member_no %>&member_img_no=<%=member_img_no %>" onclick="window.open(this.href, '_blank', 'width=305px,height=400px,toolbars=no,scrollbars=no'); return false;" id="profile-img">수정</a>
+	                           				<a href="delete_profile.do?member_img_no=<%=member_img_no%>">삭제</a>
+	                           			<%} else { %>
+	                           				<!-- 회원 이미지가 없을 경우 -->
+	                           				<a href="profile_img_create.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=305px,height=400px,toolbars=no,scrollbars=no'); return false;" id="profile-img">추가</a>
+	                           			<%} %>
+	                           		<%} %>	
+                           		</span>
+                           	</label>
                         </div>
                         <div id="mypage-top-left-down">
                             <div>
-                                <a href="change_info.jsp?member_no=<%=member_no%>"><button>회원정보 수정</button></a>
-                                <a href=""><button>회원 탈퇴</button></a>
+                                <a href="change_info.jsp?no=<%=member_no%>"><button>회원정보 수정</button></a>
+                                <a href="gone.do"><button>회원 탈퇴</button></a>
                             </div>
                         </div>
                     </div>

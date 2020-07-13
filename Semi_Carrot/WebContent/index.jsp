@@ -10,38 +10,38 @@
 <%
 	String path = request.getContextPath();
 
-// 회원 번호 불러오기
-MemberDAO mdao = new MemberDAO();
-MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+	// 회원 번호 불러오기
+	MemberDAO mdao = new MemberDAO();
+	MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
 
-// 최신 중고 게시물 불러오기
-UsedPostDAO updao = new UsedPostDAO();
-List<UsedPostDTO> list = updao.newUsedPost();
-String address = null;
-String base = null;
-
-// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
-if (mdto != null) {
-	// 최신 회원 정보 얻기
-
-	MemberDTO member = mdao.get(mdto.getMember_no());
-
-	AddrDAO adao = new AddrDAO();
-	AddrDTO adto = adao.get(member.getMember_addr_no());
+	// 최신 중고 게시물 불러오기
+	UsedPostDAO updao = new UsedPostDAO();
+	List<UsedPostDTO> list = updao.newUsedPost();
+	String address = null;
+	String base = null;
 	
-	// 자바스크립트로 보내기 위한 주소 변수
-	address = adto.getAddr_state() + " " + adto.getAddr_city() + " " + adto.getAddr_base();
-	base = adto.getAddr_base();
+	// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
+	if (mdto != null) {
+		// 최신 회원 정보 얻기
 	
-	list = updao.newUsedPost(member.getMember_addr_no());
-
-	if (list.isEmpty()) {
-
-		list = updao.newUsedPost();
-
+		MemberDTO member = mdao.get(mdto.getMember_no());
+	
+		AddrDAO adao = new AddrDAO();
+		AddrDTO adto = adao.get(member.getMember_addr_no());
+		
+		// 자바스크립트로 보내기 위한 주소 변수
+		address = adto.getAddr_state() + " " + adto.getAddr_city() + " " + adto.getAddr_base();
+		base = adto.getAddr_base();
+		
+		list = updao.newUsedPost(member.getMember_addr_no());
+	
+		if (list.isEmpty()) {
+	
+			list = updao.newUsedPost();
+	
+		}
+	
 	}
-
-}
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>

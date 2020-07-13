@@ -19,11 +19,14 @@ import carrot.bean.dao.ProfileImgDAO;
 import carrot.bean.dto.ProfileImgDTO;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/member/reg_profile_img.do")
-public class ProfileImgServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/member/reg_profile.do")
+public class ProfileImgCreateServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("UTF-8");
+		
 		try {
 
 			// 0.form 의 multipart/form-data 방식으로 전송되는 이미지 파일을 해석하고 저장하는 과정
@@ -47,33 +50,36 @@ public class ProfileImgServlet extends HttpServlet {
 			Map<String, List<FileItem>> map = utility.parseParameterMap(req);
 
 			// 5. 해석한 데이터에서 필요한 정보들을 추출
-			long member_no = Long.parseLong(req.getParameter("member_no"));
+			long member_no = Long.parseLong(map.get("member_no").get(0).getString());
 
-			// 6. 파일 정보를 불러와서 저장 (하드 디스트 + 데이터 베이스)
+			// 6. 파일 정보를 불러와서 저장 (하드 디스크 + 데이터 베이스)
 			List<FileItem> profile = map.get("member_profile");
 			ProfileImgDAO pidao = new ProfileImgDAO();
-			
+
 			for (FileItem item : profile) {
 				if (item.getSize() > 0) {
 
 					// 데이터 베이스에 저장
 					// 프로필 이미지 고유번호는 데이터 베이스 등록 메소드 안에서 호출
 					ProfileImgDTO pidto = new ProfileImgDTO();
-					
+
 					pidto.setMember_no(member_no);
 					pidto.setMember_img_name(item.getName());
 					pidto.setMember_img_type(item.getContentType());
 					pidto.setMember_img_size(item.getSize());
-					
+
 					long member_img_no = pidao.profileSave(pidto);
-					
-					//	하드 디스크에 저장
+
+					// 하드 디스크에 저장
 					File target = new File(baseDir, String.valueOf(member_img_no));
 					item.write(target);
 				}
 			}
-			
-			resp.sendRedirect(req.getContextPath() + "/member/info.jsp?no=" + member_no);
+
+			resp.getWriter().println("<script>");
+			resp.getWriter().println("window.opener.parent.location.reload('" + req.getContextPath() + "/member/info.jsp?no=" + member_no + "')");
+			resp.getWriter().println("window.close();");
+			resp.getWriter().println("</script>");
 
 		} catch (Exception e) {
 			e.printStackTrace();

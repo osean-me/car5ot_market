@@ -96,48 +96,84 @@ public class ProfileImgDAO {
 	// [4] 회원 이미지 번호 조회
 	public Long getProfileImgNo(long member_no) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "SELECT MEMBER_IMG_NO FROM PROFILE_IMG WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		Long result;
+
+		if (rs.next()) {
+
+			result = rs.getLong(1);
+		} else {
+
+			result = null;
+		}
+
+		con.close();
+
+		return result;
+	}
+
+	// [5] 회원 이미지 DB 조회
+	public ProfileImgDTO getProfileImg(long member_img_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM PROFILE_IMG WHERE MEMBER_IMG_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_img_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+
+		ProfileImgDTO pidto = new ProfileImgDTO(rs);
+
+		con.close();
+
+		return pidto;
+	}
+
+	// [6] 회원 이미지 번호로 이미지 이름 조회
+	public String getImgName(long member_img_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT MEMBER_IMG_NAME FROM PROFILE_IMG WHERE MEMBER_IMG_NO = ?";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		
-		ps.setLong(1, member_no);
+		ps.setLong(1, member_img_no);
 		
 		ResultSet rs = ps.executeQuery();
 		
-		Long result;
+		rs.next();
 		
-		if(rs.next()) {
-			
-			result = rs.getLong(1);
-		} else {
-			
-			result = null;
-		}
+		String result = rs.getString(1);
 		
 		con.close();
 		
 		return result;
 	}
 	
-	// [5] 회원 이미지 DB 조회
-		public ProfileImgDTO getProfileImg(long member_img_no) throws Exception {
-			Connection con = getConnection();
-			
-			String sql = "SELECT * FROM PROFILE_IMG WHERE MEMBER_IMG_NO = ?";
-			
-			PreparedStatement ps = con.prepareStatement(sql);
-			
-			ps.setLong(1, member_img_no);
-			
-			ResultSet rs = ps.executeQuery();
-			
-			rs.next();
-			
-			ProfileImgDTO pidto = new ProfileImgDTO(rs);
-			
-			con.close();
-			
-			return pidto;
-		}
+	// [7] 회원 이미지 DB 삭제
+	public void deleteProfileImg(long member_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "DELETE PROFILE_IMG WHERE MEMBER_IMG_NO = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setLong(1, member_no);
+		
+		ps.execute();
+		
+		con.close();
+	}
 }

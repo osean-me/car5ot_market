@@ -3,7 +3,6 @@ package carrot.bean.dto;
 import java.sql.ResultSet;
 
 public class PromotionPostDTO {
-
 	private long post_no;
 	private String post_title;
 	private String post_content;
@@ -16,21 +15,7 @@ public class PromotionPostDTO {
 	private long member_no;
 	private long member_img_no;
 	private long addr_no;
-
-	public PromotionPostDTO(ResultSet rs) throws Exception {
-		this.setPost_no(rs.getLong("post_no"));
-		this.setPost_title(rs.getString("post_title"));
-		this.setPost_content(rs.getString("post_content"));
-		this.setPost_price(rs.getLong("post_price"));
-		this.setPost_date(rs.getString("post_date"));
-		this.setPost_phone(rs.getString("post_phone"));
-		this.setPost_view(rs.getLong("post_view"));
-		this.setPost_like(rs.getLong("post_like"));
-		this.setPromotion_cate_num(rs.getLong("promotion_cate_num"));
-		this.setMember_no(rs.getLong("member_no"));
-		this.setMember_img_no(rs.getLong("member_img_no"));
-		this.setAddr_no(rs.getLong("addr_no"));
-	}
+	private long board_no;
 
 	public long getPost_no() {
 		return post_no;
@@ -128,6 +113,34 @@ public class PromotionPostDTO {
 		this.addr_no = addr_no;
 	}
 
+	public long getBoard_no() {
+		return board_no;
+	}
+
+	public void setBoard_no(long board_no) {
+		this.board_no = board_no;
+	}
+
+	public PromotionPostDTO() {
+		super();
+	}
+
+	public PromotionPostDTO(ResultSet rs) throws Exception {
+		this.setPost_no(rs.getLong("post_no"));
+		this.setPost_title(rs.getString("post_title"));
+		this.setPost_content(rs.getString("post_content"));
+		this.setPost_price(rs.getLong("post_price"));
+		this.setPost_date(rs.getString("post_date"));
+		this.setPost_phone(rs.getString("post_phone"));
+		this.setPost_view(rs.getLong("post_view"));
+		this.setPost_like(rs.getLong("post_like"));
+		this.setPromotion_cate_num(rs.getLong("promotion_cate_num"));
+		this.setMember_no(rs.getLong("member_no"));
+		this.setMember_img_no(rs.getLong("member_img_no"));
+		this.setAddr_no(rs.getLong("addr_no"));
+		this.setBoard_no(rs.getLong("board_no"));
+	}
+
 	// 작성시간 관련 메소드 추가
 	public String getPromotionPost_time() {
 		return post_date.substring(11, 16);
@@ -135,10 +148,6 @@ public class PromotionPostDTO {
 
 	public String getPromotionPost_day() {
 		return post_date.substring(0, 10);
-	}
-
-	public PromotionPostDTO() {
-		super();
 	}
 
 }

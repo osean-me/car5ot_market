@@ -10,19 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carrot.bean.dao.ProfileImgDAO;
+import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/delete_profile.do")
 public class ProfileImgDeleteServlet extends HttpServlet {
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
 			ProfileImgDAO pidao = new ProfileImgDAO();
 			
 			// 회원 번호 받아오기
-			long member_no = Long.parseLong(req.getParameter("member_no"));
+			MemberDTO mdto = (MemberDTO) req.getAttribute("memberinfo");
+			long member_no = mdto.getMember_no();
 			
 			// 해당 회원의 프로필 번호를 받아온다.
 			long member_img_no = Long.parseLong(req.getParameter("member_img_no"));
@@ -30,14 +32,11 @@ public class ProfileImgDeleteServlet extends HttpServlet {
 			// 파일 이름 받아오기
 			String member_img_name = pidao.getImgName(member_img_no);
 			
-			
-			File profile = new File("D:/semi_carrot/upload/member_profile/" + member_img_name);
-		
 			// 파일 삭제
+			File profile = new File("D:/semi_carrot/upload/member_profile/" + member_img_name);
 			profile.delete();
 			
 			// DB 삭제
-			
 			pidao.deleteProfileImg(member_no);
 			
 			resp.sendRedirect(req.getContextPath() + "/member/info.jsp?no=" + member_no);

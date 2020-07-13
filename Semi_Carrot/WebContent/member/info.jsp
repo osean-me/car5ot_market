@@ -98,7 +98,7 @@
                           		<input type="checkbox" id="profile-check" class="profile-check" onchange="profileImgButton();">
                            		<span class="profileimg-button">
                            			<a href="">수정</a>
-                           			<a href="">삭제</a>
+                           			<a href="delete_profile.do?member_img_no=<%=member_img_no%>">삭제</a>
                            		</span>
                            	</label>
                         </div>

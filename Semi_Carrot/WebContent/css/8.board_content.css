@@ -7,18 +7,17 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	border: 1px dotted black;
 }
 
-<<<<<<< HEAD
+
 .cursor:hover{
 	cursor: pointer;
 	}
-=======
+
 
 /* aritcle 기본 폼 */
 #used-post-content-form {
 	width: auto;
 	margin: 0px 15%;
 }
->>>>>>> refs/remotes/origin/master
 
 .float-box:after {
 	content: "";

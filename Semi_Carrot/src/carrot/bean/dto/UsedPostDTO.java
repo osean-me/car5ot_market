@@ -121,10 +121,10 @@ public class UsedPostDTO {
 	 public String getUsedPost_autotime() {
 		 String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		 if(getUsedPost_day().contentEquals(today)) {
-			 return getUsedPost_time();
+			 return getUsedPost_day();
 		 }
 		 else {
-			 return getUsedPost_day();
+			 return getUsedPost_time();
 		 }
 	 }
 	 

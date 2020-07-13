@@ -34,7 +34,7 @@
 			//게시글 조회수 중복 방지 코드 만들어야함 ★★
 			MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
 			UsedPostDAO updaoo = new UsedPostDAO();
-			updaoo.plusViewCount(post_no, 1);
+			updaoo.plusViewCount(post_no,memberinfo.getMember_no());
 			
 			//내글
 			boolean isMine= memberinfo.getMember_no() == updto.getMember_no();

@@ -89,7 +89,7 @@ import carrot.bean.dto.UsedPostDTO;
 						item.write(target);
 					}
 				}
-				resp.sendRedirect("post_list.jsp"); // 일단은 리스트로 보내기  + 나중에 상세페이지 완성되면 완성 페이지로 전송 
+				resp.sendRedirect("used_post_content.jsp?post_no="+updto.getPost_no()); // 일단은 리스트로 보내기  + 나중에 상세페이지 완성되면 완성 페이지로 전송 
 			}
 			catch(Exception e) {
 				e.printStackTrace();

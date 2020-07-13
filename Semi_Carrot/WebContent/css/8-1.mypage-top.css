@@ -267,6 +267,7 @@
 	height: 70%;
 	padding: 0px 20px;
 	background-color: rgba(300, 200, 100, 0.45);
+	resize: none;
 }
 
 #intro-bottom>form>input[type=submit] {
@@ -278,7 +279,7 @@
 	height: 40px;
 	display: inline-block;
 	position: absolute;
-	margin-top: 185px;
+	margin-top: 10%;
 	margin-left: -50px;
 	border-radius: 100%;
 	border: 1px solid transparent;

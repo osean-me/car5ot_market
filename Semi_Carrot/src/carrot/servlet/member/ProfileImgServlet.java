@@ -47,32 +47,32 @@ public class ProfileImgServlet extends HttpServlet {
 			Map<String, List<FileItem>> map = utility.parseParameterMap(req);
 
 			// 5. 해석한 데이터에서 필요한 정보들을 추출
-			long member_no = Long.parseLong(req.getParameter("member_no"));
+			long member_no = Long.parseLong(map.get("member_no").get(0).getString());
 
 			// 6. 파일 정보를 불러와서 저장 (하드 디스트 + 데이터 베이스)
 			List<FileItem> profile = map.get("member_profile");
 			ProfileImgDAO pidao = new ProfileImgDAO();
-			
+
 			for (FileItem item : profile) {
 				if (item.getSize() > 0) {
 
 					// 데이터 베이스에 저장
 					// 프로필 이미지 고유번호는 데이터 베이스 등록 메소드 안에서 호출
 					ProfileImgDTO pidto = new ProfileImgDTO();
-					
+
 					pidto.setMember_no(member_no);
 					pidto.setMember_img_name(item.getName());
 					pidto.setMember_img_type(item.getContentType());
 					pidto.setMember_img_size(item.getSize());
-					
+
 					long member_img_no = pidao.profileSave(pidto);
-					
-					//	하드 디스크에 저장
+
+					// 하드 디스크에 저장
 					File target = new File(baseDir, String.valueOf(member_img_no));
 					item.write(target);
 				}
 			}
-			
+
 			resp.sendRedirect(req.getContextPath() + "/member/info.jsp?no=" + member_no);
 
 		} catch (Exception e) {

@@ -18,7 +18,7 @@ public class ProfileImgDAO {
 		try {
 			Context ctx = new InitialContext();
 			Context env = (Context) ctx.lookup("java:/comp/env");
-			src = (DataSource) env.lookup("jdbc.oracle");
+			src = (DataSource) env.lookup("jdbc/oracle");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -116,7 +116,7 @@ if (mdto != null) {
 										<div id="img">
 											<img src="<%=path%>/img/logo_icon.png">
 										</div>
-										<div id="title"><%=newpost.getPost_title().substring(0, 10)%>
+										<div id="title"><%=newpost.getPost_title()%>
 											..
 										</div>
 										<div id="like"><%=newpost.getPost_like()%></div>
@@ -140,7 +140,7 @@ if (mdto != null) {
 										<div id="img">
 											<img src="<%=path%>/img/logo_icon.png">
 										</div>
-										<div id="title"><%=newpost.getPost_title().substring(0, 10)%>
+										<div id="title"><%=newpost.getPost_title()%>
 											..
 										</div>
 										<div id="like"><%=newpost.getPost_like()%></div>

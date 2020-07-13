@@ -14,6 +14,11 @@ body[test] label,
 body[test] aside{
     border:1px dotted black;
 }
+
+.cursor:hover{
+	cursor: pointer;
+	}
+
 .float-box:after {
 	content: "";
 	display: block;
@@ -284,3 +289,4 @@ textarea{
             resize:none;
             border: none;
         }
+   

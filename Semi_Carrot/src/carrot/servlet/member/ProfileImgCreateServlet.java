@@ -24,6 +24,9 @@ public class ProfileImgCreateServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("UTF-8");
+		
 		try {
 
 			// 0.form 의 multipart/form-data 방식으로 전송되는 이미지 파일을 해석하고 저장하는 과정
@@ -73,7 +76,10 @@ public class ProfileImgCreateServlet extends HttpServlet {
 				}
 			}
 
-			resp.sendRedirect(req.getContextPath() + "/member/info.jsp?no=" + member_no);
+			resp.getWriter().println("<script>");
+			resp.getWriter().println("window.opener.parent.location.reload('" + req.getContextPath() + "/member/info.jsp?no=" + member_no + "')");
+			resp.getWriter().println("window.close();");
+			resp.getWriter().println("</script>");
 
 		} catch (Exception e) {
 			e.printStackTrace();

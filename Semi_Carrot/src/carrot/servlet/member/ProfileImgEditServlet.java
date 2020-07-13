@@ -24,6 +24,9 @@ public class ProfileImgEditServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		req.setCharacterEncoding("UTF-8");
+		
 		try {
 
 			// 1. 새로 등록된 사진 도구 준비하기
@@ -78,6 +81,11 @@ public class ProfileImgEditServlet extends HttpServlet {
 				item.write(target);
 			}
 
+			resp.getWriter().println("<script>");
+			resp.getWriter().println("window.opener.parent.location.reload('" + req.getContextPath() + "/member/info.jsp?no=" + member_no + "')");
+			resp.getWriter().println("window.close();");
+			resp.getWriter().println("</script>");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

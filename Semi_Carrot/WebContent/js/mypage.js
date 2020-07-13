@@ -48,3 +48,13 @@ function radiusEdit(tag) {
 	}
 
 }
+
+function profileImgButton() {
+	var profileimg_button = document.querySelector(".profileimg-button");
+	var checkbox = document.querySelector("#profile-check").checked;
+	profileimg_button.classList.remove("button-on");
+	
+	if(checkbox) {
+		profileimg_button.classList.add("button-on");
+	}
+}

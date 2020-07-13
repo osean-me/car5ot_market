@@ -51,7 +51,7 @@ input[type=submit] {
 			</div>
 			<input type="file" name="member_profile" accept=".jpeg , .jpg , .png">
 			<input type="hidden" name="member_no"  value="<%=member_no%>">
-			<input type="submit" value="프로필 등록">
+			<input type="submit" value="프로필 등록" onClick="window.close()">
 		</form>
 	</div>
 </body>

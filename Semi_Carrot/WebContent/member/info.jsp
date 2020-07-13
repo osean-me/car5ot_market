@@ -94,7 +94,13 @@
                        			<!-- 회원 이미지가 없을 경우 -->
                             	<img alt="user_profile_none" src="<%=path %>/img/user_profile.jpg">
                        		<%} %>
-                            <a href="profile_img_edit.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=300px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img"><button></button></a>
+                           	<label id="profile-edit" for="profile-check">
+                          		<input type="checkbox" id="profile-check" class="profile-check" onchange="profileImgButton();">
+                           		<span class="profileimg-button">
+                           			<a href="">수정</a>
+                           			<a href="">삭제</a>
+                           		</span>
+                           	</label>
                         </div>
                         <div id="mypage-top-left-down">
                             <div>

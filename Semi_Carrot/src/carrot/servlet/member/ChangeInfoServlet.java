@@ -94,7 +94,7 @@ public class ChangeInfoServlet extends HttpServlet {
 					} else if (member_pw.equals(check_pw)) {
 						
 						// 바꾸려는 비밀번호와 현재 비밀번호가 같으니 다시 입력
-						resp.sendRedirect("change_info.jsp?error_no=1&no=" + memberinfo.getMember_no());
+						resp.sendRedirect("change_info.jsp?error_no=1&no=" + member_no);
 					}
 
 				} else if (check_pw.isEmpty()) {
@@ -112,7 +112,7 @@ public class ChangeInfoServlet extends HttpServlet {
 
 			} else {
 				// 현재 비밀번호가 세션 비밀번호와 다를 시
-				resp.sendRedirect("change_info.jsp?error_no=2&no=" + memberinfo.getMember_no());
+				resp.sendRedirect("change_info.jsp?error_no=2&no=" + member_no);
 			}
 
 		} catch (Exception e) {

@@ -8,7 +8,7 @@
 
 <%
 	String path = request.getContextPath();
-	long member_no = Long.parseLong(request.getParameter("member_no"));
+	long member_no = Long.parseLong(request.getParameter("no"));
 	// 회원 번호로 회원 정보 받아오기 
 	MemberDAO mdao = new MemberDAO();
 	MemberDTO mdto = mdao.get(member_no);

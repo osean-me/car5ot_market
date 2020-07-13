@@ -150,5 +150,20 @@ public class UsedPostDAO {
 	      
 	      con.close();
 	   }
+	   
+	   //게시글 수정
+	   public void edit(UsedPostDTO updto) throws Exception{
+		   Connection con = getConnection();
+		   
+		   String sql="Update used_post SET post_title=?, used_cate_num=?,post_price=?,post_content=? where post_no=?";
+		   PreparedStatement ps=con.prepareStatement(sql);
+		   ps.setString(1, updto.getPost_title());
+		   ps.setLong(2, updto.getUsed_cate_num());
+		   ps.setLong(3, updto.getPost_price());
+		   ps.setString(4, updto.getPost_content());
+		   ps.setLong(5, updto.getPost_no());
+		   
+		   con.close();		   
+	   }
 
 }

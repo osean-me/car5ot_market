@@ -17,14 +17,11 @@ public class changePassWordServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
-
-			
 
 			String member_pw = req.getParameter("member_pw");
 
 			MemberDTO member = new MemberDTO();
-	
+
 			member.setMember_pw(member_pw);
 
 			MemberDAO mdao = new MemberDAO();

@@ -1,6 +1,6 @@
 function findAddr() {
 	new daum.Postcode({
-		oncomplete : function(data) {
+		oncomplete: function(data) {
 			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
 			// 각 주소의 노출 규칙에 따라 주소를 조합한다.
@@ -59,7 +59,7 @@ function allCheck() {
 	var all = document.querySelector("#all").checked;
 	var selectBox = document.querySelectorAll(".selectBox");
 
-	for ( var i in selectBox) {
+	for (var i in selectBox) {
 		selectBox[i].checked = all;
 	}
 
@@ -139,6 +139,51 @@ function checkPw() {
 	} else if (pw.match(regex) != null && pwInfoText != null) {
 
 		pwInfo.removeChild(pwInfo.childNodes[0]);
+
+	}
+}
+
+function editcheckPw() {
+	var pw = document.querySelector("input[name=check_pw]").value;
+
+	var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,15}/;
+
+	var editpwInfo = document.querySelector("#editpwInfo");
+	var editpwInfoText = document.querySelector("#editpwInfoText");
+
+	if (pw.match(regex) == null && editpwInfoText == null) {
+
+		var pwInfoText = document.createElement("div");
+		pwInfoText.textContent = "8~15자 영문 대 소문자, 숫자, 특수문자를 사용하세요."
+		pwInfoText.setAttribute("id", "editpwInfoText");
+		pwInfoText.setAttribute("style", "color: red; font-size: 12px;");
+		editpwInfo.appendChild(pwInfoText);
+
+	} else if (pw.match(regex) != null && editpwInfoText != null) {
+
+		editpwInfo.removeChild(editpwInfo.childNodes[0]);
+
+	}
+}
+
+function doublecheckPw() {
+	var check_member_pw = document.querySelector("input[name=check_member_pw]").value;
+	var check_pw = document.querySelector("input[name=check_pw]").value;
+
+	var checkpwInfo = document.querySelector("#checkpwInfo");
+	var checkpwInfoText = document.querySelector("#checkpwInfoText");
+
+	if (check_member_pw != check_pw && checkpwInfoText == null) {
+
+		var pwInfoText = document.createElement("div");
+		pwInfoText.textContent = "비밀번호가 일치하지 않습니다."
+		pwInfoText.setAttribute("id", "checkpwInfoText");
+		pwInfoText.setAttribute("style", "color: red; font-size: 12px;");
+		checkpwInfo.appendChild(pwInfoText);
+
+	} else if (check_member_pw == check_pw && checkpwInfoText != null) {
+
+		checkpwInfo.removeChild(checkpwInfo.childNodes[0]);
 
 	}
 }

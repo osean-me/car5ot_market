@@ -7,12 +7,18 @@
 <%
 	String path = request.getContextPath();
 
+	MemberDAO mdao = new MemberDAO();
 	MemberDTO member = (MemberDTO) session.getAttribute("memberinfo");
 
-	Long member_no = member.getMember_no();
-	MemberDAO mdao = new MemberDAO();
-	MemberDTO mdto = mdao.get(member_no);
+	long member_no = member.getMember_no();
 	
+	// 회원 번호가 있을 경우
+	if(request.getParameter("member_no") != null) {
+		member_no = Long.parseLong(request.getParameter("member_no"));
+	}
+	
+	MemberDTO mdto = mdao.get(member_no);
+	System.out.println("주소 번호 : " + mdto.getMember_addr_no());
 	/*
 		현재 회원번호 가지고 있음.
 		회원번호를 가지고 있으면 회원의 주소 고유번호를 알 수 있어요.
@@ -25,70 +31,384 @@
 	AddrDAO adao = new AddrDAO();
 	
 	AddrDTO adto = adao.get(member_addr_no);
+	
+	System.out.println("회원 번호 : " + member.getMember_no());
 
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+<script type="text/javascript" src="<%=path%>/js/mypage.js"></script>
+    <link href="<%=path %>/css/8-1.mypage-top.css" type="text/css" rel="stylesheet">
+    <link href="<%=path %>/css/8-2.mypage-bottom.css" type="text/css" rel="stylesheet">
 
+        <article id="mypage-article">
+            <div id="mypage-form">
+                <div id="mypage-top">
+                    <div id="mypage-top-left">
+                        <div id="mypage-top-left-up">
+                            <img alt="user_profile" src="<%=path %>/img/user_profile.jpg">
+                        </div>
+                        <div id="mypage-top-left-down">
+                            <div>
+                                <a href="change_info.jsp?member_no=<%=member_no%>"><button>회원정보 수정</button></a>
+                                <a href=""><button>회원 탈퇴</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mypage-top-right">
+                        <div id="mypage-top-right-up">
+                            <div id="nickname">
+                                <div>
+                                    <%=mdto.getMember_nick() %>
+                                    <ul>
+                                        <li><a href="">쪽지 보내기</a></li>
+                                        <li><a href="">좋아요</a></li>
+                                        <li><a href="">싫어요</a></li>
+                                        <li><a href="">신고하기</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div id="manner">
+                                <div>
+                                    <input type="range" value="80" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="mypage-top-right-down">
+                            <div id="mypage-top-right-down-in">
+                                <div id="intro-top">
+                                    <div id="post-count">
+                                        게시글 수 : 10
+                                    </div>
+                                    <div id="reply-count">
+                                        댓글 수 : 150
+                                    </div>
+                                </div>
+                                <div id="intro-bottom">
+                                    <form action="" method="get">
+                                        <textarea maxlength="800">
 
-<div align="center">
+                                        </textarea>
+                                        <input type="submit" value="소개글 등록">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="mypage-bottom">
+                    <div id="mypage-nav">
+                        <div id="nav-1" onmouseover="radiusEdit(this);">
+                            <label for="select-1">
+                                <input type="radio" name="board" id="select-1" onchange="toggleTabAuto(this);" checked>
+                                <span>중고</span>
+                            </label>
+                        </div>
 
-	<table style="padding-top: 200px;" border="2" width=700">
+                        <div id="nav-2" onmouseover="radiusEdit(this);">
+                            <label for="select-2">
+                                <input type="radio" name="board" id="select-2" onchange="toggleTabAuto(this);">
+                                <span>홍보</span>
+                            </label>
+                        </div>
 
+                        <div id="nav-3" onmouseover="radiusEdit(this);">
+                            <label for="select-3">
+                                <input type="radio" name="board" id="select-3" onchange="toggleTabAuto(this);">
+                                <span>텃밭</span>
+                            </label>
+                        </div>
 
+                        <div id="nav-4" onmouseover="radiusEdit(this);">
+                            <label for="select-4">
+                                <input type="radio" name="board" id="select-4" onchange="toggleTabAuto(this);">
+                                <span>댓글</span>
+                            </label>
+                        </div>
+                    </div>
 
-		<tbody>
-			<tr>
-
-				<td colspan="50" align="center">마이 페이지 정보</td>
-			</tr>
-
-			<tr>
-				<th>이메일</th>
-				<td><%=mdto.getMember_id()%></td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td><%=mdto.getMember_nick()%></td>
-			</tr>
-			<tr>
-				<th >주소</th>
-				<td><%=adto.getAddr_state()%>
-				<%=adto.getAddr_city()%>
-				<%=adto.getAddr_base()%></td>
-			</tr>
-			<tr>
-				<th>전화번호</th>
-				<td><%=mdto.getMember_phone()%></td>
-			</tr>
-			<tr>
-				<th>등급</th>
-				<td><%=mdto.getMember_auth()%></td>
-			</tr>
-			<tr>
-				<th>가입일</th>
-				<td><%=mdto.getMember_join()%></td>
-			</tr>
-			<tr>
-				<th>마지막 로그인</th>
-				<td><%=mdto.getMember_login()%></td>
-			</tr>
-		</tbody>
-	</table>
-
-	<!-- check.jsp 로 보낼 때에는 최종 목적지로 go 라는 이름의 파라미터로 추가해야 한다 -->
-
-
-	<h5>
-		<a href="check.jsp?go=change_password.jsp">비밀번호 변경하기</a>
-	</h5>
-	<h5>
-		<a href="check.jsp?go=change_info.jsp">개인정보 변경하기</a>
-	</h5>
-	<h5>
-		<a href="check.jsp?go=gone.do">회원탈퇴</a>
-	</h5>
-
-</div>
+                    <div id="mypage-board">
+                        <div class="area on" id="select-1-area">
+                            <div class="mypage-board-table">
+                                <div class="mypage-post-search">
+                                    <form>
+                                        <input type="text" placeholder="검색">
+                                        <input type="submit" value="검색">
+                                    </form>
+                                </div>
+                                <div class="mypage-post-list">
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                </div>
+                                <div class="mypage-post-list">
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        중고 거래 게시글 리스트
+                                    </div>
+                                </div>
+                                <div class="mypage-pagination">
+                                    1 2 3 4 5 6 7 8 9 10
+                                </div>
+                            </div>
+                        </div>
+                        <div class="area" id="select-2-area">
+                            <div class="mypage-board-table">
+                                <div class="mypage-post-search">
+                                    <form>
+                                        <input type="text" placeholder="검색">
+                                        <input type="submit" value="검색">
+                                    </form>
+                                </div>
+                                <div class="mypage-post-list">
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                </div>
+                                <div class="mypage-post-list">
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                    <div class="product">
+                                        홍보 게시글 리스트
+                                    </div>
+                                </div>
+                                <div class="mypage-pagination">
+                                    1 2 3 4 5 6 7 8 9 10
+                                </div>
+                            </div>
+                        </div>
+                        <div class="area" id="select-3-area">
+                            <div class="mypage-board-table">
+                                <div class="mypage-post-search">
+                                    <form>
+                                        <input type="text" placeholder="검색">
+                                        <input type="submit" value="검색">
+                                    </form>
+                                </div>
+                                <div class="mypage-post-list column">
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                </div>
+                                <div class="mypage-pagination">
+                                    1 2 3 4 5 6 7 8 9 10
+                                </div>
+                            </div>
+                        </div>
+                        <div class="area" id="select-4-area">
+                            <div class="mypage-board-table">
+                                <div class="mypage-post-search">
+                                    <form>
+                                        <input type="text" placeholder="검색">
+                                        <input type="submit" value="검색">
+                                    </form>
+                                </div>
+                                <div class="mypage-post-list column">
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                    <div class="product column">
+                                        <div class="no">번호</div>
+                                        <div class="cate">말머리</div>
+                                        <div class="title">제목</div>
+                                        <div class="view">조회수</div>
+                                        <div class="date">작성일</div>
+                                    </div>
+                                </div>
+                                <div class="mypage-pagination">
+                                    1 2 3 4 5 6 7 8 9 10
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

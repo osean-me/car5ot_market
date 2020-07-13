@@ -3,9 +3,9 @@
 
 <%
 	long member_no = Long.parseLong(request.getParameter("no"));
-	System.out.println("member_no = " + member_no);
-%>	
-	
+	long member_img_no = Long.parseLong(request.getParameter("member_img_no"));
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,13 +44,14 @@ input[type=submit] {
 </head>
 <body>
 	<div>
-		<form action="reg_profile_img.do" method="post" enctype="multipart/form-data">
+		<form action="edit_profile.do" method="post" enctype="multipart/form-data">
 
 			<div id="thumb">
 				<img src="../img/logo_icon.png" alt="profile_img">
 			</div>
 			<input type="file" name="member_profile" accept=".jpeg , .jpg , .png">
-			<input type="hidden" name="member_no"  value="<%=member_no%>">
+			<input type="hidden" name="member_no" value="<%=member_no%>">
+			<input type="hidden" name="member_img_no" value="<%=member_img_no%>">
 			<input type="submit" value="프로필 등록">
 		</form>
 	</div>

@@ -19,8 +19,8 @@ import carrot.bean.dao.ProfileImgDAO;
 import carrot.bean.dto.ProfileImgDTO;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/member/reg_profile_img.do")
-public class ProfileImgServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/member/reg_profile.do")
+public class ProfileImgCreateServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,7 +49,7 @@ public class ProfileImgServlet extends HttpServlet {
 			// 5. 해석한 데이터에서 필요한 정보들을 추출
 			long member_no = Long.parseLong(map.get("member_no").get(0).getString());
 
-			// 6. 파일 정보를 불러와서 저장 (하드 디스트 + 데이터 베이스)
+			// 6. 파일 정보를 불러와서 저장 (하드 디스크 + 데이터 베이스)
 			List<FileItem> profile = map.get("member_profile");
 			ProfileImgDAO pidao = new ProfileImgDAO();
 

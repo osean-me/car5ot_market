@@ -99,11 +99,11 @@
                            		<span class="profileimg-button">
                            			<%if(member_img_no != null) { %>
                            				<!-- 회원 이미지가 있을 경우 -->
-                           				<a href="">수정</a>
+                           				<a href="profile_img_edit.jsp?no=<%=member_no %>&member_img_no=<%=member_img_no %>" onclick="window.open(this.href, '_blank', toolbars=no,scrollbars=no'); return false;" id="profile-img">수정</a>
                            				<a href="delete_profile.do?member_img_no=<%=member_img_no%>">삭제</a>
                            			<%} else { %>
                            				<!-- 회원 이미지가 없을 경우 -->
-                           				<a href="profile_img_edit.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=270px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img">추가</a>
+                           				<a href="profile_img_create.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=270px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img">추가</a>
                            			<%} %>
                            		</span>
                            	</label>

@@ -32,7 +32,6 @@ public class ProfileImgDeleteServlet extends HttpServlet {
 
 			// 회원 번호 받아오기
 			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
-			System.out.println("회원 번호 : " + mdto.getMember_no());
 			long member_no = mdto.getMember_no();
 
 			// 해당 회원의 프로필 번호를 받아온다.

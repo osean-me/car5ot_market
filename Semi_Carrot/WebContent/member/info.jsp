@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
 <%@page import="carrot.bean.dao.IntroDAO"%>
 <%@page import="carrot.bean.dto.PromotionPostDTO"%>
 <%@page import="carrot.bean.dao.BoardDAO"%>
@@ -35,6 +37,8 @@
 	
 	AddrDTO adto = adao.get(member_addr_no);
 	
+	
+	
 	//////////////////////////
 	///		회원 게시글	  ///
 	////////////////////////
@@ -53,14 +57,24 @@
 	// 작성 게시글 개수
 	int post_count = used_post.size() + promotion_post.size() + community_post.size();
 
-	//////////////////////////
-	///		자기 소개 		  ///
-	////////////////////////
+	
+	
+	/////////////////////////
+	///		자기 소개 	 ///
+	///////////////////////
 	
 	IntroDAO idao = new IntroDAO();
 	
 	String intro = idao.getIntro(member_no);
 	
+	
+	
+	/////////////////////////////
+	/// 	회원 프로필 	 ///
+	///////////////////////////
+	
+	ProfileImgDAO pidao = new ProfileImgDAO();
+	Long member_img_no = pidao.getProfileImgNo(member_no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -73,8 +87,14 @@
                 <div id="mypage-top">
                     <div id="mypage-top-left">
                         <div id="mypage-top-left-up">
-                            <img alt="user_profile" src="<%=path %>/img/user_profile.jpg">
-                            <a a href="profile_img_edit.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=300px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img"><button></button></a>
+                        	<%if(member_img_no != null) { %>
+                       			<!-- 회원 이미지가 있을 경우 -->
+                       			<img alt="<%=mdto.getMember_nick() %>" src="profile_img_down.do?member_img_no=<%=member_img_no%>">
+                       		<%} else {%>
+                       			<!-- 회원 이미지가 없을 경우 -->
+                            	<img alt="user_profile_none" src="<%=path %>/img/user_profile.jpg">
+                       		<%} %>
+                            <a href="profile_img_edit.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=300px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img"><button></button></a>
                         </div>
                         <div id="mypage-top-left-down">
                             <div>

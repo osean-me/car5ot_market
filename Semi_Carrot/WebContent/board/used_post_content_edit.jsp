@@ -220,7 +220,7 @@
 					<div class="used_text">
 						카테고리 <span class="must">*</span>
 						<select class="used_cate_style" name="used_cate_num">
-							<option value=""><%=ubdto.getUsed_cate_title() %></option>
+							<option value="<%=updto.getUsed_cate_num()%>"> <%=ubdto.getUsed_cate_title() %></option>
 							<option value="1">디지털/가전</option>
 							<option value="2">가구/인테리어</option>
 							<option value="3">유아동/유아도서</option>

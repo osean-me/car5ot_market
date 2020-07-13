@@ -163,7 +163,20 @@ public class UsedPostDAO {
 		   ps.setString(4, updto.getPost_content());
 		   ps.setLong(5, updto.getPost_no());
 		   
+		   ps.execute();
+		   
 		   con.close();		   
 	   }
-
+	   
+	   //게시글 삭제
+	   public void delete(long post_no)throws Exception{
+		   Connection con = getConnection();
+		   
+		   String sql="Delete used_post where post_no=?";
+		   PreparedStatement ps = con.prepareStatement(sql);
+		   ps.setLong(1, post_no);
+		   ps.execute();
+		   
+		   con.close();	   
+	   }
 }

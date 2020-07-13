@@ -14,7 +14,7 @@
 <link href="<%=path%>/css/9.check_exit.css" rel="stylesheet"
 	type="text/css">
 
-<article style="padding-top: 220px; margin: 0px 25%;">
+<article style="padding-top: 220px; margin: 0px 25%; text-align: center;">
 	<img src="<%=path%>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
 	<h2>회원탈퇴</h2>
 	<form action="check.do" method="post">

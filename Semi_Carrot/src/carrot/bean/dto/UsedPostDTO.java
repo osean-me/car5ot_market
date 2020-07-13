@@ -19,6 +19,7 @@ public class UsedPostDTO {
 	private long member_img_no;
 	private long addr_no;
 	private String post_state;
+	private long board_no;
 
 	public UsedPostDTO(ResultSet rs) throws SQLException {
 		this.setPost_no(rs.getLong("post_no"));
@@ -33,6 +34,7 @@ public class UsedPostDTO {
 		this.setMember_img_no(rs.getLong("member_img_no"));
 		this.setAddr_no(rs.getLong("addr_no"));
 		this.setPost_state(rs.getString("post_state"));
+		this.setBoard_no(rs.getLong("board_no"));
 	}
 
 	public long getPost_no() {
@@ -42,6 +44,7 @@ public class UsedPostDTO {
 	public void setPost_no(long post_no) {
 		this.post_no = post_no;
 	}
+
 
 	public String getPost_title() {
 		return post_title;
@@ -103,9 +106,11 @@ public class UsedPostDTO {
 		return member_no;
 	}
 
+
 	public void setMember_no(long member_no) {
 		this.member_no = member_no;
 	}
+
 
 	public long getMember_img_no() {
 		return member_img_no;
@@ -114,6 +119,7 @@ public class UsedPostDTO {
 	public void setMember_img_no(long member_img_no) {
 		this.member_img_no = member_img_no;
 	}
+
 
 	public long getAddr_no() {
 		return addr_no;
@@ -129,6 +135,15 @@ public class UsedPostDTO {
 
 	public void setPost_state(String post_state) {
 		this.post_state = post_state;
+	}
+
+	public long getBoard_no() {
+		return board_no;
+	}
+
+
+	public void setBoard_no(long board_no) {
+		this.board_no = board_no;
 	}
 
 	public UsedPostDTO() {

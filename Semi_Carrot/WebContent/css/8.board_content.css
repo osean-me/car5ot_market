@@ -8,6 +8,11 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 }
 
 
+.cursor:hover{
+	cursor: pointer;
+	}
+
+
 /* aritcle 기본 폼 */
 #used-post-content-form {
 	width: auto;
@@ -312,3 +317,4 @@ textarea {
 	resize: none;
 	border: none;
 }
+

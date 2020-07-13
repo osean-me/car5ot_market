@@ -14,7 +14,8 @@
 	<%
 		String path = request.getContextPath();
 			
-			int post_no = Integer.parseInt(request.getParameter("post_no"));
+			long post_no = Long.parseLong(request.getParameter("post_no")); 
+
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
 			
@@ -31,7 +32,7 @@
 			AddrDTO addto = addao.get(updto.getAddr_no());
 			
 			
-			//게시글 조회수 중복 방지 코드 만들어야함 ★★
+			//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
 			MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
 			UsedPostDAO updaoo = new UsedPostDAO();
 			updaoo.plusViewCount(post_no, 1);
@@ -91,17 +92,17 @@
 				<div>
 				<div class="float-box float-left">
 					<div class="left-item33">
-						<button class="like-button">♥ 찜 <%=updto.getPost_like() %></button>
+						<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
 					</div>
 					<%if(isAdmin || isMine){ %>
 					<!-- 수정 삭제 버튼은 "내 댓글" 또는 "관리자"인 경우만 표시 -->
 					<div class="left-item33">
 						<a href="used_post_edit.jsp?post_no=<%=post_no%>">
-						<button class="edit-button">수정</button>
+						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
 						</a>
 					</div>
 					<div class="left-item33">
-						<button class="delete-button">삭제</button>
+						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
 					</div>
 					<%} %>
 					</div>

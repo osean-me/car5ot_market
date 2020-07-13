@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -37,8 +39,18 @@
 				</form>
 			</div>
 			<div class="sign">
-				<%if(mdto != null) { %>
-					<img src="<%=path %>/img/user_icon.png" class="user-icon">
+				<%if(mdto != null) {
+					ProfileImgDAO pidao = new ProfileImgDAO();
+					ProfileImgDTO pidto = pidao.get(mdto.getMember_no());
+				 %>
+					<%if(pidto != null) {%>
+						<!-- 회원 이미지가 있을 때  -->
+						<%System.out.println(pidto.getMember_img_no()); %>
+						<img alt="<%=mdto.getMember_nick() %>" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidto.getMember_img_no()%>" class="user-icon">
+					<%} else { %>
+						<!-- 회원 이미지가 없을 때 -->
+						<img src="<%=path %>/img/user_icon.png" class="user-icon">
+					<%} %>
 				<%} %>
 				<ul>
 					<%if(mdto == null) { %>

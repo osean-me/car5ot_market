@@ -1,5 +1,10 @@
 package carrot.bean.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class PromotionPostDTO {
 
    private long post_no;
@@ -14,6 +19,21 @@ public class PromotionPostDTO {
    private long member_no;
    private long member_img_no;
    private long addr_no;
+   
+	public PromotionPostDTO(ResultSet rs) throws SQLException{
+		this.setPost_no(rs.getLong("post_no"));
+		this.setPost_title(rs.getString("post_title"));
+		this.setPost_content(rs.getString("post_content"));
+		this.setPost_price(rs.getLong("post_price"));
+		this.setPost_date(rs.getString("post_date"));
+		this.setPost_phone(rs.getString("post_phone"));
+		this.setPost_view(rs.getLong("post_view"));
+		this.setPost_like(rs.getLong("post_like"));
+		this.setPromotion_cate_num(rs.getLong("promotion_cate_num"));
+		this.setMember_no(rs.getLong("member_no"));
+		this.setMember_img_no(rs.getLong("member_img_no"));
+		this.setAddr_no(rs.getLong("addr_no"));
+	}
    
    public long getPost_no() {
       return post_no;
@@ -90,6 +110,7 @@ public class PromotionPostDTO {
    public PromotionPostDTO() {
       super();
    }
+ 
    
 }
 

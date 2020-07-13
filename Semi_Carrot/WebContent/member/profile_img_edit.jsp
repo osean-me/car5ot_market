@@ -17,6 +17,7 @@
 	padding: 0px;
 	width: 300px;
 	height: 350px;
+	text-align: center;
 }
 
 #thumb {
@@ -44,7 +45,8 @@ input[type=submit] {
 </head>
 <body>
 	<div>
-		<form action="edit_profile.do" method="post" enctype="multipart/form-data">
+		<form action="edit_profile.do" method="post"
+			enctype="multipart/form-data">
 
 			<div id="thumb">
 				<img src="../img/logo_icon.png" alt="profile_img">

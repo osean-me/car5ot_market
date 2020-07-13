@@ -20,6 +20,8 @@
 
 	MemberDAO mdao = new MemberDAO();
 	
+	MemberDTO loginMember = (MemberDTO)session.getAttribute("memberinfo");
+	
 	long member_no = Long.parseLong(request.getParameter("no"));
 
 	MemberDTO mdto = mdao.get(member_no);
@@ -97,14 +99,18 @@
                            	<label id="profile-edit" for="profile-check">
                           		<input type="checkbox" id="profile-check" class="profile-check" onchange="profileImgButton();">
                            		<span class="profileimg-button">
-                           			<%if(member_img_no != null) { %>
-                           				<!-- 회원 이미지가 있을 경우 -->
-                           				<a href="profile_img_edit.jsp?no=<%=member_no %>&member_img_no=<%=member_img_no %>" onclick="window.open(this.href, '_blank', toolbars=no,scrollbars=no'); return false;" id="profile-img">수정</a>
-                           				<a href="delete_profile.do?member_img_no=<%=member_img_no%>">삭제</a>
-                           			<%} else { %>
-                           				<!-- 회원 이미지가 없을 경우 -->
-                           				<a href="profile_img_create.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=270px,height=350px,toolbars=no,scrollbars=no'); return false;" id="profile-img">추가</a>
-                           			<%} %>
+	                           		<%if(member_no == loginMember.getMember_no()) { %>
+	                           			<!-- 마이페이지 회원이 자신일 경우 -->
+	                           		
+	                           			<%if(member_img_no != null) { %>
+	                           				<!-- 회원 이미지가 있을 경우 -->
+	                           				<a href="profile_img_edit.jsp?no=<%=member_no %>&member_img_no=<%=member_img_no %>" onclick="window.open(this.href, '_blank', 'width=305px,height=400px,toolbars=no,scrollbars=no'); return false;" id="profile-img">수정</a>
+	                           				<a href="delete_profile.do?member_img_no=<%=member_img_no%>">삭제</a>
+	                           			<%} else { %>
+	                           				<!-- 회원 이미지가 없을 경우 -->
+	                           				<a href="profile_img_create.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=305px,height=400px,toolbars=no,scrollbars=no'); return false;" id="profile-img">추가</a>
+	                           			<%} %>
+	                           		<%} %>	
                            		</span>
                            	</label>
                         </div>

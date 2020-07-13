@@ -105,7 +105,7 @@
                         <div id="mypage-top-left-down">
                             <div>
                                 <a href="change_info.jsp?member_no=<%=member_no%>"><button>회원정보 수정</button></a>
-                                <a href=""><button>회원 탈퇴</button></a>
+                                <a href="gone.do"><button>회원 탈퇴</button></a>
                             </div>
                         </div>
                     </div>

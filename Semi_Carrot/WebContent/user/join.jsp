@@ -17,9 +17,6 @@
             		<img src="<%=path %>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
             	</div>
                 <div class="email-form">
-                <%
-                	
-                %>
                     <input type="text" name="email_id" placeholder="이메일" id="email" required="required">
                     <span style="color: #7b7b7b;">@</span>
                     <span class="a"></span>
@@ -30,7 +27,7 @@
                         <option value="@daum.net">daum.net</option>
                         <option value="@kakao.com">kakao.com</option>
                         <option value="@nate.com">nate.com</option>
-                        <option id="writeEmail">직접 입력</option>
+                        <option value="직접 입력" id="writeEmail">직접 입력</option>
                     </select>
                 </div>
                 <div id="idInfo"></div>

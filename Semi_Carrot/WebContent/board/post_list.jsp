@@ -14,6 +14,12 @@
 	
 }
 
+#used-post-list-form {
+	width: auto;
+	margin: 0px 15%;
+	min-width: 1000px;
+}
+
 .detail {
 	
 }
@@ -27,7 +33,7 @@
 	margin-bottom: 10px;
 }
 
-.product_photo>img {
+.product_photo>a>img {
 	width: 220px;
 	height: 220px;
 }
@@ -105,7 +111,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px;">
+<article style="padding-top: 200px;" id="used-post-list-form">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">중고거래</span> 상품목록
@@ -127,7 +133,7 @@
 				%>
 				<div class="product">
 					<div class="product_photo">
-						<img src="../img/ㅎㅎ.jpg">
+						<a href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>"><img src="../img/ㅎㅎ.jpg"></a>
 					</div>
 					<div class="product_title">
 						<div class="hideText">

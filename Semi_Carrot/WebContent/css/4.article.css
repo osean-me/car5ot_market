@@ -103,6 +103,7 @@ article {
 	flex-direction: column;
 	flex: 1;
 	width: 20%;
+	max-width: 138px;
 	height: 100%;
 	/* 	border: 1px solid red; */
 	margin: 0px 15px;
@@ -117,6 +118,7 @@ article {
 #img {
 	flex: 7;
 	height: 70%;
+	
 }
 
 #img>img {

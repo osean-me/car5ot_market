@@ -49,6 +49,7 @@
 	border-bottom-left-radius: 15px;
 	background-color: bisque;
 }
+
 #mypage-top-left-up {
 	height: 75%;
 }
@@ -96,11 +97,10 @@
 }
 
 /* 마이페이지 top-right 영역 */
-
 #mypage-top-right {
 	border-top-right-radius: 15px;
 	border-bottom-right-radius: 15px;
-	background-color: rgba(128,128,128,0.10);
+	background-color: rgba(128, 128, 128, 0.10);
 }
 
 #mypage-top-right-up {
@@ -223,16 +223,35 @@
 	height: 85%;
 }
 
+/* 자기 소개 영역 */
+#intro-content {
+	text-align: left;
+}
+
 #intro-bottom>form {
 	height: 100%;
 }
 
-#intro-bottom>form>textarea {
-	width: 100%;
-	height: 80%;
+#write-intro {
+	text-align: right;
 }
 
-#intro-bottom>form>textarea {
+#write-intro>a>button, #intro-bottom>form>input[type=submit] {
+	margin-right: 5%;
+	width: 30px;
+	height: 30px;
+	border: none;
+	background-color: transparent;
+	background-image: url(../img/pencil.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: 0px 0px;
+	cursor: pointer;
+}
+
+#intro-bottom>form>textarea, #intro-content {
+	width: 100%;
+	height: 80%;
 	font-size: 15px;
 	border: 1px solid transparent;
 	background-color: transparent;
@@ -241,13 +260,40 @@
 	color: gray;
 }
 
+#intro-bottom>form>textarea {
+	margin-top: 15px;
+	width: 95%;
+	border-radius: 15px;
+	height: 70%;
+	padding: 0px 20px;
+	background-color: rgba(300, 200, 100, 0.45);
+}
+
 #intro-bottom>form>input[type=submit] {
-	background-color: transparent;
-	border: 1px solid transparent;
-	border-radius: 10%;
-	box-shadow: 3px 3px 3px rgba(128, 128, 128, 0.45);
-	color: gray;
 	float: right;
-	margin-top: 10px;
-	margin-right: 20px;
+}
+
+#profile-img {
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	position: absolute;
+	margin-top: 185px;
+	margin-left: -50px;
+	border-radius: 100%;
+	border: 1px solid transparent;
+	background-color: rgba(128, 128, 128, 0.60);
+}
+
+#profile-img>button {
+	width: 40px;
+	height: 40px;
+	border: 1px solid transparent;
+	border-radius: 100%;
+	background-color: transparent;
+	background-image: url(../img/profile_edit.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: 4px 4px;
+	cursor: pointer;
 }

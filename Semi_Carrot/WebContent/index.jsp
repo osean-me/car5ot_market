@@ -9,42 +9,46 @@
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
+
+// 회원 번호 불러오기
+MemberDAO mdao = new MemberDAO();
+MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo");
+
+// 최신 중고 게시물 불러오기
+UsedPostDAO updao = new UsedPostDAO();
+List<UsedPostDTO> list = updao.newUsedPost();
+String address = null;
+String base = null;
+
+// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
+if (mdto != null) {
+	// 최신 회원 정보 얻기
+
+	MemberDTO member = mdao.get(mdto.getMember_no());
+
+	AddrDAO adao = new AddrDAO();
+	AddrDTO adto = adao.get(member.getMember_addr_no());
 	
-	// 회원 번호 불러오기
-	MemberDAO mdao = new MemberDAO();
-	MemberDTO mdto = (MemberDTO)session.getAttribute("memberinfo");
+	// 자바스크립트로 보내기 위한 주소 변수
+	address = adto.getAddr_state() + " " + adto.getAddr_city() + " " + adto.getAddr_base();
+	base = adto.getAddr_base();
 	
-	// 최신 중고 게시물 불러오기
-	UsedPostDAO updao = new UsedPostDAO();
-	List<UsedPostDTO> list = updao.newUsedPost();
-	
-	// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
-	if(mdto != null) {
-		// 최신 회원 정보 얻기
-		
-		MemberDTO member = mdao.get(mdto.getMember_no());
-		
-		AddrDAO adao = new AddrDAO();
-		AddrDTO adto = adao.get(member.getMember_addr_no());
-		
-		list = updao.newUsedPost(member.getMember_addr_no());
-		
-		if(list.isEmpty()) {
-			
-			list = updao.newUsedPost();
-			
-		}
-		
+	list = updao.newUsedPost(member.getMember_addr_no());
+
+	if (list.isEmpty()) {
+
+		list = updao.newUsedPost();
+
 	}
-	
+
+}
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
 <!-- Java Script -->
 <script src="<%=path%>/js/swiper.min.js"></script>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fda16046fdbb798b0eb5ce18ac2adeb0&libraries=services"></script>
 <script type="text/javascript" src="<%=path%>/js/index.js"></script>
 <!-- css -->
 <link href="<%=path%>/css/swiper.min.css" type="text/css"
@@ -53,6 +57,10 @@
 	rel="stylesheet">
 <link href="<%=path%>/css/4.article.css" type="text/css"
 	rel="stylesheet">
+
+<!-- 회원 주소 데이터 자바스크립트로 보내기 -->
+<input type="hidden" value="<%=address %>" id="member_address">
+<input type="hidden" value="<%=base %>" id="member_base">
 
 <aside>
 	<!-- 이미지 슬라이더 영역 -->
@@ -67,7 +75,8 @@
 				</div>
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_2.png">
-				</div>s
+				</div>
+				s
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_3.png">
 				</div>
@@ -96,55 +105,57 @@
 							</div>
 							<div id="banner-1-right-bottom">
 								<div class="layer">
-								<%
-									int count = 0;
-									for(UsedPostDTO newpost : list) { 
-										if(count >= 5) {
+									<%
+										int count = 0;
+									for (UsedPostDTO newpost : list) {
+										if (count >= 5) {
 											break;
 										}
-								%> 
+									%>
 									<div class="hot-product">
 										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
+											<img src="<%=path%>/img/logo_icon.png">
 										</div>
-										<div id="title"><%=newpost.getPost_title().substring(0, 10) %> ..</div>
-										<div id="like"><%=newpost.getPost_like() %></div>
+										<div id="title"><%=newpost.getPost_title()%>
+											..
+										</div>
+										<div id="like"><%=newpost.getPost_like()%></div>
 									</div>
-								<%
+									<%
 										count++;
 									}
-									
-								%>
-							</div>
-							<div class="layer">
-								<%
-									int count2 = 0;
-									for(UsedPostDTO newpost : list) { 
-										if(count2 >= 10) {
+									%>
+								</div>
+								<div class="layer">
+									<%
+										int count2 = 0;
+									for (UsedPostDTO newpost : list) {
+										if (count2 >= 10) {
 											break;
 										}
-										
-										if(count2 > 4) {
-								%> 
+
+										if (count2 > 4) {
+									%>
 									<div class="hot-product">
 										<div id="img">
-											<img src="http://placeimg.com/100/100/tech">
+											<img src="<%=path%>/img/logo_icon.png">
 										</div>
-										<div id="title"><%=newpost.getPost_title().substring(0, 10) %> ..</div>
-										<div id="like"><%=newpost.getPost_like() %></div>
+										<div id="title"><%=newpost.getPost_title()%>
+											..
+										</div>
+										<div id="like"><%=newpost.getPost_like()%></div>
 									</div>
-								<%
+									<%
 										}
-										count2++;
+									count2++;
 									}
-									
-								%>	
+									%>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="swiper-slide" id="slide-2">
+				<div class="swiper-slide" id="slide-2">
 					<div id="banner-2">
 						<div id="banner-2-top">
 							<span>우리 동네의 멋진 가게들!</span>
@@ -228,7 +239,7 @@
 					</div>
 				</div>
 			</div>
-						<div class="swiper-pagination"></div>
+			<!-- <div class="swiper-pagination"></div> -->
 		</div>
 	</div>
 </article>

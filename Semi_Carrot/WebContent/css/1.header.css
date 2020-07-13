@@ -7,7 +7,7 @@
 	box-sizing: border-box;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus, select:focus, textarea:focus, button:focus {
 	outline: none;
 }
 

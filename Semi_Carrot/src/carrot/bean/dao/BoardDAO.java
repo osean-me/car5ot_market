@@ -56,9 +56,9 @@ public class BoardDAO {
 		ResultSet rs = ps.executeQuery();
 
 		String[] result = new String[3];
-		while(rs.next()) {
-			
-			result[rs.getRow()-1] = rs.getString(1);
+		while (rs.next()) {
+
+			result[rs.getRow() - 1] = rs.getString(1);
 		}
 
 		con.close();
@@ -92,6 +92,7 @@ public class BoardDAO {
 	}
 
 	// 게시판 별 게시글 가져오기
+	// 게시판 별 게시글 가져오기
 	public List<Object> getPostList(String post_board_name, long member_no) throws Exception {
 		Connection con = getConnection();
 
@@ -108,9 +109,9 @@ public class BoardDAO {
 		String name = post_board_name;
 
 		List<Object> list = new ArrayList<Object>();
-		
+
 		Object postDTO;
-		
+
 		while (rs.next()) {
 
 			if (name.equals("USED_POST")) {

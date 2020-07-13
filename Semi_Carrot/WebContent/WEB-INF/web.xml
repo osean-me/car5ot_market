@@ -7,6 +7,11 @@
 	 		<welcome-file>index.jsp</welcome-file>
 	 </welcome-file-list>
 	 
+<!-- 필터 설정 -->	
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>carrot.filter.EncodingFilter</filter-class>
+	</filter>	 
 	 
 <!-- 에러 페이지 설정 -->
 	<error-page>
@@ -21,6 +26,6 @@
 		<error-code>500</error-code>
 		<location>/error/500.jsp</location>
 	</error-page>
-	
-	
+
+
 </web-app>

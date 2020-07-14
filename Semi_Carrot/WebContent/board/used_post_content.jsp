@@ -18,6 +18,9 @@
 	pageEncoding="UTF-8"%>
 	<%
 		String path = request.getContextPath();
+	
+		MemberDTO login = (MemberDTO) session.getAttribute("memberinfo");
+		long login_member = login.getMember_no();
 		
 		long post_no = Long.parseLong(request.getParameter("post_no")); 
 
@@ -82,7 +85,7 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 
-<article style="padding-top: 220px" id="used-post-content-form">
+<article style="padding-top: 220px;" id="used-post-content-form">
 	<div class="padding50">
 		<div class="float-box float-left">
 			<div class="left-item40">
@@ -192,7 +195,7 @@
 				<div class="padding-top40">
 					<p class="font20">댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=mdto.getMember_no() %>">
+						<input type="hidden" name="no" value="<%=login_member %>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
@@ -232,9 +235,9 @@
 						// 현재 시간과 작성 시간 비교 						
 						int compareTime = systime_s - replytime_s; 
 						System.out.println("작성 시간 초단위 : " + replytime_s);
-						System.out.println("비교 : " + compareTime);
+						System.out.println("비교 : " + compareTime);	
 						
-						MemberDTO replymember = mdao.get(rdto.getMember_no());
+						MemberDTO replymember;
 				%>
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
@@ -242,7 +245,15 @@
 						</div>
 						<div class="right-item90">
 							<div class="reply-nick-font">
-								<span><%=replymember.getMember_nick() %></span>
+								<%if(rdto.getMember_no() == 0) { %>						
+									<span>탈퇴한 회원</span>
+								<%
+									} else { 
+										replymember = mdao.get(rdto.getMember_no());
+								%>
+
+									<span><%=replymember.getMember_nick() %></span>
+								<%} %>
 								<%if(compareTime > 3600 || compareTime < 0) { %>
 									<span class="right-float gray-font"><%=rdto.getReply_date().substring(0, 10) %></span>
 								<%

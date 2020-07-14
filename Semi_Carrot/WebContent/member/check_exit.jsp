@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-
+	String member_no = request.getParameter("no");
 	String path = request.getContextPath();
 %>
 
@@ -16,11 +16,17 @@
 	
 <link href="<%=path%>/css/9.check_exit.css" rel="stylesheet"
 	type="text/css">
+	<%if(request.getParameter("failed")!=null) {%>
+		<script>
+			alert("비밀번호 전화번호가 일치하지 않습니다. 다시 입력해주세요.");
+		</script>
+	<%} %>
+	
 	<h2>회원탈퇴</h2>
-	<form action="gone.do" method="post">
+	<form action="gone.do" method="get">
 	
 		<div>
-		
+		<input type="hidden"name="member_no"value=<%=member_no %>>
 		<input id="pw"type="password" name="member_pw" placeholder="비밀번호를 입력해 주세요" required="required" maxlength="15"oninput="checkPw()">
 		</div>
 		 <div id="pwInfo"></div>
@@ -44,10 +50,5 @@
 			<input id="submit" type="submit" value="탈퇴하기">
 		</div>
 	</form>
-<%if(request.getParameter("error")!=null) {%>
-	<script>
-		alert("비밀번호 전화번호가 일치하지 않습니다. 다시 입력해주세요.");
-	</script>
-<%} %>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -12,27 +12,42 @@ import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.MemberDTO;
 
 
+
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/gone.do")
 public class ExitMemberServlet extends HttpServlet {
+	/**
+	 *
+	 */
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			// 파라미터로 받아온 데이터 변수
+			long member_no = Long.parseLong(req.getParameter("member_no"));
+			String member_pw = req.getParameter("member_pw");
+			String member_phone = req.getParameter("member_phone");
 			
-			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
-			long member_no = mdto.getMember_no();
-
 			MemberDAO mdao = new MemberDAO();
-			mdao.exitMember(member_no);
-		
-			req.getSession().removeAttribute("memberinfo");
+			MemberDTO check = mdao.get(member_no);
 			
-			resp.sendRedirect("login.jsp");
-
-		} catch (Exception e) {
+			if(!check.getMember_pw().equals(member_pw) || !check.getMember_phone().equals(member_phone)) {
+				
+				// 비밀번호나 핸드폰 번호가 다를 경우 다시 탈퇴 페이지로 보내라.
+				resp.sendRedirect(req.getContextPath() + "/member/check_exit.jsp?no=" + member_no + "&failed");
+				return;
+			}
+			
+			// 탈퇴 전 세션 삭제
+			req.getSession().removeAttribute("memberinfo");
+			// 탈퇴
+			mdao.exit(member_no);
+			
+			resp.sendRedirect(req.getContextPath());
+			
+		}
+		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
-
 	}
 }

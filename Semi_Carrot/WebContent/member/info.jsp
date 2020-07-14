@@ -117,7 +117,7 @@
                         <div id="mypage-top-left-down">
                             <div>
                                 <a href="change_info.jsp?no=<%=member_no%>"><button>회원정보 수정</button></a>
-                                <a href="check_exit.jsp?gone.do"><button>회원 탈퇴</button></a>
+                                <a href="check_exit.jsp?no=<%=member_no%>"><button>회원 탈퇴</button></a>
                                 
                             </div>
                         </div>

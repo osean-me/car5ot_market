@@ -332,22 +332,17 @@ public class MemberDAO {
 	}
 
 	// [8] 회원 탈퇴
-	public int exitMember(long member_no) throws Exception {
-
-		Connection con = getConnection();
-
-		String sql = "DELETE MEMBER WHERE MEMBER_NO = ?";
-
-		PreparedStatement ps = con.prepareStatement(sql);
-
-		ps.setLong(1, member_no);
-
-		int result = ps.executeUpdate();
-
-		con.close();
-
-		return result;
-	}
+	//탈퇴 메소드
+		public void exit(long member_no) throws Exception{
+			Connection con = getConnection();
+			
+			String sql = "DELETE member WHERE member_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, member_no);
+			ps.execute();
+			
+			con.close();
+		}
 
 	// [8] 관리자가 회원 탈퇴 (long>string으로 변환)
 	public int exitMember(String member_id) throws Exception {

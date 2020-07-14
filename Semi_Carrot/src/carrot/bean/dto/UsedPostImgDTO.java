@@ -1,5 +1,8 @@
 package carrot.bean.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class UsedPostImgDTO {
 	private long post_img_no;
 	private long post_no;
@@ -7,6 +10,13 @@ public class UsedPostImgDTO {
 	private String post_img_type;
 	private long post_img_size;
 	
+	public UsedPostImgDTO(ResultSet rs) throws SQLException {
+		this.setPost_img_no(rs.getLong("post_img_no"));
+		this.setPost_no(rs.getLong("post_no"));
+		this.setPost_img_name(rs.getString("post_img_name"));
+		this.setPost_img_type(rs.getString("post_img_type"));
+		this.setPost_img_size(rs.getLong("post_img_size"));
+	}
 	public long getPost_no() {
 		return post_no;
 	}
@@ -40,6 +50,6 @@ public class UsedPostImgDTO {
 	public UsedPostImgDTO() {
 		super();
 	}
-
+	
 	
 }

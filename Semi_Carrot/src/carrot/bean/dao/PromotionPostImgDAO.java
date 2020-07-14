@@ -10,10 +10,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import carrot.bean.dto.UsedPostImgDTO;
+import carrot.bean.dto.PromotionPostImgDTO;
 
-public class UsedPostImgDAO {
-
+public class PromotionPostImgDAO {
 private static DataSource src;
 	
 	static{
@@ -46,10 +45,10 @@ private static DataSource src;
 	}
 	
 	// 저장 메소드 (중고거래 게시글)
-	public void save(UsedPostImgDTO updto) throws Exception {
+	public void save(PromotionPostImgDTO updto) throws Exception {
 		Connection con = getConnection();
 		
-		String sql = "INSERT INTO used_post_img VALUES(?,?,?,?,?)";
+		String sql = "INSERT INTO promotion_post_img VALUES(?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, updto.getPost_img_no());
 		ps.setLong(2, updto.getPost_no());
@@ -59,24 +58,6 @@ private static DataSource src;
 		ps.execute();
 		
 		con.close();
-	}
-	
-	public UsedPostImgDTO get(long post_img_no) throws SQLException {
-		Connection con = getConnection();
-		String sql = "SELECT * FROM used_post_img WHERE post_img_no = ? ";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setLong(1, post_img_no);
-		ResultSet rs = ps.executeQuery();
-		
-		UsedPostImgDTO upidto;
-		if(rs.next()) {
-			upidto = new UsedPostImgDTO(rs);
-		}
-		else {
-			upidto=null;
-		}
-		con.close();
-		return upidto;
 	}
 	
 }

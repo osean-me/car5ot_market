@@ -13,7 +13,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-		<!-- 테스트필터는 로그인필터 전에 배치해야 한다--> 
+		<!-- 테스트필터는 로그인필터 전에 배치해야 한다-->
 	<filter>
 		<filter-name>testLoginFilter</filter-name>
 		<filter-class>carrot.filter.TestLoginFilter</filter-class>
@@ -22,6 +22,7 @@
 		<filter-name>testLoginFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	 
 	
 	
 	<!-- 대문 설정 -->

@@ -246,7 +246,7 @@
 
 						</div>
 					</div>
-					
+			
 				</div>
 					<div class="left-font manner-margin ">
 						<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">

@@ -1,12 +1,16 @@
+<%@page import="carrot.bean.dto.PromotionBoardDTO"%>
+<%@page import="carrot.bean.dao.PromotionBoardDAO"%>
+<%@page import="carrot.bean.dto.PromotionPostDTO"%>
+<%@page import="carrot.bean.dao.PromotionPostDAO"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
 <%@page import="carrot.bean.dao.AddrDAO"%>
-<%@page import="carrot.bean.dto.UsedBoardDTO"%>
-<%@page import="carrot.bean.dao.UsedBoardDAO"%>
+<%@page import="carrot.bean.dto.PromotionPostDTO"%>
+<%@page import="carrot.bean.dao.PromotionPostDAO"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
-<%@page import="carrot.bean.dao.UsedPostDAO"%>
+<%@page import="carrot.bean.dao.PromotionPostDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>
 <%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -16,29 +20,29 @@
 			
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
 
-			UsedPostDAO updao = new UsedPostDAO();
-			UsedPostDTO updto = updao.get(post_no);
+			PromotionPostDAO ppao = new PromotionPostDAO();
+			PromotionPostDTO ppdto = ppao.get(post_no);
 			
 			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 			MemberDAO mdao = new MemberDAO();
-			MemberDTO mdto = mdao.get(updto.getMember_no());
+			MemberDTO mdto = mdao.get(ppdto.getMember_no());
 			
 			//"카테고리 이름" 뽑아내기위해
-			UsedBoardDAO ubdao = new UsedBoardDAO();
-			UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
+			PromotionBoardDAO pbdao = new PromotionBoardDAO();
+			PromotionBoardDTO pbdto = pbdao.get(ppdto.getPromotion_cate_num());
 			
 			//"주소 시군구동" 뽑아내기위해
 			AddrDAO addao = new AddrDAO();
-			AddrDTO addto = addao.get(updto.getAddr_no());
+			AddrDTO addto = addao.get(ppdto.getAddr_no());
 			
 			
 			//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
 			MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
-			UsedPostDAO updaoo = new UsedPostDAO();
-			updaoo.plusViewCount(post_no, 1);
+			PromotionPostDAO ppdaoo = new PromotionPostDAO();
+			ppdaoo.plusViewCount(post_no, 1);
 			
 			//내글
-			boolean isMine= memberinfo.getMember_no() == updto.getMember_no();
+			boolean isMine= memberinfo.getMember_no() == ppdto.getMember_no();
 			//관리자
 			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
 			
@@ -57,12 +61,12 @@
 			<div class="right-item60 left-font padding-left35">
 				<!-- 글 제목 -->
 				<div class="font23 padding25">
-					<span><%=updto.getPost_title() %></span>
+					<span><%=ppdto.getPost_title() %></span>
 				</div>
 				<!-- 상품 금액 -->
 				<div class="item padding25">
 					<!-- 3자리마다 콤마 찍기 -->
-					<%long price = updto.getPost_price();
+					<%long price = ppdto.getPost_price();
 					String commaNum = NumberFormat.getInstance().format(price);
 					%>
 					<span class="font45"><%=commaNum %></span> <span class=font20>원</span>
@@ -71,18 +75,18 @@
 					<hr>
 				</div>
 				<div class="item font17 gray-font padding25">
-					<span class="padding-right05">♥ <%=updto.getPost_like() %></span> <span
-						class="short-border">조회수 <%=updto.getPost_view() %></span> 
-						<span class="padding-left05"><%=updto.getUsedPost_autotime()%></span> 
+					<span class="padding-right05">♥ <%=ppdto.getPost_like() %></span> <span
+						class="short-border">조회수 <%=ppdto.getPost_view() %></span> 
+						<span class="padding-left05"><%=ppdto.getPromotionPost_autotime()%></span> 
 						<span class="right-float">☎신고하기</span>
 				</div>
 				<div class="item font15 padding15">
 					<div class="padding15">
-						<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=ubdto.getUsed_cate_title() %></span>
+						<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=pbdto.getPromotion_cate_title() %></span>
 					</div>
 					<div class="padding15">
-						<span class="gray-font">&middot; 상품상태</span><span
-							class="purple-font">&emsp;<%=updto.getPost_state() %></span>
+						<span class="gray-font transparent-font">&middot; 상품상태</span><span
+							class="purple-font transparent-font">&emsp;</span>
 					</div>
 					<div class="padding15">
 						<span class="gray-font">&middot; 거래지역</span><span
@@ -92,7 +96,7 @@
 				<div>
 				<div class="float-box float-left">
 					<div class="left-item33">
-						<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
+						<button class="like-button cursor">♥ 찜 <%=ppdto.getPost_like() %></button>
 					</div>
 					<%if(isAdmin || isMine){ %>
 					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
@@ -153,7 +157,7 @@
 				</div>
 				<hr>
 				<div class="padding-top40 padding40 product-info-border ">
-					<p class="font18"><%=updto.getPost_content() %></p>
+					<p class="font18"><%=ppdto.getPost_content() %></p>
 				</div>
 				<hr>
 				<div class="padding-top40">
@@ -225,28 +229,34 @@
 			</div>
 			
 			<div class="right-item34  padding-right30 padding-left30 ">
-				<div class="padding15 left-font">
+				<div class="padding15 left-font ">
 					<p class=" font23">상점정보</p>
 				</div>
 				<hr>
 				<div class="padding-top30">
 					<div class="float-box float-left">
-						<div class="left-item25  pic-align left-font">
+						<div class="left-item25   padding-top10 pic-align left-font">
 							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
 						</div>
 						<div class="right-item75">
 								<div class="top-margin10 left-font">
 									<!-- 작성자 -->
-									<%if(updto.getMember_no( ) != 0){ %>
+									<div class="padding15 ">
+									<%if(ppdto.getMember_no( ) != 0){ %>
 										<p class="font20"> <%=mdto.getMember_nick() %></p>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>
+									</div>
+									<div class="dimgray-font">
+										<span>☎</span>
+										<span>010.1234.1234</span>
+									</div>
 								</div>
 
 						</div>
 					</div>
-			
+					
 				</div>
 					<div class="left-font manner-margin ">
 						<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">

@@ -42,6 +42,12 @@
 			//관리자
 			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
 			
+			
+			////////////////////////////////
+			///			댓글 기능			///
+			//////////////////////////////
+			// 댓글 등록
+			
 	%>
 	
 	
@@ -97,9 +103,8 @@
 					<%if(isAdmin || isMine){ %>
 					<!-- 수정 삭제 버튼은 "내 댓글" 또는 "관리자"인 경우만 표시 -->
 					<div class="left-item33">
-						<a href="used_post_edit.jsp?post_no=<%=post_no%>">
+						<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
 						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
-						</a>
 					</div>
 					<div class="left-item33">
 						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
@@ -158,21 +163,28 @@
 				<hr>
 				<div class="padding-top40">
 					<p class="font20">댓글</p>
-					<div class="reply-div-padding">
-						<div class="reply-border">
-						<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
-						</div>
-					</div>
-					<div class="reply-num-border">
-						<div class="float-box float-left">
-							<div class="left-item50">
-								<p class="font12 gray-font text-padding10">30 / 100</p>
-							</div>
-							<div class="left-item50 text-padding10">
-								<button class="right-float reply-button">☜등록</button>
+					<form action="write_reply.do" method="post">
+						<input type="hidden" name="no" value="<%=mdto.getMember_no() %>">
+						<input type="hidden" name="post_no" value="<%=post_no %>">
+						<input type="hidden" name="reply_table_name" value="USED_POST_REPLY">
+						<input type="hidden" name="reply_seq_name" value="USED_POST_REPLY_SEQ">
+						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>">
+						<div class="reply-div-padding">
+							<div class="reply-border">
+							<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
 							</div>
 						</div>
-					</div>
+						<div class="reply-num-border">
+							<div class="float-box float-left">
+								<div class="left-item50">
+									<p class="font12 gray-font text-padding10">30 / 100</p>
+								</div>
+								<div class="left-item50 text-padding10">
+									<input type="submit" class="right-float reply-button" value="☜등록">
+								</div>
+							</div>
+						</div>
+					</form>
 				</div>
 				
 			<div class="padding-top25 ">	

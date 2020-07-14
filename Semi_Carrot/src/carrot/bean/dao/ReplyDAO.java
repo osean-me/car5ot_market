@@ -93,7 +93,7 @@ public class ReplyDAO {
 
 		Connection con = getConnection();
 
-		String sql = "INSERT INTO #1 VALUES(? , ? , ? , ? , ? , ? , ? , SYSDATE);";
+		String sql = "INSERT INTO #1 VALUES(? , ? , ? , ? , ? , ? , ? , SYSDATE)";
 
 		sql = sql.replace("#1", reply_table_name);
 		

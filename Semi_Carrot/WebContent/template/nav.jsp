@@ -11,7 +11,9 @@
 <!-- css -->
 <link href="<%=path%>/css/2.nav.css" type="text/css" rel="stylesheet">
 <nav>
-	<img src="<%=path%>/img/menu.png" id="nav-icon" onclick="navSwitch();">
+	<div id="menu-area">
+		<img src="<%=path%>/img/menu.png" id="nav-icon" onclick="navSwitch();">
+	</div>
 	<div class="nav-menu">
 		<ul>
 			<li class="medium-menu"><a href="<%=path%>/board/used_post_list.jsp" class="category">동네 중고</a>

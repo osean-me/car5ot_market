@@ -176,5 +176,132 @@ public class UsedPostDAO {
 	      
 	      con.close();
 	   }
+	   // 회원 번호로 게시물 조회
+	   public List<UsedPostDTO> getMemberUsedPost(long member_no) throws Exception {
+	      Connection con = getConnection();
+
+	      String sql = "SELECT * FROM USED_POST WHERE MEMBER_NO = ?";
+
+	      PreparedStatement ps = con.prepareStatement(sql);
+
+	      ps.setLong(1, member_no);
+
+	      ResultSet rs = ps.executeQuery();
+
+	      List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+
+	      while (rs.next()) {
+	         UsedPostDTO updto = new UsedPostDTO(rs);
+
+	         list.add(updto);
+	      }
+
+	      con.close();
+
+	      return list;
+	   }
+	   
+	   // 메인 페이지 최신 중고 게시물 조회 1
+	   public List<UsedPostDTO> newUsedPost() throws Exception {
+	      Connection con = getConnection();
+	      
+	      String sql = "SELECT * FROM (SELECT ROWNUM RN, T.* FROM (SELECT A.* FROM USED_POST A LEFT OUTER JOIN ADDRESS B ON A.ADDR_NO = B.ADDR_NO ORDER BY A.POST_DATE DESC) T ) WHERE RN BETWEEN 1 AND 10";
+	      
+	      PreparedStatement ps = con.prepareStatement(sql);
+	      
+	      ResultSet rs = ps.executeQuery();
+	      
+	      List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+	      
+	      while(rs.next()) {
+	         UsedPostDTO updto = new UsedPostDTO(rs);
+	         
+	         list.add(updto);
+	      }
+	      
+	      con.close();
+	      
+	      return list;
+	   }
+
+	   // 메인 페이지 최신 중고 게시물 조회 2 (로그인일 경우)
+	   public List<UsedPostDTO> newUsedPost(long member_addr_no) throws Exception {
+	      Connection con = getConnection();
+
+	      String sql = "SELECT * FROM (SELECT ROWNUM RN, T.* FROM (SELECT A.* FROM USED_POST A LEFT OUTER JOIN ADDRESS B ON A.ADDR_NO = B.ADDR_NO WHERE A.ADDR_NO = ? ORDER BY A.POST_DATE DESC) T ) WHERE RN BETWEEN 1 AND 10";
+
+	      PreparedStatement ps = con.prepareStatement(sql);
+	      
+	      ps.setLong(1, member_addr_no);
+
+	      ResultSet rs = ps.executeQuery();
+
+	      List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+
+	      while (rs.next()) {
+	         UsedPostDTO updto = new UsedPostDTO(rs);
+	         
+	         list.add(updto);
+	      }
+	      
+	      con.close();
+	      
+	      return list;
+	   }
+	   
+	   // 회원 거주 지역 게시글 조회 
+	   public List<UsedPostDTO> memberLocalUsedPost(long member_addr_no) throws Exception {
+	      Connection con = getConnection();
+	      
+	      String sql = "SELECT * FROM USED_POST WHERE ADDR_NO = ? ORDER BY POST_DATE DESC";
+	      
+	      PreparedStatement ps = con.prepareStatement(sql);
+	      
+	      ps.setLong(1, member_addr_no);
+	      
+	      ResultSet rs = ps.executeQuery();
+	      
+	      List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+	      
+	      while(rs.next()) {
+	         UsedPostDTO updto = new UsedPostDTO(rs);
+	         
+	         list.add(updto);
+	      }
+	      
+	      con.close();
+	      
+	      return list;
+	      
+	   }
+	     
+	      //게시글 수정
+	      public void edit(UsedPostDTO updto) throws Exception{
+	         Connection con = getConnection();
+	         
+	         String sql="Update used_post SET post_title=?, used_cate_num=?,post_price=?,post_content=? where post_no=?";
+	         PreparedStatement ps=con.prepareStatement(sql);
+	         ps.setString(1, updto.getPost_title());
+	         ps.setLong(2, updto.getUsed_cate_num());
+	         ps.setLong(3, updto.getPost_price());
+	         ps.setString(4, updto.getPost_content());
+	         ps.setLong(5, updto.getPost_no());
+	         
+	         ps.execute();
+	         
+	         con.close();         
+	      }
+	      
+	      //게시글 삭제
+	      public void delete(long post_no)throws Exception{
+	         Connection con = getConnection();
+	         
+	         String sql="Delete used_post where post_no=?";
+	         PreparedStatement ps = con.prepareStatement(sql);
+	         ps.setLong(1, post_no);
+	         ps.execute();
+	         
+	         con.close();      
+	      }
 
 }

@@ -1,9 +1,13 @@
 package carrot.bean.dto;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class PromotionBoardDTO {
 	private long promotion_cate_num;
 	private String promotion_cate_title;
 	private long  board_no;
+	
 	public PromotionBoardDTO() {
 		super();
 	}
@@ -24,6 +28,12 @@ public class PromotionBoardDTO {
 	}
 	public void setBoard_no(long board_no) {
 		this.board_no = board_no;
+	}
+	
+	public PromotionBoardDTO(ResultSet rs)throws SQLException{
+		this.setPromotion_cate_num(rs.getLong("promotion_cate_num"));
+		this.setPromotion_cate_title(rs.getString("promotion_cate_title"));
+		this.setBoard_no(rs.getLong("board_no"));
 	}
 
 }

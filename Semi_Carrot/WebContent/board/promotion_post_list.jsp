@@ -150,7 +150,7 @@
                			%>
 						<%=commaNum%>원
 							<div class="product_time">
-								<%=dldto.getPost_autotime()%>							
+								<%=dldto.getPromotionPost_autotime()%>							
 							</div>
 						</div>
 						<hr class="hr_style">

@@ -1,6 +1,9 @@
 package carrot.bean.dto;
 
+import java.sql.ResultSet;
+
 public class CommunityPostDTO {
+
    private int post_no;
    private String post_title;
    private String post_content;
@@ -10,6 +13,7 @@ public class CommunityPostDTO {
    private long member_no;
    private long member_img_no;
    private long addr_no;
+   private long board_no;
 
    public int getPost_no() {
       return post_no;
@@ -66,8 +70,27 @@ public class CommunityPostDTO {
       this.addr_no = addr_no;
    }
    
-   public CommunityPostDTO() {
+   public long getBoard_no() {
+   return board_no;
+}
+public void setBoard_no(long board_no) {
+   this.board_no = board_no;
+}
+public CommunityPostDTO() {
       super();
    }
-}
 
+   public CommunityPostDTO(ResultSet rs) throws Exception {
+         this.setPost_no(rs.getInt("post_no"));
+         this.setPost_title(rs.getNString("post_title"));
+         this.setPost_content(rs.getNString("post_content"));
+         this.setPost_date(rs.getString("post_date"));
+         this.setPost_view(rs.getInt("post_view"));
+         this.setCommunity_cate_num(rs.getInt("community_cate_num"));
+         this.setMember_no(rs.getLong("member_no"));
+         this.setMember_img_no(rs.getLong("member_img_no"));
+         this.setAddr_no(rs.getLong("addr_no"));
+         this.setBoard_no(rs.getLong("board_no"));
+      }
+
+}

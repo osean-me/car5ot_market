@@ -61,5 +61,22 @@ private static DataSource src;
 		con.close();
 	}
 	
+	public UsedPostImgDTO get(long post_img_no) throws SQLException {
+		Connection con = getConnection();
+		String sql = "SELECT * FROM used_post_img WHERE post_img_no = ? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, post_img_no);
+		ResultSet rs = ps.executeQuery();
+		
+		UsedPostImgDTO upidto;
+		if(rs.next()) {
+			upidto = new UsedPostImgDTO(rs);
+		}
+		else {
+			upidto=null;
+		}
+		con.close();
+		return upidto;
+	}
 	
 }

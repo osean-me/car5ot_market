@@ -123,27 +123,22 @@ public class DetailListDTO {
 		this.addr_base = addr_base;
 	}
 	
-	public String getPost_time() { //시간
-//		String today="오늘";
-		return post_date.substring(11, 16);
-//		return today;
-	}
-	
-	public String getPost_day() { //날짜
-		return post_date.substring(0, 10);
-	}
-	
-	public String getPost_autotime() {
-
-		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		if(!(getPost_date().equals(today))) {//오늘 작성한 글이라면
-			return getPost_day();
-		}
-		else {//아니라면
-			return getPost_time();
-		}
-	}
-	
+	//작성시간 관련 메소드 추가
+		 public String getUsedPost_time() {
+			 return post_date.substring(11,16);
+		 }
+		 public String getUsedPost_day() {
+			 return post_date.substring(0,10);
+		 }
+		 public String getUsedPost_autotime() {
+			 String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+			 if(getUsedPost_day().contentEquals(today)) {
+				 return getUsedPost_day();
+			 }
+			 else {
+				 return getUsedPost_time();
+			 }
+		 }
 	
 	public DetailListDTO(ResultSet rs) throws SQLException{
 	      this.setPost_no(rs.getLong("post_no"));

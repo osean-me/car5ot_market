@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import carrot.bean.dto.AddrDTO;
+import carrot.bean.dto.DetailList3DTO;
 import carrot.bean.dto.DetailListDTO;
 import carrot.bean.dto.UsedPostDTO;
 
@@ -113,6 +114,31 @@ public class UsedPostDAO {
 		List<DetailListDTO> list = new ArrayList<>();
 		while(rs.next()) {
 			DetailListDTO dldto = new DetailListDTO(rs);
+			
+			list.add(dldto);
+		}
+		
+		con.close();
+		return list;
+		
+	}
+	
+	// 주소 + 사진 포함 전체 목록 메소드 
+	public List<DetailList3DTO> getList3() throws Exception {
+		Connection con = getConnection();
+		//String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
+		String sql = 	"SELECT post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base " + 
+							"FROM used_post post " + 
+							"INNER JOIN " + 
+							"(SELECT post_no, min(post_img_no) post_img_no FROM used_post_img GROUP BY post_no) img " + 
+							"ON post.post_no = img.post_no	 " + 
+							"INNER JOIN address addr ON post.addr_no = addr.addr_no ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		List<DetailList3DTO> list = new ArrayList<>();
+		while(rs.next()) {
+			DetailList3DTO dldto = new DetailList3DTO(rs);
 			
 			list.add(dldto);
 		}

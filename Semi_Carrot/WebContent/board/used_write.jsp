@@ -185,6 +185,10 @@ margin-left:350px;
    margin:10px;
 }
 
+input+span {
+	color:red;
+}
+
 </style>
 <script>
    function calculateCount() {
@@ -222,6 +226,18 @@ margin-left:350px;
       }
    }
    
+   // 제목 2글자 이상 검사 
+   function checkTitle() {
+	   var title=document.querySelector(".post-title").value;
+	   var len = title.length;
+	   var isValid = len > 1;
+	   
+	   if(!isValid) {
+		   var span = document.querySelector(".post-title + span");
+		   span.textContent = "제목은 2글자 이상으로 작성하세요.";
+	   }
+   }
+   
 </script>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -234,8 +250,8 @@ margin-left:350px;
       </h1>
       <br><br>
       <hr class="hr_style2">
+ 		<hr>
       <br><br>
- 
       <!--  
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
@@ -268,7 +284,8 @@ margin-left:350px;
             <div class="used_title" style="list-style: none;">
                <div class="used_text">
                   제목 <span class="must">*</span> 
-                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." required>
+                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." onblur="checkTitle();">
+                  <span></span>
                </div>
             </div>
             <hr>

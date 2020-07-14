@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dto.DetailList3DTO"%>
 <%@page import="carrot.bean.dto.BoardDTO"%>
 <%@page import="carrot.bean.dto.DetailListDTO"%>
 <%@page import="java.text.NumberFormat"%>
@@ -29,7 +30,7 @@
 }
 
 .product_photo>img {
-	width: 220px;
+	width: 218px;
 	height: 220px;
 }
 
@@ -86,7 +87,7 @@
 
 }
 .sort_list {
-	margin-right:20px;
+	margin-right:5px;
 }
 
 .hr_style {
@@ -94,7 +95,11 @@
 	height: 1px;
 	background: lightgray;
 }
-
+.hr_style1 {
+	margin-bottom: 30px;
+	margin-top: 30px;
+	color: lightgray;
+}
 .move {
 	text-decoration: none;
 }
@@ -104,7 +109,7 @@
 <%
 	UsedPostDAO updao = new UsedPostDAO();
 	MemberDAO mdao = new MemberDAO();
-	List<DetailListDTO> list = updao.getList();
+	List<DetailList3DTO> list = updao.getList3();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -119,19 +124,21 @@
 
 			<div class="last"><a href="">최신순</a></div>
 		</div>
-		<br>
+		<hr class="hr_style1">
 	</div>
+	
 	<div align="left">
 		<div class="box">
 
 			<div class=detail>
 
 				<%
-					for (DetailListDTO dldto : list) {
+					for (DetailList3DTO dldto : list) {
 				%>
 				<div class="product">
 					<div class="product_photo">
-						<img src="../img/ㅎㅎ.jpg">
+					<% %>
+						<img src="showImg.do?post_img_no=<%=dldto.getPost_img_no()%>">
 					</div>
 					<div class="product_title">
 						<div class="hideText">
@@ -152,7 +159,7 @@
                			%>
 						<%=commaNum%>원
 							<div class="product_time">
-								<%=dldto.getPost_autotime()%>							
+								<%=dldto.getUsedPost_autotime()%>							
 							</div>
 						</div>
 						<hr class="hr_style">

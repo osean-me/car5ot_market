@@ -143,8 +143,8 @@
 					</div>
 					<div class="product_title">
 						<div class="hideText">
-						<a class="move" href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>">					
-							<font color="black"><%=dldto.getPost_title()%>
+							<a class="move" href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>" style="color: black;">					
+								<%=dldto.getPost_title()%>
 							</a>
 						</div>
 					</div>

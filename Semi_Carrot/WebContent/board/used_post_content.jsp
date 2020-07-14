@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
@@ -79,6 +81,9 @@
 
 		// 해당 게시글 댓글 존재 여부 확인
 		ReplyDAO rdao = new ReplyDAO();
+		
+		// 프로필 가지고 오기
+		ProfileImgDAO pidao = new ProfileImgDAO();
 	%>
 	
 	
@@ -225,7 +230,6 @@
 					for(ReplyDTO rdto : list) {
 						// 현재 시간과 댓글 작성일 계산
 						String replyDATE = rdto.getReply_date().substring(11);
-						System.out.println(replyDATE);
  						int replyhour = Integer.parseInt(replyDATE.substring(0, 2)) * 60;
 						int replyminute = Integer.parseInt(replyDATE.substring(3, 5)) * 60;
 						int replysecound = Integer.parseInt(replyDATE.substring(6, 8));
@@ -234,14 +238,20 @@
 						
 						// 현재 시간과 작성 시간 비교 						
 						int compareTime = systime_s - replytime_s; 
-						System.out.println("작성 시간 초단위 : " + replytime_s);
-						System.out.println("비교 : " + compareTime);	
 						
 						MemberDTO replymember;
 				%>
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
-							<img class="reply-pic-circle" src="<%=path %>/img/manner_sample.jpg">
+							<%if(rdto.getMember_no() != 0) {
+									if(pidao.getProfileImgNo(rdto.getMember_no()) != null) { %>
+										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(rdto.getMember_no())%>">
+									<%} else {%>
+										<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png">
+								<%} %>
+							<%} else { %>
+									<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png">
+							<%} %>		
 						</div>
 						<div class="right-item90">
 							<div class="reply-nick-font">
@@ -272,7 +282,7 @@
 					</div>
 					<hr>
 					<%} %>
-				<%} %>
+				<%} %>	
 				</div>
 			</div>
 			
@@ -284,12 +294,19 @@
 				<div class="padding-top30">
 					<div class="float-box float-left">
 						<div class="left-item25  pic-align left-font">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+							<%if(updto.getMember_no() != 0) { 
+									if(pidao.getProfileImgNo(updto.getMember_no()) != null) {%>
+										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(updto.getMember_no())%>" >
+									<%}%>
+										<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
+							<% 	} else { %>
+								<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
+							<%} %>
 						</div>
 						<div class="right-item75">
 								<div class="top-margin10 left-font">
 									<!-- 작성자 -->
-									<%if(updto.getMember_no( ) != 0){ %>
+									<%if(updto.getMember_no() != 0){ %>
 										<p class="font20"> <%=mdto.getMember_nick() %></p>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>

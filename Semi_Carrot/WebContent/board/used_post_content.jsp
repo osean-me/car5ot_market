@@ -113,33 +113,33 @@
 
 
 	<div>
-		<p class="font20 padding15 padding-top40">연관상품<p>
+		<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
 		
 		<div class="padding40">
 			<div class="float-box float-left">
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/nature">
-					<p class="font17">사진1</p>
+					<p class="font17 top-margin10">사진1</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/tech" >
-					<p class="font17">사진2</p>
+					<p class="font17 top-margin10">사진2</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/people" >
-					<p class="font17">사진3</p>
+					<p class="font17 top-margin10">사진3</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/animals" >
-					<p class="font17">사진4</p>
+					<p class="font17 top-margin10">사진4</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17">사진5</p>
+					<p class="font17 top-margin10">사진5</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17">사진6</p>
+					<p class="font17 top-margin10">사진6</p>
 				</div>
 			</div>
 		</div>

@@ -17,6 +17,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 #used-post-content-form {
 	width: auto;
 	margin: 0px 15%;
+	text-align: center;
 }
 
 .float-box:after {

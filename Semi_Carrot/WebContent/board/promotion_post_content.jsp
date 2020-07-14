@@ -56,7 +56,7 @@
 	<div class="padding50">
 		<div class="float-box float-left">
 			<div class="left-item40">
-				<img src="https://placeimg.com/300/250/tech" width="100%">
+				<img class="imagesize" src="https://placeimg.com/200/250/tech">
 			</div>
 			<div class="right-item60 left-font padding-left35">
 				<!-- 글 제목 -->
@@ -81,14 +81,11 @@
 						<span class="right-float">☎신고하기</span>
 				</div>
 				<div class="item font15 padding15">
-					<div class="padding15">
+					<div class="padding15 ">
 						<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=pbdto.getPromotion_cate_title() %></span>
 					</div>
-					<div class="padding15">
-						<span class="gray-font transparent-font">&middot; 상품상태</span><span
-							class="purple-font transparent-font">&emsp;</span>
-					</div>
-					<div class="padding15">
+
+					<div class="padding15 padding-top30">
 						<span class="gray-font">&middot; 거래지역</span><span
 							class="green-font">&emsp;<%=addto.getAddr_state() %> <%=addto.getAddr_city() %> <%=addto.getAddr_base() %></span>
 					</div>
@@ -117,33 +114,33 @@
 
 
 	<div>
-		<p class="font20 padding15 padding-top40">연관상품<p>
+		<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
 		
 		<div class="padding40">
 			<div class="float-box float-left">
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/nature">
-					<p class="font17">사진1</p>
+					<p class="font17 top-margin10">사진1</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/tech" >
-					<p class="font17">사진2</p>
+					<p class="font17 top-margin10">사진2</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/people" >
-					<p class="font17">사진3</p>
+					<p class="font17 top-margin10">사진3</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/animals" >
-					<p class="font17">사진4</p>
+					<p class="font17 top-margin10">사진4</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17">사진5</p>
+					<p class="font17 top-margin10">사진5</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17">사진6</p>
+					<p class="font17 top-margin10">사진6</p>
 				</div>
 			</div>
 		</div>

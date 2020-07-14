@@ -13,7 +13,7 @@ import carrot.bean.dto.MemberDTO;
 
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/member/check.do")
+@WebServlet(urlPatterns = "/member/checks.do")
 public class CheckServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

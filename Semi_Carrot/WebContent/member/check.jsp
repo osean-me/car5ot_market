@@ -13,7 +13,7 @@
     <div align ="center"style="padding-top:200px;">
     <h2> 비밀번호 를 입력 해 주세요</h2>
 
-    <form action="check.do"method="post">
+    <form action="checks.do"method="get">
     
     <input type="hidden"name="go"value=<%=go %>>
     <input type="password"name="member_pw"required>

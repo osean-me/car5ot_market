@@ -95,7 +95,7 @@
 						<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
 					</div>
 					<%if(isAdmin || isMine){ %>
-					<!-- 수정 삭제 버튼은 "내 댓글" 또는 "관리자"인 경우만 표시 -->
+					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
 					<div class="left-item33">
 						<a href="used_post_edit.jsp?post_no=<%=post_no%>">
 						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>

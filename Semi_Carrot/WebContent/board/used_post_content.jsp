@@ -265,7 +265,13 @@
 									<span><%=replymember.getMember_nick() %></span>
 								<%} %>
 								<%if(compareTime > 3600 || compareTime < 0) { %>
-									<span class="right-float gray-font"><%=rdto.getReply_date().substring(0, 10) %></span>
+									<span class="right-float gray-font">
+										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) { %>
+											오늘
+										<%} else { %>
+											<%=rdto.getReply_date().substring(0, 10) %>
+										<%} %>
+									</span>
 								<%
 									} else { 
 										int miniute = compareTime/60;

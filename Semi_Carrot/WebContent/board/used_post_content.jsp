@@ -169,7 +169,7 @@
 					<p class="font20">댓글</p>
 					<div class="reply-div-padding">
 						<div class="reply-border">
-						<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+						<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="110" rows="5"></textarea>
 						</div>
 					</div>
 					<div class="reply-num-border">

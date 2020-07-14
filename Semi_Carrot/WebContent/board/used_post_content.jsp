@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="carrot.bean.dto.ReplyDTO"%>
+<%@page import="carrot.bean.dao.ReplyDAO"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.text.NumberFormat"%>
@@ -14,33 +17,43 @@
 	<%
 		String path = request.getContextPath();
 			
-			long post_no = Long.parseLong(request.getParameter("post_no")); 
-
-			UsedPostDAO updao = new UsedPostDAO();
-			UsedPostDTO updto = updao.get(post_no);
+		long post_no = Long.parseLong(request.getParameter("post_no")); 
+		UsedPostDAO updao = new UsedPostDAO();
+		UsedPostDTO updto = updao.get(post_no);
 			
-			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
-			MemberDAO mdao = new MemberDAO();
-			MemberDTO mdto = mdao.get(updto.getMember_no());
+		//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
+		MemberDAO mdao = new MemberDAO();
+		MemberDTO mdto = mdao.get(updto.getMember_no());
+		
+		//"카테고리 이름" 뽑아내기위해
+		UsedBoardDAO ubdao = new UsedBoardDAO();
+		UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
+		
+		//"주소 시군구동" 뽑아내기위해
+		AddrDAO addao = new AddrDAO();
+		AddrDTO addto = addao.get(updto.getAddr_no());
+				
+		//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
+		MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
+		UsedPostDAO updaoo = new UsedPostDAO();
+		updaoo.plusViewCount(post_no, 1);
+		
+		//내글
+		boolean isMine= memberinfo.getMember_no() == updto.getMember_no();
+		//관리자
+		boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
+		
+		////////////////////////
+		///		댓글 조회		///
+		//////////////////////
+		
+		// 중고 거래 댓글 테이블 및 시퀀스
+		String reply_table_name = "USED_POST_REPLY";
+		String reply_seq_name = "USED_POST_REPLY_SEQ";
+		
+		// 해당 게시글 댓글 존재 여부 확인
+		ReplyDAO rdao = new ReplyDAO();
 			
-			//"카테고리 이름" 뽑아내기위해
-			UsedBoardDAO ubdao = new UsedBoardDAO();
-			UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
-			
-			//"주소 시군구동" 뽑아내기위해
-			AddrDAO addao = new AddrDAO();
-			AddrDTO addto = addao.get(updto.getAddr_no());
-			
-			
-			//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
-			MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
-			UsedPostDAO updaoo = new UsedPostDAO();
-			updaoo.plusViewCount(post_no, 1);
-			
-			//내글
-			boolean isMine= memberinfo.getMember_no() == updto.getMember_no();
-			//관리자
-			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
 			
 	%>
 	
@@ -160,8 +173,8 @@
 					<form action="write_reply.do" method="post">
 						<input type="hidden" name="no" value="<%=mdto.getMember_no() %>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
-						<input type="hidden" name="reply_table_name" value="USED_POST_REPLY">
-						<input type="hidden" name="reply_seq_name" value="USED_POST_REPLY_SEQ">
+						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
+						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
 						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
 						<div class="reply-div-padding">
 							<div class="reply-border">
@@ -181,52 +194,30 @@
 					</form>
 				</div>
 				
-			<div class="padding-top25 ">	
+			<div class="padding-top25 ">
+				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
+					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
+					
+					for(ReplyDTO rdto : list) {
+						MemberDTO replymember = mdao.get(rdto.getMember_no());
+				%>
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
 							<img class="reply-pic-circle" src="<%=path %>/img/manner_sample.jpg">
 						</div>
 						<div class="right-item90">
 							<div class="reply-nick-font">
-								<span>닉네임뭐할까</span>
+								<span><%=replymember.getMember_nick() %></span>
 								<span class="right-float gray-font">2분전</span>
 							</div>
 							<div class="font17 padding-top10">
-								가방 구매하고싶은데 팔렸나요?
+								<%=rdto.getReply_content() %>
 							</div>	
 						</div>
 					</div>
 					<hr>
-									<div class="float-box float-left reply-margin20">
-						<div class="left-item10">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
-						</div>
-						<div class="right-item90">
-							<div class="reply-nick-font">
-								<span>나는야부자</span>
-								<span class="right-float gray-font">5분전</span>
-							</div>
-							<div class="font17 padding-top10">
-								어머머 가방 너무 예쁘네요~^^
-							</div>	
-						</div>
-					</div>
-					<hr>
-					<div class="float-box float-left reply-margin20">
-						<div class="left-item10">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
-						</div>
-						<div class="right-item90">
-							<div class="reply-nick-font">
-								<span>욜로롤로</span>
-								<span class="right-float gray-font">15분전</span>
-							</div>
-							<div class="font17 padding-top10">
-								아~~~ 사고싶다 ㅜㅜ
-							</div>	
-						</div>
-					</div>
-					<hr>
+					<%} %>
+				<%} %>
 				</div>
 			</div>
 			

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -96,28 +98,55 @@ public class ReplyDAO {
 		String sql = "INSERT INTO #1 VALUES(? , ? , ? , ? , ? , ? , ? , SYSDATE)";
 
 		sql = sql.replace("#1", reply_table_name);
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setLong(1, seq_no);
 		ps.setLong(2, rdto.getMember_no());
 		ps.setLong(3, rdto.getPost_no());
 		ps.setString(4, rdto.getReply_content());
-		
+
 		// 새글 혹은 답글
-		if(rdto.getSuper_no() == 0) {
+		if (rdto.getSuper_no() == 0) {
 			// 새글일 경우
 			ps.setNull(5, Types.INTEGER);
 		} else {
 			// 답글일 경우
 			ps.setLong(5, rdto.getSuper_no());
 		}
-		
+
 		ps.setLong(6, rdto.getGroup_no());
 		ps.setLong(7, rdto.getDepth());
-		
+
 		ps.execute();
+
+		con.close();
+	}
+
+	// [4] 해당 게시글 댓글 조회
+	public List<ReplyDTO> postReply(String reply_table_name, long post_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM #1 WHERE POST_NO = ?";
+
+		sql = sql.replace("#1", reply_table_name);
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, post_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<ReplyDTO> list = new ArrayList<ReplyDTO>();
+
+		while (rs.next()) {
+			ReplyDTO rdto = new ReplyDTO(rs);
+			
+			list.add(rdto);
+		}
 		
 		con.close();
+		
+		return list;
 	}
 }

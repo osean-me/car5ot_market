@@ -7,11 +7,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	border: 1px dotted black;
 }
 
-
-.cursor:hover{
+.cursor:hover {
 	cursor: pointer;
-	}
-
+}
 
 /* aritcle 기본 폼 */
 #used-post-content-form {
@@ -90,7 +88,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	width: 90%;
 }
 
-.imagesize{
+.imagesize {
 	width: 100%;
 	height: 380px;
 }
@@ -130,8 +128,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
-.dimgray-font{
-	color:dimgray;
+
+.dimgray-font {
+	color: dimgray;
 }
 
 .purple-font {
@@ -141,7 +140,8 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .green-font {
 	color: #62B1D9;
 }
-.transparent-font{
+
+.transparent-font {
 	color: transparent;
 }
 
@@ -251,7 +251,6 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	margin: 10px 0px 0px 0px;
 }
 
-
 .manner-margin {
 	margin: 10px 0px 0px 20px
 }
@@ -335,3 +334,40 @@ textarea {
 	border: none;
 }
 
+.reply-content-form {
+	display: flex;
+	width: 100%;
+}
+
+.reply-content {
+	width: 85%;
+	display: inline-block;
+	flex: 13;
+}
+
+.reply-control {
+	width: 15%;
+	display: inline-block;
+	flex: 1.5;
+	text-align: right;
+}
+
+.reply-control>div {
+	display: inline-block;
+}
+.reply-control>div:nth-child(1) {
+	margin: 0px 10px;
+}
+
+.reply-control>div>a {
+	text-decoration: none;
+	color: gray;
+}
+
+.reply-control>div>a:hover {
+	color: #ff8900;
+}
+
+.seller {
+	margin-top: 17px;
+}

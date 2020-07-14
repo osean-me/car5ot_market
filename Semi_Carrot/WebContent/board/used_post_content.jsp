@@ -243,6 +243,7 @@
 				%>
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
+						<!-- 프로필 이미지 영역 -->
 							<%if(rdto.getMember_no() != 0) {
 									if(pidao.getProfileImgNo(rdto.getMember_no()) != null) { %>
 										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(rdto.getMember_no())%>">
@@ -254,6 +255,7 @@
 							<%} %>		
 						</div>
 						<div class="right-item90">
+							<!-- 프로필 닉네임 / 댓글 내용 영역 -->
 							<div class="reply-nick-font">
 								<%if(rdto.getMember_no() == 0) { %>						
 									<span>탈퇴한 회원</span>
@@ -264,7 +266,7 @@
 
 									<span><%=replymember.getMember_nick() %></span>
 								<%} %>
-								<%if(compareTime > 3600 || compareTime < 0) { %>
+								<%if((compareTime > 3600 || compareTime < 0)) { %>
 									<span class="right-float gray-font">
 										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) { %>
 											오늘
@@ -274,6 +276,7 @@
 									</span>
 								<%
 									} else { 
+										System.out.println(compareTime);
 										int miniute = compareTime/60;
 										int hour = miniute/60;
 										int replyResult = miniute-(hour*60);
@@ -281,8 +284,16 @@
 									<span class="right-float gray-font"><%=replyResult %> 분 전</span>
 								<%} %>
 							</div>
-							<div class="font17 padding-top10">
-								<%=rdto.getReply_content() %>
+							<div class="font17 padding-top10 reply-content-form">
+								<div class="reply-content">
+									<%=rdto.getReply_content() %>
+								</div>
+								<div class="reply-control">
+									<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
+										<div><a href="">수정</a></div>
+										<div><a href="">삭제</a></div>
+									<%} %>
+								</div>
 							</div>	
 						</div>
 					</div>
@@ -310,7 +321,7 @@
 							<%} %>
 						</div>
 						<div class="right-item75">
-								<div class="top-margin10 left-font">
+								<div class="top-margin10 left-font seller">
 									<!-- 작성자 -->
 									<%if(updto.getMember_no() != 0){ %>
 										<p class="font20"> <%=mdto.getMember_nick() %></p>

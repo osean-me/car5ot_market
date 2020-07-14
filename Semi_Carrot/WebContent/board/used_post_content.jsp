@@ -52,7 +52,7 @@
 	<div class="padding50">
 		<div class="float-box float-left">
 			<div class="left-item40">
-				<img src="https://placeimg.com/300/250/tech" width="100%">
+				<img class="imagesize" src="https://placeimg.com/200/250/tech">
 			</div>
 			<div class="right-item60 left-font padding-left35">
 				<!-- 글 제목 -->

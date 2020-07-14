@@ -127,7 +127,7 @@ public class ReplyDAO {
 	public List<ReplyDTO> postReply(String reply_table_name, long post_no) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT * FROM #1 WHERE POST_NO = ?";
+		String sql = "SELECT * FROM #1 WHERE POST_NO = ? ORDER BY REPLY_DATE DESC";
 
 		sql = sql.replace("#1", reply_table_name);
 

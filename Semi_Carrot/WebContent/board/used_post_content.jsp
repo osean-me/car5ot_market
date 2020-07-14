@@ -1,3 +1,6 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
@@ -20,6 +23,26 @@
 		long post_no = Long.parseLong(request.getParameter("post_no")); 
 		UsedPostDAO updao = new UsedPostDAO();
 		UsedPostDTO updto = updao.get(post_no);
+		
+		// 현재 날짜 가지고 오기
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat time = new SimpleDateFormat("HH:mm:ss"); 
+		
+		String sysdate = date.format(cal.getTime()); // 현재 날짜
+		String systime = time.format(cal.getTime()); // 현재 시간 
+		
+		int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
+		int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
+		int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
+		
+		// 현재 시간 > 초 단위 변환
+		int systime_s = syshour + sysminute + syssecound;
+		
+		System.out.println("시간 : " + syshour);
+		System.out.println("분 : " + sysminute);
+		System.out.println("초 : " + syssecound);
+		System.out.println("초단위 현재 시간 : " + systime_s);
 			
 		//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 		MemberDAO mdao = new MemberDAO();
@@ -52,9 +75,7 @@
 		String reply_seq_name = "USED_POST_REPLY_SEQ";
 		
 		// 해당 게시글 댓글 존재 여부 확인
-		ReplyDAO rdao = new ReplyDAO();
-			
-			
+		ReplyDAO rdao = new ReplyDAO();	
 	%>
 	
 	
@@ -199,6 +220,20 @@
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
 					
 					for(ReplyDTO rdto : list) {
+						// 현재 시간과 댓글 작성일 계산
+						String replyDATE = rdto.getReply_date().substring(11);
+						System.out.println(replyDATE);
+ 						int replyhour = Integer.parseInt(replyDATE.substring(0, 2)) * 60;
+						int replyminute = Integer.parseInt(replyDATE.substring(3, 5)) * 60;
+						int replysecound = Integer.parseInt(replyDATE.substring(6, 8));
+						
+						int replytime_s = replyhour + replyminute + replysecound;
+						
+						// 현재 시간과 작성 시간 비교 						
+						int compareTime = systime_s - replytime_s; 
+						System.out.println("작성 시간 초단위 : " + replytime_s);
+						System.out.println("비교 : " + compareTime);
+						
 						MemberDTO replymember = mdao.get(rdto.getMember_no());
 				%>
 					<div class="float-box float-left reply-margin20">
@@ -208,7 +243,16 @@
 						<div class="right-item90">
 							<div class="reply-nick-font">
 								<span><%=replymember.getMember_nick() %></span>
-								<span class="right-float gray-font">2분전</span>
+								<%if(compareTime > 3600 || compareTime < 0) { %>
+									<span class="right-float gray-font"><%=rdto.getReply_date().substring(0, 10) %></span>
+								<%
+									} else { 
+										int miniute = compareTime/60;
+										int hour = miniute/60;
+										int replyResult = miniute-(hour*60);
+								%>
+									<span class="right-float gray-font"><%=replyResult %> 분 전</span>
+								<%} %>
 							</div>
 							<div class="font17 padding-top10">
 								<%=rdto.getReply_content() %>

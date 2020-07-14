@@ -9,14 +9,14 @@ h2 {
 	color: orange;
 }
 
-#pw, #submit, #nick {
+#pw, #submit, #phone {
 	width: 500px;
 	height: 55px;
 	margin: 15px;
 }
 
 /*비밀번호 */
-#pw, #nick {
+#pw, #phone {
 	padding-left: 50px;
 	font-size: 20px;
 	border: 1px solid transparent;
@@ -27,7 +27,7 @@ h2 {
 	background-position: 5px 0.5rem;
 }
 
-#pw, #nick, #img {
+#pw, #phone, #img {
 	background-image: url(../img/key-32.png);
 	background-repeat: no-repeat;
 	background-size: 40px;

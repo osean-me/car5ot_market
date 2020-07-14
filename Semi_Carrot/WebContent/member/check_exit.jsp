@@ -17,11 +17,11 @@
 <article style="padding-top: 220px; margin: 0px 25%; text-align: center;">
 	<img src="<%=path%>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
 	<h2>회원탈퇴</h2>
-	<form action="check.do" method="post">
+	<form action="gone.do" method="post">
 		<input type="hidden" name="go" value=<%=go%>> <input id="pw"
 			type="password" name="member_pw" placeholder="비밀번호 를 입력해 주세요">
-		<input id="nick" type="text" name="member_nick"
-			placeholder="닉네임을 입력해 주세요">
+		<input id="phone" type="text" name="member_phone"
+			placeholder="전화번호를 입력해 주세요">
 
 
 		<div>
@@ -55,5 +55,20 @@
 </script>
 <%
 	}
+	else{
+		
+	}
 %>
+<script>
+alert("회원 탈퇴가 완료 되었습니다. 이용해 주셔서 감사합니다.");
+</script>
+
+
+
+
+
+
+
+
+
 <jsp:include page="/template/footer.jsp"></jsp:include>

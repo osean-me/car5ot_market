@@ -3,7 +3,40 @@
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
 
-	<!-- 필터 설정 -->	
+
+	
+	
+	
+	
+	<!-- 대문 설정 -->
+	<welcome-file-list>
+	 		<welcome-file>index.jsp</welcome-file>
+	 </welcome-file-list> 
+	
+	
+	<!-- JoinServlet 등록 -->
+<!--  
+	 <servlet>
+	 <servlet-name>user.JoinServlet</servlet-name>
+	 <servlet-class>carrot.servlet.user.JoinServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 <servlet-name>JoinServlet</servlet-name>
+	 <url-pattern>/user/join.do</url-pattern>
+	 </servlet-mapping>
+-->
+	 <!-- LoginServlet 등록 -->
+	<!--  
+	  <servlet>
+	 <servlet-name>user.loginServlet</servlet-name>
+	 <servlet-class>carrot.servlet.user.loginServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 <servlet-name>loginServlet</servlet-name>
+	 <url-pattern>/user/login.do</url-pattern>
+	 </servlet-mapping>
+-->
+<!-- 필터 설정 -->	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>carrot.filter.EncodingFilter</filter-class>
@@ -13,10 +46,27 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- 대문 설정 -->
-	<welcome-file-list>
-	 		<welcome-file>index.jsp</welcome-file>
-	 </welcome-file-list> 
+	
+	<!-- 로그인 필터-->
+	 <filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>carrot.filter.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/member/info.jsp</url-pattern>
+		<url-pattern>/member/logout.do</url-pattern>
+		<url-pattern>/member/gone.do</url-pattern>
+		<url-pattern>/member/change_info.jsp</url-pattern>
+		<url-pattern>/member/change_info.do</url-pattern>
+		<url-pattern>/member/check.jsp</url-pattern>
+		<url-pattern>/member/check.do</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/board/*</url-pattern>
+	</filter-mapping> 
+	 
+	 
+	 
 	 
 <!-- 에러 페이지 설정 -->
 	<error-page>
@@ -31,6 +81,7 @@
 		<error-code>500</error-code>
 		<location>/error/500.jsp</location>
 	</error-page>
+
 
 
 </web-app>

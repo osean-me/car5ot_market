@@ -1,9 +1,8 @@
-<%@page import="java.util.Calendar"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.List"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
+<%@page import="java.util.List"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.text.NumberFormat"%>
@@ -19,8 +18,9 @@
 	pageEncoding="UTF-8"%>
 	<%
 		String path = request.getContextPath();
-			
+		
 		long post_no = Long.parseLong(request.getParameter("post_no")); 
+
 		UsedPostDAO updao = new UsedPostDAO();
 		UsedPostDTO updto = updao.get(post_no);
 		
@@ -43,39 +43,39 @@
 		System.out.println("분 : " + sysminute);
 		System.out.println("초 : " + syssecound);
 		System.out.println("초단위 현재 시간 : " + systime_s);
-			
+		
 		//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 		MemberDAO mdao = new MemberDAO();
 		MemberDTO mdto = mdao.get(updto.getMember_no());
-		
+
 		//"카테고리 이름" 뽑아내기위해
 		UsedBoardDAO ubdao = new UsedBoardDAO();
 		UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
-		
+
 		//"주소 시군구동" 뽑아내기위해
 		AddrDAO addao = new AddrDAO();
 		AddrDTO addto = addao.get(updto.getAddr_no());
-				
+
 		//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
-		MemberDTO memberinfo = (MemberDTO)session.getAttribute("memberinfo");
+		MemberDTO memberinfo = (MemberDTO) session.getAttribute("memberinfo");
 		UsedPostDAO updaoo = new UsedPostDAO();
 		updaoo.plusViewCount(post_no, 1);
-		
+
 		//내글
-		boolean isMine= memberinfo.getMember_no() == updto.getMember_no();
+		boolean isMine = memberinfo.getMember_no() == updto.getMember_no();
 		//관리자
-		boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
-		
+		boolean isAdmin = memberinfo.getMember_auth().equals("관리자");
+
 		////////////////////////
 		///		댓글 조회		///
 		//////////////////////
-		
+
 		// 중고 거래 댓글 테이블 및 시퀀스
 		String reply_table_name = "USED_POST_REPLY";
 		String reply_seq_name = "USED_POST_REPLY_SEQ";
-		
+
 		// 해당 게시글 댓글 존재 여부 확인
-		ReplyDAO rdao = new ReplyDAO();	
+		ReplyDAO rdao = new ReplyDAO();
 	%>
 	
 	
@@ -86,7 +86,7 @@
 	<div class="padding50">
 		<div class="float-box float-left">
 			<div class="left-item40">
-				<img src="https://placeimg.com/300/250/tech" width="100%">
+				<img class="imagesize" src="https://placeimg.com/200/250/tech">
 			</div>
 			<div class="right-item60 left-font padding-left35">
 				<!-- 글 제목 -->
@@ -132,7 +132,7 @@
 					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
 					<div class="left-item33">
 						<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
-						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
+						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>				
 					</div>
 					<div class="left-item33">
 						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
@@ -146,33 +146,33 @@
 
 
 	<div>
-		<p class="font20 padding15 padding-top40">연관상품<p>
+		<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
 		
 		<div class="padding40">
 			<div class="float-box float-left">
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/nature">
-					<p class="font17">사진1</p>
+					<p class="font17 top-margin10">사진1</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/tech" >
-					<p class="font17">사진2</p>
+					<p class="font17 top-margin10">사진2</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/people" >
-					<p class="font17">사진3</p>
+					<p class="font17 top-margin10">사진3</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/animals" >
-					<p class="font17">사진4</p>
+					<p class="font17 top-margin10">사진4</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17">사진5</p>
+					<p class="font17 top-margin10">사진5</p>
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17">사진6</p>
+					<p class="font17 top-margin10">사진6</p>
 				</div>
 			</div>
 		</div>

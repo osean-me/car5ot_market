@@ -124,6 +124,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
+.dimgray-font{
+	color:dimgray;
+}
 
 .purple-font {
 	color: #6247EE;
@@ -131,6 +134,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 
 .green-font {
 	color: #62B1D9;
+}
+.transparent-font{
+	color: transparent;
 }
 
 .left-font {
@@ -236,7 +242,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 }
 
 .manner-margin {
-	margin: 10px 0px 0px 15px
+	margin: 10px 0px 0px 20px
 }
 
 .like-button {

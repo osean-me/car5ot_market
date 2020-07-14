@@ -17,6 +17,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 #used-post-content-form {
 	width: auto;
 	margin: 0px 15%;
+	text-align: center;
 }
 
 .float-box:after {
@@ -88,6 +89,11 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .right-item90 {
 	width: 90%;
 }
+
+.imagesize{
+	width: 100%;
+	height: 380px;
+}
 /*폰트크기*/
 .font12 {
 	font-size: 12px;
@@ -124,6 +130,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
+.dimgray-font{
+	color:dimgray;
+}
 
 .purple-font {
 	color: #6247EE;
@@ -131,6 +140,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 
 .green-font {
 	color: #62B1D9;
+}
+.transparent-font{
+	color: transparent;
 }
 
 .left-font {
@@ -235,8 +247,13 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	margin: 10px 0px 0px 0px;
 }
 
+.top-margin20 {
+	margin: 10px 0px 0px 0px;
+}
+
+
 .manner-margin {
-	margin: 10px 0px 0px 15px
+	margin: 10px 0px 0px 20px
 }
 
 .like-button {

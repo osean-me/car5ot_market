@@ -33,7 +33,29 @@ margin-left:350px;
    outline:1px solid orange;
 }
 
-.used_cate_style {
+.form-phone {
+   margin-top: 40px;
+   margin-bottom: 40px;
+   width: 300px;
+   padding: 0.9rem;
+   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
+   border: 1px solid lightgray;
+   font-size: 19px;
+   margin-left: 20px;
+}
+.form-phone:focus {
+   margin-top: 40px;
+   margin-bottom: 40px;
+   width: 300px;
+   padding: 0.9rem;
+   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
+   border: 1px solid lightgray;
+   font-size: 19px;
+   margin-left: 20px;
+   outline:1px solid orange;
+}
+
+.promotion_cate_style {
    width: 300px; /* 너비설정 */
    border: 1px solid lightgray; /* 테두리 설정 */
    padding: 0.9rem;
@@ -42,7 +64,7 @@ margin-left:350px;
    margin-bottom: 40px;
    margin-left: 20px;
 }
-.used_cate_style:focus {
+.promotion_cate_style:focus {
    width: 300px; /* 너비설정 */
    border: 1px solid lightgray; /* 테두리 설정 */
    padding: 0.9rem;
@@ -185,10 +207,6 @@ margin-left:350px;
    margin:10px;
 }
 
-input+span {
-	color:red;
-}
-
 </style>
 <script>
    function calculateCount() {
@@ -226,18 +244,6 @@ input+span {
       }
    }
    
-   // 제목 2글자 이상 검사 
-   function checkTitle() {
-	   var title=document.querySelector(".post-title").value;
-	   var len = title.length;
-	   var isValid = len > 1;
-	   
-	   if(!isValid) {
-		   var span = document.querySelector(".post-title + span");
-		   span.textContent = "제목은 2글자 이상으로 작성하세요.";
-	   }
-   }
-   
 </script>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -246,17 +252,17 @@ input+span {
 <article style="padding-top: 200px;" id="used-write-form">
    <div class="container" align="left">
       <h1 align="left" style="font-size: 30px; font-weight: normal;">
-         중고거래 글쓰기 &nbsp; <span class="must">   *필수항목 </span>
+         동네홍보 글쓰기 &nbsp; <span class="must">   *필수항목 </span>
       </h1>
       <br><br>
       <hr class="hr_style2">
- 		<hr>
       <br><br>
+ 
       <!--  
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
 
-      <form action="used_post_write.do" method="post"  enctype="multipart/form-data">
+      <form action="promotion_post_write.do" method="post"  enctype="multipart/form-data">
          <div class="used_container" >
 
             <!--  이미지 등록 -->
@@ -266,7 +272,7 @@ input+span {
                </div>
                <div class="used_photo_img">
                  
-                  <input class="form-input" type="file" name="used_post_img" multiple accept=".jpg, .png, .gif" onchange="preview();">
+                  <input class="form-input" type="file" name="promotion_post_img" multiple accept=".jpg, .png, .gif" onchange="preview();">
                   <div class="preview-wrap"></div>                
                   <div class="used_photo_explain" >
                      * 상품 이미지는 640x640에 최적화 되어 있습니다.<br> 
@@ -274,7 +280,7 @@ input+span {
                      - 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다. <br> 
                      - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다. <br> 
                      - 이미지는 최대 5개까지 등록 가능합니다.<br>
-                     최대 지원 사이즈인 640 X 640 으로 리사이즈 해서   올려주세요.(개당 이미지 최대 10M)
+                     최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
                   </div>
                </div>
             </div>
@@ -284,8 +290,7 @@ input+span {
             <div class="used_title" style="list-style: none;">
                <div class="used_text">
                   제목 <span class="must">*</span> 
-                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." onblur="checkTitle();">
-                  <span></span>
+                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." required>
                </div>
             </div>
             <hr>
@@ -295,22 +300,25 @@ input+span {
             <div class="used_cate" >
                <div class="used_text">
                   카테고리 <span class="must">*</span>
-                  <select class="used_cate_style" name="used_cate_num">
+                  <select class="promotion_cate_style" name="promotion_cate_num">
                      <option value="">카테고리 선택</option>
-                     <option value="1">디지털/가전</option>
-                     <option value="2">가구/인테리어</option>
-                     <option value="3">유아동/유아도서</option>
-                     <option value="4">생활/가공식품</option>
-                     <option value="5">스포츠/레저</option>
-                     <option value="6">여성/잡화</option>
-                     <option value="7">여성 의류</option>
-                     <option value="8">남성패션/잡화</option>
-                     <option value="9">게임/취미</option>
-                     <option value="10">뷰티/미용</option>
-                     <option value="11">반려동물</option>
-                     <option value="12">도서/티켓/음반</option>
-                     <option value="13">기타</option>                  
+                     <option value="1">중고차/오토바이</option>
+                     <option value="2">동네 구인구직</option>
+                     <option value="3">부동산</option>
+                     <option value="4">농수산물</option>
+                     <option value="5">지역업체</option>
+                     <option value="6">과외/클래스 모집</option>   
+                     <option value="7">전시/공연</option>               
                   </select>
+               </div>
+            </div>
+            <hr>
+			
+			 <!-- 전화번호 입력 -->
+            <div class="used_phone" style="list-style: none;">
+               <div class="used_text">
+                  전화번호 <span class="must">*</span> 
+                  <input class="form-phone" type="text" name="post_phone" placeholder="전화번호를 입력해주세요." required>
                </div>
             </div>
             <hr>
@@ -320,14 +328,6 @@ input+span {
                <div class="used_text">
                   가격 <span class="must">*</span> 
                   <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요">원
-               </div>
-               <div class="used_text">
-                  <label for="freesShipping" id="free"> 
-                     <input type="checkbox"> 무료배송
-                  </label> 
-                  <label for="priceSuggest" id="suggest"> 
-                     <input type="checkbox"> 가격협의가능
-                  </label>
                </div>
             </div>
             <hr><br><br>

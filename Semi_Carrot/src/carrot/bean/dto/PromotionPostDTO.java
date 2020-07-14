@@ -1,21 +1,24 @@
 package carrot.bean.dto;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class PromotionPostDTO {
-	private long post_no;
-	private String post_title;
-	private String post_content;
-	private long post_price;
-	private String post_date;
-	private String post_phone;
-	private long post_view;
-	private long post_like;
-	private long promotion_cate_num;
-	private long member_no;
-	private long member_img_no;
-	private long addr_no;
-	private long board_no;
+   private long post_no;
+   private String post_title;
+   private String post_content;
+   private long post_price;
+   private String post_date;
+   private String post_phone;
+   private long post_view;
+   private long post_like;
+   private long promotion_cate_num;
+   private long member_no;
+   private long member_img_no;
+   private long addr_no;
+   private long board_no;
+
 
 	public long getPost_no() {
 		return post_no;
@@ -149,5 +152,15 @@ public class PromotionPostDTO {
 	public String getPromotionPost_day() {
 		return post_date.substring(0, 10);
 	}
+	
+	public String getPromotionPost_autotime() {
+		String today = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		if (getPromotionPost_day().contentEquals(today)) {
+			return getPromotionPost_time();
+		} else {
+			return getPromotionPost_day();
+		}
+	}
 
 }
+

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DetailListDTO {
+public class DetailList3DTO {
 	private long post_no;
 	private String post_title;
 	private String post_content;
@@ -17,13 +17,51 @@ public class DetailListDTO {
 	private long member_no;
 	private long member_img_no;
 	private long addr_no;
-	private long post_img_no;
 	private String post_state;
+	private long board_no;
 	private String addr_state;
 	private String addr_city;
 	private String addr_base;
+	private long post_img_no;
 	
-	public DetailListDTO() {
+	public DetailList3DTO(ResultSet rs) throws SQLException {
+		this.setPost_no(rs.getLong("post_no"));
+		this.setPost_title(rs.getString("post_title"));
+		this.setPost_content(rs.getString("post_content"));
+		this.setPost_price(rs.getLong("post_price"));
+		this.setPost_date(rs.getString("post_date"));
+		this.setPost_view(rs.getLong("post_view"));
+		this.setPost_like(rs.getLong("post_like"));
+		this.setUsed_cate_num(rs.getLong("used_cate_num"));
+		this.setMember_no(rs.getLong("member_no"));
+		//this.setMember_img_no(rs.getLong("member_img_no"));
+		this.setAddr_no(rs.getLong("addr_no"));
+		this.setPost_state(rs.getString("post_state"));
+		this.setBoard_no(rs.getLong("board_no"));
+		this.setAddr_state(rs.getString("addr_state"));
+		this.setAddr_city(rs.getString("addr_city"));
+		this.setAddr_base(rs.getString("addr_base"));
+		this.setPost_img_no(rs.getLong("post_img_no"));
+		
+	}
+
+	//작성시간 관련 메소드 추가
+	 public String getUsedPost_time() {
+		 return post_date.substring(11,16);
+	 }
+	 public String getUsedPost_day() {
+		 return post_date.substring(0,10);
+	 }
+	 public String getUsedPost_autotime() {
+		 String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		 if(getUsedPost_day().contentEquals(today)) {
+			 return getUsedPost_time();
+		 }
+		 else {
+			 return getUsedPost_day();
+		 }
+	 }
+	public DetailList3DTO() {
 		super();
 	}
 	public long getPost_no() {
@@ -92,17 +130,17 @@ public class DetailListDTO {
 	public void setAddr_no(long addr_no) {
 		this.addr_no = addr_no;
 	}
-	public long getPost_img_no() {
-		return post_img_no;
-	}
-	public void setPost_img_no(long post_img_no) {
-		this.post_img_no = post_img_no;
-	}
 	public String getPost_state() {
 		return post_state;
 	}
 	public void setPost_state(String post_state) {
 		this.post_state = post_state;
+	}
+	public long getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(long board_no) {
+		this.board_no = board_no;
 	}
 	public String getAddr_state() {
 		return addr_state;
@@ -122,40 +160,13 @@ public class DetailListDTO {
 	public void setAddr_base(String addr_base) {
 		this.addr_base = addr_base;
 	}
+	public long getPost_img_no() {
+		return post_img_no;
+	}
+	public void setPost_img_no(long post_img_no) {
+		this.post_img_no = post_img_no;
+	}
+
 	
-	//작성시간 관련 메소드 추가
-		 public String getUsedPost_time() {
-			 return post_date.substring(11,16);
-		 }
-		 public String getUsedPost_day() {
-			 return post_date.substring(0,10);
-		 }
-		 public String getUsedPost_autotime() {
-			 String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-			 if(getUsedPost_day().contentEquals(today)) {
-				 return getUsedPost_day();
-			 }
-			 else {
-				 return getUsedPost_time();
-			 }
-		 }
 	
-	public DetailListDTO(ResultSet rs) throws SQLException{
-	      this.setPost_no(rs.getLong("post_no"));
-	      this.setPost_title(rs.getString("post_title"));
-	      this.setPost_content(rs.getString("post_content"));
-	      this.setPost_price(rs.getLong("post_price"));
-	      this.setPost_date(rs.getString("post_date"));
-	      this.setPost_view(rs.getLong("post_view"));
-	      this.setPost_like(rs.getLong("post_like"));
-	      this.setUsed_cate_num(rs.getLong("used_cate_num"));
-	      this.setMember_no(rs.getLong("member_no"));
-	      //this.setMember_img_no(rs.getLong("member_img_no"));
-	      this.setAddr_no(rs.getLong("addr_no"));
-	     // this.setPost_img_no(rs.getLong("post_img_no"));
-	      this.setPost_state(rs.getString("post_state"));
-	      this.setAddr_state(rs.getString("addr_state"));
-		  this.setAddr_city(rs.getString("addr_city"));
-		  this.setAddr_base(rs.getString("addr_base"));
-	   }
 }

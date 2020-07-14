@@ -1,23 +1,17 @@
-<%@page import="carrot.bean.dto.DetailListDTO"%>
+<%@page import="carrot.bean.dao.PromotionPostDAO"%>
+<%@page import="carrot.bean.dto.DetailList2DTO"%>
+<%@page import="carrot.bean.dto.BoardDTO"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
-<%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@page import="java.util.List"%>
-<%@page import="carrot.bean.dao.UsedPostDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
 <style>
 .h2_style {
 	
-}
-
-#used-post-list-form {
-	width: auto;
-	margin: 0px 15%;
-	min-width: 1000px;
 }
 
 .detail {
@@ -33,8 +27,8 @@
 	margin-bottom: 10px;
 }
 
-.product_photo>a>img {
-	width: 220px;
+.product_photo>img {
+	width: 210px;
 	height: 220px;
 }
 
@@ -99,22 +93,24 @@
 	height: 1px;
 	background: lightgray;
 }
+
+.move {
+	text-decoration: none;
+}
 </style>
 
-<!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 추가 + 사진 추가하기 @@@@@@@@@ -->
 <%
-	UsedPostDAO updao = new UsedPostDAO();
+	PromotionPostDAO ppdao = new PromotionPostDAO();
 	MemberDAO mdao = new MemberDAO();
-	List<DetailListDTO> list = updao.getList();
-
+	List<DetailList2DTO> list = ppdao.getList();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px;" id="used-post-list-form">
+<article style="padding-top: 200px;">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
-			<span style="color: orange">중고거래</span> 상품목록
+			<span style="color:orange">동네홍보</span> 상품목록
 		</h2>
 		<div class="sort_list" align="right">
 			<div class="popular"><a href="">인기순</a></div>
@@ -129,15 +125,17 @@
 			<div class=detail>
 
 				<%
-					for (DetailListDTO dldto : list) {
+					for (DetailList2DTO dldto : list) {
 				%>
 				<div class="product">
 					<div class="product_photo">
-						<a href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>"><img src="../img/ㅎㅎ.jpg"></a>
+						<img src="../img/math.png">
 					</div>
 					<div class="product_title">
 						<div class="hideText">
-							<%=dldto.getPost_title()%>
+						<a class="move" href="promotion_post_content.jsp?post_no=<%=dldto.getPost_no()%>">					
+							<font color="black"><%=dldto.getPost_title()%>
+							</a>
 						</div>
 					</div>
 					<div class="post_location">
@@ -152,7 +150,7 @@
                			%>
 						<%=commaNum%>원
 							<div class="product_time">
-								<%=dldto.getPost_autotime()%>							
+								<%=dldto.getPromotionPost_autotime()%>							
 							</div>
 						</div>
 						<hr class="hr_style">

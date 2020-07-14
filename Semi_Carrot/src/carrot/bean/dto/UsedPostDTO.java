@@ -1,3 +1,4 @@
+
 package carrot.bean.dto;
 
 import java.sql.ResultSet;
@@ -44,7 +45,6 @@ public class UsedPostDTO {
 	public void setPost_no(long post_no) {
 		this.post_no = post_no;
 	}
-
 
 	public String getPost_title() {
 		return post_title;
@@ -106,11 +106,9 @@ public class UsedPostDTO {
 		return member_no;
 	}
 
-
 	public void setMember_no(long member_no) {
 		this.member_no = member_no;
 	}
-
 
 	public long getMember_img_no() {
 		return member_img_no;
@@ -119,7 +117,6 @@ public class UsedPostDTO {
 	public void setMember_img_no(long member_img_no) {
 		this.member_img_no = member_img_no;
 	}
-
 
 	public long getAddr_no() {
 		return addr_no;
@@ -140,7 +137,6 @@ public class UsedPostDTO {
 	public long getBoard_no() {
 		return board_no;
 	}
-
 
 	public void setBoard_no(long board_no) {
 		this.board_no = board_no;

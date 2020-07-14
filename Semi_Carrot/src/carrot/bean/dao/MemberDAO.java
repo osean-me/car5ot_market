@@ -68,7 +68,6 @@ public class MemberDAO {
 
 		con.close();
 	}
-
 	// [3] 회원 단일 조회
 	public MemberDTO get(long member_no) throws Exception {
 		Connection con = getConnection();

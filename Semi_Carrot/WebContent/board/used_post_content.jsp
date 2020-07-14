@@ -167,7 +167,7 @@
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="USED_POST_REPLY">
 						<input type="hidden" name="reply_seq_name" value="USED_POST_REPLY_SEQ">
-						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>">
+						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
 						<div class="reply-div-padding">
 							<div class="reply-border">
 							<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>

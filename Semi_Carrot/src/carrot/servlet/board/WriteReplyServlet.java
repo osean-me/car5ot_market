@@ -54,7 +54,7 @@ public class WriteReplyServlet extends HttpServlet {
 			rdao.writeReply(rdto, reply_table_name, reply_seq_name);
 			
 			// 댓글 등록 완료되면 해당 게시물로 이동
-			resp.sendRedirect(post_path + "?post_no=" + post_no);
+			resp.sendRedirect(post_path);
 
 		} catch (Exception e) {
 			e.printStackTrace();

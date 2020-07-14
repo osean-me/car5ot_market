@@ -21,6 +21,7 @@
 		
 		long post_no = Long.parseLong(request.getParameter("post_no")); 
 
+<<<<<<< HEAD
 		UsedPostDAO updao = new UsedPostDAO();
 		UsedPostDTO updto = updao.get(post_no);
 		

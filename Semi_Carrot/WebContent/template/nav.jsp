@@ -16,7 +16,7 @@
 	</div>
 	<div class="nav-menu">
 		<ul>
-			<li class="medium-menu"><a href="<%=path%>/board/post_list.jsp" class="category">동네 중고</a>
+			<li class="medium-menu"><a href="<%=path%>/board/used_post_list.jsp" class="category">동네 중고</a>
 			<ul>
 				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=1">디지털	/ 가전</a></li>
 				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=2">가구/ 인테리어</a></li>
@@ -35,7 +35,7 @@
 			</ul>
 		</li>
 		
-		<li class="medium-menu"><a href="" class="category">동네 홍보</a>
+		<li class="medium-menu"><a href="<%=path%>/board/promotion_post_list.jsp" class="category">동네 홍보</a>
 			<ul>
 				<li><a href="">중고차 / 오토바이</a></li>
 				<li><a href="">동네 구인구직</a></li>
@@ -46,9 +46,11 @@
 				<li><a href=""> 전시 / 공연</a></li>
 				<li><a href=""></a></li>
 			</ul></li>
-		<li class="medium-menu"><a href="" class="category">동네 텃밭</a></li>
+		<li class="medium-menu"><a href="<%=path%>/board/community_post_list.jsp" class="category">동네 생활</a></li>
 		<li class="medium-menu">
 		<a href="<%=path%>/board/used_write.jsp" class="category"> 판매하기</a></li>
+		<li class="medium-menu">
+		<a href="<%=path%>/board/promotion_write.jsp" class="category"> 홍보하기</a></li>
 		</ul>
 	</div>
 </nav>

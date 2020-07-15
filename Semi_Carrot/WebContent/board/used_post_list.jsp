@@ -66,6 +66,7 @@
 					for (DetailList3DTO dldto : list) {
 				%>
 				<div class="product">
+
 					<a class="move"
 						href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>">
 						<!-- 이미지 등록 -->

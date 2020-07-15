@@ -97,7 +97,7 @@
 		<div id="map-area">
 			<div id="map"></div>
 		</div>
-		<div class="swiper-container" id="product">
+		<div class="swiper-container" id="product">-
 			<!-- 필수 영역 -->
 			<div class="swiper-wrapper">
 				<!-- 배치되는 이미지 혹은 화면 (슬라이더) -->
@@ -119,7 +119,7 @@
 									%>
 									<div class="hot-product">
 										<div id="img">
-											<a href="used_post_content.jsp?board_no=<%=newpost.getBoard_no()%>&used_cate_num=<%=newpost.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+											<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=newpost.getBoard_no()%>&used_cate_num=<%=newpost.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
 										</div>
 										<div id="title"><%=newpost.getPost_title()%>
 											..

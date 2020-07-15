@@ -162,19 +162,16 @@
 					for (DetailList3DTO dldto : list) {
 				%>
 				<div class="product">
-					<a class="move"
-						href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>">
 						<!-- 이미지 등록 -->
 						<div class="product_photo">
-							<img src="showImg.do?post_img_no=<%=dldto.getPost_img_no()%>">
+							<a class="move" href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>"><img src="showImg.do?post_img_no=<%=dldto.getPost_img_no()%>"></a>
 						</div>
 						<!-- 게시글 제목 -->
 						<div class="product_title">
 							<div class="hideText">
-								<font color="black"><%=dldto.getPost_title()%>
+								<a class="move" href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>"><%=dldto.getPost_title()%></a>
 							</div>
 						</div>
-						</a>
 						<!-- 지역 등록 -->
 						<div class="post_location">
 							<img
@@ -205,22 +202,18 @@
 									int compareTime = systime_s - posttime_s; 																	
 								%>
 								<div class="product_time">
-								<%if((compareTime > 60 || compareTime < 0)) { %>
 									<span>
-									<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) { %>
-										오늘
-									<%} else { %>
-										<%=dldto.getPost_date().substring(0, 10) %>
-									<%} %>
+										<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) {%>
+											<%if(compareTime < 3600) { %>
+												<%int postResult = (compareTime / 60) % 60; %>
+												<%=postResult %> 분 전
+											<%} else {%>
+												오늘
+											<%} %>
+										<%} else {%>
+											<%=dldto.getPost_date().substring(0, 10) %>
+										<%} %>
 									</span>
-								<%
-									}else { 
-										int miniute = compareTime/60;
-										int hour = miniute/60;
-										int postResult = miniute-(hour*60);
-								%>
-									<span><%=postResult %>분전</span>
-									<%} %>
 								</div>
 							</div>
 							<hr class="hr_style">

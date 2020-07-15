@@ -33,7 +33,7 @@
 	String sysdate = date.format(cal.getTime()); // 현재 날짜
 	String systime = time.format(cal.getTime()); // 현재 시간 
 
-	int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
+	int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 	int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
 	int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
 
@@ -103,7 +103,7 @@
 								<%
 									String promotion_post_date = dldto.getPost_date().substring(11);
 
-										int posthour = Integer.parseInt(promotion_post_date.substring(0, 2)) * 60;
+										int posthour = (Integer.parseInt(promotion_post_date.substring(0, 2)) * 60) * 60;
 										int postminute = Integer.parseInt(promotion_post_date.substring(3, 5)) * 60;
 										int postsecound = Integer.parseInt(promotion_post_date.substring(6, 8));
 
@@ -112,22 +112,18 @@
 										int compareTime = systime_s - posttime_s;
 								%>
 								<div class="product_time">
-									<%if((compareTime > 60 || compareTime < 0)) { %>
 									<span>
-									<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) { %>
-										오늘
-									<%} else { %>
-										<%=dldto.getPost_date().substring(0, 10) %>
-									<%} %>
+										<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) {%>
+											<%if(compareTime < 3600) { %>
+												<%int postResult = (compareTime / 60) % 60; %>
+												<%=postResult %> 분 전
+											<%} else {%>
+												오늘
+											<%} %>
+										<%} else {%>
+											<%=dldto.getPost_date().substring(0, 10) %>
+										<%} %>
 									</span>
-								<%
-									}else { 
-										int miniute = compareTime/60;
-										int hour = miniute/60;
-										int postResult = miniute-(hour*60);
-								%>
-									<span><%=postResult %>분전</span>
-									<%} %>
 								</div>
 							</div>
 							<hr class="hr_style">

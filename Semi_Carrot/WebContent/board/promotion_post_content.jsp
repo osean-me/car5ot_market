@@ -275,21 +275,18 @@
 
 									<span><%=replymember.getMember_nick() %></span>
 								<%} %>
-								<%if((compareTime > 3600 || compareTime < 0)) { %>
 									<span class="right-float gray-font">
-										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) { %>
-											오늘
-										<%} else { %>
+										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) {%>
+											<%if(compareTime < 3600) { %>
+												<%int replyResult = (compareTime / 60) % 60; %>
+												<%=replyResult %> 분 전
+											<%} else {%>
+												오늘
+											<%} %>
+										<%} else {%>
 											<%=rdto.getReply_date().substring(0, 10) %>
 										<%} %>
 									</span>
-								<%
-									} else { 
-										System.out.println(compareTime);
-										int replyResult = (compareTime / 60) % 60;
-								%>
-									<span class="right-float gray-font"><%=replyResult %> 분 전</span>
-								<%} %>
 							</div>
 							<div class="font17 padding-top10 reply-content-form">
 								<div class="reply-content">

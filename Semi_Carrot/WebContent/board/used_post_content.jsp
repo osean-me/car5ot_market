@@ -20,7 +20,6 @@
 		String path = request.getContextPath();
 			
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
-
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
 			
@@ -62,18 +61,87 @@
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/swiper.min.css" type="text/css" rel="stylesheet">
+    <style>
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .swiper-container .swiper-slide,
+        .swiper-container .swiper-slide > img{
+            width:100%;
+            min-height: 380px;
+            height: auto;
+            max-height: 380px;
+        }
+        
+    </style>
+<script src="<%=path%>/js/swiper.min.js"></script>
+    <script>
+        //창의 로딩이 완료되었을 때 실행할 코드를 예약
+        window.onload = function(){
+            //var mySwiper = new Swiper(선택자, 옵션);
+            var mySwiper = new Swiper ('.swiper-container', {
+                //swiper에 적용할 옵션들을 작성
+                
+                direction: 'horizontal'   //표시방식(수직:vertical, 수평:horizontal)
+                ,loop: false //순환 모드 여부
+                
+
+                //페이지 네비게이터 옵션그룹
+                ,pagination: {
+                    el: '.swiper-pagination', //적용 대상의 선택자
+                    type: 'bullets',//네비게이터 모양(bullets/fraction/...)
+                },
+                
+                // auto
+                autoplay: {
+        			delay: 3000,
+        		},
+
+                //이전/다음 이동버튼 설정그룹
+              navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                }
+
+                //커서 모양을 손모양으로 변경
+                ,grabCursor:true
+                
+                //슬라이드 전환 효과(effect)
+                //,effect:'coverflow'
+                //,effect:'cube'
+                //,effect:'fade'
+                //,effect:'flip'
+                ,effect:'slide'//기본값
+            });
+        };
+    </script>
+
 
 <article style="padding-top: 220px" id="used-post-content-form">
 	<div class="padding50">
 		<div class="float-box float-left">
 			
 			<div class="left-item40">
+			<!-- 이미지 슬라이더 영역 -->
+			<div class="swiper-container">
+				<!-- 필수 영역 -->
+    		    <div class="swiper-wrapper">		
 				<%if(!fileList.isEmpty()){ %>
 					<%for(UsedPostImgDTO upidto : fileList){ %>
+    		    	<div class="swiper-slide">
 						<!-- 이미지 미리보기 -->
-							<img class="imagesize" src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
+							<img src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
+				</div>
 					<%} %>
 				<%} %>
+			</div>
+						        <!-- 이전/다음 버튼(선택) -->
+        	<div class="swiper-button-prev" style="z-index: 1000;"></div>
+       		 <div class="swiper-button-next" style="z-index: 1000;"></div>
+			</div>
+
 			</div>
 		
 			<div class="right-item60 left-font padding-left35">
@@ -292,3 +360,4 @@
 </article>
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
+

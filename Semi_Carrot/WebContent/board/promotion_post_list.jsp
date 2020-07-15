@@ -107,7 +107,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px;">
+<article style="padding-top: 200px; margin: 0px 15%;">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color:orange">동네홍보</span> 상품목록

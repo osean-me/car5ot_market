@@ -93,7 +93,7 @@
 <script type="text/javascript" src="<%=path%>/js/reply.js"></script>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 
-<article style="padding-top: 220px;" id="used-post-content-form">
+<article style="padding-top: 220px;" id="post-content-form">
 	<div class="padding50">
 		<div class="float-box float-left">
 			<div class="left-item40">
@@ -390,8 +390,9 @@
 							<%if(updto.getMember_no() != 0) { 
 									if(pidao.getProfileImgNo(updto.getMember_no()) != null) {%>
 										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(updto.getMember_no())%>" >
-									<%}%>
+									<%} else {%>
 										<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
+									<%} %>
 							<% 	} else { %>
 								<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
 							<%} %>

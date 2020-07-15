@@ -304,7 +304,7 @@ public class UsedPostDAO {
 	         ps.setLong(1, post_no);
 	         ps.execute();
 	         
-	         con.close();      
-	      }
+				con.close();
+			}
 
 }

@@ -23,7 +23,9 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path %>/css/10.promotion&used_post_list.css" type="text/css" rel="stylesheet">
 
+
 <article style="padding-top: 200px; margin: 0px 20%">
+
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">중고거래</span> 상품목록
@@ -45,6 +47,7 @@
 			<div class=detail>
 				<%
 					for (DetailList3DTO dldto : list) {
+						System.out.println("게시글 제목 :" + dldto.getPost_title());
 				%>
 				<div class="product">
 					<a class="move"

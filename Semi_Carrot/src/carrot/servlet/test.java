@@ -1,15 +1,32 @@
 package carrot.servlet;
 
-public class test {
+import java.io.File;
+import java.io.IOException;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-		int[] a = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		int count = 0;
-		for (int b : a) {
-			count++;
-			System.out.println("count : " + count + " / b = " + b);
+import carrot.bean.dao.ProfileImgDAO;
+import carrot.bean.dao.ReplyDAO;
+import carrot.bean.dto.MemberDTO;
+
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/test.do")
+public class test extends HttpServlet {
+
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		try {
+			// 파일 삭제
+			File profile = new File("D:/upload/board/3");
+			profile.delete();
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

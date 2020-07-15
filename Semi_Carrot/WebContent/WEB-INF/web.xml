@@ -69,22 +69,8 @@
 	 
 	 
 
-		<!-- 테스트필터는 로그인필터 전에 배치해야 한다-->
-	<filter>
-		<filter-name>testLoginFilter</filter-name>
-		<filter-class>carrot.filter.TestLoginFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>testLoginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	 
 	
 	
-	<!-- 대문 설정 -->
-	<welcome-file-list>
-	 		<welcome-file>index.jsp</welcome-file>
-	 </welcome-file-list> 
 
 	 
 <!-- 에러 페이지 설정 -->

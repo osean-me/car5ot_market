@@ -35,7 +35,7 @@ String path = request.getContextPath();
 
 <article id="login-article">
 	<div class="main-form">
-	<div>
+	<div style=height:250px;>
 		<img src="<%=path%>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
     </div>    
         <div id="find-form">
@@ -43,10 +43,10 @@ String path = request.getContextPath();
 	            <div class="title">아이디 찾기</div>
 	            <form action="find_id.do" method="post">
 	            	<div>
-	             		<input id="nick1"type="text" name="member_nick" placeholder="닉네임을 입력해 주세요">
+	             		<input id="nick"type="text" name="member_nick" placeholder="닉네임 입력"required>
 	            	</div>
 	            	<div>
-	            		<input id="phone1" type="text" name="member_phone"placeholder="전화 번호를 입력해 주세요">
+	            		<input id="phone" type="text" name="member_phone"placeholder="전화 번호를 입력"required>
 	            	</div>
 	            	<div id="id-submit"> 
 	            		<input class="submit" type ="submit"value="찾기">
@@ -56,9 +56,9 @@ String path = request.getContextPath();
 	        <div class="pw-find">
 	            <div class="title">비밀번호 찾기</div>
 	            <form action="find_pw.do" method="post">
-	            <div> <input id="id2" type="text" name="member_id" placeholder="이메일 을 입력해 주세요"required></div>
-	            <div><input id="nick2" type="text" name="member_nick"placeholder="닉네임 을 입력해 주세요"required></div>
-	            <div><input id="phone2" type="text" name="member_phone"placeholder="전화 번호 를 입력해 주세요"required></div>
+	            <div> <input id="id" type="text" name="member_id" placeholder="이메일 입력"required></div>
+	            <div><input id="nick" type="text" name="member_nick"placeholder="닉네임  입력"required></div>
+	            <div><input id="phone" type="text" name="member_phone"placeholder="전화 번호 입력"required></div>
 	            <div><input class="submit" type ="submit"value="찾기"></div>
 	            </form>
 	        </div>

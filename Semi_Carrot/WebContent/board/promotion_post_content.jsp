@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="carrot.bean.dto.PromotionBoardDTO"%>
 <%@page import="carrot.bean.dao.PromotionBoardDAO"%>
 <%@page import="carrot.bean.dto.PromotionPostDTO"%>
@@ -45,6 +47,14 @@
 			boolean isMine= memberinfo.getMember_no() == ppdto.getMember_no();
 			//관리자
 			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
+			
+			//프로필 이미지
+			ProfileImgDAO pidao = new ProfileImgDAO();
+			Long member_img_no = null;
+			
+			if(mdto != null) {
+				member_img_no = pidao.getProfileImgNo(mdto.getMember_no());
+			}
 			
 	%>
 	
@@ -161,7 +171,7 @@
 					<p class="font20">댓글</p>
 					<div class="reply-div-padding">
 						<div class="reply-border">
-						<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+						<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="110" rows="5"></textarea>
 						</div>
 					</div>
 					<div class="reply-num-border">
@@ -233,7 +243,18 @@
 				<div class="padding-top30">
 					<div class="float-box float-left">
 						<div class="left-item25   padding-top10 pic-align left-font">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+							<%if(mdto != null) { %>
+								<%if(member_img_no != null) {
+										ProfileImgDTO pidto = pidao.get(mdto.getMember_no());%>
+											<%if(pidto != null) {%>
+														<!-- 회원 이미지가 있을 때  -->
+												<img alt="<%=mdto.getMember_nick() %>" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidto.getMember_img_no()%>" class="reply-pic-circle">
+												<%}%>
+											<%} else { %>
+													<!-- 회원 이미지가 없을 때 -->
+													<img src="<%=path %>/img/user_icon.png" class="reply-pic-circle">
+												<%} %>
+										<%} %>
 						</div>
 						<div class="right-item75">
 								<div class="top-margin10 left-font">

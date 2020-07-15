@@ -14,7 +14,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 /* aritcle 기본 폼 */
 #used-post-content-form {
 	width: auto;
-	margin: 0px 15%;
+	margin: 0px 20%;
 	text-align: center;
 }
 

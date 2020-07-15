@@ -76,10 +76,13 @@ public class ReplyDAO {
 
 	// [3] 댓글 등록
 	public void writeReply(ReplyDTO rdto, String reply_table_name, String reply_seq_name) throws Exception {
+		// 시퀀스번호 발급
+		long seq_no = this.getSequence(reply_seq_name);
+
 		if (rdto.getSuper_no() == 0) {
 			// 새 글일 경우 > rdto 에는 5개의 정보가 들어있음.
 			// 그룹번호 추가
-			rdto.setGroup_no(rdto.getReply_no());
+			rdto.setGroup_no(seq_no);
 		} else {
 			// 답글일 경우 > rdto 에는 6개의 정보가 들어있음.
 			// 추가로 그룹번호와 차수를 설정해준다.
@@ -89,9 +92,6 @@ public class ReplyDAO {
 			rdto.setGroup_no(motherReply.getGroup_no()); // 부모 댓글의 그룹 번호
 			rdto.setDepth(motherReply.getDepth() + 1); // 부모 댓글의 차수 + 1
 		}
-
-		// 시퀀스번호 발급
-		long seq_no = this.getSequence(reply_seq_name);
 
 		Connection con = getConnection();
 
@@ -109,7 +109,7 @@ public class ReplyDAO {
 		// 새글 혹은 답글
 		if (rdto.getSuper_no() == 0) {
 			// 새글일 경우
-			ps.setNull(5, Types.INTEGER);
+			ps.setNull(5, Types.NULL);
 		} else {
 			// 답글일 경우
 			ps.setLong(5, rdto.getSuper_no());
@@ -141,12 +141,47 @@ public class ReplyDAO {
 
 		while (rs.next()) {
 			ReplyDTO rdto = new ReplyDTO(rs);
-			
+
 			list.add(rdto);
 		}
+
+		con.close();
+
+		return list;
+	}
+
+	// [5] 댓글 수정
+	public void editReply(String reply_table_name, long reply_no, String reply_content) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "UPDATE #1 SET REPLY_CONTENT = ? WHERE REPLY_NO = ?";
+
+		sql = sql.replace("#1", reply_table_name);
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, reply_content);
+		ps.setLong(2, reply_no);
+		
+		ps.execute();
 		
 		con.close();
+	}
+	
+	// [6] 댓글 삭제
+	public void deleteReply(String reply_table_name, long reply_no) throws Exception {
+		Connection con = getConnection();
 		
-		return list;
+		String sql = "DELETE #1 WHERE REPLY_NO = ?";
+		
+		sql = sql.replace("#1", reply_table_name);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setLong(1, reply_no);
+		
+		ps.execute();
+		
+		con.close();
 	}
 }

@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
@@ -34,6 +36,8 @@
 		
 		String sysdate = date.format(cal.getTime()); // 현재 날짜
 		String systime = time.format(cal.getTime()); // 현재 시간 
+		
+		System.out.println(systime);
 		
 		int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
 		int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
@@ -79,10 +83,14 @@
 
 		// 해당 게시글 댓글 존재 여부 확인
 		ReplyDAO rdao = new ReplyDAO();
+		
+		// 프로필 가지고 오기
+		ProfileImgDAO pidao = new ProfileImgDAO();
 	%>
 	
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
+<script type="text/javascript" src="<%=path%>/js/reply.js"></script>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 
 <article style="padding-top: 220px;" id="used-post-content-form">
@@ -202,7 +210,7 @@
 						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
 						<div class="reply-div-padding">
 							<div class="reply-border">
-							<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+							<textarea class="text-padding font15" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
 							</div>
 						</div>
 						<div class="reply-num-border">
@@ -220,8 +228,8 @@
 				
 			<div class="padding-top25 ">
 				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
+					int count = 0;
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
-					
 					for(ReplyDTO rdto : list) {
 						// 현재 시간과 댓글 작성일 계산
 						String replyDATE = rdto.getReply_date().substring(11);
@@ -234,16 +242,24 @@
 						
 						// 현재 시간과 작성 시간 비교 						
 						int compareTime = systime_s - replytime_s; 
-						System.out.println("작성 시간 초단위 : " + replytime_s);
-						System.out.println("비교 : " + compareTime);	
 						
 						MemberDTO replymember;
 				%>
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
-							<img class="reply-pic-circle" src="<%=path %>/img/manner_sample.jpg">
+						<!-- 프로필 이미지 영역 -->
+							<%if(rdto.getMember_no() != 0) {
+									if(pidao.getProfileImgNo(rdto.getMember_no()) != null) { %>
+										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(rdto.getMember_no())%>">
+									<%} else {%>
+										<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png">
+								<%} %>
+							<%} else { %>
+									<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png">
+							<%} %>		
 						</div>
 						<div class="right-item90">
+							<!-- 프로필 닉네임 / 댓글 내용 영역 -->
 							<div class="reply-nick-font">
 								<%if(rdto.getMember_no() == 0) { %>						
 									<span>탈퇴한 회원</span>
@@ -254,10 +270,17 @@
 
 									<span><%=replymember.getMember_nick() %></span>
 								<%} %>
-								<%if(compareTime > 3600 || compareTime < 0) { %>
-									<span class="right-float gray-font"><%=rdto.getReply_date().substring(0, 10) %></span>
+								<%if((compareTime > 60 || compareTime < 0)) { %>
+									<span class="right-float gray-font">
+										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) { %>
+											오늘
+										<%} else { %>
+											<%=rdto.getReply_date().substring(0, 10) %>
+										<%} %>
+									</span>
 								<%
 									} else { 
+										System.out.println(compareTime);
 										int miniute = compareTime/60;
 										int hour = miniute/60;
 										int replyResult = miniute-(hour*60);
@@ -265,14 +288,73 @@
 									<span class="right-float gray-font"><%=replyResult %> 분 전</span>
 								<%} %>
 							</div>
-							<div class="font17 padding-top10">
-								<%=rdto.getReply_content() %>
+							<div class="font17 padding-top10 reply-content-form">
+								<div class="reply-content">
+									<%if(request.getParameter(String.valueOf(rdto.getReply_no())) != null) { %>
+										<form action="edit_reply.do" method="post" id="edit-reply-form">
+											<input type="hidden" name="reply_no" value="<%=rdto.getReply_no() %>">
+											<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
+											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?post_no=<%=rdto.getPost_no()%>">
+											<textarea class="font15" name="reply_content" placeholder="<%=rdto.getReply_content()%>"></textarea>
+											<input type="submit" class="right-float reply-button" value="☜수정">
+										</form>
+									<%} else {%>
+										<%=rdto.getReply_content() %>
+								</div>
+								<div class="reply-control">
+											<div>
+												<label for="re-reply<%=count%>">
+													<input type="checkbox" id="re-reply<%=count%>" style="display: none;" value="<%=count %>" onchange="reReply(this);">
+															답글
+												</label>
+											</div>
+										<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
+											<div><a href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&<%=rdto.getReply_no() %>=<%=rdto.getReply_no()%>">수정</a></div>
+											<div>
+												<form action="delete_reply.do" method="post" id="delete-reply-form">
+													<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
+													<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
+													<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
+													<input type="submit" value="삭제" class="font15">	
+												</form>
+											</div>
+										<%} %>
+									<%} %>	
+								</div>
 							</div>	
 						</div>
 					</div>
+					<div class="padding-top20 rereply-off" id="rereply-form<%=count%>">
+					<p class="font20">대댓글</p>
+					<form action="write_reply.do" method="post">
+						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="post_no" value="<%=post_no %>">
+						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
+						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
+						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
+						<div class="reply-div-padding">
+							<div class="reply-border">
+							<textarea class="text-padding font15" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+							</div>
+						</div>
+						<div class="reply-num-border">
+							<div class="float-box float-left">
+								<div class="left-item50">
+									<p class="font12 gray-font text-padding10">30 / 100</p>
+								</div>
+								<div class="left-item50 text-padding10">
+									<input type="submit" class="right-float reply-button" value="☜등록">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
 					<hr>
-					<%} %>
-				<%} %>
+					<%
+							count++;
+						} 
+					%>
+				<%} %>	
 				</div>
 			</div>
 			
@@ -284,12 +366,19 @@
 				<div class="padding-top30">
 					<div class="float-box float-left">
 						<div class="left-item25  pic-align left-font">
-							<img class="reply-pic-circle" src="https://placeimg.com/300/250/tech" >
+							<%if(updto.getMember_no() != 0) { 
+									if(pidao.getProfileImgNo(updto.getMember_no()) != null) {%>
+										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(updto.getMember_no())%>" >
+									<%}%>
+										<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
+							<% 	} else { %>
+								<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
+							<%} %>
 						</div>
 						<div class="right-item75">
-								<div class="top-margin10 left-font">
+								<div class="top-margin10 left-font seller">
 									<!-- 작성자 -->
-									<%if(updto.getMember_no( ) != 0){ %>
+									<%if(updto.getMember_no() != 0){ %>
 										<p class="font20"> <%=mdto.getMember_nick() %></p>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>

@@ -7,7 +7,7 @@
 }
 
 #used-write-form {
-margin-left:350px;
+	margin:0px 20%;
 
 }
 
@@ -88,7 +88,7 @@ margin-left:350px;
 }
 
 .first {
-   width: 1100px;
+   width: 1000px;
    height: 200px;
    border-color: lightgray;
    font-size: 20px;
@@ -96,7 +96,7 @@ margin-left:350px;
    margin-left: 50px;
 }
 .first:focus {
-   width: 1100px;
+   width: 1000px;
    height: 200px;
    font-size: 20px;
    font-weight: normal;
@@ -125,7 +125,7 @@ margin-left:350px;
 }
 
 .countNum {
-   margin-left: 1080px;
+   margin-left: 990px;
    margin-top: 10px;
 }
 
@@ -250,7 +250,6 @@ input+span {
       </h1>
       <br><br>
       <hr class="hr_style2">
- 		<hr>
       <br><br>
       <!--  
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 

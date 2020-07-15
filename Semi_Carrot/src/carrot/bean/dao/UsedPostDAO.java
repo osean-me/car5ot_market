@@ -133,6 +133,7 @@ public class UsedPostDAO {
 							"(SELECT post_no, min(post_img_no) post_img_no FROM used_post_img GROUP BY post_no) img " + 
 							"ON post.post_no = img.post_no	 " + 
 							"INNER JOIN address addr ON post.addr_no = addr.addr_no ";
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();

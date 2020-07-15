@@ -1,5 +1,3 @@
-<%@page import="carrot.bean.dao.UsedBoardDAO"%>
-<%@page import="carrot.bean.dto.UsedBoardDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="carrot.bean.dto.DetailList3DTO"%>
@@ -17,20 +15,11 @@
 
 
 <%
-	
-	//long post_no = Long.parseLong(request.getParameter("post_no")); 
-	long board_no = Long.parseLong(request.getParameter("board_no")); 
-    long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
-
-	MemberDAO mdao = new MemberDAO();
 	UsedPostDAO updao = new UsedPostDAO();
-	List<DetailList3DTO> list = updao.getList3(board_no, used_cate_num); //카테고리별 목록
+	MemberDAO mdao = new MemberDAO();
 
+	List<DetailList3DTO> list = updao.getList3(); //전체목록
 	
-	UsedBoardDAO ubdao = new UsedBoardDAO();
-	UsedBoardDTO ubdto = ubdao.get(used_cate_num); //카테고리 번호로 카테고리 이름 가져오기 
-    
-		
 	// 시간 출력 수정 
 	Calendar cal = Calendar.getInstance();
 	SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -57,7 +46,7 @@
 
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
-			<span style="color: orange"><%=ubdto.getUsed_cate_title() %></span> 상품목록
+			<span style="color: orange">중고거래</span> 상품목록
 		</h2>
 		<div class="sort_list" align="right">
 			<div class="popular">
@@ -78,8 +67,10 @@
 					for (DetailList3DTO dldto : list) {
 				%>
 				<div class="product">
+
 					<a class="move"
 						href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>">
+						
 						<!-- 이미지 등록 -->
 						<div class="product_photo">
 							<img src="showImg.do?post_img_no=<%=dldto.getPost_img_no()%>">

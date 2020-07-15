@@ -25,7 +25,9 @@
 		long login_member = login.getMember_no();
 		
 		long post_no = Long.parseLong(request.getParameter("post_no")); 
-
+		long board_no = Long.parseLong(request.getParameter("board_no")); 
+	    long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
+	         
 		UsedPostDAO updao = new UsedPostDAO();
 		UsedPostDTO updto = updao.get(post_no);
 		

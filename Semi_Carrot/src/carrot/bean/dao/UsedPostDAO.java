@@ -125,8 +125,8 @@ public class UsedPostDAO {
 		
 	}
 	
-	// 주소 + 사진 포함 전체 목록 메소드 
-	public List<DetailList3DTO> getList3() throws Exception {
+	// 주소 + 사진 포함 게시판/카테고리별 목록 메소드 
+	public List<DetailList3DTO> getList3(long board_no, long used_cate_num) throws Exception {
 		Connection con = getConnection();
 		//String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
 		String sql = 	"SELECT post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base " + 
@@ -134,9 +134,13 @@ public class UsedPostDAO {
 							"INNER JOIN " + 
 							"(SELECT post_no, min(post_img_no) post_img_no FROM used_post_img GROUP BY post_no) img " + 
 							"ON post.post_no = img.post_no	 " + 
-							"INNER JOIN address addr ON post.addr_no = addr.addr_no ";
+							"INNER JOIN address addr ON post.addr_no = addr.addr_no " +
+							"WHERE post.board_no=? AND post.used_cate_num=?" +
+							"ORDER BY post.post_no DESC";
 
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, board_no);
+		ps.setLong(2, used_cate_num);
 		
 		ResultSet rs = ps.executeQuery();
 		List<DetailList3DTO> list = new ArrayList<>();
@@ -151,6 +155,32 @@ public class UsedPostDAO {
 		
 	}
 	
+	// 주소 + 사진 포함 전체 목록 메소드 
+		public List<DetailList3DTO> getList3() throws Exception {
+			Connection con = getConnection();
+			//String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
+			String sql = 	"SELECT post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base " + 
+								"FROM used_post post " + 
+								"INNER JOIN " + 
+								"(SELECT post_no, min(post_img_no) post_img_no FROM used_post_img GROUP BY post_no) img " + 
+								"ON post.post_no = img.post_no	 " + 
+								"INNER JOIN address addr ON post.addr_no = addr.addr_no " +
+								"ORDER BY post.post_no DESC";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			List<DetailList3DTO> list = new ArrayList<>();
+			while(rs.next()) {
+				DetailList3DTO dldto = new DetailList3DTO(rs);
+				
+				list.add(dldto);
+			}
+			
+			con.close();
+			return list;
+			
+		}
 	 //단일조회
 	   public UsedPostDTO get(long post_no)throws Exception{
 	      Connection con=getConnection();

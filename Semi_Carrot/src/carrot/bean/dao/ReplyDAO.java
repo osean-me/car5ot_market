@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import carrot.bean.dto.MemberDTO;
 import carrot.bean.dto.ReplyDTO;
 
 public class ReplyDAO {
@@ -159,29 +160,59 @@ public class ReplyDAO {
 		sql = sql.replace("#1", reply_table_name);
 
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, reply_content);
 		ps.setLong(2, reply_no);
-		
+
 		ps.execute();
-		
+
 		con.close();
 	}
-	
+
 	// [6] 댓글 삭제
 	public void deleteReply(String reply_table_name, long reply_no) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "DELETE #1 WHERE REPLY_NO = ?";
+
+		sql = sql.replace("#1", reply_table_name);
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, reply_no);
+
+		ps.execute();
+
+		con.close();
+	}
+
+	// [7] super_no 로 부모 댓글 작성자 조회
+	public String getMotherReplyNick(String reply_table_name, long super_no, long post_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT MEMBER_NO FROM #1 WHERE REPLY_NO = ? AND POST_NO = ?";
 		
 		sql = sql.replace("#1", reply_table_name);
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		
-		ps.setLong(1, reply_no);
+		ps.setLong(1, super_no);
+		ps.setLong(2, post_no);
 		
-		ps.execute();
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		
+		long reply_member_no = rs.getLong(1);
 		
 		con.close();
+		
+		MemberDAO mdao = new MemberDAO();
+		
+		MemberDTO mdto = mdao.get(reply_member_no);
+		
+		String result = mdto.getMember_nick();
+		
+		return result;
 	}
 }

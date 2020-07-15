@@ -44,7 +44,7 @@
 			
 			System.out.println(systime);
 			
-			int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
+			int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 			int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
 			int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
 			
@@ -239,7 +239,7 @@
 						// 현재 시간과 댓글 작성일 계산
 						String replyDATE = rdto.getReply_date().substring(11);
 						System.out.println(replyDATE);
- 						int replyhour = Integer.parseInt(replyDATE.substring(0, 2)) * 60;
+ 						int replyhour = (Integer.parseInt(replyDATE.substring(0, 2)) * 60) * 60;
 						int replyminute = Integer.parseInt(replyDATE.substring(3, 5)) * 60;
 						int replysecound = Integer.parseInt(replyDATE.substring(6, 8));
 						
@@ -275,23 +275,18 @@
 
 									<span><%=replymember.getMember_nick() %></span>
 								<%} %>
-								<%if((compareTime > 60 || compareTime < 0)) { %>
 									<span class="right-float gray-font">
-										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) { %>
-											오늘
-										<%} else { %>
+										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) {%>
+											<%if(compareTime < 3600) { %>
+												<%int replyResult = (compareTime / 60) % 60; %>
+												<%=replyResult %> 분 전
+											<%} else {%>
+												오늘
+											<%} %>
+										<%} else {%>
 											<%=rdto.getReply_date().substring(0, 10) %>
 										<%} %>
 									</span>
-								<%
-									} else { 
-										System.out.println(compareTime);
-										int miniute = compareTime/60;
-										int hour = miniute/60;
-										int replyResult = miniute-(hour*60);
-								%>
-									<span class="right-float gray-font"><%=replyResult %> 분 전</span>
-								<%} %>
 							</div>
 							<div class="font17 padding-top10 reply-content-form">
 								<div class="reply-content">

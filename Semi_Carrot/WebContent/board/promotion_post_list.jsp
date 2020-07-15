@@ -33,7 +33,7 @@
 	String sysdate = date.format(cal.getTime()); // 현재 날짜
 	String systime = time.format(cal.getTime()); // 현재 시간 
 
-	int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
+	int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 	int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
 	int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
 
@@ -75,18 +75,14 @@
 					for (DetailList2DTO dldto : list) {
 				%>
 				<div class="product">
-					<a class="move"
-						href="promotion_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&promotion_cate_num=<%=dldto.getPromotion_cate_num()%>&post_no=<%=dldto.getPost_no()%>">
-
 						<div class="product_photo">
-							<img src="showImg2.do?post_img_no=<%=dldto.getPost_img_no()%>">
+							<a class="move" href="promotion_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&promotion_cate_num=<%=dldto.getPromotion_cate_num()%>&post_no=<%=dldto.getPost_no()%>"><img src="showImg2.do?post_img_no=<%=dldto.getPost_img_no()%>"></a>
 						</div>
 						<div class="product_title">
 							<div class="hideText">
-								<font color="black"><%=dldto.getPost_title()%>
+								<a class="move" href="promotion_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&promotion_cate_num=<%=dldto.getPromotion_cate_num()%>&post_no=<%=dldto.getPost_no()%>"><%=dldto.getPost_title()%></a>
 							</div>
 						</div>
-						</a>
 						<div class="post_location">
 							<img
 								src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAiCAYAAABIiGl0AAAAAXNSR0IArs4c6QAAA6xJREFUWAm1l01IVFEUx51xNAtxIcEENuQIrqTxO8OEmj5IAncVUS2E2kS0axO4C5KiFi0lXIh9QBC1kKgwclNGjaNOSUEapVRiUSHoTOo4/c743vjem/vGp8xcuHPu+Z//Of9778y9740rz0EbGxsrjsViQait9JpEIuF1uVzbGCfo0/jT2GGwx6WlpQN+vz+Gn7G5MkXD4fAOil6C047dlImrxxCfg9tVUFBwtbq6ekbHrVYpzAoLo9FoJ+QL9AJrkkN/3u12d9bW1l5hMsvWnDTh4eHh8uXl5fvMutFK3qD/jLxTDQ0Nv4z5JuHR0VH/4uLiKwjy/WWtseJPLKTZKO7Wq4dCoa1LS0tP8bMqKvURrcT0TU1NbRZfWkqYWXVrhJVI9j+bZmZmbuplk1s9NDR0GNEnOpgrKz8ydBrZ8rBHRHCur0MsCvc1Pazl1GF301PbqOFpBh3Z4Rv0oIvVBgBG01hqYKCwsPBMIBD4bAxHIpGKhYWFbrB9RtxuzDEr9yB6zI5gwV/U19cfYLvktjI1mQh19rOI5wSCpqDC4bgelaXvUcRMEGJzAO0qUZ2oxdrx53XMzsI9KMJldgQDPsgPYtLgK4fCoeigMmgA2R2fCG83YMohxCFlQAHCDSlgE8Tkytx8yDZmbHCKMxIMQSdcJueWFU8Y8pRDiA3KgAJ0yJ1wJMwqGrlSWxQ6Jkg4wjWBamfCzQzfqmOrqGwNXo/c56uoeaTFejSuOWjxmNx7KXiHwYIlpnIr4I1xVo9TPF8nyFgwiYFV6LidhZfgJaFXv6vvUeCEHVmBy7UZ0fAAds3rUq+BcD8X0SFZcR5XWJcecGhFqEnrjkW12rfEJoV5PRlgJg+1QM4MGqG6uroHKWEZsNXnCfzNmWpe3iL1z9LjJmGuux+AF3MlTO1rrDb1FExutS5GQB5tj3Q/WxbRSElJyWVjPZOwBLxe70mI8sKXrTaZn59/pLKy8p+xYJqwz+eLFhUVtUH6aCRuZMwC/tBba2pqvlnz04SFUFVV9Zsj1krSd2vCOvwYNdo4sx9UOUphIfJ9f8XsRXxclbgGNiuiHNOXdjxbYUlgtuMINzN8Y1dAgU+BtTDxfkUsBWUUFhYFfmKCTKAvlWU/kDfPJo7mO3vKSiR5V69Fkrg8DPj32IHtwE2+FhvzmFivx+M5xz/ENV8sJM+xsC4yMjKyKx6P32YC8rdE2iz9HKu8m/QcfqxbWOry7N2CkRfznZzR0/yIvjBeV/sPFdozA8TD8zUAAAAASUVORK5CYII="
@@ -107,7 +103,7 @@
 								<%
 									String promotion_post_date = dldto.getPost_date().substring(11);
 
-										int posthour = Integer.parseInt(promotion_post_date.substring(0, 2)) * 60;
+										int posthour = (Integer.parseInt(promotion_post_date.substring(0, 2)) * 60) * 60;
 										int postminute = Integer.parseInt(promotion_post_date.substring(3, 5)) * 60;
 										int postsecound = Integer.parseInt(promotion_post_date.substring(6, 8));
 
@@ -116,22 +112,18 @@
 										int compareTime = systime_s - posttime_s;
 								%>
 								<div class="product_time">
-									<%if((compareTime > 60 || compareTime < 0)) { %>
 									<span>
-									<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) { %>
-										오늘
-									<%} else { %>
-										<%=dldto.getPost_date().substring(0, 10) %>
-									<%} %>
+										<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) {%>
+											<%if(compareTime < 3600) { %>
+												<%int postResult = (compareTime / 60) % 60; %>
+												<%=postResult %> 분 전
+											<%} else {%>
+												오늘
+											<%} %>
+										<%} else {%>
+											<%=dldto.getPost_date().substring(0, 10) %>
+										<%} %>
 									</span>
-								<%
-									}else { 
-										int miniute = compareTime/60;
-										int hour = miniute/60;
-										int postResult = miniute-(hour*60);
-								%>
-									<span><%=postResult %>분전</span>
-									<%} %>
 								</div>
 							</div>
 							<hr class="hr_style">

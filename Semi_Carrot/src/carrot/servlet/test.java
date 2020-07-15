@@ -21,7 +21,7 @@ public class test extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			// 파일 삭제
-			File profile = new File("D:/upload/board/3");
+			File profile = new File("D:/upload/board/4");
 			profile.delete();
 
 		} catch (Exception e) {

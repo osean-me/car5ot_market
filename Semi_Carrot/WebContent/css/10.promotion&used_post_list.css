@@ -18,7 +18,7 @@
 	margin-bottom: 15px;
 }
 
-.product_photo>img {
+.product_photo>a>img {
 	width: 253px;
 	height: 250px;
 }

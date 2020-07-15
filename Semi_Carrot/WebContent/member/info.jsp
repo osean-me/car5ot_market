@@ -1,3 +1,6 @@
+<%@page import="carrot.bean.dao.UsedPostImgDAO"%>
+<%@page import="carrot.bean.dto.UsedPostImgDTO"%>
+<%@page import="carrot.bean.dto.DetailList3DTO"%>
 <%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="carrot.bean.dto.ProfileImgDTO"%>
 <%@page import="carrot.bean.dao.IntroDAO"%>
@@ -77,6 +80,8 @@
 	
 	ProfileImgDAO pidao = new ProfileImgDAO();
 	Long member_img_no = pidao.getProfileImgNo(member_no);
+	
+	UsedPostImgDAO uidao = new UsedPostImgDAO();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -241,11 +246,17 @@
 	                         					break;
 	                         				}
 	                                		
+	                                		UsedPostImgDTO uidto = uidao.getMember(post.getPost_no());
+	                                		
 	                                %>
 	                                    <div class="product">
 	                                        <div class="product-inner">
-	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
-	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
+	                                        	<div class="photo">
+	                                        		<a href="used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        	</div>
+	                                        	<div class="product-title">
+	                                        		<a href="used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><%=post.getPost_title() %>...</a>	
+	                                        	</div>
 	                                        	<div class="map">
 	                                        		<div>
 		                                        		<%=adto.getAddr_state().substring(0, 2) %>  
@@ -275,12 +286,18 @@
 	                                		if(count2 == 10) {
 	                         					break;
 	                         				}
+	                                		
+	                                		UsedPostImgDTO uidto = uidao.getMember(post.getPost_no());
 	                                		if(count2 > 4) {
 	                                %>
 	                                    <div class="product">
 	                                        <div class="product-inner">
-	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
-	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
+	                                        	<div class="photo">
+	                                        		<a href="used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        	</div>
+	                                        	<div class="product-title">
+	                                        		<a href="used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><%=post.getPost_title() %>...</a>	
+	                                        	</div>
 	                                        	<div class="map">
 	                                        		<div>
 	                                        			<%=adto.getAddr_state() %>  

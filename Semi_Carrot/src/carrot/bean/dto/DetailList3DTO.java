@@ -61,6 +61,7 @@ public class DetailList3DTO {
 			 return getUsedPost_day();
 		 }
 	 }
+	 
 	public DetailList3DTO() {
 		super();
 	}

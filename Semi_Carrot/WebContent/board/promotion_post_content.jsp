@@ -28,7 +28,9 @@
 			long login_member = login.getMember_no();
 	
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
-
+			long board_no = Long.parseLong(request.getParameter("board_no")); 
+		    long	promotion_cate_num = Long.parseLong(request.getParameter("promotion_cate_num")); 
+		 
 			PromotionPostDAO ppao = new PromotionPostDAO();
 			PromotionPostDTO ppdto = ppao.get(post_no);
 		

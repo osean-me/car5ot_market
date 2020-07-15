@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.FileUtils;
 
-import carrot.bean.dao.UsedPostImgDAO;
-import carrot.bean.dto.UsedPostImgDTO;
+import carrot.bean.dao.PromotionPostImgDAO;
+import carrot.bean.dto.PromotionPostImgDTO;
 
 
-@WebServlet(urlPatterns="/board/showImg.do")
-public class ThumbnailServlet extends HttpServlet{
+
+@WebServlet(urlPatterns="/board/showImg2.do")
+public class PromotionThumbnailServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
@@ -25,20 +26,20 @@ public class ThumbnailServlet extends HttpServlet{
 			long post_img_no = Long.parseLong(req.getParameter("post_img_no"));
 			
 			//데이터베이스에서 post_img_no 에 해당하는 파일 정보를 불러온다.
-			UsedPostImgDAO upidao = new UsedPostImgDAO();
-			UsedPostImgDTO upidto = upidao.get(post_img_no);
+			PromotionPostImgDAO ppidao = new PromotionPostImgDAO();
+			PromotionPostImgDTO ppidto = ppidao.get(post_img_no);
 			
-			if(upidto == null) {
+			if(ppidto == null) {
 				resp.sendError(404);
 				return;
 			}
 			
 			resp.setHeader("Content-Type", "application/octet-stream; charset=UTF-8");
-			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(upidto.getPost_img_name(), "UTF-8")+"\"");
-			resp.setHeader("Content-Length", String.valueOf(upidto.getPost_img_size()));
+			resp.setHeader("Content-Disposition", "attachment; filename=\""+URLEncoder.encode(ppidto.getPost_img_name(), "UTF-8")+"\"");
+			resp.setHeader("Content-Length", String.valueOf(ppidto.getPost_img_size()));
 			
 			//실제 데이터를 불러와서 사용자에게 전송
-			File target = new File("D:/upload/board", String.valueOf(upidto.getPost_img_no()));
+			File target = new File("D:/upload/board", String.valueOf(ppidto.getPost_img_no()));
 			byte[] data = FileUtils.readFileToByteArray(target);
 			resp.getOutputStream().write(data);
 		}

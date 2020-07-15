@@ -64,6 +64,7 @@ private static DataSource src;
 		con.close();
 	}
 	
+	// 이미지 단일조회 메소드 
 	public UsedPostImgDTO get(long post_img_no) throws SQLException {
 		Connection con = getConnection();
 		String sql = "SELECT * FROM used_post_img WHERE post_img_no = ? ";

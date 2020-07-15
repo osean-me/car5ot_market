@@ -212,7 +212,7 @@
 			<div class="float-box float-left">
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/nature">
-					<p class="font17 top-margin10">사진1</p>
+					<p class="font17 top-margin10">.....></p>	<!-- 제목출력 -->
 				</div>
 				<div class="left-item16">
 					<img src="https://placeimg.com/150/150/tech" >

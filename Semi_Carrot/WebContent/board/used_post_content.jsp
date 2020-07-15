@@ -1,3 +1,6 @@
+<%@page import="carrot.bean.dto.UsedPostImgDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="carrot.bean.dao.UsedPostImgDAO"%>
 <%@page import="carrot.bean.dto.ProfileImgDTO"%>
 <%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="java.util.HashSet"%>
@@ -51,6 +54,9 @@
 			if(mdto != null) {
 				member_img_no = pidao.getProfileImgNo(mdto.getMember_no());
 			}
+			//첨부파일 이미지
+			UsedPostImgDAO upidao = new UsedPostImgDAO();
+			List<UsedPostImgDTO>fileList=upidao.getList(post_no);
 	%>
 	
 	
@@ -60,9 +66,16 @@
 <article style="padding-top: 220px" id="used-post-content-form">
 	<div class="padding50">
 		<div class="float-box float-left">
+			
 			<div class="left-item40">
-				<img class="imagesize" src="https://placeimg.com/200/250/tech">
+				<%if(!fileList.isEmpty()){ %>
+					<%for(UsedPostImgDTO upidto : fileList){ %>
+						<!-- 이미지 미리보기 -->
+							<img class="imagesize" src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
+					<%} %>
+				<%} %>
 			</div>
+		
 			<div class="right-item60 left-font padding-left35">
 				<!-- 글 제목 -->
 				<div class="font23 padding25">

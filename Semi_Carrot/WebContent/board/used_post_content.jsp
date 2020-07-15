@@ -27,8 +27,8 @@
 			long login_member = login.getMember_no();
 	
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
-//	        long board_no = Long.parseLong(request.getParameter("board_no")); 
-//	        long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
+	        //long board_no = Long.parseLong(request.getParameter("board_no")); 
+	        //long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
 	         
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
@@ -43,7 +43,7 @@
 			
 			System.out.println(systime);
 			
-			int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
+			int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
 			int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
 			int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
 			
@@ -159,120 +159,120 @@
 
 
 <article style="padding-top: 220px" id="post-content-form">
-	<div class="padding50">
-		<div class="float-box float-left">
-			
-			<div class="left-item40">
-			<!-- 이미지 슬라이더 영역 -->
-			<div class="swiper-container">
-				<!-- 필수 영역 -->
-    		    <div class="swiper-wrapper">		
-				<%if(!fileList.isEmpty()){ %>
-					<%for(UsedPostImgDTO upidto : fileList){ %>
-    		    	<div class="swiper-slide">
-						<!-- 이미지 미리보기 -->
-							<img src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
-				</div>
-					<%} %>
-				<%} %>
-			</div>
-						        <!-- 이전/다음 버튼(선택) -->
-        	<div class="swiper-button-prev" ></div>
-       		 <div class="swiper-button-next"></div>
-			</div>
-
-			</div>
-		
-			<div class="right-item60 left-font padding-left35">
-				<!-- 글 제목 -->
-				<div class="font23 padding25">
-					<span><%=updto.getPost_title() %></span>
-				</div>
-				<!-- 상품 금액 -->
-				<div class="item padding25">
-					<!-- 3자리마다 콤마 찍기 -->
-					<%long price = updto.getPost_price();
-					String commaNum = NumberFormat.getInstance().format(price);
-					%>
-					<span class="font45"><%=commaNum %></span> <span class=font20>원</span>
-				</div>
-				<div class="item padding25">
-					<hr>
-				</div>
-				<div class="item font17 gray-font padding25">
-					<span class="padding-right05">♥ <%=updto.getPost_like() %></span> <span
-						class="short-border">조회수 <%=updto.getPost_view() %></span> 
-						<span class="padding-left05"><%=updto.getUsedPost_autotime()%></span> 
-						<span class="right-float">☎신고하기</span>
-				</div>
-				<div class="item font15 padding15">
-					<div class="padding15">
-						<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=ubdto.getUsed_cate_title() %></span>
-					</div>
-					<div class="padding15">
-						<span class="gray-font">&middot; 상품상태</span><span
-							class="purple-font">&emsp;<%=updto.getPost_state() %></span>
-					</div>
-					<div class="padding15">
-						<span class="gray-font">&middot; 거래지역</span><span
-							class="green-font">&emsp;<%=addto.getAddr_state() %> <%=addto.getAddr_city() %> <%=addto.getAddr_base() %></span>
-					</div>
-				</div>
-				<div>
-				<div class="float-box float-left">
-					<div class="left-item33">
-						<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
-					</div>
-					<%if(isAdmin || isMine){ %>
-					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
-					<div class="left-item33">
-						<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
-						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
-					</div>
-					<div class="left-item33">
-						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
-					</div>
-					<%} %>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div>
-		<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
-		
-		<div class="padding40">
+		<div class="padding50">
 			<div class="float-box float-left">
-				<div class="left-item16">
-					<img src="https://placeimg.com/150/150/nature">
-					<p class="font17 top-margin10">.....></p>	<!-- 제목출력 -->
+				
+				<div class="left-item40">
+				<!-- 이미지 슬라이더 영역 -->
+				<div class="swiper-container">
+					<!-- 필수 영역 -->
+	    		    <div class="swiper-wrapper">		
+					<%if(!fileList.isEmpty()){ %>
+						<%for(UsedPostImgDTO upidto : fileList){ %>
+	    		    	<div class="swiper-slide">
+							<!-- 이미지 미리보기 -->
+								<img src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
+					</div>
+						<%} %>
+					<%} %>
 				</div>
-				<div class="left-item16">
-					<img src="https://placeimg.com/150/150/tech" >
-					<p class="font17 top-margin10">사진2</p>
+							        <!-- 이전/다음 버튼(선택) -->
+	        	<div class="swiper-button-prev" ></div>
+	       		 <div class="swiper-button-next"></div>
 				</div>
-				<div class="left-item16">
-					<img src="https://placeimg.com/150/150/people" >
-					<p class="font17 top-margin10">사진3</p>
+	
 				</div>
-				<div class="left-item16">
-					<img src="https://placeimg.com/150/150/animals" >
-					<p class="font17 top-margin10">사진4</p>
-				</div>
-				<div class="left-item16">
-					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17 top-margin10">사진5</p>
-				</div>
-				<div class="left-item16">
-					<img src="https://placeimg.com/150/150/architecture" >
-					<p class="font17 top-margin10">사진6</p>
+			
+				<div class="right-item60 left-font padding-left35">
+					<!-- 글 제목 -->
+					<div class="font23 padding25">
+						<span><%=updto.getPost_title() %></span>
+					</div>
+					<!-- 상품 금액 -->
+					<div class="item padding25">
+						<!-- 3자리마다 콤마 찍기 -->
+						<%long price = updto.getPost_price();
+						String commaNum = NumberFormat.getInstance().format(price);
+						%>
+						<span class="font45"><%=commaNum %></span> <span class=font20>원</span>
+					</div>
+					<div class="item padding25">
+						<hr>
+					</div>
+					<div class="item font17 gray-font padding25">
+						<span class="padding-right05">♥ <%=updto.getPost_like() %></span> <span
+							class="short-border">조회수 <%=updto.getPost_view() %></span> 
+							<span class="padding-left05"><%=updto.getUsedPost_autotime()%></span> 
+							<span class="right-float">☎신고하기</span>
+					</div>
+					<div class="item font15 padding15">
+						<div class="padding15">
+							<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=ubdto.getUsed_cate_title() %></span>
+						</div>
+						<div class="padding15">
+							<span class="gray-font">&middot; 상품상태</span><span
+								class="purple-font">&emsp;<%=updto.getPost_state() %></span>
+						</div>
+						<div class="padding15">
+							<span class="gray-font">&middot; 거래지역</span><span
+								class="green-font">&emsp;<%=addto.getAddr_state() %> <%=addto.getAddr_city() %> <%=addto.getAddr_base() %></span>
+						</div>
+					</div>
+					<div>
+					<div class="float-box float-left">
+						<div class="left-item33">
+							<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
+						</div>
+						<%if(isAdmin || isMine){ %>
+						<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
+						<div class="left-item33">
+							<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
+							<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
+						</div>
+						<div class="left-item33">
+							<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
+						</div>
+						<%} %>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	
+
+
+		<div>
+			<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
+			
+			<div class="padding40">
+				<div class="float-box float-left">
+					<div class="left-item16">
+						<img src="https://placeimg.com/150/150/nature">
+						<p class="font17 top-margin10">.....></p>	<!-- 제목출력 -->
+					</div>
+					<div class="left-item16">
+						<img src="https://placeimg.com/150/150/tech" >
+						<p class="font17 top-margin10">사진2</p>
+					</div>
+					<div class="left-item16">
+						<img src="https://placeimg.com/150/150/people" >
+						<p class="font17 top-margin10">사진3</p>
+					</div>
+					<div class="left-item16">
+						<img src="https://placeimg.com/150/150/animals" >
+						<p class="font17 top-margin10">사진4</p>
+					</div>
+					<div class="left-item16">
+						<img src="https://placeimg.com/150/150/architecture" >
+						<p class="font17 top-margin10">사진5</p>
+					</div>
+					<div class="left-item16">
+						<img src="https://placeimg.com/150/150/architecture" >
+						<p class="font17 top-margin10">사진6</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="padding-top50">
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">

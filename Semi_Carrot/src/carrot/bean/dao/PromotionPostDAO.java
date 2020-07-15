@@ -64,9 +64,10 @@ public class PromotionPostDAO {
 				+ "post_like, "
 				+ "promotion_cate_num, "
 				+ "member_no, "
-				+ "addr_no "
+				+ "addr_no, "
+				+ "board_no "
 				+ ") " 
-				+"VALUES(?,?,?,?,sysdate,?,0,0,?,?,?)";
+				+"VALUES(?,?,?,?,sysdate,?,0,0,?,?,?,?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, updto.getPost_no());
@@ -77,6 +78,7 @@ public class PromotionPostDAO {
 		ps.setLong(6, updto.getPromotion_cate_num());
 		ps.setLong(7, updto.getMember_no());
 		ps.setLong(8,updto.getAddr_no());
+		ps.setLong(9, updto.getBoard_no());
 		ps.execute();
 		
 		con.close();
@@ -87,7 +89,7 @@ public class PromotionPostDAO {
 	//글 목록 메소드 
 	public List<PromotionPostDTO> getList2() throws Exception {
 		Connection con = getConnection();
-		String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
+		String sql ="SELECT * FROM promotion_post ORDER BY post_no DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();
@@ -100,16 +102,43 @@ public class PromotionPostDAO {
 		return list;		
 	}
 	
+	// 주소+사진 포함 게시판/카테고리별 목록 메소드 
+		public List<DetailList2DTO> getList(long board_no, long promotion_cate_num) throws Exception {
+			Connection con = getConnection();
+
+			String sql = "SELECT post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base " + 
+					"FROM promotion_post post "
+					+ "INNER JOIN "
+					+ "(SELECT post_no, min(post_img_no) post_img_no FROM promotion_post_img GROUP BY post_no) img "
+					+ "ON post.post_no = img.post_no "
+					+ "INNER JOIN address addr ON post.addr_no = addr.addr_no "
+					+ "WHERE post.board_no=? AND post.promotion_cate_num=?";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, board_no);
+			ps.setLong(2, promotion_cate_num);
+			
+			ResultSet rs = ps.executeQuery();
+			List<DetailList2DTO> list = new ArrayList<>();
+			while(rs.next()) {
+				DetailList2DTO dldto = new DetailList2DTO(rs);
+				
+				list.add(dldto);
+			}		
+			con.close();
+			return list;		
+		}
 	
-	// 주소 포함 전체 목록 메소드 
+	// 주소+사진 포함 전체 목록 메소드 
 	public List<DetailList2DTO> getList() throws Exception {
 		Connection con = getConnection();
-		//String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
-		String sql = "SELECT a.*, b.addr_state, b.addr_city, b.addr_base "
-							+ "FROM promotion_post a "
-							+ "INNER JOIN address b "
-							+ "ON a.addr_no = b.addr_no "
-							+ "ORDER BY post_no DESC";
+		String sql = 	"SELECT post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base " + 
+							"FROM promotion_post post " + 
+							"INNER JOIN " + 
+							"(SELECT post_no, min(post_img_no) post_img_no FROM promotion_post_img GROUP BY post_no) img " + 
+							"ON post.post_no = img.post_no	 " + 
+							"INNER JOIN address addr ON post.addr_no = addr.addr_no "+
+							"ORDER BY post.post_no DESC";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();
@@ -127,7 +156,7 @@ public class PromotionPostDAO {
 	   public PromotionPostDTO get(long post_no)throws Exception{
 	      Connection con=getConnection();
 	      
-	      String sql="Select*from promotion_post where post_no=?";
+	      String sql="Select * from promotion_post where post_no=?";
 	      PreparedStatement ps=con.prepareStatement(sql);
 	      ps.setLong(1, post_no);
 	      ResultSet rs=ps.executeQuery();

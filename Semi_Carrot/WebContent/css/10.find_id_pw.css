@@ -1,0 +1,175 @@
+@charset "UTF-8";
+/*
+#login-article {
+	width: 100%;
+	min-width: 1000px;
+	height: auto;
+	text-align: center;
+	padding-top: 200px;
+}
+
+#logo_icon {
+	width: 150px;
+	height: 150px;
+}
+
+* {
+	margin: 10px;
+}
+
+#nick, #submit, #phone, #id {
+	width: 500px;
+	height: 55px;
+	margin: 15px;
+}
+
+아이디 찾기
+#phone, #nick {
+	padding-left: 50px;
+	font-size: 20px;
+	border: 1px solid transparent;
+	border-bottom: 3px solid #ff8900;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: 10px;
+	background-position: 5px 0.5rem;
+}
+
+#nick {
+	background-image: url(../img/key-32.png);
+	background-repeat: no-repeat;
+	background-size: 40px;
+	background-position: 3px 3px;
+}
+
+#phone {
+	background-image: url(../img/phone-2-32.png);
+	background-repeat: no-repeat;
+	background-size: 40px;
+	background-position: 3px 3px;
+}
+
+비밀번호 찾기
+#id {
+	padding-left: 50px;
+	font-size: 20px;
+	border: 1px solid transparent;
+	border-bottom: 3px solid #ff8900;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-size: 10px;
+	background-position: 5px 0.5rem;
+}
+
+.main-form {
+	margin: 350px;
+	display: flex;
+
+	flex-direction: column-reverse;
+}
+
+.id-find, .pw-find {
+	display: inline-block;
+	flex: 1;
+	min-width: 600px;
+}
+
+.id-find {
+	margin: 30px;
+}
+
+.pw-find {
+	margin: 30px;
+}
+
+h2 {
+	text-align: center;
+	color: orange;
+}
+
+Submit(전송버튼)
+#submit {
+	margin-top: 50px;
+	height: 70px;
+	cursor: pointer;
+	font-size: 27px;
+	color: rgba(255, 137, 0, 0.87);
+	border: 2px solid rgba(255, 137, 0, 0.87);
+	border-radius: 20px;
+	background-color: transparent;
+}
+
+#submit:hover {
+	border: 1px solid transparent;
+	background-color: rgba(255, 137, 0, 0.87);
+	color: white;
+} */
+#login-article {
+	text-align: center;
+	margin: 0px 20%;
+}
+
+.main-form {
+	border: 1px solid black;
+	width: 100%;
+	padding-top: 220px;
+	text-align: center;
+	height: 1000px;
+}
+
+.title {
+	text-align: left;
+	font-size: 32px;
+	color: #ff8900;
+	font-weight: bold;
+}
+
+.main-form>div>img {
+	width: 150px;
+	height: 150px;
+}
+
+#find-form {
+	height: auto%;
+	display: flex;
+}
+
+.id-find, .pw-find {
+	height: 100%;
+	flex: 1;
+}
+
+.id-find>h2, .pw-find>h2 {
+	text-align: left;
+}
+
+.id-find>form>div input[type=text], .pw-find>form>div input[type=text] {
+	width: 90%;
+	height: 70px;
+	margin: 25px 0px;
+	font-size: 20px;
+	padding-left: 50px;
+	border: 1px solid transparent;
+	border-bottom: 3px solid #ff8900;
+}
+
+.id-find {
+	border: 1px solid red;
+}
+
+.pw-find {
+	border: 1px solid blue;
+}
+
+#id-submit {
+	margin-top: 120px;
+}
+
+.submit {
+	width: 90%;
+	height: 70px;
+	margin: 25px 0px;
+	font-size: 20px;
+	padding-left: 50px;
+	border: 1px solid transparent;
+}

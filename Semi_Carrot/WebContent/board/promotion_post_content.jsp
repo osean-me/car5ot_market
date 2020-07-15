@@ -410,7 +410,7 @@
 									</div>
 									<div class="dimgray-font">
 										<span>☎</span>
-										<span><%=ppdto.getPost_phone()%></span>
+										<span><%=ppdto.getPost_phone() %></span>
 									</div>
 								</div>
 

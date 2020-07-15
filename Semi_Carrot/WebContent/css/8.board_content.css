@@ -340,34 +340,44 @@ textarea {
 }
 
 .reply-content {
-	width: 85%;
+	width: 80%;
 	display: inline-block;
 	flex: 13;
 }
 
 .reply-control {
-	width: 15%;
-	display: inline-block;
-	flex: 1.5;
+	width: 20%;
+	display: flex;
+	flex: 2;
 	text-align: right;
 }
 
 .reply-control>div {
 	display: inline-block;
-}
-.reply-control>div:nth-child(1) {
-	margin: 0px 10px;
+	flex: 1;
 }
 
-.reply-control>div>a {
+.reply-control>div>a,
+.reply-control>div>label {
 	text-decoration: none;
 	color: gray;
 }
 
 .reply-control>div>a:hover {
+	color: red;
+}
+.reply-control>div>label:hover {
 	color: #ff8900;
 }
 
 .seller {
 	margin-top: 17px;
+}
+
+.rereply-off {
+	display: none;
+}
+
+.rereply-on {
+	display: block;
 }

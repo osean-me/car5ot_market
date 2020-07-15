@@ -37,6 +37,8 @@
 		String sysdate = date.format(cal.getTime()); // 현재 날짜
 		String systime = time.format(cal.getTime()); // 현재 시간 
 		
+		System.out.println(systime);
+		
 		int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
 		int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
 		int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
@@ -88,6 +90,7 @@
 	
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
+<script type="text/javascript" src="<%=path%>/js/reply.js"></script>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 
 <article style="padding-top: 220px;" id="used-post-content-form">
@@ -225,11 +228,12 @@
 				
 			<div class="padding-top25 ">
 				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
+					int count = 0;
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
-					
 					for(ReplyDTO rdto : list) {
 						// 현재 시간과 댓글 작성일 계산
 						String replyDATE = rdto.getReply_date().substring(11);
+						System.out.println(replyDATE);
  						int replyhour = Integer.parseInt(replyDATE.substring(0, 2)) * 60;
 						int replyminute = Integer.parseInt(replyDATE.substring(3, 5)) * 60;
 						int replysecound = Integer.parseInt(replyDATE.substring(6, 8));
@@ -266,7 +270,7 @@
 
 									<span><%=replymember.getMember_nick() %></span>
 								<%} %>
-								<%if((compareTime > 3600 || compareTime < 0)) { %>
+								<%if((compareTime > 60 || compareTime < 0)) { %>
 									<span class="right-float gray-font">
 										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) { %>
 											오늘
@@ -289,6 +293,12 @@
 									<%=rdto.getReply_content() %>
 								</div>
 								<div class="reply-control">
+										<div>
+											<label for="re-reply<%=count%>">
+												<input type="checkbox" id="re-reply<%=count%>" style="display: none;" value="<%=count %>" onchange="reReply(this);">
+														답글
+											</label>
+										</div>
 									<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
 										<div><a href="">수정</a></div>
 										<div><a href="">삭제</a></div>
@@ -297,8 +307,36 @@
 							</div>	
 						</div>
 					</div>
+					<div class="padding-top20 rereply-off" id="rereply-form<%=count%>">
+					<p class="font20">대댓글</p>
+					<form action="write_reply.do" method="post">
+						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="post_no" value="<%=post_no %>">
+						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
+						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
+						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
+						<div class="reply-div-padding">
+							<div class="reply-border">
+							<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+							</div>
+						</div>
+						<div class="reply-num-border">
+							<div class="float-box float-left">
+								<div class="left-item50">
+									<p class="font12 gray-font text-padding10">30 / 100</p>
+								</div>
+								<div class="left-item50 text-padding10">
+									<input type="submit" class="right-float reply-button" value="☜등록">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
 					<hr>
-					<%} %>
+					<%
+							count++;
+						} 
+					%>
 				<%} %>	
 				</div>
 			</div>

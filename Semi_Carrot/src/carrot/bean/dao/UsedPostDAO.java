@@ -63,9 +63,10 @@ public class UsedPostDAO {
 				+ "used_cate_num, "
 				+ "member_no, "
 				+ "addr_no, "
-				+ "post_state "
+				+ "post_state, "
+				+ "board_no "
 				+ ") " 
-				+"VALUES(?,?,?,?,sysdate,0,0,?,?,?,'판매중')";
+				+"VALUES(?,?,?,?,sysdate,0,0,?,?,?,'판매중',?)";
 		
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, updto.getPost_no());
@@ -75,6 +76,7 @@ public class UsedPostDAO {
 		ps.setLong(5, updto.getUsed_cate_num());
 		ps.setLong(6, updto.getMember_no());
 		ps.setLong(7,updto.getAddr_no());
+		ps.setLong(8, updto.getBoard_no());
 		ps.execute();
 		
 		con.close();

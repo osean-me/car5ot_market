@@ -42,19 +42,14 @@
 
 	<div align="left">
 		<div class="box">
-
 			<div class=detail>
-
 				<%
 					for (DetailList3DTO dldto : list) {
 				%>
 				<div class="product">
 					<a class="move"
-						href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>">
+						href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>">
 						<div class="product_photo">
-							<%
-								
-							%>
 							<img src="showImg.do?post_img_no=<%=dldto.getPost_img_no()%>">
 						</div>
 						<div class="product_title">

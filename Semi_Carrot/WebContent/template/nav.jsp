@@ -18,20 +18,20 @@
 		<ul>
 			<li class="medium-menu"><a href="<%=path%>/board/used_post_list.jsp" class="category">동네 중고</a>
 			<ul>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=1">디지털	/ 가전</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=2">가구/ 인테리어</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=3">유아동/ 유아도서</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=4">생활/ 가공식품</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=5">스포츠/ 레저</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=6">여성잡화</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=7">여성의류</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=8">남성패션/ 잡화</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=9">게임/ 취미</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=10">뷰티/ 미용</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=11">반려동물</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=12">도서/ 티켓 / 음반</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=13">기타</a></li>
-				<li><a href="<%=path%>/board/post_list.jsp?board_no=1&used_cate_num=14">삽니다</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=1">디지털	/ 가전</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=2">가구/ 인테리어</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=3">유아동/ 유아도서</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=4">생활/ 가공식품</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=5">스포츠/ 레저</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=6">여성잡화</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=7">여성의류</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=8">남성패션/ 잡화</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=9">게임/ 취미</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=10">뷰티/ 미용</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=11">반려동물</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=12">도서/ 티켓 / 음반</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=13">기타</a></li>
+				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=14">삽니다</a></li>
 			</ul>
 		</li>
 		

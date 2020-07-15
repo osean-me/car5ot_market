@@ -198,10 +198,6 @@ input+span {
 
       countTag.textContent = len;
    }
-   function changeValue() {
-      var cb = document.querySelector("input[type=checkbox]").checked;
-      var se = document.querySelector("select").value;
-   }
    
    // 이미지 미리보기 
    function preview() {
@@ -256,6 +252,10 @@ input+span {
       -->
 
       <form action="used_post_write.do" method="post"  enctype="multipart/form-data">
+      	
+      	<!-- board_no 값 hidden으로 넘겨주기  -->
+      	<input type="hidden" name="board_no" value="1">
+      	
          <div class="used_container" >
 
             <!--  이미지 등록 -->
@@ -273,7 +273,8 @@ input+span {
                      - 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다. <br> 
                      - 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다. <br> 
                      - 이미지는 최대 5개까지 등록 가능합니다.<br>
-                     최대 지원 사이즈인 640 X 640 으로 리사이즈 해서   올려주세요.(개당 이미지 최대 10M)
+                        
+                        최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)
                   </div>
                </div>
             </div>

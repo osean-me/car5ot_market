@@ -50,17 +50,18 @@ public class PromotionPostWriteServlet extends HttpServlet {
 			long member_no = mdto.getMember_no();
 			long member_addr_no = mdto.getMember_addr_no();
 
-			//중고거래 게시글 정보 가져오기
+			// 게시글 정보 가져오기
 			PromotionPostDTO ppdto = new PromotionPostDTO();
 			ppdto.setPromotion_cate_num(Long.parseLong(map.get("promotion_cate_num").get(0).getString())); // 카테고리번호
 			ppdto.setPost_title(map.get("post_title").get(0).getString()); //제목
 			ppdto.setPost_content(map.get("post_content").get(0).getString()); // 내용
 			ppdto.setPost_phone(map.get("post_phone").get(0).getString()); // 전화번호
 			ppdto.setPost_price(Long.parseLong(map.get("post_price").get(0).getString())); //가격
+			ppdto.setBoard_no(Long.parseLong(map.get("board_no").get(0).getString())); // 게시판 번호
 			ppdto.setMember_no(member_no);
 			ppdto.setAddr_no(member_addr_no);
 			
-			//중고거래 게시글 함수 실행			
+			// 게시글 함수 실행			
 			PromotionPostDAO ppdao = new PromotionPostDAO();
 			int post_no = ppdao.getSequence(); //번호 먼저 추출
 			ppdto.setPost_no(post_no); // 들어갈 번호 설정 후
@@ -91,7 +92,7 @@ public class PromotionPostWriteServlet extends HttpServlet {
 					item.write(target);
 				}
 			}
-			resp.sendRedirect("promotion_post_list.jsp"); // 일단은 리스트로 보내기  + 나중에 상세페이지 완성되면 완성 페이지로 전송 
+			resp.sendRedirect("promotion_post_content.jsp?board_no="+ppdto.getBoard_no()+"&promotion_cate_num="+ ppdto.getPromotion_cate_num()+"&post_no="+ ppdto.getPost_no()); 
 		}
 		catch(Exception e) {
 			e.printStackTrace();

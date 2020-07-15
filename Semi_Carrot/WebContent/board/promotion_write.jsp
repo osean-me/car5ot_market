@@ -262,7 +262,9 @@
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
 
-      <form action="promotion_post_write.do" method="post"  enctype="multipart/form-data">
+      <form action="promotion_post_write.do" method="post" enctype="multipart/form-data">
+         <input type="hidden" name="board_no" value="2">
+         
          <div class="used_container" >
 
             <!--  이미지 등록 -->

@@ -64,7 +64,7 @@ private static DataSource src;
 	// 이미지 단일조회 메소드 
 		public PromotionPostImgDTO get(long post_img_no) throws SQLException {
 		Connection con = getConnection();
-		String sql = "SELECT * FROM promotion_post_img WHERE post_img_no = ? ";
+		String sql = "SELECT * FROM promotion_post_img WHERE post_img_no=? ";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, post_img_no);
 		ResultSet rs = ps.executeQuery();

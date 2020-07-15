@@ -16,7 +16,7 @@
 	</div>
 	<div class="nav-menu">
 		<ul>
-			<li class="medium-menu"><a href="<%=path%>/board/used_post_list.jsp" class="category">동네 중고</a>
+			<li class="medium-menu"><a href="<%=path%>/board/used_all_post_list.jsp" class="category">동네 중고</a>
 			<ul>
 				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=1">디지털	/ 가전</a></li>
 				<li><a href="<%=path%>/board/used_post_list.jsp?board_no=1&used_cate_num=2">가구/ 인테리어</a></li>
@@ -35,15 +35,15 @@
 			</ul>
 		</li>
 		
-		<li class="medium-menu"><a href="<%=path%>/board/promotion_post_list.jsp" class="category">동네 홍보</a>
+		<li class="medium-menu"><a href="<%=path%>/board/promotion_all_post_list.jsp" class="category">동네 홍보</a>
 			<ul>
-				<li><a href="">중고차 / 오토바이</a></li>
-				<li><a href="">동네 구인구직</a></li>
-				<li><a href="">부동산</a></li>
-				<li><a href="">농수산물</a></li>
-				<li><a href="">지역업체</a></li>
-				<li><a href="">과외 / 클래스 모집</a></li>
-				<li><a href=""> 전시 / 공연</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=1">중고차 / 오토바이</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=2">동네 구인구직</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=3">부동산</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=4">농수산물</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=5">지역업체</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=6">과외 / 클래스 모집</a></li>
+				<li><a href="<%=path%>/board/promotion_post_list.jsp?board_no=2&promotion_cate_num=7"> 전시 / 공연</a></li>
 				<li><a href=""></a></li>
 			</ul></li>
 		<li class="medium-menu"><a href="<%=path%>/board/community_post_list.jsp" class="category">동네 생활</a></li>

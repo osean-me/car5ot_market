@@ -100,7 +100,6 @@
 </style>
 
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 추가 + 사진 추가하기 @@@@@@@@@ -->
->>>>>>> refs/remotes/origin/master
 <%
 	
 	//long post_no = Long.parseLong(request.getParameter("post_no")); 
@@ -175,6 +174,7 @@
 								<font color="black"><%=dldto.getPost_title()%>
 							</div>
 						</div>
+						</a>
 						<!-- 지역 등록 -->
 						<div class="post_location">
 							<img
@@ -231,7 +231,6 @@
 								<%=dldto.getPost_like()%>
 							</div>
 						</div>
-					</a>
 				</div>
 				<%
 					}

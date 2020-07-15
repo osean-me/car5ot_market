@@ -15,11 +15,9 @@
 .h2_style {
 	
 }
-
 .detail {
 	
 }
-
 .product {
 	border: 1px solid lightgray;
 	float: left;
@@ -28,18 +26,15 @@
 	margin-right: 13px;
 	margin-bottom: 10px;
 }
-
 .product_photo>img {
 	width: 218px;
 	height: 220px;
 }
-
 .product_title {
 	margin: 5px;
 	font-size: 20px;
 	margin-left: 15px;
 	}
-
 .product_price {
 	margin: 5px;
 	font-size: 20px;
@@ -52,7 +47,6 @@
 	font-size:16px;
 	font-weight:normal;
 }
-
 .post_location {
 	font-size: 15px;
 	color: #adadad;
@@ -60,7 +54,6 @@
 	margin-left: 15px;
 	font-weight: light;
 }
-
 .post_post {
 	margin-right: 5px;
 }
@@ -69,14 +62,12 @@
 	text-align:right;
 	color:gray;
 }
-
 .hideText {
 	width:200px;
 	white-space:nowrap;
 	overflow:hidden;
 	text-overflow:ellipsis;
 }
-
 .last {
 	font-size: 18px;
 }
@@ -84,12 +75,10 @@
 	float:right;
 	margin-left:10px;
 	font-size: 18px;
-
 }
 .sort_list {
 	margin-right:5px;
 }
-
 .hr_style {
 	border: 0;
 	height: 1px;
@@ -114,7 +103,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px;">
+<article style="padding-top: 200px;  margin: 0px 15%;">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">중고거래</span> 상품목록
@@ -134,6 +123,7 @@
 
 				<%
 					for (DetailList3DTO dldto : list) {
+						System.out.println("게시글 제목 :" + dldto.getPost_title());
 				%>
 				<div class="product">
 					<div class="product_photo">
@@ -142,8 +132,8 @@
 					</div>
 					<div class="product_title">
 						<div class="hideText">
-						<a class="move" href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>">					
-							<font color="black"><%=dldto.getPost_title()%>
+							<a class="move" href="used_post_content.jsp?post_no=<%=dldto.getPost_no()%>" style="color: black;">					
+								<%=dldto.getPost_title()%>
 							</a>
 						</div>
 					</div>
@@ -183,4 +173,3 @@
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
-

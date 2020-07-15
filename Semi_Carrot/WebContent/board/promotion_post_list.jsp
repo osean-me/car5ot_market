@@ -9,105 +9,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<style>
-.h2_style {
-	
-}
-
-.detail {
-	
-}
-
-.product {
-	border: 1px solid lightgray;
-	float: left;
-	width: 220px; 
-	margin: 5px;
-	margin-right: 13px;
-	margin-bottom: 10px;
-}
-
-.product_photo>img {
-	width: 210px;
-	height: 220px;
-}
-
-.product_title {
-	margin: 5px;
-	font-size: 20px;
-	margin-left: 15px;
-	}
-
-.product_price {
-	margin: 5px;
-	font-size: 20px;
-	margin-left: 15px;
-	color: orange;
-}
-.product_time {
-	float:right;
-	color:gray;
-	font-size:16px;
-	font-weight:normal;
-}
-
-.post_location {
-	font-size: 15px;
-	color: #adadad;
-	text-align: left;
-	margin-left: 15px;
-	font-weight: light;
-}
-
-.post_post {
-	margin-right: 5px;
-}
-.product_like{
-	margin-right:10px;
-	text-align:right;
-	color:gray;
-}
-
-.hideText {
-	width:200px;
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow:ellipsis;
-}
-
-.last {
-	font-size: 18px;
-}
-.popular {
-	float:right;
-	margin-left:10px;
-	font-size: 18px;
-
-}
-.sort_list {
-	margin-right:20px;
-}
-
-.hr_style {
-	border: 0;
-	height: 1px;
-	background: lightgray;
-}
-
-.move {
-	text-decoration: none;
-}
-</style>
-
 <%
 	PromotionPostDAO ppdao = new PromotionPostDAO();
 	MemberDAO mdao = new MemberDAO();
 	List<DetailList2DTO> list = ppdao.getList();
+	
+	String path = request.getContextPath();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px;">
+<link href="<%=path %>/css/10.promotion&used_post_list.css" type="text/css" rel="stylesheet">
+
+<article style="padding-top: 200px; margin:0px 20%">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color:orange">동네홍보</span> 상품목록
@@ -117,7 +31,7 @@
 
 			<div class="last"><a href="">최신순</a></div>
 		</div>
-		<br>
+				<hr class="hr_style1">
 	</div>
 	<div align="left">
 		<div class="box">
@@ -129,7 +43,7 @@
 				%>
 				<div class="product">
 					<div class="product_photo">
-						<img src="../img/math.png">
+						<img src="showImg2.do?post_img_no=<%=dldto.getPost_img_no()%>">
 					</div>
 					<div class="product_title">
 						<div class="hideText">

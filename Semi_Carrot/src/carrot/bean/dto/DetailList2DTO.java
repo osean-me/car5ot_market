@@ -17,12 +17,19 @@ public class DetailList2DTO {
 	private long promotion_cate_num;
 	private long member_no;
 	private long member_img_no;
+	private long board_no;
 	private long addr_no;
-	private long post_img_no;
 	private String addr_state;
 	private String addr_city;
 	private String addr_base;
+	private long post_img_no;
 	
+	public long getBoard_no() {
+		return board_no;
+	}
+	public void setBoard_no(long board_no) {
+		this.board_no = board_no;
+	}
 	public String getPost_phone() {
 		return post_phone;
 	}
@@ -150,11 +157,13 @@ public class DetailList2DTO {
 	      this.setMember_no(rs.getLong("member_no"));
 	      //this.setMember_img_no(rs.getLong("member_img_no"));
 	      this.setAddr_no(rs.getLong("addr_no"));
-	     // this.setPost_img_no(rs.getLong("post_img_no"));
+		  this.setBoard_no(rs.getLong("board_no"));
 	      this.setAddr_state(rs.getString("addr_state"));
 		  this.setAddr_city(rs.getString("addr_city"));
 		  this.setAddr_base(rs.getString("addr_base"));
+		  this.setPost_img_no(rs.getLong("post_img_no"));
 	   }
+	
 	public DetailList2DTO() {
 		super();
 	}

@@ -101,15 +101,16 @@ public class PromotionPostDAO {
 	}
 	
 	
-	// 주소 포함 전체 목록 메소드 
+	// 주소+사진 포함 전체 목록 메소드 
 	public List<DetailList2DTO> getList() throws Exception {
 		Connection con = getConnection();
 		//String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
-		String sql = "SELECT a.*, b.addr_state, b.addr_city, b.addr_base "
-							+ "FROM promotion_post a "
-							+ "INNER JOIN address b "
-							+ "ON a.addr_no = b.addr_no "
-							+ "ORDER BY post_no DESC";
+		String sql = 	"SELECT post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base " + 
+							"FROM promotion_post post " + 
+							"INNER JOIN " + 
+							"(SELECT post_no, min(post_img_no) post_img_no FROM promotion_post_img GROUP BY post_no) img " + 
+							"ON post.post_no = img.post_no	 " + 
+							"INNER JOIN address addr ON post.addr_no = addr.addr_no ";
 		PreparedStatement ps = con.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();

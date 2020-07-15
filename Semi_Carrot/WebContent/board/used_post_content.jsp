@@ -228,9 +228,11 @@
 				
 			<div class="padding-top25 ">
 				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
-					int count = 0;
+
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
-					for(ReplyDTO rdto : list) {
+					for(int i=0; i < list.size(); i++) {
+						
+						ReplyDTO rdto = list.get(i);
 						// 현재 시간과 댓글 작성일 계산
 						String replyDATE = rdto.getReply_date().substring(11);
 						System.out.println(replyDATE);
@@ -299,12 +301,17 @@
 											<input type="submit" class="right-float reply-button" value="☜수정">
 										</form>
 									<%} else {%>
+										<%if(rdto.getSuper_no() != 0) { 
+											String MotherReply_member = rdao.getMotherReplyNick(reply_table_name, rdto.getSuper_no(), post_no);
+										%>
+											<span class="mother-reply">@<%=MotherReply_member %> > </span>
+										<%} %>
 										<%=rdto.getReply_content() %>
 								</div>
 								<div class="reply-control">
 											<div>
-												<label for="re-reply<%=count%>">
-													<input type="checkbox" id="re-reply<%=count%>" style="display: none;" value="<%=count %>" onchange="reReply(this);">
+												<label for="re-reply<%=i%>">
+													<input type="checkbox" id="re-reply<%=i%>" style="display: none;" value="<%=i %>" onchange="reReply(this);">
 															답글
 												</label>
 											</div>
@@ -324,7 +331,7 @@
 							</div>	
 						</div>
 					</div>
-					<div class="padding-top20 rereply-off" id="rereply-form<%=count%>">
+					<div class="padding-top20 rereply-off" id="rereply-form<%=i%>">
 					<p class="font20">대댓글</p>
 					<form action="write_reply.do" method="post">
 						<input type="hidden" name="no" value="<%=login_member %>">
@@ -350,11 +357,24 @@
 						</div>
 					</form>
 				</div>
-					<hr>
 					<%
-							count++;
-						} 
+						boolean lineInsertable = false;
+						//뒤의 데이터가 남아있다면 불러온다
+						if(i < list.size() - 1){//뒤 데이터가 차수가 0일 때는 라인을 넣는다
+							ReplyDTO next = list.get(i+1);
+							lineInsertable = next.getDepth() == 0;
+						}
+						else {//마지막 데이터라면 라인을 넣어
+							lineInsertable = true;
+						}
+						
+						
 					%>
+				
+						<%if(lineInsertable) { %>
+							<hr>
+						<%} %>
+					<%} %>
 				<%} %>	
 				</div>
 			</div>

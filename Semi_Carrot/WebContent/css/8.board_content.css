@@ -403,3 +403,11 @@ textarea {
 	width: 50px;
 	height: 21px;
 }
+
+.mother-reply {
+	color: #ff8900;
+	font-weight: bold;
+	font-size: 18px;
+/* 	background-color: #ff8900; */
+}
+

@@ -310,7 +310,14 @@
 											</div>
 										<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
 											<div><a href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&<%=rdto.getReply_no() %>=<%=rdto.getReply_no()%>">수정</a></div>
-											<div><a href="">삭제</a></div>
+											<div>
+												<form action="delete_reply.do" method="post" id="delete-reply-form">
+													<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
+													<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
+													<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
+													<input type="submit" value="삭제" class="font15">	
+												</form>
+											</div>
 										<%} %>
 									<%} %>	
 								</div>

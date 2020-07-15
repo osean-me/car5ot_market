@@ -167,4 +167,21 @@ public class ReplyDAO {
 		
 		con.close();
 	}
+	
+	// [6] 댓글 삭제
+	public void deleteReply(String reply_table_name, long reply_no) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "DELETE #1 WHERE REPLY_NO = ?";
+		
+		sql = sql.replace("#1", reply_table_name);
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setLong(1, reply_no);
+		
+		ps.execute();
+		
+		con.close();
+	}
 }

@@ -359,16 +359,20 @@ textarea {
 	flex: 1;
 }
 
-.reply-control>div>a,
-.reply-control>div>label {
+.reply-control>div>a, .reply-control>div>label, #delete-reply-form>input[type=submit]
+	{
+	background-color: transparent;
+	border: none;
 	text-decoration: none;
 	color: gray;
 	cursor: pointer;
 }
 
-.reply-control>div>a:hover {
+.reply-control>div>a:hover, #delete-reply-form>input[type=submit]:hover
+	{
 	color: red;
 }
+
 .reply-control>div>label:hover {
 	color: #ff8900;
 }

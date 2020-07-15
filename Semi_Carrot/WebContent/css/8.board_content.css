@@ -295,6 +295,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	border: 1px solid #999999;
 	outline: none;
 	width: 50px;
+	cursor: pointer;
 }
 /*테두리*/
 .short-border {
@@ -330,6 +331,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 }
 
 textarea {
+	width: 100%;
 	resize: none;
 	border: none;
 }
@@ -361,6 +363,7 @@ textarea {
 .reply-control>div>label {
 	text-decoration: none;
 	color: gray;
+	cursor: pointer;
 }
 
 .reply-control>div>a:hover {
@@ -380,4 +383,19 @@ textarea {
 
 .rereply-on {
 	display: block;
+}
+
+#edit-reply-form {
+	display: flex;
+}
+
+#edit-reply-form>textarea {
+	flex: 14;
+	width: 90%;
+}
+
+#edit-reply-form>input[type=submit] {
+	flex: 1;
+	width: 50px;
+	height: 21px;
 }

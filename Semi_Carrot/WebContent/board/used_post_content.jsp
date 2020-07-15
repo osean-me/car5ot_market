@@ -210,7 +210,7 @@
 						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
 						<div class="reply-div-padding">
 							<div class="reply-border">
-							<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+							<textarea class="text-padding font15" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
 							</div>
 						</div>
 						<div class="reply-num-border">
@@ -290,19 +290,26 @@
 							</div>
 							<div class="font17 padding-top10 reply-content-form">
 								<div class="reply-content">
-									<%=rdto.getReply_content() %>
+									<%if(request.getParameter(String.valueOf(rdto.getReply_no())) != null) { %>
+										<form action="edit_reply.do" method="post" id="edit-reply-form">
+											<textarea class="font15" placeholder="<%=rdto.getReply_content()%>"></textarea>
+											<input type="submit" class="right-float reply-button" value="☜수정">
+										</form>
+									<%} else {%>
+										<%=rdto.getReply_content() %>
 								</div>
 								<div class="reply-control">
-										<div>
-											<label for="re-reply<%=count%>">
-												<input type="checkbox" id="re-reply<%=count%>" style="display: none;" value="<%=count %>" onchange="reReply(this);">
-														답글
-											</label>
-										</div>
-									<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
-										<div><a href="">수정</a></div>
-										<div><a href="">삭제</a></div>
-									<%} %>
+											<div>
+												<label for="re-reply<%=count%>">
+													<input type="checkbox" id="re-reply<%=count%>" style="display: none;" value="<%=count %>" onchange="reReply(this);">
+															답글
+												</label>
+											</div>
+										<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
+											<div><a href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&<%=rdto.getReply_no() %>=<%=rdto.getReply_no()%>">수정</a></div>
+											<div><a href="">삭제</a></div>
+										<%} %>
+									<%} %>	
 								</div>
 							</div>	
 						</div>
@@ -317,7 +324,7 @@
 						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
 						<div class="reply-div-padding">
 							<div class="reply-border">
-							<textarea class="text-padding" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+							<textarea class="text-padding font15" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
 							</div>
 						</div>
 						<div class="reply-num-border">

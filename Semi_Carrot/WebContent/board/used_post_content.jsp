@@ -328,6 +328,7 @@
 					<p class="font20">대댓글</p>
 					<form action="write_reply.do" method="post">
 						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">

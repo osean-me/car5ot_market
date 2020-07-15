@@ -295,7 +295,7 @@
 											<input type="hidden" name="reply_no" value="<%=rdto.getReply_no() %>">
 											<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?post_no=<%=rdto.getPost_no()%>">
-											<textarea class="font15" name="reply_content" placeholder="<%=rdto.getReply_content()%>"></textarea>
+											<textarea class="font15" name="reply_content" placeholder="<%=rdto.getReply_content()%>"><%=rdto.getReply_content() %></textarea>
 											<input type="submit" class="right-float reply-button" value="☜수정">
 										</form>
 									<%} else {%>
@@ -328,13 +328,14 @@
 					<p class="font20">대댓글</p>
 					<form action="write_reply.do" method="post">
 						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
 						<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?<%=request.getQueryString()%>">
 						<div class="reply-div-padding">
 							<div class="reply-border">
-							<textarea class="text-padding font15" name="reply_content" placeholder="댓글 입력" cols="116" rows="5"></textarea>
+							<textarea class="text-padding font15" name="reply_content" placeholder="대댓글 입력" cols="116" rows="5"></textarea>
 							</div>
 						</div>
 						<div class="reply-num-border">

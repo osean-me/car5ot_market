@@ -193,14 +193,12 @@
                                 <span>중고</span>
                             </label>
                         </div>
-						<%if(mdto.getMember_auth().equals("업체")) { %>
 	                        <div id="nav-2" onmouseover="radiusEdit(this);">
 	                            <label for="select-2">
 	                                <input type="radio" name="board" id="select-2" onchange="toggleTabAuto(this);">
 	                                <span>홍보</span>
 	                            </label>
 	                        </div>
-						<%} %>
                         <div id="nav-3" onmouseover="radiusEdit(this);">
                             <label for="select-3">
                                 <input type="radio" name="board" id="select-3" onchange="toggleTabAuto(this);">

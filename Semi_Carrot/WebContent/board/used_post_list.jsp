@@ -16,6 +16,91 @@
 	pageEncoding="UTF-8"%>
 
 
+<style>
+.h2_style {
+	
+}
+.detail {
+	
+}
+.product {
+	border: 1px solid lightgray;
+	float: left;
+	width: 220px; 
+	margin: 5px;
+	margin-right: 13px;
+	margin-bottom: 10px;
+}
+.product_photo>img {
+	width: 218px;
+	height: 220px;
+}
+.product_title {
+	margin: 5px;
+	font-size: 20px;
+	margin-left: 15px;
+	}
+.product_price {
+	margin: 5px;
+	font-size: 20px;
+	margin-left: 15px;
+	color: orange;
+}
+.product_time {
+	float:right;
+	color:gray;
+	font-size:16px;
+	font-weight:normal;
+}
+.post_location {
+	font-size: 15px;
+	color: #adadad;
+	text-align: left;
+	margin-left: 15px;
+	font-weight: light;
+}
+.post_post {
+	margin-right: 5px;
+}
+.product_like{
+	margin-right:10px;
+	text-align:right;
+	color:gray;
+}
+.hideText {
+	width:200px;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.last {
+	font-size: 18px;
+}
+.popular {
+	float:right;
+	margin-left:10px;
+	font-size: 18px;
+}
+.sort_list {
+	margin-right:5px;
+}
+.hr_style {
+	border: 0;
+	height: 1px;
+	background: lightgray;
+}
+.hr_style1 {
+	margin-bottom: 30px;
+	margin-top: 30px;
+	color: lightgray;
+}
+.move {
+	text-decoration: none;
+}
+</style>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 추가 + 사진 추가하기 @@@@@@@@@ -->
+>>>>>>> refs/remotes/origin/master
 <%
 	
 	//long post_no = Long.parseLong(request.getParameter("post_no")); 
@@ -160,4 +245,3 @@
 
 
 <jsp:include page="/template/footer.jsp"></jsp:include>
-

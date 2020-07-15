@@ -45,10 +45,12 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
+
 <link href="<%=path%>/css/10.promotion&used_post_list.css"
 	type="text/css" rel="stylesheet">
 
 <article style="padding-top: 200px; margin: 0px 20%">
+
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange"><%=pbdto.getPromotion_cate_title()%></span> 상품목록

@@ -22,6 +22,7 @@ import carrot.bean.dto.PromotionPostDTO;
 import carrot.bean.dto.PromotionPostImgDTO;
 
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns="/board/promotion_post_write.do")
 public class PromotionPostWriteServlet extends HttpServlet {
 //		목표: 게시글 등록 후 동네홍보 상세페이지로 이동 

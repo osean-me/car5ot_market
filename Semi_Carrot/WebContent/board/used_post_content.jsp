@@ -20,6 +20,9 @@
 		String path = request.getContextPath();
 			
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
+//	        long board_no = Long.parseLong(request.getParameter("board_no")); 
+//	        long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
+	         
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
 			
@@ -138,8 +141,8 @@
 				<%} %>
 			</div>
 						        <!-- 이전/다음 버튼(선택) -->
-        	<div class="swiper-button-prev" style="z-index: 1000;"></div>
-       		 <div class="swiper-button-next" style="z-index: 1000;"></div>
+        	<div class="swiper-button-prev" ></div>
+       		 <div class="swiper-button-next"></div>
 			</div>
 
 			</div>

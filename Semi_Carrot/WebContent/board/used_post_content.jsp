@@ -281,8 +281,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-
+		</div>				
 		<div class="padding-top50">
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
@@ -509,5 +508,4 @@
 		</div>
 	</div>
 </article>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

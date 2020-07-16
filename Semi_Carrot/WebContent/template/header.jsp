@@ -39,10 +39,10 @@
 				<a href="<%=path%>"><img src="<%=path %>/img/logo.png"></a>
 			</div>
 			<div class="search">
-				<form>
-					<input type="text" class="search-bar" name="search_keyword"
-						placeholder="검색어를 입력해주세요!"> <input type="submit"
-						class="search-icon" value="">
+				<form action="<%=path%>/board/used_all_post_list.jsp" method="get">
+					<input type="hidden" name="type" value="post_title">
+					<input type="text" class="search-bar" name="keyword" placeholder="검색어를 입력해주세요!"> 
+					<input type="submit" class="search-icon" value="">
 				</form>
 			</div>
 			<div class="sign">

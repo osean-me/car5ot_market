@@ -45,7 +45,7 @@
 		base = adto.getAddr_base();
 		
 		list = updao.newUsedPost(member.getMember_addr_no());
-		list2= ppdao.newpPromotionPost(member.getMember_addr_no());
+		list2= ppdao.newPromotionPost(member.getMember_addr_no());
 	
 		if (list.isEmpty()) {
 	

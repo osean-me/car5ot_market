@@ -11,7 +11,6 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import carrot.bean.dto.PromotionPostImgDTO;
-import carrot.bean.dto.UsedPostImgDTO;
 
 public class PromotionPostImgDAO {
 	private static DataSource src;

@@ -210,11 +210,16 @@
                                 <span>텃밭</span>
                             </label>
                         </div>
-
                         <div id="nav-4" onmouseover="radiusEdit(this);">
                             <label for="select-4">
                                 <input type="radio" name="board" id="select-4" onchange="toggleTabAuto(this);">
                                 <span>댓글</span>
+                            </label>
+                        </div>
+                        <div id="nav-5" onmouseover="radiusEdit(this);">
+                            <label for="select-5">
+                                <input type="radio" name="board" id="select-5" onchange="toggleTabAuto(this);">
+                                <span>찜꽁</span>
                             </label>
                         </div>
                     </div>
@@ -598,6 +603,98 @@
                                         <div class="view">조회수</div>
                                         <div class="date">작성일</div>
                                     </div>
+                                </div>
+                                <div class="mypage-pagination">
+                                    1 2 3 4 5 6 7 8 9 10
+                                </div>
+                            </div>
+                        </div>
+                        <div class="area" id="select-5-area">
+                            <div class="mypage-board-table">
+                                <div class="mypage-post-search">
+                                    <form>
+                                        <input type="text" placeholder="검색">
+                                        <input type="submit" value="">
+                                    </form>
+                                </div>
+                                <div class="mypage-post-list column">
+                                    <%if(promotion_post.isEmpty()) { %>
+                                	<div style="flex: 9; width: 100%; heigth: 90%;">
+                                		게시물이 없습니다.
+                                	</div>
+                                <%} else { %>
+	                                 <div class="mypage-post-list">
+	                                <%
+	                                	int count5 = 0;
+	                                	for(Object promotion : promotion_post) {
+	                                		
+	                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+	                                		
+	                                		if(count5 == 5) {
+	                         					break;
+	                         				}
+	                                		
+	                                %>
+	                                    <div class="product">
+	                                        <div class="product-inner">
+	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
+	                                        	<div class="map">
+	                                        		<div>
+		                                        		<%=adto.getAddr_state() %>  
+		                                        		<%=adto.getAddr_city() %>  
+		                                        		<%=adto.getAddr_base() %>
+	                                        		</div>
+	                                        	</div>
+	                                        	<div class="price-date">
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+	                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+	                                        	</div>
+	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        </div>
+	                                    </div>
+	                                    <%
+	                                	    count5++;
+	                                    } 
+	                                    %>
+	                                </div>
+	                                <div class="mypage-post-list">
+	                                <%
+	                                	int count6 = 0;
+	                                	for(Object promotion : promotion_post) {
+	                                		
+	                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+	                                		
+	                                		if(count6 == 10) {
+	                         					break;
+	                         				}
+	                                		if(count6 > 4) {
+	                                %>
+	                                    <div class="product">
+	                                        <div class="product-inner">
+	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
+	                                        	<div class="map">
+	                                        		<div>
+	                                        			<%=adto.getAddr_state() %>  
+	                                        			<%=adto.getAddr_city() %>  
+	                                        			<%=adto.getAddr_base() %>
+	                                        		</div>
+	                                        	</div>
+	                                        	<div class="price-date">
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+	                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+	                                        	</div>
+	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        </div>
+	                                    </div>
+	                                    <%
+	                                		}    
+	                                    	count6++;
+	                                    } 
+	                                    %>
+	                                </div>
+                                <%} %>
                                 </div>
                                 <div class="mypage-pagination">
                                     1 2 3 4 5 6 7 8 9 10

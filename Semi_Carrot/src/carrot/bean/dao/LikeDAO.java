@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -146,5 +148,24 @@ public class LikeDAO {
 
 		con.close();
 	}
+	
+//	// [6] 회원의 찜목록 불러오기
+//	public List<Object> getPostLikeList(long member_no) throws Exception {
+//		List<Integer> list = new ArrayList<Integer>();
+//		
+//		Integer a = new Integer[2];
+//		
+//		list.add(a);
+//		
+//		Connection con = getConnection();
+//		
+//		String sql = "SELECT BOARD_NO, POST_NO FROM POST_LIKE WHERE MEMBER_NO = ?";
+//		
+//		PreparedStatement ps = con.prepareStatement(sql);
+//		
+//		ps.setLong(1, member_no);
+//		
+//		ResultSet rs = ps.executeQuery();
+//	}
 
 }

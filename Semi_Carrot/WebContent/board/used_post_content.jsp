@@ -239,10 +239,8 @@
 								for(int i = 1; i <= 18; i++) { 
 									if(updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i) == null) {
 										return;
-									}
-									
-									RecoUsedPostDTO rupdto = updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i);
-									
+									}									
+									RecoUsedPostDTO rupdto = updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i);						
 							%>
 
 								<div class="inline">
@@ -260,7 +258,7 @@
 				</div>
 			</div>
 
-		<div class="padding-top50">
+		<div class="padding-top100">
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
 				<div class="padding15">

@@ -57,24 +57,15 @@
 		int finishBlock = startBlock + blockSize - 1;
 		
 		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
-		int count;
-		if(isSearch){ // 검색
-			count = updao.getCount2(type,keyword,board_no, used_cate_num);
-		}
-		else {//목록
-			count = updao.getCount2(board_no, used_cate_num);
-		}
+		int count = updao.getCount2(board_no, used_cate_num);
+		
 		int pageCount = (count + pageSize - 1) / pageSize;
 		if(finishBlock > pageCount){
 			finishBlock = pageCount;
 		}
 		
-	List<DetailList3DTO> list;
-	if(isSearch){
-		list = updao.getList2(type,keyword,start, finish, board_no, used_cate_num); // 카테고리별 검색 목록
-	}else {
-		list = updao.getList2(start, finish, board_no, used_cate_num); //카테고리별 전체 목록
-	}
+	List<DetailList3DTO> list = updao.getList2(start, finish, board_no, used_cate_num); //카테고리별 전체 목록
+
 
 	
 	UsedBoardDAO ubdao = new UsedBoardDAO();
@@ -201,11 +192,7 @@
 				<!--  페이지 네비게이터  -->
 			<div class="row center pagination">
 				<%if(startBlock > 1){ %>
-					<%if(!isSearch) { %>
 						<a href = "used_post_list.jsp?page=<%=startBlock-1%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>">&lt;</a>
-					<%} else { %>
-						<a href = "used_post_list.jsp?page=<%=startBlock-1%>&type=<%=type%>&keyword=<%=keyword%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>">&lt;</a>
-					<%} %>
 				<%} %>
 				
 				<!-- 
@@ -222,21 +209,11 @@
 							prop="";
 						}
 					%>
-					
-					<% if(!isSearch) {%>
 						<a href="used_post_list.jsp?page=<%=i %>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>" <%=prop%>><%=i %></a>
-					<%} else { %>
-						<a href = "used_post_list.jsp?page=<%=finishBlock+1%>&type=<%=type%>&keyword=<%=keyword%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>" <%=prop%>><%=i %></a>
-					<%} %>	
-				<%} %>
 				
 				<%if(pageCount > finishBlock){ %>
-					<%if(!isSearch){ %> 
 						<a href="used_post_list.jsp?page=<%=finishBlock + 1%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>">&gt;</a>
-					<%}else{ %>
-						<a href="used_post_list.jsp?page=<%=finishBlock + 1%>&type=<%=type%>&keyword=<%=keyword%>&board_no=<%=board_no%>&used_cate_num=<%=used_cate_num %>">&gt;</a>
-					<%} %>
-				<%} %>
+				<%}} %>
 			</div>
 		</div>
 	</div>

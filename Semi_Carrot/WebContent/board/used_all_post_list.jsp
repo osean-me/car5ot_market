@@ -214,17 +214,18 @@
 						}
 					%>
 					
-					<% if(!isSearch) {%>
-						<a href="used_all_post_list.jsp?page=<%=i %>" <%=prop%>><%=i %></a>
-					<%} else { %>
-						<a href = "used_all_post_list.jsp?page=<%=finishBlock+1%>&type=<%=type%>&keyword=<%=keyword%>" <%=prop%>><%=i %></a>
+					<% if(!isSearch) {%> <!-- 목록이면 -->
+							<a href="used_all_post_list.jsp?page=<%=i%>" <%=prop%>><%=i %></a>
+					<%} 
+						else { %> <!-- 검색이면 -->
+							<a href = "used_all_post_list.jsp?page=<%=i%>&type=<%=type%>&keyword=<%=keyword%>" <%=prop%>><%=i %></a>
 					<%} %>	
 				<%} %>
 				
 				<%if(pageCount > finishBlock){ %>
-					<%if(!isSearch){ %> 
+					<%if(!isSearch){ %> <!-- 목록이면 -->
 						<a href="used_all_post_list.jsp?page=<%=finishBlock + 1%>">&gt;</a>
-					<%}else{ %>
+					<%}else{ %> <!-- 검색이면 -->
 						<a href="used_all_post_list.jsp?page=<%=finishBlock + 1%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
 					<%} %>
 				<%} %>

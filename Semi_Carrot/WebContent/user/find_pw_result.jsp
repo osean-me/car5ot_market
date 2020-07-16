@@ -8,6 +8,11 @@
 	session.removeAttribute("member_pw");
 	String path = request.getContextPath();
 %>
+ 
+<% //var str = "abcdefg";
+
+//alert("substr : " + str.substring(2,4));  
+%> 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 

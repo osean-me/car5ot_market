@@ -60,10 +60,12 @@
 		<url-pattern>/member/gone.do</url-pattern>
 		<url-pattern>/member/change_info.jsp</url-pattern>
 		<url-pattern>/member/change_info.do</url-pattern>
-		<url-pattern>/member/check.jsp</url-pattern>
+		<url-pattern>/member/check_exit.jsp</url-pattern>
 		<url-pattern>/member/check.do</url-pattern>
 		<url-pattern>/admin/*</url-pattern>
-		<url-pattern>/board/*</url-pattern>
+	<url-pattern>/board/used_write.jsp</url-pattern>
+	<url-pattern>/board/promotion_write.jsp</url-pattern>
+	
 	</filter-mapping> 
 	 
 	 

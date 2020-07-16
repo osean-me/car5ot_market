@@ -28,8 +28,8 @@
 			long login_member = login.getMember_no();
 	
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
-	        //long board_no = Long.parseLong(request.getParameter("board_no")); 
-	        //long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
+	        long board_no = Long.parseLong(request.getParameter("board_no")); 
+	        long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
 	         
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
@@ -89,7 +89,6 @@
 			// 프로필 가지고 오기
 			ProfileImgDAO pidao = new ProfileImgDAO();
 			
-			//♬♬ 연관상품♬♬
 	%>
 	
 	
@@ -102,13 +101,13 @@
             width: 100%;
             height: 100%;
         }
-        .swiper-container .swiper-slide,
-        .swiper-container .swiper-slide > img{
+        .mainimg{
             width:100%;
             min-height: 380px;
             height: auto;
             max-height: 380px;
         }
+
         
     </style>
 <script src="<%=path%>/js/swiper.min.js"></script>
@@ -127,18 +126,15 @@
                     el: '.swiper-pagination', //적용 대상의 선택자
                     type: 'bullets',//네비게이터 모양(bullets/fraction/...)
                 },
-                
-                // auto
-                autoplay: {
-        			delay: 3000,
-        		},
+
                 //이전/다음 이동버튼 설정그룹
               navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
+                    grabCursor:true
                 }
                 //커서 모양을 손모양으로 변경
-                ,grabCursor:true
+                ,grabCursor:false
                 
                 //슬라이드 전환 효과(effect)
                 //,effect:'coverflow'
@@ -164,7 +160,7 @@
 						<%for(UsedPostImgDTO upidto : fileList){ %>
 	    		    	<div class="swiper-slide">
 							<!-- 이미지 미리보기 -->
-								<img src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
+								<img class="mainimg" src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
 					</div>
 						<%} %>
 					<%} %>
@@ -238,7 +234,7 @@
 				
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">
-						<div class="swiper-slide left-item16">
+						<div class=" swiper-slide left-item16" style="height:180px;">
 							<%
 								for(int i = 1; i <= 18; i++) { 
 									if(updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i) == null) {
@@ -246,10 +242,11 @@
 									}
 									
 									RecoUsedPostDTO rupdto = updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i);
+									
 							%>
-							
+
 								<div class="inline">
-									<img src="https://placeimg.com/150/150/nature" id="img<%=i%>">
+									<a href="used_post_content.jsp?board_no=<%=board_no%>&used_cate_num=<%=used_cate_num%>&post_no=<%=rupdto.getPost_no()%>"> <img class="image" src="showImg.do?post_img_no=<%=rupdto.getImgno()%>"></a>
 									<p class="font17 top-margin10"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
 								</div>
 								<%if(i % 6 == 0) { %>
@@ -258,6 +255,8 @@
 							<%} %> <!-- 연관상품 마지막 -->
 						</div>
 					</div>
+					<div class="swiper-button-prev" ></div>
+	       		 	<div class="swiper-button-next"></div>
 				</div>
 			</div>
 

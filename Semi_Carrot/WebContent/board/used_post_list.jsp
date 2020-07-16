@@ -16,89 +16,6 @@
 	pageEncoding="UTF-8"%>
 
 
-<style>
-.h2_style {
-	
-}
-.detail {
-	
-}
-.product {
-	border: 1px solid lightgray;
-	float: left;
-	width: 220px; 
-	margin: 5px;
-	margin-right: 13px;
-	margin-bottom: 10px;
-}
-.product_photo>img {
-	width: 218px;
-	height: 220px;
-}
-.product_title {
-	margin: 5px;
-	font-size: 20px;
-	margin-left: 15px;
-	}
-.product_price {
-	margin: 5px;
-	font-size: 20px;
-	margin-left: 15px;
-	color: orange;
-}
-.product_time {
-	float:right;
-	color:gray;
-	font-size:16px;
-	font-weight:normal;
-}
-.post_location {
-	font-size: 15px;
-	color: #adadad;
-	text-align: left;
-	margin-left: 15px;
-	font-weight: light;
-}
-.post_post {
-	margin-right: 5px;
-}
-.product_like{
-	margin-right:10px;
-	text-align:right;
-	color:gray;
-}
-.hideText {
-	width:200px;
-	white-space:nowrap;
-	overflow:hidden;
-	text-overflow:ellipsis;
-}
-.last {
-	font-size: 18px;
-}
-.popular {
-	float:right;
-	margin-left:10px;
-	font-size: 18px;
-}
-.sort_list {
-	margin-right:5px;
-}
-.hr_style {
-	border: 0;
-	height: 1px;
-	background: lightgray;
-}
-.hr_style1 {
-	margin-bottom: 30px;
-	margin-top: 30px;
-	color: lightgray;
-}
-.move {
-	text-decoration: none;
-}
-</style>
-
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@ 등록시간 추가 + 사진 추가하기 @@@@@@@@@ -->
 <%
 	
@@ -108,7 +25,56 @@
 
 	MemberDAO mdao = new MemberDAO();
 	UsedPostDAO updao = new UsedPostDAO();
-	List<DetailList3DTO> list = updao.getList3(board_no, used_cate_num); //카테고리별 목록
+	
+	//검색인지 목록인지 검사 
+		String type = request.getParameter("type");
+		String keyword = request.getParameter("keyword");
+		
+		boolean isSearch = type != null && keyword !=null;
+		
+		// 페이지 계산 코드 
+		int pageSize=4; // 한 페이지에 20개의 데이터를 표시하겠다 
+		
+		String pageStr = request.getParameter("page");
+		int pageNo;
+		
+		try {
+			pageNo = Integer.parseInt(pageStr);
+			if(pageNo <= 0){
+				throw new Exception();
+			}
+		}
+		catch(Exception e){
+			pageNo = 1;
+		}
+		
+		int finish = pageNo * pageSize;
+		int start = finish - (pageSize-1);
+
+		// 페이지 네비게이터 계산 코드 
+		int blockSize = 10; // 네비게이터 블록을 10개씩 배치하겠다 ! 
+		int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
+		int finishBlock = startBlock + blockSize - 1;
+		
+		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
+		int count;
+		if(isSearch){ // 검색
+			count = updao.getCount2(type,keyword,board_no, used_cate_num);
+		}
+		else {//목록
+			count = updao.getCount2(board_no, used_cate_num);
+		}
+		int pageCount = (count + pageSize - 1) / pageSize;
+		if(finishBlock > pageCount){
+			finishBlock = pageCount;
+		}
+		
+	List<DetailList3DTO> list;
+	if(isSearch){
+		list = updao.getList2(type,keyword,start, finish, board_no, used_cate_num); // 카테고리별 검색 목록
+	}else {
+		list = updao.getList2(start, finish, board_no, used_cate_num); //카테고리별 전체 목록
+	}
 
 	
 	UsedBoardDAO ubdao = new UsedBoardDAO();
@@ -231,6 +197,47 @@
 
 			</div>
 			<div style="clear: both;"></div>
+			
+				<!--  페이지 네비게이터  -->
+			<div class="row center pagination">
+				<%if(startBlock > 1){ %>
+					<%if(!isSearch) { %>
+						<a href = "used_post_list.jsp?page=<%=startBlock-1%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>">&lt;</a>
+					<%} else { %>
+						<a href = "used_post_list.jsp?page=<%=startBlock-1%>&type=<%=type%>&keyword=<%=keyword%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>">&lt;</a>
+					<%} %>
+				<%} %>
+				
+				<!-- 
+					이동 숫자에 반복문을 적용 
+					범위는 startBlock부터 finishBlock까지로 설정(상단에서 계산을 미리 해두었음)
+				-->
+				<%for(int i=startBlock; i<=finishBlock; i++) { %>
+					<%
+						String prop;
+						if(i==pageNo) { //현재 페이지 번호면
+							prop = "class='on'";
+						}
+						else { // 현재 페이지가 아니면
+							prop="";
+						}
+					%>
+					
+					<% if(!isSearch) {%>
+						<a href="used_post_list.jsp?page=<%=i %>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>" <%=prop%>><%=i %></a>
+					<%} else { %>
+						<a href = "used_post_list.jsp?page=<%=finishBlock+1%>&type=<%=type%>&keyword=<%=keyword%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>" <%=prop%>><%=i %></a>
+					<%} %>	
+				<%} %>
+				
+				<%if(pageCount > finishBlock){ %>
+					<%if(!isSearch){ %> 
+						<a href="used_post_list.jsp?page=<%=finishBlock + 1%>&board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>">&gt;</a>
+					<%}else{ %>
+						<a href="used_post_list.jsp?page=<%=finishBlock + 1%>&type=<%=type%>&keyword=<%=keyword%>&board_no=<%=board_no%>&used_cate_num=<%=used_cate_num %>">&gt;</a>
+					<%} %>
+				<%} %>
+			</div>
 		</div>
 	</div>
 </article>

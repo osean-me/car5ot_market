@@ -234,6 +234,33 @@ public class UsedPostDAO {
 	      return list;
 	   }
 	   
+	   //같은 동네&카테고리 최신글 조회 (1~18)
+	   public List<UsedPostDTO> relationPost(long used_cate_num, long addr_no) throws Exception {
+		      Connection con = getConnection();
+
+		      String sql = "SELECT*FROM(SELECT rownum rn, used_post.* FROM(SELECT *FROM used_post WHERE used_cate_num=? AND addr_no=? ORDER BY post_no DESC)used_post)WHERE rn BETWEEN 1AND 18";
+
+		      PreparedStatement ps = con.prepareStatement(sql);
+
+		      ps.setLong(1,used_cate_num);
+		      ps.setLong(2, addr_no);
+
+		      ResultSet rs = ps.executeQuery();
+
+		      List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+
+		      while (rs.next()) {
+		         UsedPostDTO updto = new UsedPostDTO(rs);
+
+		         list.add(updto);
+		      }
+
+		      con.close();
+
+		      return list;
+		   }
+	   
+	   
 	   // 메인 페이지 최신 중고 게시물 조회 1
 	   public List<UsedPostDTO> newUsedPost() throws Exception {
 	      Connection con = getConnection();

@@ -247,7 +247,7 @@
 									<a href="used_post_content.jsp?board_no=<%=board_no%>&used_cate_num=<%=used_cate_num%>&post_no=<%=rupdto.getPost_no()%>"> <img class="image" src="showImg.do?post_img_no=<%=rupdto.getImgno()%>"></a>
 									<p class="font17 top-margin10"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
 								</div>
-								<%if(i % 6 == 0) { %>
+								<%if(i % 6 == 0&i<18) { %>
 									</div><div class="swiper-slide left-item16">
 								<%} %>
 							<%} %> <!-- 연관상품 마지막 -->

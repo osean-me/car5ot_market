@@ -1,16 +1,19 @@
 @charset "UTF-8";
 
-   #full-article {
+#full-article {
+	width: 30%;
+	min-width: 1200px;
+    height: auto;
 	text-align: center;
 	margin: 0px 20%;
+	 padding-top:200px;
 }
 
 .main-form {
 	/*border: 1px solid black;*/
-	width: 100%;
-	padding-top: 220px;
-	text-align: center;
-	height: 1000px;
+	padding-top: 10px;
+    padding-bottom: 30px;
+    font-size: 18px;
 }
 
 .title {

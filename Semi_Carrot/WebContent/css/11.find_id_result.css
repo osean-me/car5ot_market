@@ -1,16 +1,19 @@
 @charset "UTF-8";
 
    #full-article {
+	width: 50%;
+	min-width: 1200px;
+    height: auto;
 	text-align: center;
 	margin: 0px 20%;
+	 padding-top:200px;
 }
 
 .main-form {
 	/*border: 1px solid black;*/
-	width: 100%;
-	padding-top: 220px;
-	text-align: center;
-	height: 1000px;
+	padding-top: 20px;
+    padding-bottom: 30px;
+    font-size: 18px;
 }
 
 .title {
@@ -21,12 +24,12 @@
 }
 
 .main-form>div>img {
-	width: 150px;
+	width: 190px;
 	height: 150px;
 }
 
 #find-form {
-	height: auto%;
+	height: auto;
 	display: flex;
 }
 
@@ -40,7 +43,7 @@
 }
 
 .id-find>form>div input[type=text], .pw-find>form>div input[type=text] {
-	width: 90%;
+	width: 50%;
 	height: 70px;
 	margin: 25px 0px;
 	font-size: 20px;
@@ -55,7 +58,7 @@
 }
 
 .submit {
-	width: 30%;
+	width: 60%;
 	height: 55px;
 	cursor: pointer;
 	margin: 60px 0px 0px 0px;

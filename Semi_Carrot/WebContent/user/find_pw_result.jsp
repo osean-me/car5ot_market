@@ -9,10 +9,7 @@
 	String path = request.getContextPath();
 %>
  
-<% //var str = "abcdefg";
 
-//alert("substr : " + str.substring(2,4));  
-%> 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
@@ -25,7 +22,12 @@ type="text/css">
     </div>    
         <div id="find-form">
 	        <div class="id-find">
-	            <div class="title"><%=member_pw%> 잊지말라구 당근~!</div>
+	            <div class="title">
+	            	<%=member_pw.substring(0, member_pw.length()-5) %>
+	            	<%for(int i = member_pw.length()-1; i >= member_pw.length()-5; i--) { %>
+	            		*
+	            	<%} %>
+	            </div>
 	            <form action="login.jsp" method="post">
 	            	<div id="id-submit"> 
 	            		<input class="submit" type ="submit"value="로그인">
@@ -33,7 +35,7 @@ type="text/css">
 	            	</form>
 	            	 <form action="find_id_pw.jsp" method="post">
 	       <div>
-	       <input class="submit" type ="submit"value="비밀번호가 기억나지 않습니다">
+	       <input class="submit" type ="submit"value="비밀번호 찾으러 go~!">
 	       </div>
 	   </form>
                     </div>  

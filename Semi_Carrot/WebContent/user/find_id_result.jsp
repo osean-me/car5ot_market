@@ -25,7 +25,7 @@
 	            	</form>
 	            	 <form action="find_id_pw.jsp" method="post">
 	       <div>
-	       <input class="submit" type ="submit"value="비밀번호가 기억나지 않습니다">
+	       <input class="submit" type ="submit"value="비밀번호 찾으러 go~!">
 	       </div>
 	   </form>
                     </div>  

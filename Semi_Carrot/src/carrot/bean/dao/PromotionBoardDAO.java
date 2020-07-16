@@ -33,7 +33,7 @@ public class PromotionBoardDAO {
 	public PromotionBoardDTO get(long promotion_cate_num)throws Exception{
 		Connection con = getConnection();
 		
-		String sql="Select*from promotion_board where promotion_cate_num=?";
+		String sql="Select * from promotion_board where promotion_cate_num=?";
 		PreparedStatement ps=con.prepareStatement(sql);
 		ps.setLong(1, promotion_cate_num);
 		ResultSet rs=ps.executeQuery();

@@ -7,16 +7,14 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	border: 1px dotted black;
 }
 
-
-.cursor:hover{
+.cursor:hover {
 	cursor: pointer;
-	}
-
+}
 
 /* aritcle 기본 폼 */
-#used-post-content-form {
+#post-content-form {
 	width: auto;
-	margin: 0px 15%;
+	margin: 0px 20%;
 	text-align: center;
 }
 
@@ -90,7 +88,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	width: 90%;
 }
 
-.imagesize{
+.imagesize {
 	width: 100%;
 	height: 380px;
 }
@@ -130,8 +128,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
-.dimgray-font{
-	color:dimgray;
+
+.dimgray-font {
+	color: dimgray;
 }
 
 .purple-font {
@@ -141,7 +140,8 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .green-font {
 	color: #62B1D9;
 }
-.transparent-font{
+
+.transparent-font {
 	color: transparent;
 }
 
@@ -251,7 +251,6 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	margin: 10px 0px 0px 0px;
 }
 
-
 .manner-margin {
 	margin: 10px 0px 0px 20px
 }
@@ -296,6 +295,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	border: 1px solid #999999;
 	outline: none;
 	width: 50px;
+	cursor: pointer;
 }
 /*테두리*/
 .short-border {
@@ -331,7 +331,83 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 }
 
 textarea {
+	width: 100%;
 	resize: none;
 	border: none;
+}
+
+.reply-content-form {
+	display: flex;
+	width: 100%;
+}
+
+.reply-content {
+	width: 80%;
+	display: inline-block;
+	flex: 13;
+}
+
+.reply-control {
+	width: 20%;
+	display: flex;
+	flex: 2;
+	text-align: right;
+}
+
+.reply-control>div {
+	display: inline-block;
+	flex: 1;
+}
+
+.reply-control>div>a, .reply-control>div>label, #delete-reply-form>input[type=submit]
+	{
+	background-color: transparent;
+	border: none;
+	text-decoration: none;
+	color: gray;
+	cursor: pointer;
+}
+
+.reply-control>div>a:hover, #delete-reply-form>input[type=submit]:hover
+	{
+	color: red;
+}
+
+.reply-control>div>label:hover {
+	color: #ff8900;
+}
+
+.seller {
+	margin-top: 17px;
+}
+
+.rereply-off {
+	display: none;
+}
+
+.rereply-on {
+	display: block;
+}
+
+#edit-reply-form {
+	display: flex;
+}
+
+#edit-reply-form>textarea {
+	flex: 14;
+	width: 90%;
+}
+
+#edit-reply-form>input[type=submit] {
+	flex: 1;
+	width: 50px;
+	height: 21px;
+}
+
+.mother-reply {
+	color: #ff8900;
+	font-weight: bold;
+	font-size: 18px;
+/* 	background-color: #ff8900; */
 }
 

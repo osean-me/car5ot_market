@@ -7,7 +7,7 @@
 }
 
 #used-write-form {
-margin-left:350px;
+	margin:0px 20%;
 
 }
 
@@ -110,7 +110,7 @@ margin-left:350px;
 }
 
 .first {
-   width: 1100px;
+   width: 1000px;
    height: 200px;
    border-color: lightgray;
    font-size: 20px;
@@ -118,7 +118,7 @@ margin-left:350px;
    margin-left: 50px;
 }
 .first:focus {
-   width: 1100px;
+   width: 1000px;
    height: 200px;
    font-size: 20px;
    font-weight: normal;
@@ -147,7 +147,7 @@ margin-left:350px;
 }
 
 .countNum {
-   margin-left: 1080px;
+   margin-left: 990px;
    margin-top: 10px;
 }
 
@@ -223,7 +223,7 @@ margin-left:350px;
    
    // 이미지 미리보기 
    function preview() {
-      var fileTag = document.querySelector("input[name=used_post_img]");
+      var fileTag = document.querySelector("input[name=promotion_post_img]");
       var divTag = document.querySelector(".preview-wrap");
       
       if(fileTag.files.length > 0) {
@@ -262,7 +262,9 @@ margin-left:350px;
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
 
-      <form action="promotion_post_write.do" method="post"  enctype="multipart/form-data">
+      <form action="promotion_post_write.do" method="post" enctype="multipart/form-data">
+         <input type="hidden" name="board_no" value="2">
+         
          <div class="used_container" >
 
             <!--  이미지 등록 -->

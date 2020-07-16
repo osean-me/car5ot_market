@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.UsedPostImgDAO"%>
+<%@page import="carrot.bean.dto.UsedPostImgDTO"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
 <%@page import="carrot.bean.dao.AddrDAO"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
@@ -19,6 +21,8 @@
 	List<UsedPostDTO> list = updao.newUsedPost();
 	String address = null;
 	String base = null;
+	
+	UsedPostImgDAO uidao = new UsedPostImgDAO();
 	
 	// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
 	if (mdto != null) {
@@ -93,7 +97,7 @@
 		<div id="map-area">
 			<div id="map"></div>
 		</div>
-		<div class="swiper-container" id="product">
+		<div class="swiper-container" id="product">-
 			<!-- 필수 영역 -->
 			<div class="swiper-wrapper">
 				<!-- 배치되는 이미지 혹은 화면 (슬라이더) -->
@@ -108,14 +112,15 @@
 									<%
 										int count = 0;
 									for (UsedPostDTO newpost : list) {
+										UsedPostImgDTO uidto = uidao.getMember(newpost.getPost_no());
 										if (count >= 5) {
 											break;
 										}
 									%>
 									<div class="hot-product">
 										<div id="img">
-											<img src="<%=path%>/img/logo_icon.png">
-									</div>
+											<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=newpost.getBoard_no()%>&used_cate_num=<%=newpost.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+										</div>
 										<div id="title"><%=newpost.getPost_title()%>
 											..
 										</div>
@@ -130,6 +135,7 @@
 									<%
 										int count2 = 0;
 									for (UsedPostDTO newpost : list) {
+										UsedPostImgDTO uidto = uidao.getMember(newpost.getPost_no());
 										if (count2 >= 10) {
 											break;
 										}
@@ -138,7 +144,7 @@
 									%>
 									<div class="hot-product">
 										<div id="img">
-											<img src="<%=path%>/img/logo_icon.png">
+											<a href="used_post_content.jsp?board_no=<%=newpost.getBoard_no()%>&used_cate_num=<%=newpost.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
 										</div>
 										<div id="title"><%=newpost.getPost_title()%>
 											..

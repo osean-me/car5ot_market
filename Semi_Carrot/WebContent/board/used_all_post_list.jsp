@@ -66,20 +66,10 @@
 	int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
 	int finishBlock = startBlock + blockSize - 1;
 	
-	//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
-// 	int count;
-// 	if(isSearch){ // 검색
-// 		count = updao.getCount(type,keyword);
-// 	}
-// 	else {//목록
-// 		count = updao.getCount();
-// 	}
-// 	int pageCount = (count + pageSize - 1) / pageSize;
-// 	if(finishBlock > pageCount){
-// 		finishBlock = pageCount;
-// 	}
+
 	int count; // 페이지 개수 출력하기 위함
 	int pageCount;
+	
 	List<DetailList3DTO> list;
 	
 	if(mdto!=null){ // 회원인 경우(로그인이 되어있는 경우)

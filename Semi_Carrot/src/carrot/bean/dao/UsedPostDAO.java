@@ -240,7 +240,7 @@ public class UsedPostDAO {
 	
 	
 	// @@@@ 카테고리별 목록 메소드 @@@@ 
-	// (목록)게시판/카테고리별 목록 메소드(+ 페이지 네비게이션)
+	// (비회원) 게시판/카테고리별 목록 메소드(+ 페이지 네비게이션)
 	public List<DetailList3DTO> getList2(int start, int finish, long board_no, long used_cate_num) throws Exception {
 		Connection con = getConnection();
 		// String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
@@ -272,6 +272,38 @@ public class UsedPostDAO {
 		return list;
 	}
 	
+	// (회원) 게시판/카테고리별 목록 메소드(+ 페이지 네비게이션)
+	public List<DetailList3DTO> getList2(int start, int finish, long board_no, long used_cate_num, long member_addr_no) throws Exception {
+		Connection con = getConnection();
+		// String sql ="SELECT * FROM used_post ORDER BY post_no DESC";
+		String sql =
+				"SELECT * FROM( "
+				+ "SELECT ROWNUM rn, post.*, img.post_img_no , addr.addr_state, addr.addr_city, addr.addr_base "
+				+ "FROM used_post post " 
+				+ "INNER JOIN "
+				+ "(SELECT post_no, min(post_img_no) post_img_no FROM used_post_img GROUP BY post_no) img "
+				+ "ON post.post_no = img.post_no	 " 
+				+ "INNER JOIN address addr ON post.addr_no = addr.addr_no "
+				+ "WHERE post.board_no=? AND post.used_cate_num=? AND post.addr_no=?" 
+				+ "ORDER BY post.post_no DESC "
+				+ ") WHERE rn BETWEEN ? AND ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, board_no);
+		ps.setLong(2, used_cate_num);
+		ps.setLong(3, member_addr_no);
+		ps.setInt(4, start);
+		ps.setInt(5, finish);
+		ResultSet rs = ps.executeQuery();
+
+		List<DetailList3DTO> list = new ArrayList<>();
+		while (rs.next()) {
+			DetailList3DTO dldto = new DetailList3DTO(rs);
+			list.add(dldto);
+		}
+		con.close();
+		return list;
+	}
 
 	// 단일조회
 	public UsedPostDTO get(long post_no) throws Exception {
@@ -493,15 +525,15 @@ public class UsedPostDAO {
 		return count;
 	}
 	
-	//(카테고리별)목록인 경우
-	public int getCount2(long board_no, long used_cate_num) throws Exception {
+	//회원(카테고리별)목록인 경우
+	public int getCount2(long board_no, long used_cate_num,long member_addr_no) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=?";
+		String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=? AND addr_no=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, board_no);
 		ps.setLong(2, used_cate_num);
-		
+		ps.setLong(3, member_addr_no);
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
@@ -509,5 +541,22 @@ public class UsedPostDAO {
 		con.close();
 		return count;
 	}
+	
+	//비회원(카테고리별)목록인 경우
+		public int getCount2(long board_no, long used_cate_num) throws Exception {
+			Connection con = getConnection();
+
+			String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, board_no);
+			ps.setLong(2, used_cate_num);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+
+			con.close();
+			return count;
+		}
 
 }

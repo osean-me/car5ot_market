@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dao.AddrDAO"%>
 <%@page import="carrot.bean.dao.UsedBoardDAO"%>
 <%@page import="carrot.bean.dto.UsedBoardDTO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -25,6 +26,8 @@
 
 	MemberDAO mdao = new MemberDAO();
 	UsedPostDAO updao = new UsedPostDAO();
+	MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo"); // 회원번호 불러오기
+	
 	
 	//검색인지 목록인지 검사 
 		String type = request.getParameter("type");
@@ -56,17 +59,42 @@
 		int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
 		int finishBlock = startBlock + blockSize - 1;
 		
-		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
-		int count = updao.getCount2(board_no, used_cate_num);
+		//(** 다음 버튼의 경우 계산을 통하여 페이지 개수를 구해야 출력 여부 판단이 가능)
+// 		int count = updao.getCount2(board_no, used_cate_num);
 		
-		int pageCount = (count + pageSize - 1) / pageSize;
-		if(finishBlock > pageCount){
-			finishBlock = pageCount;
-		}
+// 		int pageCount = (count + pageSize - 1) / pageSize;
+// 		if(finishBlock > pageCount){
+// 			finishBlock = pageCount;
+// 		}
+	
+	int count; // 페이지 개수 출력하기 위함
+	int pageCount; 
 		
-	List<DetailList3DTO> list = updao.getList2(start, finish, board_no, used_cate_num); //카테고리별 전체 목록
-
-
+	List<DetailList3DTO> list; 
+	
+	if(mdto!=null){ // 회원인 경우(로그인이 되어있는 경우)
+		MemberDTO member = mdao.get(mdto.getMember_no());
+		
+		AddrDAO adao = new AddrDAO();
+		AddrDTO adto = adao.get(member.getMember_addr_no());
+		
+		count = updao.getCount2(board_no, used_cate_num,member.getMember_addr_no());
+		list = updao.getList2(start, finish, board_no, used_cate_num,member.getMember_addr_no()); 
+		
+		pageCount = (count + pageSize - 1) / pageSize;
+ 		if(finishBlock > pageCount){
+ 			finishBlock = pageCount;
+ 		}	
+	}
+	else { //비회원인 경우 
+		count = updao.getCount2(board_no, used_cate_num);
+		list = updao.getList2(start, finish, board_no, used_cate_num); //카테고리별 전체 목록
+		
+		pageCount = (count + pageSize - 1) / pageSize;
+ 		if(finishBlock > pageCount){
+ 			finishBlock = pageCount;
+ 		}	
+	}
 	
 	UsedBoardDAO ubdao = new UsedBoardDAO();
 	UsedBoardDTO ubdto = ubdao.get(used_cate_num); //카테고리 번호로 카테고리 이름 가져오기 

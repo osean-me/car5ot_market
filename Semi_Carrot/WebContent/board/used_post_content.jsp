@@ -21,13 +21,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%
-		String path = request.getContextPath();
+			String path = request.getContextPath();
 	
 			MemberDTO login = (MemberDTO) session.getAttribute("memberinfo");
 			long login_member = login.getMember_no();
 	
-			long post_no = Long.parseLong(request.getParameter("post_no")); 
-	        //long board_no = Long.parseLong(request.getParameter("board_no")); 
+			long post_no = Long.parseLong(request.getParameter("post_no"));
+			String board_no = request.getParameter("board_no");
 	        //long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
 	         
 			UsedPostDAO updao = new UsedPostDAO();
@@ -50,10 +50,10 @@
 			// 현재 시간 > 초 단위 변환
 			int systime_s = syshour + sysminute + syssecound;
 			
-			System.out.println("시간 : " + syshour);
+/* 			System.out.println("시간 : " + syshour);
 			System.out.println("분 : " + sysminute);
 			System.out.println("초 : " + syssecound);
-			System.out.println("초단위 현재 시간 : " + systime_s);
+			System.out.println("초단위 현재 시간 : " + systime_s); */
 			
 			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 			MemberDAO mdao = new MemberDAO();
@@ -221,7 +221,12 @@
 					<div>
 					<div class="float-box float-left">
 						<div class="left-item33">
-							<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
+							<form action="<%=path %>/member/post_like.do" method="post">
+								<input type="hidden" name="member_no" value="<%=mdto.getMember_no()%>">
+								<input type="hidden" name="board_no" value="<%=board_no%>">
+								<input type="hidden" name="post_no" value="<%=post_no%>">
+								<input type="submit" class="like-button cursor" value="♥ 찜 <%=updto.getPost_like() %>">
+							</form>
 						</div>
 						<%if(isAdmin || isMine){ %>
 						<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->

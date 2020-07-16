@@ -29,7 +29,7 @@
 	
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
 			long board_no = Long.parseLong(request.getParameter("board_no")); 
-		    long	promotion_cate_num = Long.parseLong(request.getParameter("promotion_cate_num")); 
+/* 		    long promotion_cate_num = Long.parseLong(request.getParameter("promotion_cate_num"));  */
 		 
 			PromotionPostDAO ppao = new PromotionPostDAO();
 			PromotionPostDTO ppdto = ppao.get(post_no);
@@ -140,7 +140,9 @@
 				<div>
 				<div class="float-box float-left">
 					<div class="left-item33">
-						<button class="like-button cursor">♥ 찜 <%=ppdto.getPost_like() %></button>
+						<form>
+							<input type="submit" class="like-button cursor" value="♥ 찜 <%=ppdto.getPost_like() %> ">
+						</form>
 					</div>
 					<%if(isAdmin || isMine){ %>
 					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->

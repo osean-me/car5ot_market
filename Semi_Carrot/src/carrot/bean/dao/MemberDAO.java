@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import carrot.bean.dto.LikeDTO;
 import carrot.bean.dto.MemberDTO;
 
 public class MemberDAO {
@@ -366,6 +367,39 @@ public class MemberDAO {
 		con.close();
 
 		return result;
+	}
+	
+	// [9] 회원 찜 등록
+	public void insertLike(LikeDTO ldto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "INSERT INTO POST_LIKE VALUES(? , ? , ?)";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setLong(1, ldto.getMember_no());
+		ps.setLong(2, ldto.getBoard_no());
+		ps.setLong(3, ldto.getPost_no());
+		
+		ps.execute();
+		
+		con.close();
+	}
+	
+	// [10] 회원 찜 삭제
+	public void deleteLike(LikeDTO ldto) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "DELETE POST_LIKE WHERE MEMBER_NO = ? AND BOARD_NO = ? AND POST_NO = ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, ldto.getMember_no());
+		ps.setLong(2, ldto.getBoard_no());
+		ps.setLong(3, ldto.getPost_no());
+		
+		ps.execute();
+		
+		con.close();
 	}
 
 }

@@ -34,11 +34,13 @@ public class JoinServlet extends HttpServlet {
 			
 			adto.setAddr_state(addr_state);
 			adto.setAddr_city(addr_city);
-			adto.setAddr_city(addr_city);
+			adto.setAddr_base(addr_base);
 
 
 			// Address Method (주소 조회 검사)
 			Long addr_no = adao.findAddrNo(adto);
+			System.out.println(addr_no);
+			System.out.println(adao.findAddrNo(adto));
 			if (addr_no == null) {
 				addr_no = adao.getAddrNo();
 				adto.setAddr_no(addr_no);

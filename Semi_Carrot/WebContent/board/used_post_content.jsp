@@ -107,7 +107,20 @@
             height: auto;
             max-height: 380px;
         }
-
+        
+        .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+        	position:absolute;
+        	left:auto;
+        	top:auto;
+        	bottom:auto;
+        	right:0;
+        	width:auto;
+        	font-size:15px;
+        }
+        
+        .title-label{
+        	position:relative;
+        }
         
     </style>
 <script src="<%=path%>/js/swiper.min.js"></script>
@@ -124,9 +137,8 @@
                 //페이지 네비게이터 옵션그룹
                 ,pagination: {
                     el: '.swiper-pagination', //적용 대상의 선택자
-                    type: 'bullets',//네비게이터 모양(bullets/fraction/...)
+                    type: 'fraction',//네비게이터 모양(bullets/fraction/...)
                 },
-
                 //이전/다음 이동버튼 설정그룹
               navigation: {
                     nextEl: '.swiper-button-next',
@@ -230,7 +242,7 @@
 
 
 			<div>
-				<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
+				<p class="font20 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
 				
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">

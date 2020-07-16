@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dto.RecoUsedPostDTO"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -58,20 +59,16 @@
 			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 			MemberDAO mdao = new MemberDAO();
 			MemberDTO mdto = mdao.get(updto.getMember_no());
-
 			//"카테고리 이름" 뽑아내기위해
 			UsedBoardDAO ubdao = new UsedBoardDAO();
 			UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
-
 			//"주소 시군구동" 뽑아내기위해
 			AddrDAO addao = new AddrDAO();
 			AddrDTO addto = addao.get(updto.getAddr_no());
-
 			//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
 			MemberDTO memberinfo = (MemberDTO) session.getAttribute("memberinfo");
 			UsedPostDAO updaoo = new UsedPostDAO();
 			updaoo.plusViewCount(post_no, 1);
-
 			//내글
 			boolean isMine = memberinfo.getMember_no() == updto.getMember_no();
 			//관리자
@@ -80,20 +77,19 @@
 			//첨부파일 이미지
 			UsedPostImgDAO upidao = new UsedPostImgDAO();
 			List<UsedPostImgDTO>fileList=upidao.getList(post_no);
-
 			////////////////////////
 			///		댓글 조회		///
 			//////////////////////
-
 			// 중고 거래 댓글 테이블 및 시퀀스
 			String reply_table_name = "USED_POST_REPLY";
 			String reply_seq_name = "USED_POST_REPLY_SEQ";
-
 			// 해당 게시글 댓글 존재 여부 확인
 			ReplyDAO rdao = new ReplyDAO();
 			
 			// 프로필 가지고 오기
 			ProfileImgDAO pidao = new ProfileImgDAO();
+			
+			//♬♬ 연관상품♬♬
 	%>
 	
 	
@@ -126,7 +122,6 @@
                 direction: 'horizontal'   //표시방식(수직:vertical, 수평:horizontal)
                 ,loop: false //순환 모드 여부
                 
-
                 //페이지 네비게이터 옵션그룹
                 ,pagination: {
                     el: '.swiper-pagination', //적용 대상의 선택자
@@ -137,13 +132,11 @@
                 autoplay: {
         			delay: 3000,
         		},
-
                 //이전/다음 이동버튼 설정그룹
               navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 }
-
                 //커서 모양을 손모양으로 변경
                 ,grabCursor:true
                 
@@ -240,38 +233,33 @@
 		</div>
 
 
-		<div>
-			<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
-			
-			<div class="padding40">
-				<div class="float-box float-left">
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/nature">
-						<p class="font17 top-margin10">.....></p>	<!-- 제목출력 -->
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/tech" >
-						<p class="font17 top-margin10">사진2</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/people" >
-						<p class="font17 top-margin10">사진3</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/animals" >
-						<p class="font17 top-margin10">사진4</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/architecture" >
-						<p class="font17 top-margin10">사진5</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/architecture" >
-						<p class="font17 top-margin10">사진6</p>
+			<div>
+				<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
+				
+				<div class="swiper-container padding40">
+					<div class="swiper-wrapper float-box float-left">
+						<div class="swiper-slide left-item16">
+							<%
+								for(int i = 1; i <= 18; i++) { 
+									if(updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i) == null) {
+										return;
+									}
+									
+									RecoUsedPostDTO rupdto = updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i);
+							%>
+							
+								<div class="inline">
+									<img src="https://placeimg.com/150/150/nature" id="img<%=i%>">
+									<p class="font17 top-margin10"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
+								</div>
+								<%if(i % 6 == 0) { %>
+									</div><div class="swiper-slide left-item16">
+								<%} %>
+							<%} %> <!-- 연관상품 마지막 -->
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
 		<div class="padding-top50">
 		<div class="float-box float-left">
@@ -312,7 +300,6 @@
 				
 			<div class="padding-top25 ">
 				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
-
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
 					for(int i=0; i < list.size(); i++) {
 						

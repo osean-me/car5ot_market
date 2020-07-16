@@ -215,22 +215,26 @@ public class UsedPostDAO {
 	}
 
 	// 같은 동네&같은 카테고리 최신글 조회 (1~18)
-	public List<RecoUsedPostDTO>getRecoList(long addr_no, long used_cate_num)throws Exception{
+	public RecoUsedPostDTO getRecoList(long addr_no, long used_cate_num, int count) throws Exception {
 		Connection con = getConnection();
-		String sql ="SELECT up.post_no, up.post_title, up.ADDR_NO,up.USED_CATE_NUM,img.imgno FROM used_post up INNER JOIN (SELECT post_no, min(post_img_no) imgno FROM used_post_img GROUP BY post_no) img ON up.post_no = img.post_no AND up.ADDR_NO =? AND up.USED_CATE_NUM =? WHERE rownum <= 18 ORDER BY post_date DESC";
+		String sql = "SELECT * FROM (SELECT ROWNUM rn, up.post_no, up.post_title, up.ADDR_NO,up.USED_CATE_NUM,img.imgno FROM used_post up INNER JOIN (SELECT post_no, min(post_img_no) imgno FROM used_post_img GROUP BY post_no ORDER BY post_no desc) img ON up.post_no = img.post_no AND up.ADDR_NO =? AND up.USED_CATE_NUM =? ORDER BY post_date DESC) WHERE rn = ?";
+
 		PreparedStatement ps = con.prepareStatement(sql);
+
 		ps.setLong(1, addr_no);
 		ps.setLong(2, used_cate_num);
+		ps.setInt(3, count);
+
 		ResultSet rs = ps.executeQuery();
-		List<RecoUsedPostDTO> list = new ArrayList<>();
-		while (rs.next()) {
-			RecoUsedPostDTO rupdto = new RecoUsedPostDTO(rs);
-			list.add(rupdto);
-		}
+
+		rs.next();
+
+		RecoUsedPostDTO rupdto = new RecoUsedPostDTO(rs);
+
 		con.close();
-		return list;
+
+		return rupdto;
 	}
-		
 
 	// 메인 페이지 최신 중고 게시물 조회 1
 	public List<UsedPostDTO> newUsedPost() throws Exception {
@@ -334,7 +338,5 @@ public class UsedPostDAO {
 
 		con.close();
 	}
-
-
 
 }

@@ -23,9 +23,6 @@
 	<%
 			String path = request.getContextPath();
 	
-			MemberDTO login = (MemberDTO) session.getAttribute("memberinfo");
-			long login_member = login.getMember_no();
-	
 			long post_no = Long.parseLong(request.getParameter("post_no"));
 			String board_no = request.getParameter("board_no");
 	        //long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
@@ -40,8 +37,6 @@
 			
 			String sysdate = date.format(cal.getTime()); // 현재 날짜
 			String systime = time.format(cal.getTime()); // 현재 시간 
-			
-			System.out.println(systime);
 			
 			int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 			int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
@@ -84,6 +79,8 @@
 			////////////////////////
 			///		댓글 조회		///
 			//////////////////////
+			// 중고 거래 게시글 테이블 이름
+			String post_table = "USED_POST";
 
 			// 중고 거래 댓글 테이블 및 시퀀스
 			String reply_table_name = "USED_POST_REPLY";
@@ -224,15 +221,18 @@
 					</div>
 					<div>
 					<div class="float-box float-left">
+						<%if(updto.getMember_no() != memberinfo.getMember_no()) {%>
 						<div class="left-item33">
 							<form action="<%=path %>/member/post_like.do" method="post">
 								<input type="hidden" name="member_no" value="<%=mdto.getMember_no()%>">
 								<input type="hidden" name="board_no" value="<%=board_no%>">
 								<input type="hidden" name="post_no" value="<%=post_no%>">
+								<input type="hidden" name="post_table" value="<%=post_table%>">
 								<input type="hidden" name="post_path" value="<%=request.getRequestURI() %>?<%=request.getQueryString() %>">
 								<input type="submit" class="like-button cursor" value="♥ 찜 <%=updto.getPost_like() %>">
 							</form>
 						</div>
+						<%} %>
 						<%if(isAdmin || isMine){ %>
 						<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
 						<div class="left-item33">
@@ -297,7 +297,7 @@
 				<div class="padding-top40">
 					<p class="font20">댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
@@ -405,7 +405,7 @@
 															답글
 												</label>
 											</div>
-										<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
+										<%if(memberinfo.getMember_no() == rdto.getMember_no() || memberinfo.getMember_auth().equals("관리자")) { %>
 											<div><a href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&<%=rdto.getReply_no() %>=<%=rdto.getReply_no()%>">수정</a></div>
 											<div>
 												<form action="delete_reply.do" method="post" id="delete-reply-form">
@@ -424,7 +424,7 @@
 					<div class="padding-top20 rereply-off" id="rereply-form<%=i%>">
 					<p class="font20">대댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
 						<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">

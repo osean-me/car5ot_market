@@ -33,7 +33,7 @@
 		boolean isSearch = type != null && keyword !=null;
 		
 		// 페이지 계산 코드 
-		int pageSize=4; // 한 페이지에 20개의 데이터를 표시하겠다 
+		int pageSize=16; // 한 페이지에 16개의 데이터를 표시하겠다 
 		
 		String pageStr = request.getParameter("page");
 		int pageNo;

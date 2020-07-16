@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dao.AddrDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="carrot.bean.dto.DetailList3DTO"%>
@@ -17,7 +18,8 @@
 <%
 	UsedPostDAO updao = new UsedPostDAO();
 	MemberDAO mdao = new MemberDAO();
-
+	MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo"); // 회원번호 불러오기
+	
 
 	// 시간 출력 수정 
 	Calendar cal = Calendar.getInstance();
@@ -41,7 +43,7 @@
 	boolean isSearch = type != null && keyword !=null;
 	
 	// 페이지 계산 코드 
-	int pageSize=4; // 한 페이지에 20개의 데이터를 표시하겠다 
+	int pageSize=16; // 한 페이지에 16개의 데이터를 표시하겠다 
 	
 	String pageStr = request.getParameter("page");
 	int pageNo;
@@ -65,25 +67,55 @@
 	int finishBlock = startBlock + blockSize - 1;
 	
 	//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
-	int count;
-	if(isSearch){ // 검색
-		count = updao.getCount(type,keyword);
-	}
-	else {//목록
-		count = updao.getCount();
-	}
-	int pageCount = (count + pageSize - 1) / pageSize;
-	if(finishBlock > pageCount){
-		finishBlock = pageCount;
-	}
-	
+// 	int count;
+// 	if(isSearch){ // 검색
+// 		count = updao.getCount(type,keyword);
+// 	}
+// 	else {//목록
+// 		count = updao.getCount();
+// 	}
+// 	int pageCount = (count + pageSize - 1) / pageSize;
+// 	if(finishBlock > pageCount){
+// 		finishBlock = pageCount;
+// 	}
+	int count; // 페이지 개수 출력하기 위함
+	int pageCount;
 	List<DetailList3DTO> list;
-	if(isSearch){
-		list = updao.getList(type,keyword,start,finish); // 검색목록
-	}else {
-		list = updao.getList(start,finish); // 전체목록
-	}
 	
+	if(mdto!=null){ // 회원인 경우(로그인이 되어있는 경우)
+		MemberDTO member = mdao.get(mdto.getMember_no());
+		
+		AddrDAO adao = new AddrDAO();
+		AddrDTO adto = adao.get(member.getMember_addr_no());
+		
+		if(isSearch){
+			count = updao.getCount(type,keyword,member.getMember_addr_no());
+			list = updao.getAreaList(type,keyword,start,finish,member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 
+		}else {
+			count = updao.getCount(member.getMember_addr_no());
+			list = updao.getAreaList(start,finish,member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
+		}
+		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
+		pageCount = (count + pageSize - 1) / pageSize;
+	 	if(finishBlock > pageCount){
+	 		finishBlock = pageCount;
+	 	}
+	} 
+	else { // 비회원인 경우	
+		if(isSearch){
+			count = updao.getCount(type,keyword);
+			list = updao.getList(type,keyword,start,finish); // (지역 상관X)검색목록
+		}else {
+			count = updao.getCount();
+			list = updao.getList(start,finish); // (지역 상관X)전체목록
+		}
+		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
+		pageCount = (count + pageSize - 1) / pageSize;
+	 	if(finishBlock > pageCount){
+	 		finishBlock = pageCount;
+	 	}
+	}
+ 	
 	String path = request.getContextPath();
 %>
 
@@ -96,7 +128,11 @@
 
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
+			<%if(!isSearch) { %>
 			<span style="color: orange">중고거래</span> 상품목록
+			<%} else { %>
+			<span style="color: orange"><%=keyword %></span>의 검색결과
+			<%} %>
 		</h2>
 		<div class="sort_list" align="right">
 			<div class="popular">

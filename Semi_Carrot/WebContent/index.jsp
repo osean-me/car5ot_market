@@ -115,7 +115,7 @@
 									<div class="hot-product">
 										<div id="img">
 											<img src="<%=path%>/img/logo_icon.png">
-										</div>
+									</div>
 										<div id="title"><%=newpost.getPost_title()%>
 											..
 										</div>

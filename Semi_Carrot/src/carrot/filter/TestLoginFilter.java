@@ -37,6 +37,7 @@ public class TestLoginFilter implements Filter{
 
 				//로그인
 				req.getSession().setAttribute("memberinfo", user);
+				
 			}
 			
 			chain.doFilter(request, response);//통과

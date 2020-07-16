@@ -1,3 +1,7 @@
+<%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
+<%@page import="carrot.bean.dto.PromotionPostImgDTO"%>
+<%@page import="carrot.bean.dto.PromotionPostDTO"%>
+<%@page import="carrot.bean.dao.PromotionPostDAO"%>
 <%@page import="carrot.bean.dao.UsedPostImgDAO"%>
 <%@page import="carrot.bean.dto.UsedPostImgDTO"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
@@ -18,11 +22,14 @@
 
 	// 최신 중고 게시물 불러오기
 	UsedPostDAO updao = new UsedPostDAO();
+	PromotionPostDAO ppdao = new PromotionPostDAO();
 	List<UsedPostDTO> list = updao.newUsedPost();
+	List<PromotionPostDTO> list2 = ppdao.newPromotionPost();
 	String address = null;
 	String base = null;
 	
 	UsedPostImgDAO uidao = new UsedPostImgDAO();
+	PromotionPostImgDAO pidao = new PromotionPostImgDAO();
 	
 	// 로그인 세션이 있는 경우 > 회원 번호 / 주소 번호 구해오기
 	if (mdto != null) {
@@ -38,11 +45,17 @@
 		base = adto.getAddr_base();
 		
 		list = updao.newUsedPost(member.getMember_addr_no());
+		list2= ppdao.newpPromotionPost(member.getMember_addr_no());
 	
 		if (list.isEmpty()) {
 	
 			list = updao.newUsedPost();
 	
+		}
+		
+		if(list2.isEmpty()) {
+			
+			list2 = ppdao.newPromotionPost();
 		}
 	
 	}
@@ -80,7 +93,6 @@
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_2.png">
 				</div>
-				s
 				<div class="swiper-slide">
 					<img src="./img/banner_1903x300_3.png">
 				</div>
@@ -166,80 +178,55 @@
 						<div id="banner-2-top">
 							<span>우리 동네의 멋진 가게들!</span>
 						</div>
-						<div id="banner-2-bottom">
-							<div class="layer">
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
+							<div id="banner-1-right-bottom">
+								<div class="layer">
+									<%
+										int count3 = 0;
+									for (PromotionPostDTO ppdto: list2) {
+										PromotionPostImgDTO pidto = pidao.getMember(ppdto.getPost_no());
+										if (count3 >= 5) {
+											break;
+										}
+									%>
+									<div class="hot-product">
+										<div id="img">
+											<a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=ppdto.getBoard_no()%>&promotion_cate_num=<%=ppdto.getPromotion_cate_num()%>&post_no=<%=pidto.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=pidto.getPost_img_no()%>"></a>
+										</div>
+										<div id="title"><%=ppdto.getPost_title()%>
+											..
+										</div>
+										<div id="like"><%=ppdto.getPost_like()%></div>
 									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
+									<%
+										count3++;
+									}
+									%>
 								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
+								<div class="layer">
+									<%
+										int count4 = 0;
+									for (PromotionPostDTO ppdto : list2) {
+										PromotionPostImgDTO pidto = pidao.getMember(ppdto.getPost_no());
+										if (count4 >= 10) {
+											break;
+										}
+
+										if (count4 > 4) {
+									%>
+									<div class="hot-product">
+										<div id="img">
+											<a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=ppdto.getBoard_no()%>&promotion_cate_num=<%=ppdto.getPromotion_cate_num()%>&post_no=<%=pidto.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=pidto.getPost_img_no()%>"></a>
+										</div>
+										<div id="title"><%=ppdto.getPost_title()%>
+											..
+										</div>
+										<div id="like"><%=ppdto.getPost_like()%></div>
 									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-							</div>
-							<div class="layer">
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
-								<div class="hot-product">
-									<div id="img">
-										<img src="http://placeimg.com/100/100/tech">
-									</div>
-									<div id="title">티비 급처합니다!</div>
-									<div id="like">25</div>
-								</div>
+								<%
+										}
+									count4++;
+									}
+								%>
 							</div>
 						</div>
 					</div>

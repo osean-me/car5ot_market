@@ -3,7 +3,6 @@
 <%@page import="java.util.Calendar"%>
 <%@page import="carrot.bean.dto.DetailList3DTO"%>
 <%@page import="carrot.bean.dto.BoardDTO"%>
-<%@page import="carrot.bean.dto.DetailListDTO"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>

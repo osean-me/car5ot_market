@@ -13,7 +13,6 @@ import javax.sql.DataSource;
 
 import carrot.bean.dto.AddrDTO;
 import carrot.bean.dto.DetailList3DTO;
-import carrot.bean.dto.DetailListDTO;
 import carrot.bean.dto.UsedPostDTO;
 
 public class UsedPostDAO {
@@ -84,16 +83,6 @@ public class UsedPostDAO {
 	}
 
 	/*
-	 * //글 목록 메소드 public List<UsedPostDTO> getList2() throws Exception { Connection
-	 * con = getConnection(); String sql
-	 * ="SELECT * FROM used_post ORDER BY post_no DESC"; PreparedStatement ps =
-	 * con.prepareStatement(sql);
-	 * 
-	 * ResultSet rs = ps.executeQuery(); List<UsedPostDTO> list = new ArrayList<>();
-	 * while(rs.next()) { UsedPostDTO updto = new UsedPostDTO(rs); list.add(updto);
-	 * } con.close(); return list; }
-	 * 
-	 * 
 	 * // 주소 포함 전체 목록 메소드 public List<DetailListDTO> getList() throws Exception {
 	 * Connection con = getConnection(); //String sql
 	 * ="SELECT * FROM used_post ORDER BY post_no DESC"; String sql =

@@ -9,7 +9,7 @@
 
 <article>
 <div align="center">
-<img src="<%=request.getContextPath()%>/img/403ERROR.png">
+<img src="<%=request.getContextPath()%>/img/403carrot.png">
  <h1><a href="<%=path%>">홈으로</a></h1>
 </div>
 </article>

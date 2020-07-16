@@ -8,10 +8,15 @@
 	
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-	<article>
-			<img src="<%=request.getContextPath()%>/img/404ERROR.png">
-			 <h1><a href="<%=path%>">홈으로</a></h1>
+<article>
+<div align="center">
+	
+			<img src="<%=request.getContextPath()%>/img/404carrot.png">
+			<h1><a href="<%=path%>">홈으로</a></h1>
+	
+</div>			 
 	</article>
+
 	
 <jsp:include page="/template/footer.jsp"></jsp:include>
 

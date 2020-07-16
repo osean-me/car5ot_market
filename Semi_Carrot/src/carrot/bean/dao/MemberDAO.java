@@ -262,7 +262,7 @@ public class MemberDAO {
 
 		String sql = "UPDATE MEMBER SET MEMBER_PW = ?, MEMBER_NICK = ?, MEMBER_ADDR_NO = ?, MEMBER_PHONE = ? WHERE MEMBER_NO = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, mdto.getMember_pw());
 		ps.setString(2, mdto.getMember_nick());
 		ps.setLong(3, mdto.getMember_addr_no());
@@ -368,38 +368,64 @@ public class MemberDAO {
 
 		return result;
 	}
-	
+
 	// [9] 회원 찜 등록
 	public void insertLike(LikeDTO ldto) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "INSERT INTO POST_LIKE VALUES(? , ? , ?)";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setLong(1, ldto.getMember_no());
 		ps.setLong(2, ldto.getBoard_no());
 		ps.setLong(3, ldto.getPost_no());
-		
+
 		ps.execute();
-		
+
 		con.close();
 	}
-	
+
 	// [10] 회원 찜 삭제
 	public void deleteLike(LikeDTO ldto) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "DELETE POST_LIKE WHERE MEMBER_NO = ? AND BOARD_NO = ? AND POST_NO = ?";
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setLong(1, ldto.getMember_no());
 		ps.setLong(2, ldto.getBoard_no());
 		ps.setLong(3, ldto.getPost_no());
-		
+
 		ps.execute();
+
+		con.close();
+	}
+
+	public Long searchLike(LikeDTO ldto) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT POST_NO FROM POST_LIKE WHERE MEMBER_NO = ? AND BOARD_NO = ? AND POST_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, ldto.getMember_no());
+		ps.setLong(2, ldto.getBoard_no());
+		ps.setLong(3, ldto.getPost_no());
+
+		ResultSet rs = ps.executeQuery();
+		
+		Long result;
+		
+		if (rs.next()) {
+			result = rs.getLong(1);
+		} else {
+			result = null;
+		}
 		
 		con.close();
+		
+		return result;
 	}
 
 }

@@ -157,7 +157,11 @@
         };
     </script>
 
-
+<%if(request.getParameter("succ") != null) { %>
+	alert("해당 게시글이 찜 목록에 등록되었어요!");
+<%} else if(request.getParameter("del") != null){ %>
+	alert("해당 게시글이 찜 목록에서 삭제되었어요!");
+<%} %>
 <article style="padding-top: 220px" id="post-content-form">
 		<div class="padding50">
 			<div class="float-box float-left">
@@ -225,6 +229,7 @@
 								<input type="hidden" name="member_no" value="<%=mdto.getMember_no()%>">
 								<input type="hidden" name="board_no" value="<%=board_no%>">
 								<input type="hidden" name="post_no" value="<%=post_no%>">
+								<input type="hidden" name="post_path" value="<%=request.getRequestURI() %>?<%=request.getQueryString() %>">
 								<input type="submit" class="like-button cursor" value="♥ 찜 <%=updto.getPost_like() %>">
 							</form>
 						</div>

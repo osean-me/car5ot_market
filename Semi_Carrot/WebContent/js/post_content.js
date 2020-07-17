@@ -61,11 +61,10 @@ function viewReplyMemberInfo(tag) {
 	console.log(getInfo.value)
 	
 	var loginMember = document.querySelector("#login-member").value;
-	var replyMember = document.querySelector("#reply-member" + tagId).value;
 	
 	getInfo.classList.remove("display-on");
 	
-	if(loginMember != replyMember) {
+	if(loginMember != getId.value) {
 		if(getId.checked) {
 			getInfo.classList.add("display-on");
 

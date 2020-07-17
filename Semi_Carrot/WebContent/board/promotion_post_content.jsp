@@ -324,8 +324,8 @@
 									} else { 
 										replymember = mdao.get(rdto.getMember_no());
 								%>
-									<label id="reply-member-form" for="<%=rdto.getMember_no()%>"><input type="checkbox" id="reply-nick<%=rdto.getMember_no() %>" onchange="viewReplyMemberInfo(this);"><%=replymember.getMember_nick() %></label>
-									<div class="info-reply-nick<%=rdto.getMember_no() %> reply-tab-design">
+									<label id="reply-member-form" for="<%=rdto.getMember_no()%><%=rdto.getReply_no()%>"><input type="checkbox" id="<%=rdto.getMember_no() %><%=rdto.getReply_no() %>" value="<%=rdto.getMember_no() %>" onchange="viewReplyMemberInfo(this);"><%=replymember.getMember_nick() %></label>
+									<div class="info<%=rdto.getMember_no() %><%=rdto.getReply_no() %> reply-tab-design">
 										<div><a href="<%=path%>/member/info.jsp?no=<%=replymember.getMember_no()%>">회원 페이지</a></div>
 											<form action="<%=path %>/member/manner.do" method="post">
 		                                       	<input type="hidden" name="this_member_no" value="<%=replymember.getMember_no()%>"> <!-- 좋아요 누를 회원 -->

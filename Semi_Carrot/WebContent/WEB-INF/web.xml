@@ -44,6 +44,7 @@
 		<url-pattern>/admin/*</url-pattern>
 		<url-pattern>/board/used_write.jsp</url-pattern>
 		<url-pattern>/board/promotion_write.jsp</url-pattern>
+		<url-pattern>/board/used_post_content.jsp</url-pattern>
 
 	</filter-mapping>
 
@@ -55,12 +56,12 @@
 	<filter-mapping>
 		<filter-name>memberFilter</filter-name>
 		<url-pattern>/user/find_id_pw.jsp</url-pattern>
-				<url-pattern>/user/find_id.do</url-pattern>
-					<url-pattern>/user/find_pw.do</url-pattern>
-						<url-pattern>/user/join.jsp</url-pattern>
-						<url-pattern>/user/login.jsp</url-pattern>
-								<url-pattern>/user/find_id.result</url-pattern>
-								<url-pattern>/user/find_pw.result</url-pattern>
+		<url-pattern>/user/find_id.do</url-pattern>
+		<url-pattern>/user/find_pw.do</url-pattern>
+		<url-pattern>/user/join.jsp</url-pattern>
+		<url-pattern>/user/login.jsp</url-pattern>
+		<url-pattern>/user/find_id.result</url-pattern>
+		<url-pattern>/user/find_pw.result</url-pattern>
 
 	</filter-mapping>
 

@@ -113,6 +113,8 @@
 										int count = 0;
 									for (UsedPostDTO newpost : list) {
 										UsedPostImgDTO uidto = uidao.getMember(newpost.getPost_no());
+										System.out.println(newpost.getPost_title());
+										System.out.println(uidto.getPost_img_no());
 										if (count >= 5) {
 											break;
 										}

@@ -33,7 +33,7 @@ String path = request.getContextPath();
 <link href="<%=path%>/css/10.find_id_pw.css" rel="stylesheet"
 	type="text/css">
 <script type="text/javascript" src="<%=path%>/js/password.js"></script>
-<article id="login-article">
+
 	<div class="main-form">
 	<div style=height:250px;>
 		<img src="<%=path%>/img/logo_icon.png" alt="logo_icon" id="logo_icon">

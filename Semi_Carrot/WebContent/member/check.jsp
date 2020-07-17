@@ -22,11 +22,11 @@
 				<div class="pw-find">
 					<div>
 						<form action="checks.do" method="get"style="margin-top:200px">
+					
 							<input id="pw" type="password" name="member_pw" required placeholder="비밀번호 입력">
 							<div>
 								<form action="info.jsp" method="post" style="text-align: right;">
 									<input class="submit" type="submit" value="확인" style="width: 345px; height:55px margin-top:100px;">
-
 								</form>
 							</div>
 							<%

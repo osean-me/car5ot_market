@@ -65,10 +65,22 @@
 			//"주소 시군구동" 뽑아내기위해
 			AddrDAO addao = new AddrDAO();
 			AddrDTO addto = addao.get(updto.getAddr_no());
-			//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
+			
+			/////////////게시글 조회수 중복 방지 코드//////////////
+			Set<Long> memory = (Set<Long>)session.getAttribute("memory");
+			if(memory==null){
+				memory=new HashSet<>();
+			}
+			boolean isFrist = memory.add(post_no);
+			session.setAttribute("memory", memory);
+			
 			MemberDTO memberinfo = (MemberDTO) session.getAttribute("memberinfo");
-			UsedPostDAO updaoo = new UsedPostDAO();
-			updaoo.plusViewCount(post_no, 1);
+			
+			if(isFrist){
+				updao.plusViewCount(post_no, memberinfo.getMember_no());
+			}
+			
+			
 			//내글
 			boolean isMine = memberinfo.getMember_no() == updto.getMember_no();
 			//관리자
@@ -269,7 +281,7 @@
 
 								<div class="inline">
 									<a href="used_post_content.jsp?board_no=<%=board_no%>&used_cate_num=<%=used_cate_num%>&post_no=<%=rupdto.getPost_no()%>"> <img class="image" src="showImg.do?post_img_no=<%=rupdto.getImgno()%>"></a>
-									<p class="font17 top-margin5"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
+									<p class="font17 top-margin5 reco"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
 								</div>
 								<%if(i % 6 == 0&i<18) { %>
 									</div><div class="swiper-slide left-item16">

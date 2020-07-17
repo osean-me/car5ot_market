@@ -439,4 +439,16 @@ textarea {
 .inline {
 	display: inline-block;
 	margin: 0px 10px 0px 10px;
+
 }
+.reco{
+	overflow: hidden;
+	 text-overflow: ellipsis;
+	 white-space: nowrap;
+	 width: 150px;
+	 height: 19px;
+}
+}
+
+}
+

@@ -42,7 +42,7 @@
 			String sysdate = date.format(cal.getTime()); // 현재 날짜
 			String systime = time.format(cal.getTime()); // 현재 시간 
 			
-			System.out.println(systime);
+/* 			System.out.println(systime); */
 			
 			int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 			int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
@@ -51,10 +51,10 @@
 			// 현재 시간 > 초 단위 변환
 			int systime_s = syshour + sysminute + syssecound;
 			
-			System.out.println("시간 : " + syshour);
+/* 			System.out.println("시간 : " + syshour);
 			System.out.println("분 : " + sysminute);
 			System.out.println("초 : " + syssecound);
-			System.out.println("초단위 현재 시간 : " + systime_s);
+			System.out.println("초단위 현재 시간 : " + systime_s); */
 			
 			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 			MemberDAO mdao = new MemberDAO();
@@ -80,6 +80,8 @@
 			////////////////////////
 			///		댓글 조회		///
 			//////////////////////
+			// 중고 거래 게시글 테이블 이름
+			String post_table = "USED_POST";
 			// 중고 거래 댓글 테이블 및 시퀀스
 			String reply_table_name = "USED_POST_REPLY";
 			String reply_seq_name = "USED_POST_REPLY_SEQ";
@@ -221,9 +223,18 @@
 					</div>
 					<div>
 					<div class="float-box float-left">
+						<%if(updto.getMember_no() != memberinfo.getMember_no()) {%>
 						<div class="left-item33">
-							<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
+							<form action="<%=path %>/member/post_like.do" method="post">
+								<input type="hidden" name="member_no" value="<%=memberinfo.getMember_no()%>">
+								<input type="hidden" name="board_no" value="<%=board_no%>">
+								<input type="hidden" name="post_no" value="<%=post_no%>">
+								<input type="hidden" name="post_table" value="<%=post_table%>">
+								<input type="hidden" name="post_path" value="<%=request.getRequestURI() %>?<%=request.getQueryString() %>">
+								<input type="submit" class="like-button cursor" value="♥ 찜 <%=updto.getPost_like() %>">
+							</form>
 						</div>
+						<%} %>
 						<%if(isAdmin || isMine){ %>
 						<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
 						<div class="left-item33">

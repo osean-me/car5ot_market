@@ -92,7 +92,6 @@ public class BoardDAO {
 	}
 
 	// 게시판 별 게시글 가져오기
-	// 게시판 별 게시글 가져오기
 	public List<Object> getPostList(String post_board_name, long member_no) throws Exception {
 		Connection con = getConnection();
 

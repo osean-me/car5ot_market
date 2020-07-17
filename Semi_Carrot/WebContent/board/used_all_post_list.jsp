@@ -1,8 +1,8 @@
+<%@page import="carrot.bean.dao.AddrDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="carrot.bean.dto.DetailList3DTO"%>
 <%@page import="carrot.bean.dto.BoardDTO"%>
-<%@page import="carrot.bean.dto.DetailListDTO"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>
@@ -17,8 +17,8 @@
 <%
 	UsedPostDAO updao = new UsedPostDAO();
 	MemberDAO mdao = new MemberDAO();
-
-	List<DetailList3DTO> list = updao.getList3(); //전체목록
+	MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo"); // 회원번호 불러오기
+	
 
 	// 시간 출력 수정 
 	Calendar cal = Calendar.getInstance();
@@ -34,7 +34,82 @@
 
 	// 현재 시간 > 초 단위 변환
 	int systime_s = syshour + sysminute + syssecound;
+	
+	//검색인지 목록인지 검사 
+	String type = request.getParameter("type");
+	String keyword = request.getParameter("keyword");
+	
+	
+	boolean isSearch = type != null && keyword !=null;
+	
+	// 페이지 계산 코드 
+	int pageSize=12; // 한 페이지에 16개의 데이터를 표시하겠다 
+	
+	String pageStr = request.getParameter("page");
+	int pageNo;
+	
+	try {
+		pageNo = Integer.parseInt(pageStr);
+		if(pageNo <= 0){
+			throw new Exception();
+		}
+	}
+	catch(Exception e){
+		pageNo = 1;
+	}
+	
+	int finish = pageNo * pageSize;
+	int start = finish - (pageSize-1);
 
+	// 페이지 네비게이터 계산 코드 
+	int blockSize = 10; // 네비게이터 블록을 10개씩 배치하겠다 ! 
+	int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
+	int finishBlock = startBlock + blockSize - 1;
+	
+
+	int count; // 페이지 개수 출력하기 위함
+	int pageCount;
+	int searchCount;
+	
+	List<DetailList3DTO> list;
+	
+	if(mdto!=null){ // 회원인 경우(로그인이 되어있는 경우)
+		MemberDTO member = mdao.get(mdto.getMember_no());
+		
+		AddrDAO adao = new AddrDAO();
+		AddrDTO adto = adao.get(member.getMember_addr_no());
+		
+		
+		if(isSearch){
+			count = updao.getCount(type,keyword,member.getMember_addr_no());
+			list = updao.getAreaList(type,keyword,start,finish,member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 			
+		}else {
+			count = updao.getCount(member.getMember_addr_no());
+			list = updao.getAreaList(start,finish,member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
+		}
+		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
+		pageCount = (count + pageSize - 1) / pageSize;
+	 	if(finishBlock > pageCount){
+	 		finishBlock = pageCount;
+	 	}
+	 	searchCount=count;
+	} 
+	else { // 비회원인 경우	
+		if(isSearch){
+			count = updao.getCount(type,keyword);
+			list = updao.getList(type,keyword,start,finish); // (지역 상관X)검색목록
+		}else {
+			count = updao.getCount();
+			list = updao.getList(start,finish); // (지역 상관X)전체목록
+		}
+		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
+		pageCount = (count + pageSize - 1) / pageSize;
+	 	if(finishBlock > pageCount){
+	 		finishBlock = pageCount;
+	 	}
+	 	searchCount=count;
+	}
+ 	
 	String path = request.getContextPath();
 %>
 
@@ -47,7 +122,11 @@
 
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
+			<%if(!isSearch) { %>
 			<span style="color: orange">중고거래</span> 상품목록
+			<%} else { %>
+			<span style="color: orange"><%=keyword %></span>의 검색결과
+			<%} %>
 		</h2>
 		<div class="sort_list" align="right">
 			<div class="popular">
@@ -58,9 +137,24 @@
 				<a href="">최신순</a>
 			</div>
 		</div>
-		<hr class="hr_style1">
+		<hr class="hr_style1">	
 	</div>
-
+	
+<!-- 	검색어가 없는경우 -->
+	<%if(count==0){%>
+	<div align="center">
+		<div class="noSearch"><span style="color: orange; font-size:30px;"><%=keyword %></span><br>
+		에 대한 검색결과가 없습니다.</div>
+		<hr class="search">
+		<div class = "searchContent">
+		- 단어의 철자가 정확한지 확인해 보세요<br>
+		- 보다 일반적인 검색어로 다시 검색해 보세요<br>
+		- 검색어의 띄어쓰기를 다르게 해보세요<br>
+		- 유해/금지어가 아닌지 확인해주세요<br>	
+		</div>	
+	</div>
+	<%} %>
+	
 	<div align="left">
 		<div class="box">
 			<div class=detail>
@@ -71,8 +165,9 @@
 						<!-- 이미지 등록 -->
 						<div class="product_photo">
 							<a class="move" href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>"><img src="showImg.do?post_img_no=<%=dldto.getPost_img_no()%>"></a>
-						</div> <!-- 게시글 제목 -->
-						<div class="product_title">
+						</div> 
+						<!-- 게시글 제목 -->
+							<div class="product_title">
 							<div class="hideText">
 								<a class="move" href="used_post_content.jsp?board_no=<%=dldto.getBoard_no()%>&used_cate_num=<%=dldto.getUsed_cate_num()%>&post_no=<%=dldto.getPost_no()%>"><%=dldto.getPost_title()%></a>
 							</div>
@@ -96,30 +191,30 @@
 							<%=commaNum%>원
 							<!-- 게시글 등록 시간 -->
 							<%
-								String used_post_date = dldto.getPost_date().substring(11);
-
-									int posthour = (Integer.parseInt(used_post_date.substring(0, 2)) * 60) * 60;
+									String used_post_date=dldto.getPost_date().substring(11);
+								
+									int posthour = Integer.parseInt(used_post_date.substring(0, 2)) * 60;
 									int postminute = Integer.parseInt(used_post_date.substring(3, 5)) * 60;
 									int postsecound = Integer.parseInt(used_post_date.substring(6, 8));
-
+									
 									int posttime_s = posthour + postminute + postsecound;
-
-									int compareTime = systime_s - posttime_s;
-							%>
-							<div class="product_time">
-								<span>
-									<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) {%>
-										<%if(compareTime < 3600) { %>
-											<%int postResult = (compareTime / 60) % 60; %>
-											<%=postResult %> 분 전
+									
+									int compareTime = systime_s - posttime_s; 																	
+								%>
+								<div class="product_time">
+									<span>
+										<%if(dldto.getPost_date().substring(0, 10).equals(sysdate)) {%>
+											<%if(compareTime < 3600) { %>
+												<%int postResult = (compareTime / 60) % 60; %>
+												<%=postResult %> 분 전
+											<%} else {%>
+												오늘
+											<%} %>
 										<%} else {%>
-											오늘
+											<%=dldto.getPost_date().substring(0, 10) %>
 										<%} %>
-									<%} else {%>
-										<%=dldto.getUsedPost_day().substring(0, 10) %>
-									<%} %>
-								</span>
-							</div>
+									</span>
+								</div>
 						</div>
 						<hr class="hr_style">
 						<div class="product_like">
@@ -137,6 +232,49 @@
 
 			</div>
 			<div style="clear: both;"></div>
+			
+			
+			<!--  페이지 네비게이터  -->
+			<div class="row center pagination">
+				<%if(startBlock > 1){ %>
+					<%if(!isSearch) { %>
+						<a href = "used_all_post_list.jsp?page=<%=startBlock-1%>">&lt;</a>
+					<%} else { %>
+						<a href = "used_all_post_list.jsp?page=<%=startBlock-1%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
+					<%} %>
+				<%} %>
+				
+				<!-- 
+					이동 숫자에 반복문을 적용 
+					범위는 startBlock부터 finishBlock까지로 설정(상단에서 계산을 미리 해두었음)
+				-->
+				<%for(int i=startBlock; i<=finishBlock; i++) { %>
+					<%
+						String prop;
+						if(i==pageNo) { //현재 페이지 번호면
+							prop = "class='on'";
+						}
+						else { // 현재 페이지가 아니면
+							prop="";
+						}
+					%>
+					
+					<% if(!isSearch) {%> <!-- 목록이면 -->
+							<a href="used_all_post_list.jsp?page=<%=i%>" <%=prop%>><%=i %></a>
+					<%} 
+						else { %> <!-- 검색이면 -->
+							<a href = "used_all_post_list.jsp?page=<%=i%>&type=<%=type%>&keyword=<%=keyword%>" <%=prop%>><%=i %></a>
+					<%} %>	
+				<%} %>
+				
+				<%if(pageCount > finishBlock){ %>
+					<%if(!isSearch){ %> <!-- 목록이면 -->
+						<a href="used_all_post_list.jsp?page=<%=finishBlock + 1%>">&gt;</a>
+					<%}else{ %> <!-- 검색이면 -->
+						<a href="used_all_post_list.jsp?page=<%=finishBlock + 1%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
+					<%} %>
+				<%} %>
+			</div>
 		</div>
 	</div>
 </article>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carrot.bean.dao.UsedPostDAO;
+import carrot.bean.dto.UsedBoardDTO;
 import carrot.bean.dto.UsedPostDTO;
 
 @SuppressWarnings("serial")
@@ -26,11 +27,12 @@ public class UsedPostEditServlet extends HttpServlet {
 			updto.setUsed_cate_num(Long.parseLong(req.getParameter("used_cate_num")));
 			updto.setPost_price(Long.parseLong(req.getParameter("post_price")));
 			updto.setPost_content(req.getParameter("post_content"));
+			updto.setBoard_no(Long.parseLong(req.getParameter("board_no")));
 			
 			UsedPostDAO updao = new UsedPostDAO();
 			updao.edit(updto);
 			
-			resp.sendRedirect("used_post_content.jsp?post_no="+updto.getPost_no());
+			resp.sendRedirect("used_post_content.jsp?board_no="+updto.getBoard_no()+"&used_cate_num="+updto.getUsed_cate_num()+"&post_no="+updto.getPost_no());
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dto.RecoUsedPostDTO"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -27,8 +28,8 @@
 			long login_member = login.getMember_no();
 	
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
-	        //long board_no = Long.parseLong(request.getParameter("board_no")); 
-	        //long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
+	        long board_no = Long.parseLong(request.getParameter("board_no")); 
+	        long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
 	         
 			UsedPostDAO updao = new UsedPostDAO();
 			UsedPostDTO updto = updao.get(post_no);
@@ -41,7 +42,7 @@
 			String sysdate = date.format(cal.getTime()); // 현재 날짜
 			String systime = time.format(cal.getTime()); // 현재 시간 
 			
-			System.out.println(systime);
+/* 			System.out.println(systime); */
 			
 			int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 			int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
@@ -50,28 +51,24 @@
 			// 현재 시간 > 초 단위 변환
 			int systime_s = syshour + sysminute + syssecound;
 			
-			System.out.println("시간 : " + syshour);
+/* 			System.out.println("시간 : " + syshour);
 			System.out.println("분 : " + sysminute);
 			System.out.println("초 : " + syssecound);
-			System.out.println("초단위 현재 시간 : " + systime_s);
+			System.out.println("초단위 현재 시간 : " + systime_s); */
 			
 			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 			MemberDAO mdao = new MemberDAO();
 			MemberDTO mdto = mdao.get(updto.getMember_no());
-
 			//"카테고리 이름" 뽑아내기위해
 			UsedBoardDAO ubdao = new UsedBoardDAO();
 			UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
-
 			//"주소 시군구동" 뽑아내기위해
 			AddrDAO addao = new AddrDAO();
 			AddrDTO addto = addao.get(updto.getAddr_no());
-
 			//게시글 조회수 중복 방지 코드 만들어야함 ★★★★★★
 			MemberDTO memberinfo = (MemberDTO) session.getAttribute("memberinfo");
 			UsedPostDAO updaoo = new UsedPostDAO();
 			updaoo.plusViewCount(post_no, 1);
-
 			//내글
 			boolean isMine = memberinfo.getMember_no() == updto.getMember_no();
 			//관리자
@@ -80,20 +77,20 @@
 			//첨부파일 이미지
 			UsedPostImgDAO upidao = new UsedPostImgDAO();
 			List<UsedPostImgDTO>fileList=upidao.getList(post_no);
-
 			////////////////////////
 			///		댓글 조회		///
 			//////////////////////
-
+			// 중고 거래 게시글 테이블 이름
+			String post_table = "USED_POST";
 			// 중고 거래 댓글 테이블 및 시퀀스
 			String reply_table_name = "USED_POST_REPLY";
 			String reply_seq_name = "USED_POST_REPLY_SEQ";
-
 			// 해당 게시글 댓글 존재 여부 확인
 			ReplyDAO rdao = new ReplyDAO();
 			
 			// 프로필 가지고 오기
 			ProfileImgDAO pidao = new ProfileImgDAO();
+			
 	%>
 	
 	
@@ -106,12 +103,25 @@
             width: 100%;
             height: 100%;
         }
-        .swiper-container .swiper-slide,
-        .swiper-container .swiper-slide > img{
+        .mainimg{
             width:100%;
             min-height: 380px;
             height: auto;
             max-height: 380px;
+        }
+        
+        .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+        	position:absolute;
+        	left:auto;
+        	top:auto;
+        	bottom:auto;
+        	right:0;
+        	width:auto;
+        	font-size:15px;
+        }
+        
+        .title-label{
+        	position:relative;
         }
         
     </style>
@@ -126,26 +136,19 @@
                 direction: 'horizontal'   //표시방식(수직:vertical, 수평:horizontal)
                 ,loop: false //순환 모드 여부
                 
-
                 //페이지 네비게이터 옵션그룹
                 ,pagination: {
                     el: '.swiper-pagination', //적용 대상의 선택자
-                    type: 'bullets',//네비게이터 모양(bullets/fraction/...)
+                    type: 'fraction',//네비게이터 모양(bullets/fraction/...)
                 },
-                
-                // auto
-                autoplay: {
-        			delay: 3000,
-        		},
-
                 //이전/다음 이동버튼 설정그룹
               navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
+                    grabCursor:true
                 }
-
                 //커서 모양을 손모양으로 변경
-                ,grabCursor:true
+                ,grabCursor:false
                 
                 //슬라이드 전환 효과(effect)
                 //,effect:'coverflow'
@@ -171,7 +174,7 @@
 						<%for(UsedPostImgDTO upidto : fileList){ %>
 	    		    	<div class="swiper-slide">
 							<!-- 이미지 미리보기 -->
-								<img src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
+								<img class="mainimg" src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
 					</div>
 						<%} %>
 					<%} %>
@@ -185,7 +188,7 @@
 			
 				<div class="right-item60 left-font padding-left35">
 					<!-- 글 제목 -->
-					<div class="font23 padding25">
+					<div class="font30 padding25">
 						<span><%=updto.getPost_title() %></span>
 					</div>
 					<!-- 상품 금액 -->
@@ -194,7 +197,7 @@
 						<%long price = updto.getPost_price();
 						String commaNum = NumberFormat.getInstance().format(price);
 						%>
-						<span class="font45"><%=commaNum %></span> <span class=font20>원</span>
+						<span class="font50"><%=commaNum %></span> <span class=font20>원</span>
 					</div>
 					<div class="item padding25">
 						<hr>
@@ -220,9 +223,18 @@
 					</div>
 					<div>
 					<div class="float-box float-left">
+						<%if(updto.getMember_no() != memberinfo.getMember_no()) {%>
 						<div class="left-item33">
-							<button class="like-button cursor">♥ 찜 <%=updto.getPost_like() %></button>
+							<form action="<%=path %>/member/post_like.do" method="post">
+								<input type="hidden" name="member_no" value="<%=memberinfo.getMember_no()%>">
+								<input type="hidden" name="board_no" value="<%=board_no%>">
+								<input type="hidden" name="post_no" value="<%=post_no%>">
+								<input type="hidden" name="post_table" value="<%=post_table%>">
+								<input type="hidden" name="post_path" value="<%=request.getRequestURI() %>?<%=request.getQueryString() %>">
+								<input type="submit" class="like-button cursor" value="♥ 찜 <%=updto.getPost_like() %>">
+							</form>
 						</div>
+						<%} %>
 						<%if(isAdmin || isMine){ %>
 						<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
 						<div class="left-item33">
@@ -240,54 +252,51 @@
 		</div>
 
 
-		<div>
-			<p class="font20 padding25 padding-top40 left-font padding-left30">연관상품<p>
-			
-			<div class="padding40">
-				<div class="float-box float-left">
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/nature">
-						<p class="font17 top-margin10">.....></p>	<!-- 제목출력 -->
+			<div>
+				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
+				
+				<div class="swiper-container padding40">
+					<div class="swiper-wrapper float-box float-left">
+						<div class=" swiper-slide left-item16" style="height:180px;">
+							<%long recoCount = updao.getRecoCount(updto.getAddr_no(), updto.getUsed_cate_num()); 
+							
+								for(int i = 1; i <= recoCount; i++) {  //18대신 count 를 넣어야 함.
+									if(updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i) == null) {
+										return;
+									}									
+									RecoUsedPostDTO rupdto = updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i);						
+							%>
+
+								<div class="inline">
+									<a href="used_post_content.jsp?board_no=<%=board_no%>&used_cate_num=<%=used_cate_num%>&post_no=<%=rupdto.getPost_no()%>"> <img class="image" src="showImg.do?post_img_no=<%=rupdto.getImgno()%>"></a>
+									<p class="font17 top-margin5"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
+								</div>
+								<%if(i % 6 == 0&i<18) { %>
+									</div><div class="swiper-slide left-item16">
+								<%} %>
+							<%} %> <!-- 연관상품 마지막 -->
+						</div>
 					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/tech" >
-						<p class="font17 top-margin10">사진2</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/people" >
-						<p class="font17 top-margin10">사진3</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/animals" >
-						<p class="font17 top-margin10">사진4</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/architecture" >
-						<p class="font17 top-margin10">사진5</p>
-					</div>
-					<div class="left-item16">
-						<img src="https://placeimg.com/150/150/architecture" >
-						<p class="font17 top-margin10">사진6</p>
-					</div>
+					<div class="swiper-button-prev" ></div>
+	       		 	<div class="swiper-button-next"></div>
 				</div>
 			</div>
-		</div>
 
-		<div class="padding-top50">
+		<div class="padding-top100">
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
 				<div class="padding15">
-					<p class="font23">상품정보</p>
+					<p class="font27">상품정보</p>
 				</div>
 				<hr>
 				<div class="padding-top40 padding40 product-info-border ">
 					<p class="font18"><%=updto.getPost_content() %></p>
 				</div>
 				<hr>
-				<div class="padding-top40">
-					<p class="font20">댓글</p>
+				<div class="padding-top100">
+					<p class="font27">댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
@@ -312,7 +321,6 @@
 				
 			<div class="padding-top25 ">
 				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
-
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
 					for(int i=0; i < list.size(); i++) {
 						
@@ -376,7 +384,7 @@
 										<form action="edit_reply.do" method="post" id="edit-reply-form">
 											<input type="hidden" name="reply_no" value="<%=rdto.getReply_no() %>">
 											<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
-											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?post_no=<%=rdto.getPost_no()%>">
+											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>&post_no=<%=post_no%>">
 											<textarea class="font15" name="reply_content" placeholder="<%=rdto.getReply_content()%>"><%=rdto.getReply_content() %></textarea>
 											<input type="submit" class="right-float reply-button" value="☜수정">
 										</form>
@@ -395,7 +403,7 @@
 															답글
 												</label>
 											</div>
-										<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
+										<%if(memberinfo.getMember_no() == rdto.getMember_no() || memberinfo.getMember_auth().equals("관리자")) { %>
 											<div><a href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&<%=rdto.getReply_no() %>=<%=rdto.getReply_no()%>">수정</a></div>
 											<div>
 												<form action="delete_reply.do" method="post" id="delete-reply-form">
@@ -414,7 +422,7 @@
 					<div class="padding-top20 rereply-off" id="rereply-form<%=i%>">
 					<p class="font20">대댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
 						<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
@@ -461,7 +469,7 @@
 			
 			<div class="right-item34  padding-right30 padding-left30 ">
 				<div class="padding15 left-font">
-					<p class=" font23">상점정보</p>
+					<p class=" font27">상점정보</p>
 				</div>
 				<hr>
 				<div class="padding-top30">
@@ -499,5 +507,4 @@
 		</div>
 	</div>
 </article>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

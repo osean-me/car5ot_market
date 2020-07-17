@@ -16,6 +16,7 @@ import carrot.bean.dao.UsedPostImgDAO;
 import carrot.bean.dto.UsedPostImgDTO;
 
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns="/board/showImg.do")
 public class UsedThumbnailServlet extends HttpServlet{
 	@Override

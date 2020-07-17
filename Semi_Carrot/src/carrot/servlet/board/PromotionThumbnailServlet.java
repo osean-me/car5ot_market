@@ -17,6 +17,7 @@ import carrot.bean.dto.PromotionPostImgDTO;
 
 
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns="/board/showImg2.do")
 public class PromotionThumbnailServlet extends HttpServlet{
 	@Override

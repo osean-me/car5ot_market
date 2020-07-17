@@ -10,7 +10,12 @@ nav {
     margin-top: 78px;
     background-color: white;
     z-index: 2;
-    display: flex;
+}
+
+#nav-area {
+	width: 1200px;
+	margin: 0px auto;
+	display: flex;
 }
 
 #menu-area {
@@ -20,9 +25,9 @@ nav {
 
 #nav-icon {
     width: 50px;
-    height: auto;
     margin-top: 20px;
     cursor: pointer;
+    float: left;
 }
 
 .nav-menu.on {
@@ -65,7 +70,6 @@ nav {
     display: inline-block;
     list-style: none;
     font-size: 32px;
-    margin-right: 8rem;
     flex: 1;
 }
 

@@ -42,14 +42,13 @@
 		var titleInfo = document.querySelector("#titleInfo");
 		var titleInfoText = document.querySelector("#titleInfoText");
 
-		if (title.match(regex) == null && titleInfoText == null) {
-				
+		var isValid = title.match(regex);
+		if (isValid) {			
 			var titleInfoText = document.createElement("div");
 			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
 			titleInfoText.setAttribute("id", "titleInfoText");
 			titleInfoText.setAttribute("style", "color: red; font-size: 15px;");
 			titleInfo.appendChild(titleInfoText);
-
 		} 
 		else if (title.match(regex) != null && titleInfoText != null) {
 				titleInfo.removeChild(titleInfo.childNodes[0]);
@@ -64,12 +63,13 @@
 		var priceInfo = document.querySelector("#priceInfo");
 		var priceInfoText = document.querySelector("#priceInfoText");
 
+		var isValid = price.match(regex) == null && priceInfoText == null;
 		if (price.match(regex) == null && priceInfoText == null) {
 				
 			var priceInfoText = document.createElement("div");
 			priceInfoText.textContent = "⛔   숫자만 입력하세요.";
-			priceInfoText.setAttribute("id", "priceInfoText");
-			priceInfoText.setAttribute("style", "color: red; font-size: 15px;");
+			priceInfoText.setAttribute("id","priceInfoText");
+			priceInfoText.setAttribute("style","color: red; font-size: 15px;");
 			priceInfo.appendChild(priceInfoText);
 
 		} 

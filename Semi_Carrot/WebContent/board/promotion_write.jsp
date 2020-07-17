@@ -94,7 +94,7 @@
 		if (phone.match(regex) == null && phoneInfoText == null) {
 				
 			var phoneInfoText = document.createElement("div");
-			phoneInfoText.textContent = "⛔   -를 제외하고 숫자만 입력하세요.";
+			phoneInfoText.textContent = "⛔   -를 제외한 올바른 전화번호를 입력하세요.";
 			phoneInfoText.setAttribute("id", "phoneInfoText");
 			phoneInfoText.setAttribute("style", "color: red; font-size: 15px;");
 			phoneInfo.appendChild(phoneInfoText);

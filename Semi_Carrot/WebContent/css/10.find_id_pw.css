@@ -2,10 +2,10 @@
 
 
 #login-article {
-		width: 100%;
 	min-width: 1000px;
     height: auto;
     text-align: center;
+    margin: 0px 15%;
 }
 
 .main-form {

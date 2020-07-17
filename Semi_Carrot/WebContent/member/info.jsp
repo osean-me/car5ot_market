@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
+<%@page import="carrot.bean.dto.PromotionPostImgDTO"%>
 <%@page import="carrot.bean.dto.LikeDTO"%>
 <%@page import="carrot.bean.dao.LikeDAO"%>
 <%@page import="carrot.bean.dao.UsedPostImgDAO"%>
@@ -84,6 +86,7 @@
 	Long member_img_no = pidao.getProfileImgNo(member_no);
 	
 	UsedPostImgDAO uidao = new UsedPostImgDAO();
+	PromotionPostImgDAO ppidao = new PromotionPostImgDAO();
 	
 	/////////////////////
 	/// 	찜 목록 	 ///
@@ -364,11 +367,12 @@
 	                                		if(count3 == 5) {
 	                         					break;
 	                         				}
+	                                		PromotionPostImgDTO ppidto = ppidao.getMember(post.getPost_no());
 	                                		
 	                                %>
 	                                    <div class="product">
 	                                        <div class="product-inner">
-	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="photo"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>"></a></div>
 	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
 	                                        	<div class="map">
 	                                        		<div>
@@ -400,10 +404,11 @@
 	                         					break;
 	                         				}
 	                                		if(count4 > 4) {
+	                                		PromotionPostImgDTO ppidto = ppidao.getMember(post.getPost_no());
 	                                %>
 	                                    <div class="product">
 	                                        <div class="product-inner">
-	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="photo"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>"></a></div>
 	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
 	                                        	<div class="map">
 	                                        		<div>
@@ -639,11 +644,14 @@
 	                                		if(count5 == 5) {
 	                         					break;
 	                         				}
+	                                		UsedPostImgDTO uidto = uidao.getMember(like.getPost_no());
 	                                		
 	                                %>
 	                                    <div class="product">
 	                                        <div class="product-inner">
-	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="photo">
+	                                        		<a href="used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        	</div>
 	                                        	<div class="product-title"><%=like.getPost_title() %>...</div>
 	                                        	<div class="map">
 	                                        		<div>
@@ -673,10 +681,13 @@
 	                         					break;
 	                         				}
 	                                		if(count6 > 4) {
+	                                			UsedPostImgDTO uidto = uidao.getMember(like.getPost_no());
 	                                %>
 	                                    <div class="product">
 	                                        <div class="product-inner">
-	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
+	                                        	<div class="photo">
+	                                        		<a href="used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        	</div>
 	                                        	<div class="product-title"><%=like.getPost_title()%>...</div>
 	                                        	<div class="map">
 	                                        		<div>

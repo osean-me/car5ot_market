@@ -301,6 +301,7 @@
 						
 						MemberDTO replymember;
 				%>
+					<input type="hidden" value=<%=rdto.getMember_no() %> id="reply-member<%=rdto.getMember_no()%>">
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
 						<!-- 프로필 이미지 영역 -->
@@ -323,17 +324,17 @@
 									} else { 
 										replymember = mdao.get(rdto.getMember_no());
 								%>
-									<label id="reply-member-form" for="reply-nick<%=rdto.getReply_no() %>"><input type="checkbox" id="reply-nick<%=rdto.getReply_no() %>" onchange="viewMemberInfo(this);"><%=replymember.getMember_nick() %></label>
-									<div class="info-reply-nick<%=rdto.getReply_no() %> reply-tab-design">
+									<label id="reply-member-form" for="<%=rdto.getMember_no()%>"><input type="checkbox" id="reply-nick<%=rdto.getMember_no() %>" onchange="viewReplyMemberInfo(this);"><%=replymember.getMember_nick() %></label>
+									<div class="info-reply-nick<%=rdto.getMember_no() %> reply-tab-design">
 										<div><a href="<%=path%>/member/info.jsp?no=<%=replymember.getMember_no()%>">회원 페이지</a></div>
-											<form action="manner.do" method="post">
+											<form action="<%=path %>/member/manner.do" method="post">
 		                                       	<input type="hidden" name="this_member_no" value="<%=replymember.getMember_no()%>"> <!-- 좋아요 누를 회원 -->
 		                                   		<input type="hidden" name="push_member_no" value="<%=memberinfo.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
 		                                  		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
 		                                  		<input type="hidden" name="good" value="">
 		                                   		<input type="submit" value="좋아요" class="submit-button">
 	                                   		</form>
-											<form action="manner.do" method="post">
+											<form action="<%=path %>/member/manner.do" method="post">
 		                                  		<input type="hidden" name="this_member_no" value="<%=replymember.getMember_no()%>"> <!-- 싫어요 누를 회원 -->
 		                                   		<input type="hidden" name="push_member_no" value="<%=memberinfo.getMember_no() %>"> <!-- 싫어요를 누른 회원 -->
 		                                   		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">

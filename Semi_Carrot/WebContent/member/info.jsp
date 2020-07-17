@@ -141,9 +141,10 @@
                         </div>
                         <div id="mypage-top-left-down">
                             <div>
+                            	<%if(loginMember.getMember_no() == member_no) { %>
                                 <a href="change_info.jsp?no=<%=member_no%>"><button>회원정보 수정</button></a>
                                 <a href="check_exit.jsp?no=<%=member_no%>"><button>회원 탈퇴</button></a>
-                                
+                                <%} %>
                             </div>
                         </div>
                     </div>
@@ -160,7 +161,7 @@
                                         		<input type="hidden" name="push_member_no" value="<%=loginMember.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
                                         		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
                                         		<input type="hidden" name="good" value="">
-                                        		<input type="submit" value="좋아요">
+                                        		<input type="submit" value="좋아요" class="submit-button">
                                         	</form>
                                         </li>
                                         <li>
@@ -169,7 +170,7 @@
                                         		<input type="hidden" name="push_member_no" value="<%=loginMember.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
                                         		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
                                         		<input type="hidden" name="bad" value="">
-                                        		<input type="submit" value="싫어요">
+                                        		<input type="submit" value="싫어요" class="submit-button">
                                         	</form>
                                         </li>
                                         <li><a href="">신고하기</a></li>

@@ -34,7 +34,7 @@ public class JoinServlet extends HttpServlet {
 			
 			adto.setAddr_state(addr_state);
 			adto.setAddr_city(addr_city);
-			adto.setAddr_city(addr_city);
+			adto.setAddr_base(addr_base);
 
 
 			// Address Method (주소 조회 검사)

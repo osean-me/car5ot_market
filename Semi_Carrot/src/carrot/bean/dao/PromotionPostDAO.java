@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> refs/remotes/origin/master
 package carrot.bean.dao;
 
 import java.sql.Connection;

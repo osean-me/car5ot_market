@@ -33,3 +33,42 @@ window.onload = function() {
 		effect : 'slide'// 기본값
 	});
 };
+
+function viewMemberInfo(tag) {
+	var tagId = tag.id;
+	
+	var getId = document.getElementById(tagId);
+	var getInfo = document.querySelector(".info-" + tagId);
+	
+	var loginMember = document.querySelector("#login-member").value;
+	var postMember = document.querySelector("#post-member").value;
+	
+	getInfo.classList.remove("display-on");
+	
+	if(loginMember != postMember) {
+		if(getId.checked) {
+			getInfo.classList.add("display-on");
+
+		}
+	}
+}
+
+function viewReplyMemberInfo(tag) {
+	var tagId = tag.id;
+	
+	var getId = document.getElementById(tagId);
+	var getInfo = document.querySelector(".info" + tagId);
+	console.log(getInfo.value)
+	
+	var loginMember = document.querySelector("#login-member").value;
+	var replyMember = document.querySelector("#reply-member" + tagId).value;
+	
+	getInfo.classList.remove("display-on");
+	
+	if(loginMember != replyMember) {
+		if(getId.checked) {
+			getInfo.classList.add("display-on");
+
+		}
+	}
+}

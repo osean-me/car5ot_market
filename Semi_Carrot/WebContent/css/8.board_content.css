@@ -141,8 +141,9 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
-.lightgray-font{
-	color:#cfcfcf;
+
+.lightgray-font {
+	color: #cfcfcf;
 	font-size: 20px;
 }
 
@@ -278,6 +279,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 
 .manner-margin {
 	margin: 10px 0px 0px 20px
+	z-index: 1;
 }
 
 .like-button {
@@ -479,4 +481,54 @@ textarea {
 .title-label {
 	position: relative;
 }
+
+#member-form>label, #reply-member-form {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+#member-form>label:hover, #reply-member-form:hover {
+	color: #ff8900;
+}
+
+#member-form>label>input[type=checkbox], #reply-member-form>input[type=checkbox]
+	{
+	display: none;
+}
+
+.info-member-nick, .reply-tab-design {
+	position: absolute;
+	margin-left: 15px;
+	display: none;
+	width: 100px;
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 5px 5px 15px rgba(128, 128, 128, 0.65);
+}
+
+.info-member-nick>div>a, .reply-tab-design>div>a, .submit-button {
+	text-decoration: none;
+	color: gray;
+}
+
+.info-member-nick>div>a:hover, .reply-tab-design>div>a:hover, .submit-button:hover {
+	color: #ff8900;
+}
+
+.info-member-nick>div,
+.reply-tab-design>div,
+.submit-button {
+	margin: 10px;
+	margin-top: 0px;
+}
+
+.submit-button {
+	border: 1px solid transparent;
+	font-size: 15px;
+	cursor: pointer;
+}
+
+.display-on {
+	display: inline-block;
 }

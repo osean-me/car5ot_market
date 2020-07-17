@@ -28,8 +28,8 @@ public class UsedPostDeleteServlet extends HttpServlet {
 			UsedPostDAO updao = new UsedPostDAO();
 			
 			// 파일 삭제
-			File profile = new File("D:/upload/board/" + upidto.getPost_img_no());
-			profile.delete();
+			File post = new File("D:/upload/board/" + upidto.getPost_img_no());
+			post.delete();
 
 			// DB 삭제
 			upidao.deleteUsedPostImg(post_no);

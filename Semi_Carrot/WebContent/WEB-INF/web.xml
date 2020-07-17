@@ -45,7 +45,6 @@
 		<url-pattern>/board/used_write.jsp</url-pattern>
 		<url-pattern>/board/promotion_write.jsp</url-pattern>
 		<url-pattern>/board/used_post_content.jsp</url-pattern>
-
 	</filter-mapping>
 
 	<!-- 회원 필터 -->
@@ -62,12 +61,7 @@
 		<url-pattern>/user/login.jsp</url-pattern>
 		<url-pattern>/user/find_id.result</url-pattern>
 		<url-pattern>/user/find_pw.result</url-pattern>
-
 	</filter-mapping>
-
-
-
-
 
 	<!-- 에러 페이지 설정 -->
 	<error-page>

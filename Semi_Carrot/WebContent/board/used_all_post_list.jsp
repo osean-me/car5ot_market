@@ -39,10 +39,11 @@
 	String type = request.getParameter("type");
 	String keyword = request.getParameter("keyword");
 	
+	
 	boolean isSearch = type != null && keyword !=null;
 	
 	// 페이지 계산 코드 
-	int pageSize=16; // 한 페이지에 16개의 데이터를 표시하겠다 
+	int pageSize=4; // 한 페이지에 16개의 데이터를 표시하겠다 
 	
 	String pageStr = request.getParameter("page");
 	int pageNo;
@@ -68,6 +69,7 @@
 
 	int count; // 페이지 개수 출력하기 위함
 	int pageCount;
+	int searchCount;
 	
 	List<DetailList3DTO> list;
 	
@@ -77,9 +79,10 @@
 		AddrDAO adao = new AddrDAO();
 		AddrDTO adto = adao.get(member.getMember_addr_no());
 		
+		
 		if(isSearch){
 			count = updao.getCount(type,keyword,member.getMember_addr_no());
-			list = updao.getAreaList(type,keyword,start,finish,member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 
+			list = updao.getAreaList(type,keyword,start,finish,member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 			
 		}else {
 			count = updao.getCount(member.getMember_addr_no());
 			list = updao.getAreaList(start,finish,member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
@@ -89,6 +92,7 @@
 	 	if(finishBlock > pageCount){
 	 		finishBlock = pageCount;
 	 	}
+	 	searchCount=count;
 	} 
 	else { // 비회원인 경우	
 		if(isSearch){
@@ -103,6 +107,7 @@
 	 	if(finishBlock > pageCount){
 	 		finishBlock = pageCount;
 	 	}
+	 	searchCount=count;
 	}
  	
 	String path = request.getContextPath();
@@ -132,9 +137,24 @@
 				<a href="">최신순</a>
 			</div>
 		</div>
-		<hr class="hr_style1">
+		<hr class="hr_style1">	
 	</div>
-
+	
+<!-- 	검색어가 없는경우 -->
+	<%if(count==0){%>
+	<div align="center">
+		<div class="noSearch"><span style="color: orange; font-size:30px;"><%=keyword %></span><br>
+		에 대한 검색결과가 없습니다.</div>
+		<hr class="search">
+		<div class = "searchContent">
+		- 단어의 철자가 정확한지 확인해 보세요<br>
+		- 보다 일반적인 검색어로 다시 검색해 보세요<br>
+		- 검색어의 띄어쓰기를 다르게 해보세요<br>
+		- 유해/금지어가 아닌지 확인해주세요<br>	
+		</div>	
+	</div>
+	<%} %>
+	
 	<div align="left">
 		<div class="box">
 			<div class=detail>

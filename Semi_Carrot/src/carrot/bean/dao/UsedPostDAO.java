@@ -293,6 +293,104 @@ public class UsedPostDAO {
 		con.close();
 		return list;
 	}
+	
+
+	// 비회원(전체)목록인 경우
+	public int getCount() throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT count(*) FROM used_post";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		return count;
+	}
+	
+	// 비회원(전체)검색인 경우
+	public int getCount(String type, String keyword) throws Exception {
+		Connection con = getConnection();
+		
+		String sql = "SELECT count(*) FROM used_post WHERE instr(#1,?) > 0";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		
+		con.close();
+		return count;
+	}
+	
+	// 검색/목록 구별하여 갯수 출력
+	// 회원(전체)목록인 경우
+	public int getCount(long member_addr_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT count(*) FROM used_post where addr_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, member_addr_no);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+
+		con.close();
+		return count;
+	}
+
+	// 회원(전체)검색인 경우
+	public int getCount(String type, String keyword, long member_addr_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT count(*) FROM used_post WHERE instr(#1,?) > 0 AND addr_no=?";
+		sql = sql.replace("#1", type);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setLong(2, member_addr_no);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+
+		con.close();
+		return count;
+	}
+	
+	//회원(카테고리별)목록인 경우
+	public int getCount2(long board_no, long used_cate_num,long member_addr_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=? AND addr_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, board_no);
+		ps.setLong(2, used_cate_num);
+		ps.setLong(3, member_addr_no);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+
+		con.close();
+		return count;
+	}
+	
+	//비회원(카테고리별)목록인 경우
+		public int getCount2(long board_no, long used_cate_num) throws Exception {
+			Connection con = getConnection();
+
+			String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, board_no);
+			ps.setLong(2, used_cate_num);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			int count = rs.getInt(1);
+
+			con.close();
+			return count;
+		}
 
 	// 단일조회
 	public UsedPostDTO get(long post_no) throws Exception {
@@ -451,101 +549,5 @@ public class UsedPostDAO {
 		con.close();
 	}
 
-	// 비회원(전체)목록인 경우
-	public int getCount() throws Exception {
-		Connection con = getConnection();
-		
-		String sql = "SELECT count(*) FROM used_post";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-		
-		con.close();
-		return count;
-	}
-	
-	// 비회원(전체)검색인 경우
-	public int getCount(String type, String keyword) throws Exception {
-		Connection con = getConnection();
-		
-		String sql = "SELECT count(*) FROM used_post WHERE instr(#1,?) > 0";
-		sql = sql.replace("#1", type);
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, keyword);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-		
-		con.close();
-		return count;
-	}
-	
-	// 검색/목록 구별하여 갯수 출력
-	// 회원(전체)목록인 경우
-	public int getCount(long member_addr_no) throws Exception {
-		Connection con = getConnection();
-
-		String sql = "SELECT count(*) FROM used_post where addr_no=?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setLong(1, member_addr_no);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-
-		con.close();
-		return count;
-	}
-
-	// 회원(전체)검색인 경우
-	public int getCount(String type, String keyword, long member_addr_no) throws Exception {
-		Connection con = getConnection();
-
-		String sql = "SELECT count(*) FROM used_post WHERE instr(#1,?) > 0 AND addr_no=?";
-		sql = sql.replace("#1", type);
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, keyword);
-		ps.setLong(2, member_addr_no);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-
-		con.close();
-		return count;
-	}
-	
-	//회원(카테고리별)목록인 경우
-	public int getCount2(long board_no, long used_cate_num,long member_addr_no) throws Exception {
-		Connection con = getConnection();
-
-		String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=? AND addr_no=?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setLong(1, board_no);
-		ps.setLong(2, used_cate_num);
-		ps.setLong(3, member_addr_no);
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-
-		con.close();
-		return count;
-	}
-	
-	//비회원(카테고리별)목록인 경우
-		public int getCount2(long board_no, long used_cate_num) throws Exception {
-			Connection con = getConnection();
-
-			String sql = "SELECT count(*) FROM used_post WHERE board_no=? AND used_cate_num=?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setLong(1, board_no);
-			ps.setLong(2, used_cate_num);
-			
-			ResultSet rs = ps.executeQuery();
-			rs.next();
-			int count = rs.getInt(1);
-
-			con.close();
-			return count;
-		}
 
 }

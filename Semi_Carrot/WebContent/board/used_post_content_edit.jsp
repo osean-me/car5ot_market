@@ -1,3 +1,4 @@
+  
 <%@page import="carrot.bean.dto.UsedBoardDTO"%>
 <%@page import="carrot.bean.dao.UsedBoardDAO"%>
 <%@page import="carrot.bean.dto.UsedPostDTO"%>
@@ -19,12 +20,9 @@
 * {
    box-sizing: border-box;
 }
-
 #used-write-form {
 	margin:0px 20%;
-
 }
-
 .form-title {
    margin-top: 40px;
    margin-bottom: 40px;
@@ -46,7 +44,6 @@
    margin-left: 50px;
    outline:1px solid orange;
 }
-
 .used_cate_style {
    width: 300px; /* 너비설정 */
    border: 1px solid lightgray; /* 테두리 설정 */
@@ -66,7 +63,6 @@
    margin-left: 20px;
       outline:1px solid orange;
 }
-
 .form-price {
    margin-top: 40px;
    margin-bottom: 40px;
@@ -88,19 +84,15 @@
    margin-left: 50px;
    outline:1px solid orange;
 }
-
 #free {
    margin-left: 80px;
 }
-
 #free:checked {
    color: orange;
 }
-
 #suggest {
    margin-left: 50px;
 }
-
 .first {
    width: 1000px;
    height: 200px;
@@ -123,26 +115,21 @@
    margin-bottom: 30px;
 }
 .used_content_text {
-
 }
-
 .main .used_content_text {
    float: left;
    width: 50px;
    height: 254px;
 }
-
 .main .content {
    float: left;
    width: 250px;
    height: 250px;
 }
-
 .countNum {
    margin-left: 990px;
    margin-top: 10px;
 }
-
 .form-btn {
    background-color: orange;
    color: white;
@@ -154,7 +141,6 @@
    font-size: 27px;
    margin-top: 70px;
 }
-
 .must {
    font-size: 20px;
    font-weight: normal;
@@ -164,33 +150,26 @@
    font-size: 20px;
    text-align:left;
 }
-
 .used_photo, .used_title, .used_cate, .used_price, .used_content {
    list-style: none;
 }
-
 .used_photo_text {
    margin-bottom: 10px;
 }
-
 .used_photo_img {
    margin-bottom:45px;
 }
-
 .used_photo_explain {
    color: lightblue;
 }
-
 .used_text {
     display: inline-block;
 }
-
 .hr_style2 {
    border: 0;
    height: 3px;
    background:orange;
 }
-
 .preview-wrap > img {
    width:200px;
    height:200px;
@@ -198,18 +177,15 @@
    margin-right:10px;
    margin:10px;
 }
-
 input+span {
 	color:red;
 }
-
 </style>
 <script>
    function calculateCount() {
       var text = document.querySelector(".first").value;
       var len = text.length;
       var countTag = document.querySelector(".letter-count");
-
       countTag.textContent = len;
    }
    

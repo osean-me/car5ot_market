@@ -309,10 +309,10 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo">
-	                                        		<a href="used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
 	                                        	</div>
 	                                        	<div class="product-title">
-	                                        		<a href="used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><%=post.getPost_title() %>...</a>	
+	                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><%=post.getPost_title() %>...</a>	
 	                                        	</div>
 	                                        	<div class="map">
 	                                        		<div>
@@ -373,7 +373,7 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>"></a></div>
-	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
+	                                        	<div class="product-title"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><%=post.getPost_title() %>...</a></div>
 	                                        	<div class="map">
 	                                        		<div>
 		                                        		<%=adto.getAddr_state() %>  
@@ -409,7 +409,7 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>"></a></div>
-	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
+	                                        	<div class="product-title"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><%=post.getPost_title()%>...</a></div>
 	                                        	<div class="map">
 	                                        		<div>
 	                                        			<%=adto.getAddr_state() %>  
@@ -650,9 +650,9 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo">
-	                                        		<a href="used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
 	                                        	</div>
-	                                        	<div class="product-title"><%=like.getPost_title() %>...</div>
+	                                        	<div class="product-title"><a href="<%=path %>/board/used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><%=like.getPost_title() %>...</a></div>
 	                                        	<div class="map">
 	                                        		<div>
 		                                        		<%=adto.getAddr_state() %>  
@@ -686,9 +686,9 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo">
-	                                        		<a href="used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+	                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
 	                                        	</div>
-	                                        	<div class="product-title"><%=like.getPost_title()%>...</div>
+	                                        	<div class="product-title"><a href="<%=path %>/board/used_post_content.jsp?board_no=<%=like.getBoard_no()%>&used_cate_num=<%=like.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><%=like.getPost_title()%>...</a></div>
 	                                        	<div class="map">
 	                                        		<div>
 	                                        			<%=adto.getAddr_state() %>  

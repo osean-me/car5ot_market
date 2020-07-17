@@ -213,7 +213,7 @@
 										<%} else {%>
 											<%=dldto.getPost_date().substring(0, 10) %>
 										<%} %>
-									</span>
+									</span>  
 								</div>
 						</div>
 						<hr class="hr_style">

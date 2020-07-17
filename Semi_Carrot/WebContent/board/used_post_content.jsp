@@ -489,7 +489,15 @@
 								<div class="top-margin10 left-font seller">
 									<!-- 작성자 -->
 									<%if(updto.getMember_no() != 0){ %>
-										<p class="font20"> <%=mdto.getMember_nick() %></p>
+										<div id="write-member-form">
+											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo();"><%=mdto.getMember_nick() %></label>
+											<div>
+												<div>회원 페이지</div>
+												<div>좋아요</div>
+												<div>싫어요</div>
+												<div>신고하기</div>
+											</div>
+										</div>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>

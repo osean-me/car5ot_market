@@ -119,5 +119,18 @@ public class PromotionPostImgDAO {
 		con.close();
 		return pidto;
 	}
+	//이미지 DB 삭제
+	public void deletePromotionPostImg(long post_no) throws Exception {
+		Connection con = getConnection();
 
+		String sql = "DELETE promotion_post_IMG WHERE post_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, post_no);
+
+		ps.execute();
+
+		con.close();
+	}
 }

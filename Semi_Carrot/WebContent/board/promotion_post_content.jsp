@@ -315,9 +315,9 @@
 									} else { 
 										replymember = mdao.get(rdto.getMember_no());
 								%>
-									<label id="reply-member-form" for="reply-nick"><input type="checkbox" id="reply-nick" onchange="viewMemberInfo(this);"><%=replymember.getMember_nick() %></label>
-									<div class="info-reply-nick">
-										<div><a href="">회원 페이지</a></div>
+									<label id="reply-member-form" for="reply-nick<%=replymember.getMember_no() %>"><input type="checkbox" id="reply-nick<%=replymember.getMember_no() %>" onchange="viewMemberInfo(this);"><%=replymember.getMember_nick() %></label>
+									<div class="info-reply-nick<%=replymember.getMember_no() %> reply-tab-design">
+										<div><a href="<%=path%>/member/info.jsp?no=<%=replymember.getMember_no()%>">회원 페이지</a></div>
 										<div><a href="">좋아요</a></div>
 										<div><a href="">싫어요</a></div>
 										<div><a href="">신고하기</a></div>
@@ -451,7 +451,7 @@
 										<div id="member-form">
 											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo(this);"><%=mdto.getMember_nick() %></label>
 											<div class="info-member-nick">
-												<div><a href="">회원 페이지</a></div>
+												<div><a href="<%=path%>/member/info.jsp?no=<%=mdto.getMember_no()%>">회원 페이지</a></div>
 												<div><a href="">좋아요</a></div>
 												<div><a href="">싫어요</a></div>
 												<div><a href="">신고하기</a></div>

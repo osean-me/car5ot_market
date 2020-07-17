@@ -570,4 +570,23 @@ public class UsedPostDAO {
 
 			return rupdto;
 		}
+		
+		// 같은 동네&같은 카테고리 최신글 조회 (1~18) COUNT
+		public long getRecoCount(long addr_no, long used_cate_num) throws Exception{
+			Connection con = getConnection();
+			
+			String sql="SELECT count(*) FROM (SELECT ROWNUM rn, up.post_no, up.post_title, up.ADDR_NO,up.USED_CATE_NUM,img.imgno FROM used_post up INNER JOIN (SELECT post_no, min(post_img_no) imgno FROM used_post_img GROUP BY post_no ORDER BY post_no desc) img ON up.post_no = img.post_no AND up.ADDR_NO =? AND up.USED_CATE_NUM =? ORDER BY post_date DESC) WHERE rn BETWEEN 1 AND 18";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setLong(1, addr_no);
+			ps.setLong(2, used_cate_num);
+			
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			long count=rs.getLong(1);
+			
+			con.close();
+			
+			return count;
+		}
+		
 }

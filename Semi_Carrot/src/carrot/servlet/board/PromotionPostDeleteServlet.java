@@ -13,7 +13,7 @@ import carrot.bean.dao.PromotionPostDAO;
 import carrot.bean.dao.PromotionPostImgDAO;
 import carrot.bean.dto.PromotionPostImgDTO;
 
-@WebServlet(urlPatterns = "board/promopostdelete.do")
+@WebServlet(urlPatterns = "/board/promopostdelete.do")
 public class PromotionPostDeleteServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

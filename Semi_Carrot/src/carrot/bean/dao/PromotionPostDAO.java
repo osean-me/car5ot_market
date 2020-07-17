@@ -12,6 +12,8 @@ import javax.sql.DataSource;
 
 import carrot.bean.dto.DetailList2DTO;
 import carrot.bean.dto.PromotionPostDTO;
+import carrot.bean.dto.RecoPromotionPostDTO;
+import carrot.bean.dto.RecoUsedPostDTO;
 
 public class PromotionPostDAO {
 	private static DataSource src;
@@ -474,5 +476,43 @@ public class PromotionPostDAO {
 		return list;
 
 	}
+	//같은 동네&같은 카테고리 최신글 조회(1~18)
+	public RecoPromotionPostDTO getRecoList(long addr_no, long promotion_cate_num, int count) throws Exception {
+		Connection con = getConnection();
+		String sql="SELECT * FROM (SELECT ROWNUM rn, pp.post_no, pp.post_title, pp.ADDR_NO,pp.promotion_CATE_NUM,img.imgno FROM promotion_post pp INNER JOIN(SELECT post_no, min(post_img_no) imgno FROM promotion_post_img GROUP BY post_no ORDER BY post_no desc) img ON pp.post_no = img.post_no AND pp.ADDR_NO =? AND pp.promotion_CATE_NUM =? ORDER BY post_date DESC) WHERE rn = ?";
+	
+		PreparedStatement ps = con.prepareStatement(sql);
 
+		ps.setLong(1, addr_no);
+		ps.setLong(2, promotion_cate_num);
+		ps.setInt(3, count);
+
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+
+		RecoPromotionPostDTO rppdto = new RecoPromotionPostDTO(rs);
+
+		con.close();
+
+		return rppdto;
+	}
+	
+	// 같은 동네&같은 카테고리 최신글 조회 (1~18) COUNT
+	public long getRecoCount(long addr_no, long promotion_cate_num) throws Exception {
+		Connection con = getConnection();
+		
+		String sql="SELECT count(*) FROM(SELECT ROWNUM rn, pp.post_no, pp.post_title, pp.ADDR_NO,pp.Promotion_CATE_NUM,img.imgno FROM promotion_post pp INNER JOIN(SELECT post_no, min(post_img_no) imgno FROM promotion_post_img GROUP BY post_no ORDER BY post_no desc)img ON pp.post_no = img.post_no AND pp.ADDR_NO =? AND pp.promotion_CATE_NUM =? ORDER BY post_date DESC) WHERE rn BETWEEN 1 AND 18";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, addr_no);
+		ps.setLong(2, promotion_cate_num);
+
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		long count = rs.getLong(1);
+
+		con.close();
+
+		return count;
+	}
 }

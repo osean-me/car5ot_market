@@ -141,6 +141,10 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
+.lightgray-font{
+	color:#cfcfcf;
+	font-size: 20px;
+}
 
 .dimgray-font {
 	color: dimgray;
@@ -439,4 +443,40 @@ textarea {
 .inline {
 	display: inline-block;
 	margin: 0px 10px 0px 10px;
+}
+
+.reco {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 150px;
+	height: 19px;
+}
+
+.swiper-container {
+	width: 100%;
+	height: 100%;
+}
+
+.mainimg {
+	width: 100%;
+	min-height: 380px;
+	height: auto;
+	max-height: 380px;
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets,
+	.swiper-pagination-custom, .swiper-pagination-fraction {
+	position: absolute;
+	left: auto;
+	top: auto;
+	bottom: auto;
+	right: 0;
+	width: auto;
+	font-size: 15px;
+}
+
+.title-label {
+	position: relative;
+}
 }

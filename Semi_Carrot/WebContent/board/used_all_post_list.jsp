@@ -83,6 +83,7 @@
 		if(isSearch){
 			count = updao.getCount(type,keyword,member.getMember_addr_no());
 			list = updao.getAreaList(type,keyword,start,finish,member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 			
+			
 		}else {
 			count = updao.getCount(member.getMember_addr_no());
 			list = updao.getAreaList(start,finish,member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
@@ -128,14 +129,7 @@
 			<span style="color: orange"><%=keyword %></span>의 검색결과
 			<%} %>
 		</h2>
-		<div class="sort_list" align="right">
-			<div class="popular">
-				<a href="">인기순</a>
-			</div>
 
-			<div class="last">
-				<a href="">최신순</a>
-			</div>
 		</div>
 		<hr class="hr_style1">	
 	</div>

@@ -127,15 +127,6 @@
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange"><%=ubdto.getUsed_cate_title() %></span> 상품목록
 		</h2>
-		<div class="sort_list" align="right">
-			<div class="popular">
-				<a href="">인기순</a>
-			</div>
-
-			<div class="last">
-				<a href="">최신순</a>
-			</div>
-		</div>
 		<hr class="hr_style1">
 	</div>
 

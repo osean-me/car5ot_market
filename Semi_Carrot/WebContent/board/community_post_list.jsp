@@ -9,7 +9,7 @@
 }
 
 .top {
-	width: 1200px;
+	width: 1100px;
 	height: 150px;
 	border: 1px solid lightgray;
 	padding: 20px;
@@ -111,7 +111,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<article style="padding-top: 200px; margin:0px 15%">
+<article style="padding-top: 200px; margin:0px 20%">
 	<div align="left">
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">우리동네</span> 커뮤니티

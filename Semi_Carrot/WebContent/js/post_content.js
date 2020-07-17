@@ -40,10 +40,25 @@ function viewMemberInfo(tag) {
 	var getId = document.getElementById(tagId);
 	var getInfo = document.querySelector(".info-" + tagId);
 	
+	var loginMember = document.querySelector("#login-member").value;
+	var postMember = document.querySelector("#post-member").value;
+	var replyMember = document.querySelectorAll(".reply-member");
+	console.log(loginMember);
+	console.log(postMember);
+	console.log(replyMember.length);
 	getInfo.classList.remove("display-on");
 	
-	if(getId.checked) {
-		console.log("성공");
-		getInfo.classList.add("display-on");
+	if(loginMember != postMember) {
+		for(var i = 0; i < replyMember.length; i++) {
+			console.log("i : " + replyMember[i].value);
+			if(replyMember[i].value != loginMember) {
+				console.log("논리값 : " + replyMember[i].value != loginMember)
+				if(getId.checked) {
+				console.log("성공");
+				getInfo.classList.add("display-on");
+				break;
+				}
+			}
+		}
 	}
 }

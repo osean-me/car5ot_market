@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -11,6 +13,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import carrot.bean.dto.PromotionPostImgDTO;
+import carrot.bean.dto.UsedPostImgDTO;
 
 public class PromotionPostImgDAO {
 	private static DataSource src;
@@ -76,6 +79,23 @@ public class PromotionPostImgDAO {
 		con.close();
 		return ppidto;
 	}
+	
+	//게시글 첨부파일 조회
+	public List<PromotionPostImgDTO>getList(long post_no)throws Exception{
+		Connection con = getConnection();
+		String sql = "SELECT * FROM promotion_post_img WHERE post_no = ? ORDER BY post_img_no ASC";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, post_no);
+		ResultSet rs = ps.executeQuery();
+		List<PromotionPostImgDTO> list = new ArrayList<>();
+		while (rs.next()) {
+			PromotionPostImgDTO ppidto = new PromotionPostImgDTO(rs);
+			list.add(ppidto);
+		}
+		con.close();
+		return list;
+	}
+
 
 	// 회원 게시글 이미지 조회
 	public PromotionPostImgDTO getMember(long post_no) throws SQLException {

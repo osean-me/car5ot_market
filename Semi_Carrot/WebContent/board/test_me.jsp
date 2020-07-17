@@ -1,39 +1,39 @@
-<%@page import="carrot.bean.dto.RecoPromotionPostDTO"%>
-<%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
-<%@page import="carrot.bean.dto.PromotionPostImgDTO"%>
+<%@page import="carrot.bean.dto.RecoUsedPostDTO"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
-<%@page import="java.util.List"%>
-<%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="carrot.bean.dao.ReplyDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="carrot.bean.dto.PromotionBoardDTO"%>
-<%@page import="carrot.bean.dao.PromotionBoardDAO"%>
-<%@page import="carrot.bean.dto.PromotionPostDTO"%>
-<%@page import="carrot.bean.dao.PromotionPostDAO"%>
+<%@page import="carrot.bean.dto.UsedPostImgDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="carrot.bean.dao.UsedPostImgDAO"%>
+<%@page import="carrot.bean.dto.ProfileImgDTO"%>
+<%@page import="carrot.bean.dao.ProfileImgDAO"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="carrot.bean.dto.AddrDTO"%>
 <%@page import="carrot.bean.dao.AddrDAO"%>
-<%@page import="carrot.bean.dto.PromotionPostDTO"%>
-<%@page import="carrot.bean.dao.PromotionPostDAO"%>
+<%@page import="carrot.bean.dto.UsedBoardDTO"%>
+<%@page import="carrot.bean.dao.UsedBoardDAO"%>
 <%@page import="carrot.bean.dao.MemberDAO"%>
-<%@page import="carrot.bean.dao.PromotionPostDAO"%>
+<%@page import="carrot.bean.dao.UsedPostDAO"%>
 <%@page import="carrot.bean.dto.MemberDTO"%>
 <%@page import="carrot.bean.dto.UsedPostDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%
-			String path = request.getContextPath();
+		String path = request.getContextPath();
+	
+			MemberDTO login = (MemberDTO) session.getAttribute("memberinfo");
+			long login_member = login.getMember_no();
 	
 			long post_no = Long.parseLong(request.getParameter("post_no")); 
-			long board_no = Long.parseLong(request.getParameter("board_no")); 
-			long promotion_cate_num = Long.parseLong(request.getParameter("promotion_cate_num"));
-		 
-			PromotionPostDAO ppdao = new PromotionPostDAO();
-			PromotionPostDTO ppdto = ppdao.get(post_no);
-		
+	        long board_no = Long.parseLong(request.getParameter("board_no")); 
+	        long used_cate_num = Long.parseLong(request.getParameter("used_cate_num")); 
+	         
+			UsedPostDAO updao = new UsedPostDAO();
+			UsedPostDTO updto = updao.get(post_no);
+			
 			// 현재 날짜 가지고 오기
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -42,7 +42,7 @@
 			String sysdate = date.format(cal.getTime()); // 현재 날짜
 			String systime = time.format(cal.getTime()); // 현재 시간 
 			
-/* 			System.out.println(systime) */;
+/* 			System.out.println(systime); */
 			
 			int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 			int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
@@ -58,56 +58,51 @@
 			
 			//"글작성자 닉네임"을 표시하기 위해 작성자 회원정보가 필요 
 			MemberDAO mdao = new MemberDAO();
-			MemberDTO mdto = mdao.get(ppdto.getMember_no());
-			
+			MemberDTO mdto = mdao.get(updto.getMember_no());
 			//"카테고리 이름" 뽑아내기위해
-			PromotionBoardDAO pbdao = new PromotionBoardDAO();
-			PromotionBoardDTO pbdto = pbdao.get(ppdto.getPromotion_cate_num());
-			
+			UsedBoardDAO ubdao = new UsedBoardDAO();
+			UsedBoardDTO ubdto = ubdao.get(updto.getUsed_cate_num());
 			//"주소 시군구동" 뽑아내기위해
 			AddrDAO addao = new AddrDAO();
-			AddrDTO addto = addao.get(ppdto.getAddr_no());
+			AddrDTO addto = addao.get(updto.getAddr_no());
 			
-			
-			/////////게시글 조회수 중복 방지 코드////////////
-			Set<Long> memoryP = (Set<Long>)session.getAttribute("memoryP");
-			if(memoryP==null){
-				memoryP=new HashSet<>();
+			/////////////게시글 조회수 중복 방지 코드//////////////
+			Set<Long> memory = (Set<Long>)session.getAttribute("memory");
+			if(memory==null){
+				memory=new HashSet<>();
 			}
-			boolean isFrist = memoryP.add(post_no);
-			session.setAttribute("memoryP", memoryP);
+			boolean isFrist = memory.add(post_no);
+			session.setAttribute("memory", memory);
 			
 			MemberDTO memberinfo = (MemberDTO) session.getAttribute("memberinfo");
 			
 			if(isFrist){
-				ppdao.plusViewCount(post_no, memberinfo.getMember_no());
+				updao.plusViewCount(post_no, memberinfo.getMember_no());
 			}
-
+			
 			
 			//내글
-			boolean isMine= memberinfo.getMember_no() == ppdto.getMember_no();
+			boolean isMine = memberinfo.getMember_no() == updto.getMember_no();
 			//관리자
-			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
+			boolean isAdmin = memberinfo.getMember_auth().equals("관리자");
 			
 			//첨부파일 이미지
-			PromotionPostImgDAO ppidao = new PromotionPostImgDAO();
-			List<PromotionPostImgDTO>fileList=ppidao.getList(post_no);
-			
-			
+			UsedPostImgDAO upidao = new UsedPostImgDAO();
+			List<UsedPostImgDTO>fileList=upidao.getList(post_no);
 			////////////////////////
 			///		댓글 조회		///
 			//////////////////////
-			// 홍보 거래 게시글 테이블 이름
-			String post_table = "PROMOTION_POST";
-			// 홍보 거래 댓글 테이블 및 시퀀스
-			String reply_table_name = "PROMOTION_POST_REPLY";
-			String reply_seq_name = "PROMOTION_POST_REPLY_SEQ";
-			
+			// 중고 거래 게시글 테이블 이름
+			String post_table = "USED_POST";
+			// 중고 거래 댓글 테이블 및 시퀀스
+			String reply_table_name = "USED_POST_REPLY";
+			String reply_seq_name = "USED_POST_REPLY_SEQ";
 			// 해당 게시글 댓글 존재 여부 확인
 			ReplyDAO rdao = new ReplyDAO();
 			
 			// 프로필 가지고 오기
 			ProfileImgDAO pidao = new ProfileImgDAO();
+			
 	%>
 	
 	
@@ -115,8 +110,10 @@
 <script type="text/javascript" src="<%=path%>/js/reply.js"></script>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 <link href="<%=path%>/css/swiper.min.css" type="text/css" rel="stylesheet">
-    <script src="<%=path%>/js/swiper.min.js"></script>
-    <script type="text/javascript" src="<%=path%>/js/post_content.js"></script>
+<script src="<%=path%>/js/swiper.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/post_content.js"></script>
+
+
 <article style="padding-top: 220px" id="post-content-form">
 		<div class="padding50">
 			<div class="float-box float-left">
@@ -127,10 +124,10 @@
 					<!-- 필수 영역 -->
 	    		    <div class="swiper-wrapper">		
 					<%if(!fileList.isEmpty()){ %>
-						<%for(PromotionPostImgDTO ppidto : fileList){ %>
+						<%for(UsedPostImgDTO upidto : fileList){ %>
 	    		    	<div class="swiper-slide">
 							<!-- 이미지 미리보기 -->
-								<img class="mainimg" src="showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>">
+								<img class="mainimg" src="showImg.do?post_img_no=<%=upidto.getPost_img_no()%>">
 					</div>
 						<%} %>
 					<%} %>
@@ -143,86 +140,89 @@
 				</div>
 			
 				<div class="right-item60 left-font padding-left35">
-				<!-- 글 제목 -->
-				<div class="font30 padding25">
-					<span><%=ppdto.getPost_title() %></span>
-				</div>
-				<!-- 상품 금액 -->
-				<div class="item padding25">
-					<!-- 3자리마다 콤마 찍기 -->
-					<%long price = ppdto.getPost_price();
-					String commaNum = NumberFormat.getInstance().format(price);
-					%>
-					<span class="font50"><%=commaNum %></span> <span class=font20>원</span>
-				</div>
-				<div class="item padding25">
-					<hr>
-				</div>
-				<div class="item font17 gray-font padding25">
-					<span class="lightgray-font">♥</span> <span class="font15 padding-right05"><%=ppdto.getPost_like() %></span> <span
-						class="short-border"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAaCAYAAADMp76xAAAAAXNSR0IArs4c6QAABAdJREFUWAm9mFtIFFEYx9tZ11UW1tLoaoGEPShqq3ahgogyIgnqQXqIgih6qKgEH4JIqCgIIoowIrSn6i0irOxCQdAN7wb2IiSlSUZuGJGyumu/b9lZZo8zs7ObdeBwvvNd/uc/53zznWFcs9Js7e3tczVNWzs1NbUKiErGfJfLNYcxVyCRg8g/GAeZdiC3eTyeN2VlZd/Enm5zpRLY09Pjm5yc3EnMbghUMbpTiYd8BP8X9Dt+v/9uYWHhz1TixdcR4YGBgezh4eFD+J+gz5XAGWijYFzKycm5nArxpIQ5+hqAr9AXzgBJM4ggqXWyvLz8uplR1VkShmgOR3iVo9+jBv2LOWs9pu+H+JAdvilhyC4j6AldxqSNhT7g1Oh2u59mZWV9loDx8fGl4XB4C+IBHrpIdA7ad7C2V1RUvLPynUa4u7s7wIvVQsB8qyCDfgK5jgUaWChs0MdFyLo7OjoOo7hI98QN1sJvsHaB+cDMJYFwV1fXCnblJY5+M2dFN8GOVgcCgWeK3nQKdhXYDzE6IR2GdA2k76lgmq7o7OxcBGAzcydkJazOKVlxjvnWieyguTmZ25y21PiEFt3h/v7+rJGRkddYyhOsFhOe/gMvR6lVGliEzZL0YGPep5DTw16vd2VJScmAjhnd4WAweBaFI7KxwEaVLCQyIHOafB2ULrLo9IVkjMU0GnVJ5PmhUOim0UejIqwGuNaoTCZLNVB9yNFTkUikHqzF0kUWnepnFqv6GOdgbWYDDuo6jaduYOLWFU5Gvgk+qX4A73ei08ue6ms3B/ui3LbiozExLUd2AOxSQnWx850h2+f8/PyQYGksfoRxMhVguRRUf06qyYnOLFaNM87BjdAP0KMbq1Fu2phcMDolk2M3WIIbOGf5JjgD1hfpIosuwYmJWazqo8yvGG++6NH29vZmjo2NPcdxveJsOoXQ/yprXcKpsrLyt04kWtaKi4tDPp9vB0T6dIPdSN4Xxa5bO7dpNomR2GkGEwVchjIyMrYbyYpbwstDGSqkHL0CdJ4Jhqr6l1ezfNhvhGynumj8ahYDOSc7vI7+UeZJmke+DajjR3lAy7IoNvERX/CcfEd8pRBsMCMrfBJ2WCdITi8gpx8xD+g6u1FyGvtff15KSlLjt5aWllpumClhIdfX1+cdHR09D0gtu2TpZ/cgKdqasrOzj/M+/bKLS0qEb4JN5PU1QJbbAaVrY0M+UQKPkY73nWAkJSwgkoe84fsQ6+lLRDcD7Stkz3FV35Aq5RTPEWEdLFavt7HQXnTVPEimbnM4ThDbQtytvLy85oKCgnGHcXG3lAjHoxAogbNJlTWIq6VDQn6k5DLmih+y/EgJMsqPlFaOvZW3/y0v1A+xp9v+ADhPuomDsZuZAAAAAElFTkSuQmCC" width="20" height="13" alt="조회수 아이콘"> <%=ppdto.getPost_view() %></span> 
-						<span class="padding-left05"><%=ppdto.getPromotionPost_autotime()%></span> 
-						<span class="right-float">☎신고하기</span>
-				</div>
-				<div class="item font15 padding15">
-					<div class="padding15 ">
-						<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=pbdto.getPromotion_cate_title() %></span>
+					<!-- 글 제목 -->
+					<div class="font30 padding25">
+						<span><%=updto.getPost_title() %></span>
 					</div>
-
-					<div class="padding15 padding-top30">
-						<span class="gray-font">&middot; 거래지역</span><span
-							class="green-font">&emsp;<%=addto.getAddr_state() %> <%=addto.getAddr_city() %> <%=addto.getAddr_base() %></span>
+					<!-- 상품 금액 -->
+					<div class="item padding25">
+						<!-- 3자리마다 콤마 찍기 -->
+						<%long price = updto.getPost_price();
+						String commaNum = NumberFormat.getInstance().format(price);
+						%>
+						<span class="font50"><%=commaNum %></span> <span class=font20>원</span>
 					</div>
-				</div>
-				<div>
-				<div class="float-box float-left">
-<%-- 					<%if(ppdto.getMember_no() != memberinfo.getMember_no()) {%>
+					<div class="item padding25">
+						<hr>
+					</div>
+					<div class="item font17 gray-font padding25">
+						<span class="lightgray-font">♥</span><span class="font15 padding-right05"><%=updto.getPost_like() %></span> <span
+							class="short-border"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACwAAAAaCAYAAADMp76xAAAAAXNSR0IArs4c6QAABAdJREFUWAm9mFtIFFEYx9tZ11UW1tLoaoGEPShqq3ahgogyIgnqQXqIgih6qKgEH4JIqCgIIoowIrSn6i0irOxCQdAN7wb2IiSlSUZuGJGyumu/b9lZZo8zs7ObdeBwvvNd/uc/53zznWFcs9Js7e3tczVNWzs1NbUKiErGfJfLNYcxVyCRg8g/GAeZdiC3eTyeN2VlZd/Enm5zpRLY09Pjm5yc3EnMbghUMbpTiYd8BP8X9Dt+v/9uYWHhz1TixdcR4YGBgezh4eFD+J+gz5XAGWijYFzKycm5nArxpIQ5+hqAr9AXzgBJM4ggqXWyvLz8uplR1VkShmgOR3iVo9+jBv2LOWs9pu+H+JAdvilhyC4j6AldxqSNhT7g1Oh2u59mZWV9loDx8fGl4XB4C+IBHrpIdA7ad7C2V1RUvLPynUa4u7s7wIvVQsB8qyCDfgK5jgUaWChs0MdFyLo7OjoOo7hI98QN1sJvsHaB+cDMJYFwV1fXCnblJY5+M2dFN8GOVgcCgWeK3nQKdhXYDzE6IR2GdA2k76lgmq7o7OxcBGAzcydkJazOKVlxjvnWieyguTmZ25y21PiEFt3h/v7+rJGRkddYyhOsFhOe/gMvR6lVGliEzZL0YGPep5DTw16vd2VJScmAjhnd4WAweBaFI7KxwEaVLCQyIHOafB2ULrLo9IVkjMU0GnVJ5PmhUOim0UejIqwGuNaoTCZLNVB9yNFTkUikHqzF0kUWnepnFqv6GOdgbWYDDuo6jaduYOLWFU5Gvgk+qX4A73ei08ue6ms3B/ui3LbiozExLUd2AOxSQnWx850h2+f8/PyQYGksfoRxMhVguRRUf06qyYnOLFaNM87BjdAP0KMbq1Fu2phcMDolk2M3WIIbOGf5JjgD1hfpIosuwYmJWazqo8yvGG++6NH29vZmjo2NPcdxveJsOoXQ/yprXcKpsrLyt04kWtaKi4tDPp9vB0T6dIPdSN4Xxa5bO7dpNomR2GkGEwVchjIyMrYbyYpbwstDGSqkHL0CdJ4Jhqr6l1ezfNhvhGynumj8ahYDOSc7vI7+UeZJmke+DajjR3lAy7IoNvERX/CcfEd8pRBsMCMrfBJ2WCdITi8gpx8xD+g6u1FyGvtff15KSlLjt5aWllpumClhIdfX1+cdHR09D0gtu2TpZ/cgKdqasrOzj/M+/bKLS0qEb4JN5PU1QJbbAaVrY0M+UQKPkY73nWAkJSwgkoe84fsQ6+lLRDcD7Stkz3FV35Aq5RTPEWEdLFavt7HQXnTVPEimbnM4ThDbQtytvLy85oKCgnGHcXG3lAjHoxAogbNJlTWIq6VDQn6k5DLmih+y/EgJMsqPlFaOvZW3/y0v1A+xp9v+ADhPuomDsZuZAAAAAElFTkSuQmCC" width="20" height="13" alt="조회수 아이콘"> <%=updto.getPost_view() %></span> 
+							<span class="padding-left05"><%=updto.getUsedPost_autotime()%></span> 
+							<span class="right-float">☎신고하기</span>
+					</div>
+					<div class="item font15 padding15">
+						<div class="padding15">
+							<span class="gray-font">&middot; 카테고리</span><span>&emsp;<%=ubdto.getUsed_cate_title() %></span>
+						</div>
+						<div class="padding15">
+							<span class="gray-font">&middot; 상품상태</span><span
+								class="purple-font">&emsp;<%=updto.getPost_state() %></span>
+						</div>
+						<div class="padding15">
+							<span class="gray-font">&middot; 거래지역</span><span
+								class="green-font">&emsp;<%=addto.getAddr_state() %> <%=addto.getAddr_city() %> <%=addto.getAddr_base() %></span>
+						</div>
+					</div>
+					<div>
+					<div class="float-box float-left">
+						<%if(updto.getMember_no() != memberinfo.getMember_no()) {%>
 						<div class="left-item33">
 							<form action="<%=path %>/member/post_like.do" method="post">
-								<input type="hidden" name="member_no" value="<%=mdto.getMember_no()%>">
+								<input type="hidden" name="member_no" value="<%=memberinfo.getMember_no()%>">
 								<input type="hidden" name="board_no" value="<%=board_no%>">
 								<input type="hidden" name="post_no" value="<%=post_no%>">
 								<input type="hidden" name="post_table" value="<%=post_table%>">
 								<input type="hidden" name="post_path" value="<%=request.getRequestURI() %>?<%=request.getQueryString() %>">
-								<input type="submit" class="like-button cursor" value="♥ 찜 <%=ppdto.getPost_like() %>">
+								<input type="submit" class="like-button cursor" value="♥ 찜 <%=updto.getPost_like() %>">
 							</form>
 						</div>
-						<%} %> --%>
-					<%if(isAdmin || isMine){ %>
-					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
-					<div class="left-item33">
-						<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
-						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
-					</div>
-					<div class="left-item33">
-						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
-					</div>
-					<%} %>
+						<%} %>
+						<%if(isAdmin || isMine){ %>
+						<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
+						<div class="left-item33">
+							<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
+							<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
+						</div>
+						<div class="left-item33">
+							<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
+						</div>
+						<%} %>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<div>
+			<div>
 				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
 				
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">
 						<div class=" swiper-slide left-item16" style="height:180px;">
-							<%long recoCount = ppdao.getRecoCount(ppdto.getAddr_no(), ppdto.getPromotion_cate_num()); 
+							<%long recoCount = updao.getRecoCount(updto.getAddr_no(), updto.getUsed_cate_num()); 
 							
 								for(int i = 1; i <= recoCount; i++) {  //18대신 count 를 넣어야 함.
-									if(ppdao.getRecoList(ppdto.getAddr_no(), ppdto.getPromotion_cate_num(), i) == null) {
+									if(updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i) == null) {
 										return;
 									}									
-									RecoPromotionPostDTO rppdto = ppdao.getRecoList(ppdto.getAddr_no(), ppdto.getPromotion_cate_num(), i);						
+									RecoUsedPostDTO rupdto = updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i);						
 							%>
 
 								<div class="inline">
-									<a href="promotion_post_content.jsp?board_no=<%=board_no%>&promotion_cate_num=<%=promotion_cate_num%>&post_no=<%=rppdto.getPost_no()%>"> <img class="image" src="showImg2.do?post_img_no=<%=rppdto.getImgno()%>"></a>
-									<p class="font17 top-margin5 reco"><%=rppdto.getPost_title() %></p>	<!-- 제목출력 -->
+									<a href="used_post_content.jsp?board_no=<%=board_no%>&used_cate_num=<%=used_cate_num%>&post_no=<%=rupdto.getPost_no()%>"> <img class="image" src="showImg.do?post_img_no=<%=rupdto.getImgno()%>"></a>
+									<p class="font17 top-margin5 reco"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
 								</div>
 								<%if(i % 6 == 0&i<18) { %>
 									</div><div class="swiper-slide left-item16">
@@ -234,8 +234,8 @@
 	       		 	<div class="swiper-button-next"></div>
 				</div>
 			</div>
-	
-	<div class="padding-top100">
+
+		<div class="padding-top100">
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
 				<div class="padding15">
@@ -243,10 +243,10 @@
 				</div>
 				<hr>
 				<div class="padding-top40 padding40 product-info-border ">
-					<p class="font18"><%=ppdto.getPost_content() %></p>
+					<p class="font18"><%=updto.getPost_content() %></p>
 				</div>
 				<hr>
-				<div class="padding-top40">
+				<div class="padding-top100">
 					<p class="font27">댓글</p>
 					<form action="write_reply.do" method="post">
 						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
@@ -274,7 +274,6 @@
 				
 			<div class="padding-top25 ">
 				<%if(rdao.postReply(reply_table_name, post_no) != null) { 
-
 					List<ReplyDTO> list = rdao.postReply(reply_table_name, post_no);
 					for(int i=0; i < list.size(); i++) {
 						
@@ -290,6 +289,7 @@
 						
 						// 현재 시간과 작성 시간 비교 						
 						int compareTime = systime_s - replytime_s; 
+						System.out.println(compareTime);
 						
 						MemberDTO replymember;
 				%>
@@ -337,7 +337,7 @@
 										<form action="edit_reply.do" method="post" id="edit-reply-form">
 											<input type="hidden" name="reply_no" value="<%=rdto.getReply_no() %>">
 											<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
-											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?board_no=<%=board_no %>&promotion_cate_num=<%=promotion_cate_num %>&post_no=<%=post_no%>">
+											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>&post_no=<%=post_no%>">
 											<textarea class="font15" name="reply_content" placeholder="<%=rdto.getReply_content()%>"><%=rdto.getReply_content() %></textarea>
 											<input type="submit" class="right-float reply-button" value="☜수정">
 										</form>
@@ -421,42 +421,36 @@
 			</div>
 			
 			<div class="right-item34  padding-right30 padding-left30 ">
-				<div class="padding15 left-font ">
+				<div class="padding15 left-font">
 					<p class=" font27">상점정보</p>
 				</div>
 				<hr>
 				<div class="padding-top30">
 					<div class="float-box float-left">
 						<div class="left-item25  pic-align left-font">
-							<%if(ppdto.getMember_no() != 0) { 
-									if(pidao.getProfileImgNo(ppdto.getMember_no()) != null) {%>
-										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(ppdto.getMember_no())%>" >
+							<%if(updto.getMember_no() != 0) { 
+									if(pidao.getProfileImgNo(updto.getMember_no()) != null) {%>
+										<img class="reply-pic-circle" src="<%=path %>/member/profile_img_down.do?member_img_no=<%=pidao.getProfileImgNo(updto.getMember_no())%>" >
 									<%} else {%>
 										<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
-									<%} %>	
+									<%} %>
 							<% 	} else { %>
 								<img class="reply-pic-circle" src="<%=path %>/img/user_icon.png" >
 							<%} %>
 						</div>
 						<div class="right-item75">
-								<div class="top-margin10 left-font">
+								<div class="top-margin10 left-font seller">
 									<!-- 작성자 -->
-									<div class="padding15 ">
-									<%if(ppdto.getMember_no( ) != 0){ %>
+									<%if(updto.getMember_no() != 0){ %>
 										<p class="font20"> <%=mdto.getMember_nick() %></p>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>
-									</div>
-									<div class="dimgray-font">
-										<span>☎</span>
-										<span><%=ppdto.getPost_phone() %></span>
-									</div>
 								</div>
 
 						</div>
 					</div>
-					
+			
 				</div>
 					<div class="left-font manner-margin ">
 						<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">
@@ -466,5 +460,4 @@
 		</div>
 	</div>
 </article>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

@@ -247,8 +247,9 @@
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">
 						<div class=" swiper-slide left-item16" style="height:180px;">
-							<%
-								for(int i = 1; i <= 18; i++) { 
+							<%long recoCount = updao.getRecoCount(updto.getAddr_no(), updto.getUsed_cate_num()); 
+							
+								for(int i = 1; i <= recoCount; i++) {  //18대신 count 를 넣어야 함.
 									if(updao.getRecoList(updto.getAddr_no(), updto.getUsed_cate_num(), i) == null) {
 										return;
 									}									
@@ -257,7 +258,7 @@
 
 								<div class="inline">
 									<a href="used_post_content.jsp?board_no=<%=board_no%>&used_cate_num=<%=used_cate_num%>&post_no=<%=rupdto.getPost_no()%>"> <img class="image" src="showImg.do?post_img_no=<%=rupdto.getImgno()%>"></a>
-									<p class="font17 top-margin10"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
+									<p class="font17 top-margin5"><%=rupdto.getPost_title() %></p>	<!-- 제목출력 -->
 								</div>
 								<%if(i % 6 == 0&i<18) { %>
 									</div><div class="swiper-slide left-item16">

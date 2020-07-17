@@ -384,7 +384,7 @@
 										<form action="edit_reply.do" method="post" id="edit-reply-form">
 											<input type="hidden" name="reply_no" value="<%=rdto.getReply_no() %>">
 											<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
-											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?post_no=<%=rdto.getPost_no()%>">
+											<input type="hidden" name="post_path" value="<%=request.getRequestURI()%>?board_no=<%=board_no %>&used_cate_num=<%=used_cate_num %>&post_no=<%=post_no%>">
 											<textarea class="font15" name="reply_content" placeholder="<%=rdto.getReply_content()%>"><%=rdto.getReply_content() %></textarea>
 											<input type="submit" class="right-float reply-button" value="☜수정">
 										</form>

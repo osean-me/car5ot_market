@@ -33,6 +33,7 @@ public class TestLoginFilter implements Filter{
 			if(mdto == null) {//로그인 상태가 아니라면
 				//3번 코드
 				MemberDAO mdao = new MemberDAO();
+
 				MemberDTO user = mdao.get("test1");	//test1 아이디 확인
 
 				//로그인

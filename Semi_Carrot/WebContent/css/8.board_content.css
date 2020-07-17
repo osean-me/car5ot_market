@@ -121,12 +121,20 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 	font-size: 23px;
 }
 
+.font27 {
+	font-size: 27px;
+}
+
 .font30 {
 	font-size: 30px;
 }
 
 .font45 {
 	font-size: 45px;
+}
+
+.font50 {
+	font-size: 50px;
 }
 
 .gray-font {

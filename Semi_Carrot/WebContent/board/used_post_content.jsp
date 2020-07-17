@@ -186,7 +186,7 @@
 			
 				<div class="right-item60 left-font padding-left35">
 					<!-- 글 제목 -->
-					<div class="font23 padding25">
+					<div class="font30 padding25">
 						<span><%=updto.getPost_title() %></span>
 					</div>
 					<!-- 상품 금액 -->
@@ -195,7 +195,7 @@
 						<%long price = updto.getPost_price();
 						String commaNum = NumberFormat.getInstance().format(price);
 						%>
-						<span class="font45"><%=commaNum %></span> <span class=font20>원</span>
+						<span class="font50"><%=commaNum %></span> <span class=font20>원</span>
 					</div>
 					<div class="item padding25">
 						<hr>
@@ -242,7 +242,7 @@
 
 
 			<div>
-				<p class="font20 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
+				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
 				
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">
@@ -274,17 +274,17 @@
 		<div class="float-box float-left">
 			<div class="left-item66 padding-right30 info-border left-font">
 				<div class="padding15">
-					<p class="font23">상품정보</p>
+					<p class="font27">상품정보</p>
 				</div>
 				<hr>
 				<div class="padding-top40 padding40 product-info-border ">
 					<p class="font18"><%=updto.getPost_content() %></p>
 				</div>
 				<hr>
-				<div class="padding-top40">
-					<p class="font20">댓글</p>
+				<div class="padding-top100">
+					<p class="font27">댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
 						<input type="hidden" name="reply_seq_name" value="<%=reply_seq_name %>">
@@ -391,7 +391,7 @@
 															답글
 												</label>
 											</div>
-										<%if(login_member == rdto.getMember_no() || login.getMember_auth().equals("관리자")) { %>
+										<%if(memberinfo.getMember_no() == rdto.getMember_no() || memberinfo.getMember_auth().equals("관리자")) { %>
 											<div><a href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&<%=rdto.getReply_no() %>=<%=rdto.getReply_no()%>">수정</a></div>
 											<div>
 												<form action="delete_reply.do" method="post" id="delete-reply-form">
@@ -410,7 +410,7 @@
 					<div class="padding-top20 rereply-off" id="rereply-form<%=i%>">
 					<p class="font20">대댓글</p>
 					<form action="write_reply.do" method="post">
-						<input type="hidden" name="no" value="<%=login_member %>">
+						<input type="hidden" name="no" value="<%=memberinfo.getMember_no() %>">
 						<input type="hidden" name="reply_no" value="<%=rdto.getReply_no()%>">
 						<input type="hidden" name="post_no" value="<%=post_no %>">
 						<input type="hidden" name="reply_table_name" value="<%=reply_table_name %>">
@@ -457,7 +457,7 @@
 			
 			<div class="right-item34  padding-right30 padding-left30 ">
 				<div class="padding15 left-font">
-					<p class=" font23">상점정보</p>
+					<p class=" font27">상점정보</p>
 				</div>
 				<hr>
 				<div class="padding-top30">
@@ -495,5 +495,4 @@
 		</div>
 	</div>
 </article>
-
 <jsp:include page="/template/footer.jsp"></jsp:include>

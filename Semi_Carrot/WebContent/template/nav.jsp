@@ -48,7 +48,7 @@
 			</ul></li>
 		<li class="medium-menu"><a href="<%=path%>/board/community_post_list.jsp" class="category">동네 생활</a></li>
 		<li class="medium-menu">
-		<a href="<%=path%>/board/used_write.jsp" class="category"> 판매하기</a></li>
+		<a href="<%=path%>/board/used_write.jsp" class="category">판매하기</a></li>
 		<li class="medium-menu">
 		<a href="<%=path%>/board/promotion_write.jsp" class="category"> 홍보하기</a></li>
 		</ul>

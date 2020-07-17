@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.AddrDAO"%>
+<%@page import="carrot.bean.dto.MemberDTO"%>
 <%@page import="carrot.bean.dto.PromotionBoardDTO"%>
 <%@page import="carrot.bean.dao.PromotionBoardDAO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -19,8 +21,69 @@
 
 	MemberDAO mdao = new MemberDAO();
 	PromotionPostDAO ppdao = new PromotionPostDAO();
-	List<DetailList2DTO> list = ppdao.getList(board_no, promotion_cate_num);
+	MemberDTO mdto = (MemberDTO) session.getAttribute("memberinfo"); // 회원번호 불러오기
 
+
+	//검색인지 목록인지 검사 
+		String type = request.getParameter("type");
+		String keyword = request.getParameter("keyword");
+			
+		boolean isSearch = type != null && keyword !=null;
+			
+		// 페이지 계산 코드 
+		int pageSize=16; // 한 페이지에 16개의 데이터를 표시하겠다 
+			
+		String pageStr = request.getParameter("page");
+		int pageNo;
+			
+		try {
+			pageNo = Integer.parseInt(pageStr);
+			if(pageNo <= 0){
+				throw new Exception();
+			}
+		}
+		catch(Exception e){
+			pageNo = 1;
+		}
+			
+		int finish = pageNo * pageSize;
+		int start = finish - (pageSize-1);
+
+		// 페이지 네비게이터 계산 코드 
+		int blockSize = 10; // 네비게이터 블록을 10개씩 배치하겠다 ! 
+		int startBlock = (pageNo - 1) / blockSize * blockSize + 1;
+		int finishBlock = startBlock + blockSize - 1;
+
+		
+	int count; // 페이지 개수 출력하기 위함
+	int pageCount; 
+			
+	List<DetailList2DTO> list; 
+		
+	if(mdto!=null){ // 회원인 경우(로그인이 되어있는 경우)
+		MemberDTO member = mdao.get(mdto.getMember_no());
+			
+		AddrDAO adao = new AddrDAO();
+		AddrDTO adto = adao.get(member.getMember_addr_no());
+			
+		count = ppdao.getCount2(board_no, promotion_cate_num,member.getMember_addr_no());
+		list = ppdao.getList2(start, finish, board_no, promotion_cate_num,member.getMember_addr_no()); 
+			
+		pageCount = (count + pageSize - 1) / pageSize;
+	 	if(finishBlock > pageCount){
+	 		finishBlock = pageCount;
+	 	}	
+	}
+	else { //비회원인 경우 
+		count = ppdao.getCount2(board_no, promotion_cate_num);
+		list = ppdao.getList2(start, finish, board_no, promotion_cate_num); //카테고리별 전체 목록
+			
+		pageCount = (count + pageSize - 1) / pageSize;
+	 	if(finishBlock > pageCount){
+				finishBlock = pageCount;
+	 	}	
+	}
+	
 	PromotionBoardDAO pbdao = new PromotionBoardDAO();
 	PromotionBoardDTO pbdto = pbdao.get(promotion_cate_num); //카테고리 번호로 카테고리 이름 가져오기 
 	
@@ -140,6 +203,50 @@
 				%>
 			</div>
 			<div style="clear: both;"></div>
+			
+			
+			<!--  페이지 네비게이터  -->
+			<div class="row center pagination">
+				<%if(startBlock > 1){ %>
+					<%if(!isSearch) { %>
+						<a href = "promotion_post_list.jsp?page=<%=startBlock-1%>">&lt;</a>
+					<%} else { %>
+						<a href = "promotion_post_list.jsp?page=<%=startBlock-1%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
+					<%} %>
+				<%} %>
+				
+				<!-- 
+					이동 숫자에 반복문을 적용 
+					범위는 startBlock부터 finishBlock까지로 설정(상단에서 계산을 미리 해두었음)
+				-->
+				<%for(int i=startBlock; i<=finishBlock; i++) { %>
+					<%
+						String prop;
+						if(i==pageNo) { //현재 페이지 번호면
+							prop = "class='on'";
+						}
+						else { // 현재 페이지가 아니면
+							prop="";
+						}
+					%>
+					
+					<% if(!isSearch) {%> <!-- 목록이면 -->
+							<a href="promotion_post_list.jsp?page=<%=i%>" <%=prop%>><%=i %></a>
+					<%} 
+						else { %> <!-- 검색이면 -->
+							<a href = "promotion_post_list.jsp?page=<%=i%>&type=<%=type%>&keyword=<%=keyword%>" <%=prop%>><%=i %></a>
+					<%} %>	
+				<%} %>
+				
+				<%if(pageCount > finishBlock){ %>
+					<%if(!isSearch){ %> <!-- 목록이면 -->
+						<a href="promotion_post_list.jsp?page=<%=finishBlock + 1%>">&gt;</a>
+					<%}else{ %> <!-- 검색이면 -->
+						<a href="promotion_post_list.jsp?page=<%=finishBlock + 1%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
+					<%} %>
+				<%} %>
+			</div>		
+			
 		</div>
 	</div>
 

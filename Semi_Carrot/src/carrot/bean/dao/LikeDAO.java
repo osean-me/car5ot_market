@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import carrot.bean.dto.LikeDTO;
+import carrot.bean.dto.UsedPostDTO;
 
 public class LikeDAO {
 	private static DataSource src;
@@ -77,7 +78,7 @@ public class LikeDAO {
 		con.close();
 	}
 
-	// [3] 회원 찜 조회
+	// [3-1] 회원 찜 조회 > 특정 게시물 검사
 	public Long searchLike(LikeDTO ldto) throws Exception {
 		Connection con = getConnection();
 
@@ -102,6 +103,31 @@ public class LikeDAO {
 		con.close();
 
 		return result;
+	}
+
+	// [3-2] 회원 찜 조회 > 해당 회원의 찜 리스트
+	public List<LikeDTO> searchLike(long member_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT * FROM POST_LIKE WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<LikeDTO> list = new ArrayList<LikeDTO>();
+
+		while (rs.next()) {
+			LikeDTO ldto = new LikeDTO(rs);
+
+			list.add(ldto);
+		}
+
+		con.close();
+
+		return list;
 	}
 
 	// [4] 게시글 좋아요 수 조회
@@ -148,24 +174,47 @@ public class LikeDAO {
 
 		con.close();
 	}
-	
-//	// [6] 회원의 찜목록 불러오기
-//	public List<Object> getPostLikeList(long member_no) throws Exception {
-//		List<Integer> list = new ArrayList<Integer>();
-//		
-//		Integer a = new Integer[2];
-//		
-//		list.add(a);
-//		
-//		Connection con = getConnection();
-//		
-//		String sql = "SELECT BOARD_NO, POST_NO FROM POST_LIKE WHERE MEMBER_NO = ?";
-//		
-//		PreparedStatement ps = con.prepareStatement(sql);
-//		
-//		ps.setLong(1, member_no);
-//		
-//		ResultSet rs = ps.executeQuery();
-//	}
+
+	// [6] 회원의 중고 찜목록 불러오기
+	public List<UsedPostDTO> getMemberUsedPostLike(long member_no) throws Exception {
+
+		// 회원의 찜 목록 받아오기
+		List<LikeDTO> member_like = this.searchLike(member_no);
+		// 글 정보 받아올 List
+		List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+
+		Connection con = getConnection();
+
+		// 회원 찜 목록 리스트가 있거나 없을 경
+		if (member_like != null) {
+
+			for (LikeDTO ldto : member_like) {
+
+				String sql = "SELECT * FROM USED_POST WHERE POST_NO = ?";
+
+				PreparedStatement ps = con.prepareStatement(sql);
+
+				ps.setLong(1, ldto.getPost_no());
+
+				ResultSet rs = ps.executeQuery();
+
+				rs.next();
+
+				UsedPostDTO updto = new UsedPostDTO(rs);
+
+				list.add(updto);
+			}
+
+		} else {
+
+			list = null;
+
+		}
+
+		con.close();
+
+		return list;
+
+	}
 
 }

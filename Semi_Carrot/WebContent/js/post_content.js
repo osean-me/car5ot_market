@@ -34,14 +34,16 @@ window.onload = function() {
 	});
 };
 
-function viewMemberInfo() {
-	var memberNick = document.querySelector("#member-nick");
-	var memberInfo = document.querySelector(".member-info");
+function viewMemberInfo(tag) {
+	var tagId = tag.id;
 	
-	memberInfo.classList.remove("display-on");
+	var getId = document.getElementById(tagId);
+	var getInfo = document.querySelector(".info-" + tagId);
 	
-	if(memberNick.checked) {
+	getInfo.classList.remove("display-on");
+	
+	if(getId.checked) {
 		console.log("성공");
-		memberInfo.classList.add("display-on");
+		getInfo.classList.add("display-on");
 	}
 }

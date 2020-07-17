@@ -315,8 +315,13 @@
 									} else { 
 										replymember = mdao.get(rdto.getMember_no());
 								%>
-
-									<span><%=replymember.getMember_nick() %></span>
+									<label id="reply-member-form" for="reply-nick"><input type="checkbox" id="reply-nick" onchange="viewMemberInfo(this);"><%=replymember.getMember_nick() %></label>
+									<div class="info-reply-nick">
+										<div><a href="">회원 페이지</a></div>
+										<div><a href="">좋아요</a></div>
+										<div><a href="">싫어요</a></div>
+										<div><a href="">신고하기</a></div>
+									</div>
 								<%} %>
 									<span class="right-float gray-font">
 										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) {%>
@@ -443,7 +448,15 @@
 									<!-- 작성자 -->
 									<div class="padding15 ">
 									<%if(ppdto.getMember_no( ) != 0){ %>
-										<p class="font20"> <%=mdto.getMember_nick() %></p>
+										<div id="member-form">
+											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo(this);"><%=mdto.getMember_nick() %></label>
+											<div class="info-member-nick">
+												<div><a href="">회원 페이지</a></div>
+												<div><a href="">좋아요</a></div>
+												<div><a href="">싫어요</a></div>
+												<div><a href="">신고하기</a></div>
+											</div>
+										</div>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>

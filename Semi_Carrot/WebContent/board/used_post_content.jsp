@@ -316,7 +316,13 @@
 										replymember = mdao.get(rdto.getMember_no());
 								%>
 
-									<span><%=replymember.getMember_nick() %></span>
+									<label id="reply-member-form" for="reply-nick"><input type="checkbox" id="reply-nick" onchange="viewMemberInfo(this);"><%=replymember.getMember_nick() %></label>
+									<div class="info-reply-nick">
+										<div><a href="">회원 페이지</a></div>
+										<div><a href="">좋아요</a></div>
+										<div><a href="">싫어요</a></div>
+										<div><a href="">신고하기</a></div>
+									</div>
 								<%} %>
 									<span class="right-float gray-font">
 										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) {%>
@@ -442,10 +448,10 @@
 								<div class="top-margin10 left-font seller">
 									<!-- 작성자 -->
 									<%if(updto.getMember_no() != 0){ %>
-										<div id="write-member-form">
-											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo();"><%=mdto.getMember_nick() %></label>
-											<div class="member-info">
-												<div><a href="">회원 페이지</a></div>
+										<div id="member-form">
+											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo(this);"><%=mdto.getMember_nick() %></label>
+											<div class="info-member-nick">
+												<div><a href="<%=path%>/member/info.jsp?no=<%=mdto.getMember_no()%>">회원 페이지</a></div>
 												<div><a href="">좋아요</a></div>
 												<div><a href="">싫어요</a></div>
 												<div><a href="">신고하기</a></div>

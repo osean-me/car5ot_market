@@ -110,67 +110,8 @@
 <script type="text/javascript" src="<%=path%>/js/reply.js"></script>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
 <link href="<%=path%>/css/swiper.min.css" type="text/css" rel="stylesheet">
-    <style>
-        .swiper-container {
-            width: 100%;
-            height: 100%;
-        }
-        .mainimg{
-            width:100%;
-            min-height: 380px;
-            height: auto;
-            max-height: 380px;
-        }
-        
-        .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
-        	position:absolute;
-        	left:auto;
-        	top:auto;
-        	bottom:auto;
-        	right:0;
-        	width:auto;
-        	font-size:15px;
-        }
-        
-        .title-label{
-        	position:relative;
-        }
-        
-    </style>
 <script src="<%=path%>/js/swiper.min.js"></script>
-    <script>
-        //창의 로딩이 완료되었을 때 실행할 코드를 예약
-        window.onload = function(){
-            //var mySwiper = new Swiper(선택자, 옵션);
-            var mySwiper = new Swiper ('.swiper-container', {
-                //swiper에 적용할 옵션들을 작성
-                
-                direction: 'horizontal'   //표시방식(수직:vertical, 수평:horizontal)
-                ,loop: false //순환 모드 여부
-                
-                //페이지 네비게이터 옵션그룹
-                ,pagination: {
-                    el: '.swiper-pagination', //적용 대상의 선택자
-                    type: 'fraction',//네비게이터 모양(bullets/fraction/...)
-                },
-                //이전/다음 이동버튼 설정그룹
-              navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                    grabCursor:true
-                }
-                //커서 모양을 손모양으로 변경
-                ,grabCursor:false
-                
-                //슬라이드 전환 효과(effect)
-                //,effect:'coverflow'
-                //,effect:'cube'
-                //,effect:'fade'
-                //,effect:'flip'
-                ,effect:'slide'//기본값
-            });
-        };
-    </script>
+<script type="text/javascript" src="<%=path%>/js/post_content.js"></script>
 
 
 <article style="padding-top: 220px" id="post-content-form">

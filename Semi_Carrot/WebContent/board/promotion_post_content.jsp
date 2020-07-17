@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
+<%@page import="carrot.bean.dto.PromotionPostImgDTO"%>
 <%@page import="carrot.bean.dto.ReplyDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="carrot.bean.dao.ProfileImgDAO"%>
@@ -86,6 +88,11 @@
 			//관리자
 			boolean isAdmin= memberinfo.getMember_auth().equals("관리자");
 			
+			//첨부파일 이미지
+			PromotionPostImgDAO ppidao = new PromotionPostImgDAO();
+			List<PromotionPostImgDTO>fileList=ppidao.getList(post_no);
+			
+			
 			////////////////////////
 			///		댓글 조회		///
 			//////////////////////
@@ -106,14 +113,61 @@
 <jsp:include page="/template/header.jsp"></jsp:include>
 <script type="text/javascript" src="<%=path%>/js/reply.js"></script>
 <link href="<%=path %>/css/8.board_content.css" type="text/css" rel="stylesheet">
-
+<link href="<%=path%>/css/swiper.min.css" type="text/css" rel="stylesheet">
+   <style>
+        .swiper-container {
+            width: 100%;
+            height: 100%;
+        }
+        .mainimg{
+            width:100%;
+            min-height: 380px;
+            height: auto;
+            max-height: 380px;
+        }
+        
+        .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+        	position:absolute;
+        	left:auto;
+        	top:auto;
+        	bottom:auto;
+        	right:0;
+        	width:auto;
+        	font-size:15px;
+        }
+        
+        .title-label{
+        	position:relative;
+        }
+        
+    </style>
+    <script src="<%=path%>/js/swiper.min.js"></script>
 <article style="padding-top: 220px" id="post-content-form">
-	<div class="padding50">
-		<div class="float-box float-left">
-			<div class="left-item40">
-				<img class="imagesize" src="https://placeimg.com/200/250/tech">
-			</div>
-			<div class="right-item60 left-font padding-left35">
+		<div class="padding50">
+			<div class="float-box float-left">
+				
+				<div class="left-item40">
+				<!-- 이미지 슬라이더 영역 -->
+				<div class="swiper-container">
+					<!-- 필수 영역 -->
+	    		    <div class="swiper-wrapper">		
+					<%if(!fileList.isEmpty()){ %>
+						<%for(PromotionPostImgDTO ppidto : fileList){ %>
+	    		    	<div class="swiper-slide">
+							<!-- 이미지 미리보기 -->
+								<img class="mainimg" src="showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>">
+					</div>
+						<%} %>
+					<%} %>
+				</div>
+							        <!-- 이전/다음 버튼(선택) -->
+	        	<div class="swiper-button-prev" ></div>
+	       		 <div class="swiper-button-next"></div>
+				</div>
+	
+				</div>
+			
+				<div class="right-item60 left-font padding-left35">
 				<!-- 글 제목 -->
 				<div class="font23 padding25">
 					<span><%=ppdto.getPost_title() %></span>

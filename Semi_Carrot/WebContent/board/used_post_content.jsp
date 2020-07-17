@@ -194,7 +194,7 @@
 							<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
 						</div>
 						<div class="left-item33">
-							<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
+							<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=path%>/board/usedpostdelete.do?post_no=<%=post_no %>"><button class="delete-button cursor">삭제</button></a>
 						</div>
 						<%} %>
 						</div>

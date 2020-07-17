@@ -1,31 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!-- 비밀번호 검사 -->
-<!-- 목적지 정보 파라미터 이름 go -->
-
 <%
-	String go = request.getParameter("go");
+	String member_no = request.getParameter("no");
 	String path = request.getContextPath();
 %>
 
 
 <jsp:include page="/template/header.jsp"></jsp:include>
+
+<script type="text/javascript" src="<%=path%>/js/change_exit.js"></script>
+<article id="login-article"></article>
+
+	<img src="<%=path%>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
+	
 <link href="<%=path%>/css/9.check_exit.css" rel="stylesheet"
 	type="text/css">
-
-<article style="padding-top: 220px; margin: 0px 25%; text-align: center;">
-	<img src="<%=path%>/img/logo_icon.png" alt="logo_icon" id="logo_icon">
+	<%if(request.getParameter("failed")!=null) {%>
+		<script>
+			alert("비밀번호 전화번호가 일치하지 않습니다. 다시 입력해주세요.");
+		</script>
+	<%} %>
+	
 	<h2>회원탈퇴</h2>
-	<form action="check.do" method="post">
-		<input type="hidden" name="go" value=<%=go%>> <input id="pw"
-			type="password" name="member_pw" placeholder="비밀번호 를 입력해 주세요">
-		<input id="nick" type="text" name="member_nick"
-			placeholder="닉네임을 입력해 주세요">
-
-
+	<form action="gone.do" method="get">
+	
 		<div>
-
+		<input type="hidden"name="member_no"value=<%=member_no %>>
+		<input id="pw"type="password" name="member_pw" placeholder="비밀번호를 입력해 주세요" required="required" maxlength="15"oninput="checkPw()">
+		</div>
+		 <div id="pwInfo"></div>
+		<input id="phone" type="text" name="member_phone"placeholder="전화번호를 입력해 주세요"required maxlength="11"oninput="checkPhone()">
+		 <div id="phoneInfo"></div>
+		<div>
 			<h2>탈퇴 사유 선택</h2>
 		</div>
 		<div>
@@ -42,18 +49,6 @@
 		<div>
 			<input id="submit" type="submit" value="탈퇴하기">
 		</div>
-
-
 	</form>
-</article>
 
-<%
-	if (request.getParameter("error") != null) {
-%>
-<script>
-	alert("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
-</script>
-<%
-	}
-%>
 <jsp:include page="/template/footer.jsp"></jsp:include>

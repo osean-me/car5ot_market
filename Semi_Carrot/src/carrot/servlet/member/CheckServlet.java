@@ -19,10 +19,9 @@ public class CheckServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-
-			String go = req.getParameter("go");
-
+			// 파라미터 받아오기
 			String member_pw = req.getParameter("member_pw");
+			String path = req.getParameter("go");
 
 			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
 			String member_id = mdto.getMember_id();
@@ -34,9 +33,9 @@ public class CheckServlet extends HttpServlet {
 			MemberDTO result = mdao.login(member);
 
 			if (result == null) {// (로그인 실패)
-				resp.sendRedirect("check.jsp?error&go=" + go);
+				resp.sendRedirect("check.jsp?" + path);
 			} else {
-				resp.sendRedirect(go);
+				resp.sendRedirect(path);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

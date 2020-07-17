@@ -7,6 +7,7 @@
 <%
 	String go = request.getParameter("go");
 	String path = request.getContextPath();
+	
 %>
 
 
@@ -22,7 +23,8 @@
 		<div id="find-form">
 			<div class="pw-find">
 				<div>
-					<form action="checks.do" method="get" style="margin-top: 200px">
+					<form action="check.do" method="get" style="margin-top: 200px">
+						<input type="hidden" name="go" value="<%=go%>">
 						<input id="pw" type="password" name="member_pw" required
 							placeholder="비밀번호 입력" style="display:block;margin: 0px auto;"> <input class="submit"
 							type="submit" value="확인"

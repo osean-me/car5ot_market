@@ -9,9 +9,21 @@
 
 }
 
+#titleInfo {
+	margin-top:10px;
+	margin-bottom:5px;
+	margin-left:110px;
+}
+#priceInfo {
+	margin-top:10px;
+	margin-bottom:10px;
+	margin-left:110px;
+}
+.titleHeight {
+	   margin-bottom: 40px;
+}
 .form-title {
    margin-top: 40px;
-   margin-bottom: 40px;
    width: 1000px;
    padding: 0.9rem;
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
@@ -21,7 +33,6 @@
 }
 .form-title:focus {
    margin-top: 40px;
-   margin-bottom: 40px;
    width: 1000px;
    padding: 0.9rem;
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
@@ -53,7 +64,6 @@
 
 .form-price {
    margin-top: 40px;
-   margin-bottom: 40px;
    width: 300px;
    padding: 0.9rem;
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
@@ -63,7 +73,6 @@
 }
 .form-price:focus {
    margin-top: 40px;
-   margin-bottom: 40px;
    width: 300px;
    padding: 0.9rem;
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */

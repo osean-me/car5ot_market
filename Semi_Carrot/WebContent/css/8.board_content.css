@@ -141,6 +141,10 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 .gray-font {
 	color: #999999;
 }
+.lightgray-font{
+	color:#cfcfcf;
+	font-size: 20px;
+}
 
 .dimgray-font {
 	color: dimgray;

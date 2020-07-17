@@ -2,17 +2,39 @@
     pageEncoding="UTF-8"%>
 <%String member_id = (String)session.getAttribute("member_id");
 	session.removeAttribute("member_id");
+	String path = request.getContextPath();
+	
 %>
 
-<!-- 헤더연결 -->
+<jsp:include page="/template/header.jsp"></jsp:include>
 
-<div align="center">
-	
-	<h3>검색된 아이디는 <%=member_id%> 입니다</h3>
-	
-	
-	<h5><a href="login.jsp">로그인 하러가기</a></h5>
-	<h5><a href="find_id_pw.jsp">비밀번호가 기억나지 않아요</a></h5>
-	
-</div>
-<!-- 풋터연결 -->
+<link href="<%=path%>/css/11.find_id_result.css"rel="stylesheet"
+	type="text/css">
+<article id="full-article">
+	<div class="main-form">
+	<div style="height: 150px;">
+		<img src="<%=path%>/img/shoping.png" alt="logo_icon" id="logo_icon">
+    </div>    
+       <div id="find-form">
+	   	<div class="id-find">
+	    	<div class="find-form-title">
+	   		   	<%=member_id%> 잊지말라구 당근~!
+	        </div>
+	        <div class="find-form-body">
+		       	<div>
+	          		 <form action="login.jsp" method="post"style="text-align:right;">
+	          		<input class="submit" type ="submit"value="로그인" style="margin-right:50px">
+	          		
+	          		</form>
+	          	</div>
+	          	<div>
+	          		<form action="find_id_pw.jsp" method="post"style="text-align:left;">
+	          			<input  class="submit"  type="submit"value="비밀번호 찾으러 go~!"style="margin-left:50px;">
+	          		</form>
+	          	</div>
+	          </div>
+         </div>  
+     </div>
+   </div>
+</article>
+<jsp:include page="/template/footer.jsp"></jsp:include>

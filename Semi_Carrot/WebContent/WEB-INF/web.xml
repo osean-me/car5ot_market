@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+<web-app version="4.0"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
 
-	<!-- 필터 설정 -->	
+
+
+
+
+
+	<!-- 대문 설정 -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>carrot.filter.EncodingFilter</filter-class>
@@ -12,25 +25,45 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
-		<!-- 테스트필터는 로그인필터 전에 배치해야 한다
+
+
+	<!-- 로그인 필터 -->
 	<filter>
-		<filter-name>testLoginFilter</filter-name>
-		<filter-class>carrot.filter.TestLoginFilter</filter-class>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>carrot.filter.LoginFilter</filter-class>
 	</filter>
 	<filter-mapping>
-		<filter-name>testLoginFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>-->
-	 
-	
-	
-	<!-- 대문 설정 -->
-	<welcome-file-list>
-	 		<welcome-file>index.jsp</welcome-file>
-	 </welcome-file-list> 
-	 
-<!-- 에러 페이지 설정 -->
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/member/info.jsp</url-pattern>
+		<url-pattern>/member/logout.do</url-pattern>
+		<url-pattern>/member/gone.do</url-pattern>
+		<url-pattern>/member/change_info.jsp</url-pattern>
+		<url-pattern>/member/change_info.do</url-pattern>
+		<url-pattern>/member/check_exit.jsp</url-pattern>
+		<url-pattern>/member/check.do</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/board/used_write.jsp</url-pattern>
+		<url-pattern>/board/promotion_write.jsp</url-pattern>
+		<url-pattern>/board/used_post_content.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- 회원 필터 -->
+	<filter>
+		<filter-name>memberFilter</filter-name>
+		<filter-class>carrot.filter.memberFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>memberFilter</filter-name>
+		<url-pattern>/user/find_id_pw.jsp</url-pattern>
+		<url-pattern>/user/find_id.do</url-pattern>
+		<url-pattern>/user/find_pw.do</url-pattern>
+		<url-pattern>/user/join.jsp</url-pattern>
+		<url-pattern>/user/login.jsp</url-pattern>
+		<url-pattern>/user/find_id.result</url-pattern>
+		<url-pattern>/user/find_pw.result</url-pattern>
+	</filter-mapping>
+
+	<!-- 에러 페이지 설정 -->
 	<error-page>
 		<error-code>403</error-code>
 		<location>/error/403.jsp</location>
@@ -43,6 +76,7 @@
 		<error-code>500</error-code>
 		<location>/error/500.jsp</location>
 	</error-page>
+
 
 
 </web-app>

@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+
+#login-article {
+	min-width: 1000px;
+    height: auto;
+    text-align: center;
+    margin: 0px 15%;
+}
+
+.main-form {
+ padding-top: 220px;
+    padding-bottom: 50px;
+    font-size: 18px;
+}
+
+.title {
+	text-align: center;
+	font-size: 32px;
+	color: #ff8900;
+	font-weight: bold;
+}
+
+.main-form>div>img {
+	  margin-bottom: 50px;
+    width: 120px;
+    height: auto;
+}
+
+
+#find-form {
+	height: auto;
+	margin:30px;
+	display: flex;
+}
+
+.id-find, .pw-find {
+	height: 100%;
+	flex: 1;
+}
+
+.id-find>h2, .pw-find>h2 {
+	text-align: left;
+}
+
+.id-find>form>div input[type=text], .pw-find>form>div input[type=text] {
+	width: 60%;
+	height: 70px;
+	margin: 25px 0px;
+	font-size: 20px;
+	padding-left: 50px;
+	border: 1px solid transparent;
+	border-bottom: 3px solid #ff8900;
+}
+
+
+
+
+
+
+
+#nick{
+	 background-image: url(../img/rename-32.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position:left;
+}
+#phone{
+		background-image: url(../img/phone-2-32.png);
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position:left;
+}
+
+#id{
+	 background-image: url(../img/new-post-32.png);
+	 background-repeat: no-repeat;
+	 background-size: 30px;
+	background-position:left;
+}
+.id-find {
+/*	border: 1px solid red;*/
+}
+
+.pw-find {
+	/*border: 1px solid blue;*/
+}
+
+#id-submit {
+	margin-top: 120px;
+}
+
+.submit {
+	width: 60%;
+	height: 55px;
+	cursor: pointer;
+	margin: 60px 0px 0px 0px;
+	font-size: 28px;
+	color: rgba(255, 137, 0, 0.87);
+	border: 3px solid rgba(255, 137, 0, 0.87);
+	padding-left: 0px;
+	border-radius: 15px;
+	background-color: transparent;
+	
+}
+.submit:hover {
+	border: 1px solid transparent;
+	background-color: rgba(255, 137, 0, 0.87);
+	color: white;
+}

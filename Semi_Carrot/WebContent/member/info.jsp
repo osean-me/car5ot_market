@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.LikeDTO"%>
+<%@page import="carrot.bean.dao.LikeDAO"%>
 <%@page import="carrot.bean.dao.UsedPostImgDAO"%>
 <%@page import="carrot.bean.dto.UsedPostImgDTO"%>
 <%@page import="carrot.bean.dto.DetailList3DTO"%>
@@ -64,9 +66,9 @@
 
 	
 	
-	/////////////////////////
+	/////////////////////
 	///		자기 소개 	 ///
-	///////////////////////
+	///////////////////
 	
 	IntroDAO idao = new IntroDAO();
 	
@@ -74,14 +76,20 @@
 	
 	
 	
-	/////////////////////////////
+	/////////////////////////
 	/// 	회원 프로필 	 ///
-	///////////////////////////
+	///////////////////////
 	
 	ProfileImgDAO pidao = new ProfileImgDAO();
 	Long member_img_no = pidao.getProfileImgNo(member_no);
 	
 	UsedPostImgDAO uidao = new UsedPostImgDAO();
+	
+	/////////////////////
+	/// 	찜 목록 	 ///
+	///////////////////
+	LikeDAO ldao = new LikeDAO();
+	List<UsedPostDTO> post_like = ldao.getMemberUsedPostLike(member_no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -618,7 +626,7 @@
                                     </form>
                                 </div>
                                 <div class="mypage-post-list column">
-                                    <%if(promotion_post.isEmpty()) { %>
+                                    <%if(post_like.isEmpty()) { %>
                                 	<div style="flex: 9; width: 100%; heigth: 90%;">
                                 		게시물이 없습니다.
                                 	</div>
@@ -626,9 +634,7 @@
 	                                 <div class="mypage-post-list">
 	                                <%
 	                                	int count5 = 0;
-	                                	for(Object promotion : promotion_post) {
-	                                		
-	                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+	                                	for(UsedPostDTO like : post_like) {
 	                                		
 	                                		if(count5 == 5) {
 	                         					break;
@@ -638,7 +644,7 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
-	                                        	<div class="product-title"><%=post.getPost_title() %>...</div>
+	                                        	<div class="product-title"><%=like.getPost_title() %>...</div>
 	                                        	<div class="map">
 	                                        		<div>
 		                                        		<%=adto.getAddr_state() %>  
@@ -647,10 +653,10 @@
 	                                        		</div>
 	                                        	</div>
 	                                        	<div class="price-date">
-	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
-	                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(like.getPost_price()) %></div>
+	                                        		<div class="date"><%=like.getUsedPost_day() %></div>
 	                                        	</div>
-	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        	<div class="post-like"><%=like.getPost_like() %></div>
 	                                        </div>
 	                                    </div>
 	                                    <%
@@ -661,9 +667,7 @@
 	                                <div class="mypage-post-list">
 	                                <%
 	                                	int count6 = 0;
-	                                	for(Object promotion : promotion_post) {
-	                                		
-	                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+	                                	for(UsedPostDTO like : post_like) {
 	                                		
 	                                		if(count6 == 10) {
 	                         					break;
@@ -673,7 +677,7 @@
 	                                    <div class="product">
 	                                        <div class="product-inner">
 	                                        	<div class="photo"><img src="<%=path%>/img/logo_icon.png"></div>
-	                                        	<div class="product-title"><%=post.getPost_title()%>...</div>
+	                                        	<div class="product-title"><%=like.getPost_title()%>...</div>
 	                                        	<div class="map">
 	                                        		<div>
 	                                        			<%=adto.getAddr_state() %>  
@@ -682,10 +686,10 @@
 	                                        		</div>
 	                                        	</div>
 	                                        	<div class="price-date">
-	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
-	                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+	                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(like.getPost_price()) %></div>
+	                                        		<div class="date"><%=like.getUsedPost_day() %></div>
 	                                        	</div>
-	                                        	<div class="post-like"><%=post.getPost_like() %></div>
+	                                        	<div class="post-like"><%=like.getPost_like() %></div>
 	                                        </div>
 	                                    </div>
 	                                    <%

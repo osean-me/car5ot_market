@@ -3,7 +3,6 @@ package carrot.bean.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -177,44 +176,27 @@ public class LikeDAO {
 
 	// [6] 회원의 중고 찜목록 불러오기
 	public List<UsedPostDTO> getMemberUsedPostLike(long member_no) throws Exception {
-
-		// 회원의 찜 목록 받아오기
-		List<LikeDTO> member_like = this.searchLike(member_no);
-		// 글 정보 받아올 List
-		List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
-
 		Connection con = getConnection();
 
-		// 회원 찜 목록 리스트가 있거나 없을 경
-		if (member_like != null) {
+		String sql = "SELECT * FROM USED_POST WHERE POST_NO = (SELECT POST_NO FROM POST_LIKE WHERE MEMBER_NO = ?)";
 
-			for (LikeDTO ldto : member_like) {
+		PreparedStatement ps = con.prepareStatement(sql);
 
-				String sql = "SELECT * FROM USED_POST WHERE POST_NO = ?";
+		ps.setLong(1, member_no);
 
-				PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
 
-				ps.setLong(1, ldto.getPost_no());
+		List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
 
-				ResultSet rs = ps.executeQuery();
-
-				rs.next();
-
-				UsedPostDTO updto = new UsedPostDTO(rs);
-
-				list.add(updto);
-			}
-
-		} else {
-
-			list = null;
-
+		while (rs.next()) {
+			UsedPostDTO updto = new UsedPostDTO(rs);
+			
+			list.add(updto);
 		}
-
+		
 		con.close();
-
+		
 		return list;
-
 	}
 
 }

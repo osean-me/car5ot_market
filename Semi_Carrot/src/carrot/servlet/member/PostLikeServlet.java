@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carrot.bean.dao.LikeDAO;
-import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.LikeDTO;
 
 @SuppressWarnings("serial")

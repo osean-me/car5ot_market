@@ -1,18 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%
+	String path = request.getContextPath();
+%>
 
-    
-    <jsp:include page="/template/header.jsp"></jsp:include>
-    
-    <div align="center" style="padding-top: 200px;">
-    <h2>관리자화면</h2>
-    
-    <h4><a href="admin_list.jsp">회원검색</a></h4>
-    <h4><a href="#">회원보기</a></h4>
-     <h4><a href="#">신고내역 조회</a></h4>
-     
-    </div>
-    
-    
-    
-        <jsp:include page="/template/footer.jsp"></jsp:include>
+<jsp:include page="/template/header.jsp"></jsp:include>
+
+<link href="<%=path%>/css/13.admin.css" rel="stylesheet" type="text/css">
+
+
+<article id="full-article">
+	<div class="main-form">
+		<div style="height: 200px;">
+			<img src="<%=path%>/img/admin.png" alt="logo_icon" id="logo_icon"
+				style="width: 500px; height: 300px;">
+		</div>
+		<div id="find-form">
+			<div class="id-find">
+				<div class="title">
+					<div class="find-from-title">관리자화면</div>
+					<div id="find-form">
+						<div class="pw-find">
+							<div>
+								<form action="admin_list.jsp" method="get"
+									style="margin-top: 0px">
+									<input class="submit" type="submit" value="회원 검색"
+										style="width: 345px; height: 55px margin-top:100px;">
+
+
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</article>
+
+
+<jsp:include page="/template/footer.jsp"></jsp:include>

@@ -95,14 +95,14 @@ public class MemberDAO {
 	}
 
 	// 회원정보-상세조회(long>string으로 변환)
-	public MemberDTO get(String member_id) throws Exception {
+	public MemberDTO get(String member_no) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT * FROM MEMBER WHERE MEMBER_id=?";
+		String sql = "SELECT * FROM MEMBER WHERE MEMBER_no=?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.setString(1, member_id);
+		ps.setString(1, member_no);
 
 		ResultSet rs = ps.executeQuery();
 

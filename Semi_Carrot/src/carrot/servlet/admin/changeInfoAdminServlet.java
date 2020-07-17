@@ -14,7 +14,7 @@ import carrot.bean.dto.AddrDTO;
 import carrot.bean.dto.MemberDTO;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/admin/change_info.do")
+@WebServlet(urlPatterns = "/admin/change_info_admin.do")
 public class changeInfoAdminServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -65,7 +65,7 @@ public class changeInfoAdminServlet extends HttpServlet {
 			mdao.changeInfo(mdto);
 
 			// 출력
-			resp.sendRedirect("info.jsp");
+			resp.sendRedirect("admin_list.jsp");
 
 		} catch (Exception e) {
 

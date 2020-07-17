@@ -26,8 +26,8 @@
 					<form action="check.do" method="get" style="margin-top: 200px">
 						<input type="hidden" name="go" value="<%=go%>">
 						<input id="pw" type="password" name="member_pw" required
-							placeholder="비밀번호 입력" style="display:block;margin: 0px auto;"> <input class="submit"
-							type="submit" value="확인"
+							placeholder="비밀번호 입력" style="display:block;margin: 0px auto;"> 
+							<input class="submit"type="submit" value="확인"
 							style="width: 345px; height: 55px margin-top:100px;">
 
 					</form>

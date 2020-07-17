@@ -266,7 +266,7 @@ input+span {
       <br><br>
       <!--  
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
-      -->
+       -->
 
       	
          <div class="used_container" >

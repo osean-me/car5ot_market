@@ -116,15 +116,7 @@
 		<h2 style="font-size: 30px; margin: 15px;">
 			<span style="color: orange">우리동네</span> 커뮤니티
 		</h2>
-		<div class="sort_list" align="right">
-			<div class="popular">
-				<a href="">인기순</a>
-			</div>
-
-			<div class="last">
-				<a href="">최신순</a>
-			</div>
-		</div>
+		
 		<hr class="hr_style1">
 
 		<!-- 커뮤니티 글 목록 -->

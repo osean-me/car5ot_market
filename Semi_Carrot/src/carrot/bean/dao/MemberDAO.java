@@ -10,6 +10,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import carrot.bean.dto.LikeDTO;
 import carrot.bean.dto.MemberDTO;
 
 public class MemberDAO {
@@ -260,7 +261,7 @@ public class MemberDAO {
 
 		String sql = "UPDATE MEMBER SET MEMBER_PW = ?, MEMBER_NICK = ?, MEMBER_ADDR_NO = ?, MEMBER_PHONE = ? WHERE MEMBER_NO = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setString(1, mdto.getMember_pw());
 		ps.setString(2, mdto.getMember_nick());
 		ps.setLong(3, mdto.getMember_addr_no());

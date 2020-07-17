@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.MannerDTO"%>
+<%@page import="carrot.bean.dao.MannerDAO"%>
 <%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
 <%@page import="carrot.bean.dto.PromotionPostImgDTO"%>
 <%@page import="carrot.bean.dto.LikeDTO"%>
@@ -93,6 +95,13 @@
 	///////////////////
 	LikeDAO ldao = new LikeDAO();
 	List<UsedPostDTO> post_like = ldao.getMemberUsedPostLike(member_no);
+	
+	////////////////////////
+	///		매너 지수		///
+	//////////////////////
+	MannerDAO mndao = new MannerDAO();
+	MannerDTO mndto = mndao.getMannerCount(member_no);
+	long manner_count = mndto.getManner_count();
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -143,17 +152,34 @@
                             <div id="nickname">
                                 <div>
                                     <%=mdto.getMember_nick() %>
+                                    <%if(loginMember.getMember_no() != member_no) { %>
                                     <ul>
-                                        <li><a href="">쪽지 보내기</a></li>
-                                        <li><a href="">좋아요</a></li>
-                                        <li><a href="">싫어요</a></li>
+                                        <li>
+                                        	<form action="manner.do" method="post">
+                                        		<input type="hidden" name="this_member_no" value="<%=member_no%>"> <!-- 좋아요 누를 회원 -->
+                                        		<input type="hidden" name="push_member_no" value="<%=loginMember.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
+                                        		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
+                                        		<input type="hidden" name="good" value="">
+                                        		<input type="submit" value="좋아요">
+                                        	</form>
+                                        </li>
+                                        <li>
+                                        	<form action="manner.do" method="post">
+                                        		<input type="hidden" name="this_member_no" value="<%=member_no%>"> <!-- 좋아요 누를 회원 -->
+                                        		<input type="hidden" name="push_member_no" value="<%=loginMember.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
+                                        		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
+                                        		<input type="hidden" name="bad" value="">
+                                        		<input type="submit" value="싫어요">
+                                        	</form>
+                                        </li>
                                         <li><a href="">신고하기</a></li>
                                     </ul>
+                                    <%} %>
                                 </div>
                             </div>
                             <div id="manner">
                                 <div>
-                                    <input type="range" value="80" readonly>
+                                    <input type="range" value="<%=manner_count %>" readonly>
                                 </div>
                             </div>
                         </div>
@@ -219,18 +245,12 @@
                         <div id="nav-3" onmouseover="radiusEdit(this);">
                             <label for="select-3">
                                 <input type="radio" name="board" id="select-3" onchange="toggleTabAuto(this);">
-                                <span>텃밭</span>
-                            </label>
-                        </div>
-                        <div id="nav-4" onmouseover="radiusEdit(this);">
-                            <label for="select-4">
-                                <input type="radio" name="board" id="select-4" onchange="toggleTabAuto(this);">
                                 <span>댓글</span>
                             </label>
                         </div>
                         <div id="nav-5" onmouseover="radiusEdit(this);">
-                            <label for="select-5">
-                                <input type="radio" name="board" id="select-5" onchange="toggleTabAuto(this);">
+                            <label for="select-4">
+                                <input type="radio" name="board" id="select-4" onchange="toggleTabAuto(this);">
                                 <span>찜꽁</span>
                             </label>
                         </div>
@@ -336,11 +356,6 @@
 	                                    %>
 	                                </div>
                                 <%} %>
-                                <div class="mypage-pagination">
-                                	<div>
-                                    	1 2 3 4 5 6 7 8 9 10
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         
@@ -432,9 +447,6 @@
 	                                    %>
 	                                </div>
                                 <%} %>
-                                <div class="mypage-pagination">
-                                    1 2 3 4 5 6 7 8 9 10
-                                </div>
                             </div>
                         </div>
                         <div class="area" id="select-3-area">
@@ -524,106 +536,9 @@
                                         <div class="date">작성일</div>
                                     </div>
                                 </div>
-                                <div class="mypage-pagination">
-                                	<div>
-                                  	  1 2 3 4 5 6 7 8 9 10
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="area" id="select-4-area">
-                            <div class="mypage-board-table">
-                                <div class="mypage-post-search">
-                                    <form>
-                                        <input type="text" placeholder="검색">
-                                        <input type="submit" value="">
-                                    </form>
-                                </div>
-                                <div class="mypage-post-list column">
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                    <div class="commu-post">
-                                        <div class="no">번호</div>
-                                        <div class="cate">말머리</div>
-                                        <div class="title">제목</div>
-                                        <div class="view">조회수</div>
-                                        <div class="date">작성일</div>
-                                    </div>
-                                </div>
-                                <div class="mypage-pagination">
-                                    1 2 3 4 5 6 7 8 9 10
-                                </div>
-                            </div>
-                        </div>
-                        <div class="area" id="select-5-area">
                             <div class="mypage-board-table">
                                 <div class="mypage-post-search">
                                     <form>
@@ -711,9 +626,6 @@
 	                                    %>
 	                                </div>
                                 <%} %>
-                                </div>
-                                <div class="mypage-pagination">
-                                    1 2 3 4 5 6 7 8 9 10
                                 </div>
                             </div>
                         </div>

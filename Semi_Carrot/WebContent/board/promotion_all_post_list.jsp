@@ -35,13 +35,9 @@
 	int systime_s = syshour + sysminute + syssecound;
 
 	//검색인지 목록인지 검사 
-	String type = request.getParameter("type");
-	String keyword = request.getParameter("keyword");
-
-	boolean isSearch = type != null && keyword != null;
 
 	// 페이지 계산 코드 
-	int pageSize = 16; // 한 페이지에 16개의 데이터를 표시하겠다 
+	int pageSize = 12; // 한 페이지에 16개의 데이터를 표시하겠다 
 
 	String pageStr = request.getParameter("page");
 	int pageNo;
@@ -74,26 +70,18 @@
 		AddrDAO adao = new AddrDAO();
 		AddrDTO adto = adao.get(member.getMember_addr_no());
 
-		if (isSearch) {
-			count = ppdao.getCount(type, keyword, member.getMember_addr_no());
-			list = ppdao.getAreaList(type, keyword, start, finish, member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 
-		} else {
-			count = ppdao.getCount(member.getMember_addr_no());
-			list = ppdao.getAreaList(start, finish, member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
-		}
+		count = ppdao.getCount(member.getMember_addr_no());
+		list = ppdao.getAreaList(start, finish, member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
+
 		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
 		pageCount = (count + pageSize - 1) / pageSize;
 		if (finishBlock > pageCount) {
 			finishBlock = pageCount;
 		}
 	} else { // 비회원인 경우	
-		if (isSearch) {
-			count = ppdao.getCount(type, keyword);
-			list = ppdao.getList(type, keyword, start, finish); // (지역 상관X)검색목록
-		} else {
-			count = ppdao.getCount();
-			list = ppdao.getList(start, finish); // (지역 상관X)전체목록
-		}
+		count = ppdao.getCount();
+		list = ppdao.getList(start, finish); // (지역 상관X)전체목록
+		
 		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
 		pageCount = (count + pageSize - 1) / pageSize;
 		if (finishBlock > pageCount) {
@@ -206,12 +194,8 @@
 			
 			<!--  페이지 네비게이터  -->
 			<div class="row center pagination">
-				<%if(startBlock > 1){ %>
-					<%if(!isSearch) { %>
-						<a href = "promotion_all_post_list.jsp?page=<%=startBlock-1%>">&lt;</a>
-					<%} else { %>
-						<a href = "promotion_all_post_list.jsp?page=<%=startBlock-1%>&type=<%=type%>&keyword=<%=keyword%>">&lt;</a>
-					<%} %>
+				<%if(startBlock > 1){ %>				
+						<a href = "promotion_all_post_list.jsp?page=<%=startBlock-1%>">&lt;</a>					
 				<%} %>
 				
 				<!-- 
@@ -228,21 +212,11 @@
 							prop="";
 						}
 					%>
-					
-					<% if(!isSearch) {%> <!-- 목록이면 -->
-							<a href="promotion_all_post_list.jsp?page=<%=i%>" <%=prop%>><%=i %></a>
-					<%} 
-						else { %> <!-- 검색이면 -->
-							<a href = "promotion_all_post_list.jsp?page=<%=i%>&type=<%=type%>&keyword=<%=keyword%>" <%=prop%>><%=i %></a>
-					<%} %>	
+						<a href="promotion_all_post_list.jsp?page=<%=i%>" <%=prop%>><%=i %></a>
 				<%} %>
 				
 				<%if(pageCount > finishBlock){ %>
-					<%if(!isSearch){ %> <!-- 목록이면 -->
 						<a href="promotion_all_post_list.jsp?page=<%=finishBlock + 1%>">&gt;</a>
-					<%}else{ %> <!-- 검색이면 -->
-						<a href="promotion_all_post_list.jsp?page=<%=finishBlock + 1%>&type=<%=type%>&keyword=<%=keyword%>">&gt;</a>
-					<%} %>
 				<%} %>
 			</div>			
 		</div>

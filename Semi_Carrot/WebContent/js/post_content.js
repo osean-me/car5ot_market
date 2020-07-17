@@ -33,3 +33,15 @@ window.onload = function() {
 		effect : 'slide'// 기본값
 	});
 };
+
+function viewMemberInfo() {
+	var memberNick = document.querySelector("#member-nick");
+	var memberInfo = document.querySelector(".member-info");
+	
+	memberInfo.classList.remove("display-on");
+	
+	if(memberNick.checked) {
+		console.log("성공");
+		memberInfo.classList.add("display-on");
+	}
+}

@@ -444,11 +444,11 @@
 									<%if(updto.getMember_no() != 0){ %>
 										<div id="write-member-form">
 											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo();"><%=mdto.getMember_nick() %></label>
-											<div>
-												<div>회원 페이지</div>
-												<div>좋아요</div>
-												<div>싫어요</div>
-												<div>신고하기</div>
+											<div class="member-info">
+												<div><a href="">회원 페이지</a></div>
+												<div><a href="">좋아요</a></div>
+												<div><a href="">싫어요</a></div>
+												<div><a href="">신고하기</a></div>
 											</div>
 										</div>
 									<%} else{%>

@@ -475,4 +475,49 @@ textarea {
 .title-label {
 	position: relative;
 }
+
+#write-member-form>label {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+}
+
+#write-member-form>label:hover {
+	color: #ff8900;
+}
+
+.member-info {
+	display: none;
+	width: 100px;
+	background-color: white;
+	border-radius: 15px;
+	box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
+}
+
+.member-info>div>a {
+	text-decoration: none;
+	color: gray;
+}
+
+.member-info>div>a:hover {
+	color: #ff8900;
+}
+
+#write-member-form>label>input[type=checkbox] {
+	display: none;
+	
+}
+
+#write-member-form>div {
+	position: absolute;
+	margin-left: 15px;
+}
+
+#write-member-form>div>div {
+	margin: 10px;
+	margin-top: 0px;
+}
+
+.display-on {
+	display: inline-block;
 }

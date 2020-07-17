@@ -279,6 +279,7 @@ body[test] main, body[test] header, body[test] nav, body[test] section,
 
 .manner-margin {
 	margin: 10px 0px 0px 20px
+	z-index: 1;
 }
 
 .like-button {

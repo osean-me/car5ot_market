@@ -505,7 +505,7 @@
 					
 				</div>
 					<div class="left-font manner-margin ">
-						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%;">
+						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%; position: relative; z-index: -1;">
 					</div>
 			</div>
 			

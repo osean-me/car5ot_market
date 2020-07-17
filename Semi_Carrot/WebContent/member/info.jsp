@@ -121,10 +121,10 @@
                        			<!-- 회원 이미지가 없을 경우 -->
                             	<img alt="user_profile_none" src="<%=path %>/img/user_profile.jpg">
                        		<%} %>
+	                        <%if(loginMember.getMember_no() == member_no) { %>
                            	<label id="profile-edit" for="profile-check">
                           		<input type="checkbox" id="profile-check" class="profile-check" onchange="profileImgButton();">
-                           		<span class="profileimg-button">
-	                           		<%if(member_no == loginMember.getMember_no()) { %>
+                           				<span class="profileimg-button">
 	                           			<!-- 마이페이지 회원이 자신일 경우 -->
 	                           		
 	                           			<%if(member_img_no != null) { %>
@@ -135,9 +135,9 @@
 	                           				<!-- 회원 이미지가 없을 경우 -->
 	                           				<a href="profile_img_create.jsp?no=<%=member_no %>" onclick="window.open(this.href, '_blank', 'width=305px,height=400px,toolbars=no,scrollbars=no'); return false;" id="profile-img">추가</a>
 	                           			<%} %>
-	                           		<%} %>	
                            		</span>
                            	</label>
+	                    <%} %>	
                         </div>
                         <div id="mypage-top-left-down">
                             <div>
@@ -208,20 +208,17 @@
                                         <input type="submit" value="">
                                     </form>
                                  <%} else {%> 
+                                		<div id="intro-content">
                                  	<%if(intro != null) { %>
-                                		<div id="intro-content">
                                 			<%=intro %>
-                                		</div>
-                                		<div id="write-intro">
-                                			<a href="info.jsp?no=<%=member_no%>&edit_intro"><button></button></a>
-                                		</div>
                                 	<%} else {%>
-                                		<div id="intro-content">
                                 			자기소개가 없어요! 
+                                	<%} %>
                                 		</div>
-                                		<div id="write-intro">
-                                			<a href="info.jsp?no=<%=member_no%>&edit_intro"><button></button></a>
-                                		</div>
+                                	<%if(loginMember.getMember_no() == member_no) { %>	
+                                	<div id="write-intro">
+                                		<a href="info.jsp?no=<%=member_no%>&edit_intro"><button></button></a>
+                                	</div>
                                 	<%} %>
                                  <%} %>  
                                 </div>

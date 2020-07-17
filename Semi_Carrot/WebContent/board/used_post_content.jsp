@@ -492,16 +492,13 @@
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>
 								</div>
-
+							</div>
 						</div>
-					</div>
-			
-				</div>
 					<div class="left-font manner-margin ">
-						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%;">
+							<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%; position: relative; z-index: -1;">
 					</div>
+				</div>
 			</div>
-			
 		</div>
 	</div>
 </article>

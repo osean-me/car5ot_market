@@ -9,37 +9,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import carrot.bean.dao.UsedPostDAO;
-import carrot.bean.dao.UsedPostImgDAO;
-import carrot.bean.dto.UsedPostDTO;
-import carrot.bean.dto.UsedPostImgDTO;
+import carrot.bean.dao.PromotionPostDAO;
+import carrot.bean.dao.PromotionPostImgDAO;
+import carrot.bean.dto.PromotionPostImgDTO;
 
-@WebServlet(urlPatterns = "/board/usedpostdelete.do")
-public class UsedPostDeleteServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/board/promopostdelete.do")
+public class PromotionPostDeleteServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			long post_no = Long.parseLong(req.getParameter("post_no"));
-						
-			UsedPostImgDAO upidao = new UsedPostImgDAO();
 			
-			UsedPostImgDTO upidto = upidao.getMember(post_no);
+			PromotionPostImgDAO ppidao = new PromotionPostImgDAO();
+			PromotionPostImgDTO ppidto = ppidao.getMember(post_no);
+			PromotionPostDAO ppdao = new PromotionPostDAO();
 			
-			UsedPostDAO updao = new UsedPostDAO();
-			
-			// 파일 삭제
-			File post = new File("D:/upload/board/" + upidto.getPost_img_no());
+			//파일삭제
+			File post = new File("D:/upload/board/" + ppidto.getPost_img_no());
 			post.delete();
-
+			
 			// DB 삭제
-			upidao.deleteUsedPostImg(post_no);
+			ppidao.deletePromotionPostImg(post_no);
 			// 게시글 삭제
-			updao.delete(post_no);
+			ppdao.delete(post_no);
 			resp.sendRedirect("used_all_post_list.jsp");
+			
 		}
-		catch(Exception e){
+		
+		catch(Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
-		}	
+		}
 	}
 }

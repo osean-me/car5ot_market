@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import carrot.bean.dao.AddrDAO;
+import carrot.bean.dao.MannerDAO;
 import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.AddrDTO;
 import carrot.bean.dto.MemberDTO;
@@ -74,6 +75,7 @@ public class JoinServlet extends HttpServlet {
 			// Member Constructor
 			MemberDTO mdto = new MemberDTO();
 			MemberDAO mdao = new MemberDAO();
+			MannerDAO mndao = new MannerDAO();
 
 			// Member Method
 			long member_no = mdao.getMemberNo();
@@ -84,8 +86,12 @@ public class JoinServlet extends HttpServlet {
 			mdto.setMember_addr_no(member_addr_no);
 			mdto.setMember_nick(member_nick);
 			mdto.setMember_phone(member_phone);
-
+			
+			// 회원 가입
 			mdao.join(mdto);
+			
+			//	매너 지수 테이블에 데이터 추가
+			mndao.insertManner(member_no);
 
 			resp.sendRedirect(req.getContextPath());
 

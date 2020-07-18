@@ -14,6 +14,7 @@ import carrot.bean.dto.DetailList2DTO;
 import carrot.bean.dto.PromotionPostDTO;
 import carrot.bean.dto.RecoPromotionPostDTO;
 import carrot.bean.dto.RecoUsedPostDTO;
+import carrot.bean.dto.UsedPostDTO;
 
 public class PromotionPostDAO {
 	private static DataSource src;
@@ -514,5 +515,32 @@ public class PromotionPostDAO {
 		con.close();
 
 		return count;
+	}
+	//게시글 삭제
+	public void delete(long post_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "Delete promotion_post where post_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setLong(1, post_no);
+		ps.execute();
+
+		con.close();
+	}
+	
+	//게시글 수정
+	public void edit(PromotionPostDTO ppdto) throws Exception {
+		Connection con = getConnection();
+		String sql = "Update promotion_post SET post_title=?, promotion_cate_num=?,post_content=? where post_no=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setString(1, ppdto.getPost_title());
+		ps.setLong(2, ppdto.getPromotion_cate_num());
+		ps.setString(3, ppdto.getPost_content());
+		ps.setLong(4, ppdto.getPost_no());
+		
+		ps.execute();
+		
+		con.close();
 	}
 }

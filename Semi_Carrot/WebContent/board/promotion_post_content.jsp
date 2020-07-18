@@ -1,3 +1,5 @@
+<%@page import="carrot.bean.dto.MannerDTO"%>
+<%@page import="carrot.bean.dao.MannerDAO"%>
 <%@page import="carrot.bean.dto.RecoPromotionPostDTO"%>
 <%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
 <%@page import="carrot.bean.dto.PromotionPostImgDTO"%>
@@ -108,6 +110,10 @@
 			
 			// 프로필 가지고 오기
 			ProfileImgDAO pidao = new ProfileImgDAO();
+			
+			// 매너지수 가지고 오기
+			MannerDAO mndao = new MannerDAO();
+			MannerDTO mndto = mndao.getMannerCount(ppdto.getMember_no());
 	%>
 	
 	
@@ -117,6 +123,9 @@
 <link href="<%=path%>/css/swiper.min.css" type="text/css" rel="stylesheet">
     <script src="<%=path%>/js/swiper.min.js"></script>
     <script type="text/javascript" src="<%=path%>/js/post_content.js"></script>
+    
+<input type="hidden" value="<%=memberinfo.getMember_no()%>" id="login-member">
+<input type="hidden" value="<%=ppdto.getMember_no() %>" id="post-member">
 <article style="padding-top: 220px" id="post-content-form">
 		<div class="padding50">
 			<div class="float-box float-left">
@@ -191,11 +200,10 @@
 					<%if(isAdmin || isMine){ %>
 					<!-- 수정 삭제 버튼은 "내글" 또는 "관리자"인 경우만 표시 -->
 					<div class="left-item33">
-						<a href="used_post_edit.jsp?post_no=<%=post_no%>"></a>
-						<a href="used_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
+						<a href="promotion_post_content_edit.jsp?post_no=<%=post_no%>"><button class="edit-button cursor">수정</button></a>
 					</div>
 					<div class="left-item33">
-						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/usedpostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
+						<a href="<%=request.getContextPath()%>/member/check.jsp?go=<%=request.getContextPath()%>/board/promopostdelete.do?post_no=<%=post_no%>"><button class="delete-button cursor">삭제</button></a>
 					</div>
 					<%} %>
 					</div>
@@ -293,6 +301,7 @@
 						
 						MemberDTO replymember;
 				%>
+					<input type="hidden" value=<%=rdto.getMember_no() %> id="reply-member<%=rdto.getMember_no()%>">
 					<div class="float-box float-left reply-margin20">
 						<div class="left-item10">
 						<!-- 프로필 이미지 영역 -->
@@ -315,8 +324,25 @@
 									} else { 
 										replymember = mdao.get(rdto.getMember_no());
 								%>
-
-									<span><%=replymember.getMember_nick() %></span>
+									<label id="reply-member-form" for="<%=rdto.getMember_no()%><%=rdto.getReply_no()%>"><input type="checkbox" id="<%=rdto.getMember_no() %><%=rdto.getReply_no() %>" value="<%=rdto.getMember_no() %>" onchange="viewReplyMemberInfo(this);"><%=replymember.getMember_nick() %></label>
+									<div class="info<%=rdto.getMember_no() %><%=rdto.getReply_no() %> reply-tab-design">
+										<div><a href="<%=path%>/member/info.jsp?no=<%=replymember.getMember_no()%>">회원 페이지</a></div>
+											<form action="<%=path %>/member/manner.do" method="post">
+		                                       	<input type="hidden" name="this_member_no" value="<%=replymember.getMember_no()%>"> <!-- 좋아요 누를 회원 -->
+		                                   		<input type="hidden" name="push_member_no" value="<%=memberinfo.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
+		                                  		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
+		                                  		<input type="hidden" name="good" value="">
+		                                   		<input type="submit" value="좋아요" class="submit-button">
+	                                   		</form>
+											<form action="<%=path %>/member/manner.do" method="post">
+		                                  		<input type="hidden" name="this_member_no" value="<%=replymember.getMember_no()%>"> <!-- 싫어요 누를 회원 -->
+		                                   		<input type="hidden" name="push_member_no" value="<%=memberinfo.getMember_no() %>"> <!-- 싫어요를 누른 회원 -->
+		                                   		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
+		                                   		<input type="hidden" name="bad" value="">
+		                                   		<input type="submit" value="싫어요" class="submit-button">
+	                                   		</form>
+										<div><a href="">신고하기</a></div>
+									</div>
 								<%} %>
 									<span class="right-float gray-font">
 										<%if(rdto.getReply_date().substring(0, 10).equals(sysdate)) {%>
@@ -443,7 +469,27 @@
 									<!-- 작성자 -->
 									<div class="padding15 ">
 									<%if(ppdto.getMember_no( ) != 0){ %>
-										<p class="font20"> <%=mdto.getMember_nick() %></p>
+										<div id="member-form">
+											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo(this);"><%=mdto.getMember_nick() %></label>
+											<div class="info-member-nick">
+												<div><a href="<%=path%>/member/info.jsp?no=<%=mdto.getMember_no()%>">회원 페이지</a></div>
+												<form action="<%=path%>/member/manner.do" method="post">
+	                                	       		<input type="hidden" name="this_member_no" value="<%=ppdto.getMember_no()%>"> <!-- 좋아요 누를 회원 -->
+	                                	   			<input type="hidden" name="push_member_no" value="<%=memberinfo.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
+	                                		  		<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
+	                                  				<input type="hidden" name="good" value="">
+	                                  	 			<input type="submit" value="좋아요" class="submit-button">
+                                   				</form>
+												<form action="<%=path%>/member/manner.do" method="post">
+	                                	  			<input type="hidden" name="this_member_no" value="<%=ppdto.getMember_no()%>"> <!-- 좋아요 누를 회원 -->
+	                                	   			<input type="hidden" name="push_member_no" value="<%=memberinfo.getMember_no() %>"> <!-- 좋아요를 누른 회원 -->
+	                                	   			<input type="hidden" name="path" value="<%=request.getRequestURI() %>?<%=request.getQueryString()%>">
+	                                	   			<input type="hidden" name="bad" value="">
+	                                	   			<input type="submit" value="싫어요" class="submit-button">
+                                   				</form>
+												<div><a href="">신고하기</a></div>
+											</div>
+										</div>
 									<%} else{%>
 											<p class="gray-font font20">탈퇴한 회원</p>
 									<%} %>
@@ -459,7 +505,7 @@
 					
 				</div>
 					<div class="left-font manner-margin ">
-						<img src="<%=path %>/img/manner_sample.jpg" width="200" height="50">
+						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%; position: relative; z-index: -1;">
 					</div>
 			</div>
 			

@@ -27,10 +27,23 @@ function toggleTabAuto(tag) {
 	}*/
 }
 
+// 댓글 메뉴
+function replyNav(tag) {
+	var id = tag.id;
+	var targetId = id + "-area";
+	
+	var list = document.querySelectorAll(".area2");
+	for(var i = 0; i < list.length; i++) {
+		list[i].classList.remove("on");
+	}
+	
+	var target = document.getElementById(targetId);
+	target.classList.add("on");
+}
+
 // 모서리 모양
 function radiusEdit(tag) {
 	var id = tag.id;
-	console.log(id);
 	var mypageBoard = document.querySelector("#mypage-board");
 
 	mypageBoard.classList.remove("set-left");

@@ -252,6 +252,7 @@
                     <div id="mypage-board">
                     <!-- 중고 거래 게시판 -->
                         <div class="area on" id="select-1-area">
+                        <div class="empty"></div>
                             <div class="mypage-board-table">
                                 <div class="mypage-post-list">
                                 <%if(used_post.isEmpty()) { %>
@@ -302,9 +303,10 @@
                         
                         <!--홍보 게시판 -->
                         <div class="area" id="select-2-area">
+                        <div class="empty"></div>
                             <div class="mypage-board-table">
                                 <div class="mypage-post-list">
-		                                <%if(used_post.isEmpty()) { %>
+		                                <%if(promotion_post.isEmpty()) { %>
 		                                	<div style="flex: 9; width: 100%; heigth: 90%;">
 		                                		게시물이 없습니다.
 		                                	</div>
@@ -319,7 +321,6 @@
 			                                		AddrDTO promotion_addr = adao.get(post.getAddr_no());
 			                                		
 			                                %>
-			                                 <div class="mypage-post-list">
 			                                    <div class="product">
 			                                        <div class="product-inner">
 			                                        	<div class="photo"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>"></a></div>
@@ -346,18 +347,118 @@
 	                       			</div>
                             	</div>
                         	</div>
-                        </div>
                         
                         <!-- 댓글 -->
                         <div class="area" id="select-3-area">
-                            
-                        </div>
+                            <div id="reply-nav" class="empty">
+                            	<label for="1-reply">
+                            		<input type="radio" id="1-reply" name="reply-package" onchange="replyNav(this);" checked>
+                            		중고
+                            	</label>
+                            	<label for="2-reply">
+                            		<input type="radio" id="2-reply" name="reply-package" onchange="replyNav(this);">
+                            		홍보
+                            	</label>
+                            </div>
+                            <div id="1-reply-area" class="area2 on">
+                            	<div class="mypage-board-table">
+	                                <div class="mypage-post-list">
+	                                <%if(used_post.isEmpty()) { %>
+	                                	<div style="flex: 9; width: 100%; heigth: 90%;">
+	                                		게시물이 없습니다.
+	                                	</div>
+	                                <%} else { %>
+		                                <%
+		                                	for(int i = 0; i < used_post.size(); i++) {
+		                                		
+		                                		Object used = used_post.get(i);
+		                                		UsedPostDTO post = (UsedPostDTO) used;
+		                                		
+		                                		UsedPostImgDTO uidto = uidao.getMember(post.getPost_no());
+		                                		AddrDTO used_addr = adao.get(post.getAddr_no());
+		                                		
+		                                %>
+		                                    <div class="product">
+		                                        <div class="product-inner">
+		                                        	<div class="photo">
+		                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>&board_no=<%=post.getBoard_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+		                                        	</div>
+		                                        	<div class="product-title">
+		                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>&board_no=<%=post.getBoard_no()%>"><%=post.getPost_title() %>...</a>	
+		                                        	</div>
+		                                        	<div class="map">
+		                                        		<div>
+			                                        		<%=used_addr.getAddr_state().substring(0, 2) %>  
+			                                        		<%=used_addr.getAddr_city() %>  
+			                                        		<%=used_addr.getAddr_base() %>
+		                                        		</div>
+		                                        	</div>
+		                                        	<div class="price-date">
+		                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+		                                        		<div class="date"><%=post.getUsedPost_day() %></div>
+		                                        	</div>
+		                                        	<div class="post-like"><%=post.getPost_like() %></div>
+		                                        </div>
+		                                    </div>
+			                                <%if((i+1) % 5 == 0) { %>
+			                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+			                               	<%} %>
+		                                <%} %>
+		                              <%} %>  
+		                       		</div>
+	                            </div>
+                            </div>
+                            <div id="2-reply-area" class="area2">
+                            	<div class="mypage-board-table">
+	                                <div class="mypage-post-list">
+			                                <%if(promotion_post.isEmpty()) { %>
+			                                	<div style="flex: 9; width: 100%; heigth: 90%;">
+			                                		게시물이 없습니다.
+			                                	</div>
+			                                <%} else { %>
+				                                <%
+				                                	for(int i = 0; i < promotion_post.size(); i++) {
+				                                		
+				                                		Object promotion = promotion_post.get(i);
+				                                		PromotionPostDTO post = (PromotionPostDTO) promotion;
+				                                		
+				                                		PromotionPostImgDTO ppidto = ppidao.getMember(post.getPost_no());
+				                                		AddrDTO promotion_addr = adao.get(post.getAddr_no());
+				                                		
+				                                %>
+				                                    <div class="product">
+				                                        <div class="product-inner">
+				                                        	<div class="photo"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><img src="<%=path%>/board/showImg2.do?post_img_no=<%=ppidto.getPost_img_no()%>"></a></div>
+				                                        	<div class="product-title"><a href="<%=path %>/board/promotion_post_content.jsp?board_no=<%=post.getBoard_no()%>&promotion_cate_num=<%=post.getPromotion_cate_num()%>&post_no=<%=post.getPost_no()%>"><%=post.getPost_title() %>...</a></div>
+				                                        	<div class="map">
+				                                        		<div>
+					                                        		<%=promotion_addr.getAddr_state() %>  
+					                                        		<%=promotion_addr.getAddr_city() %>  
+					                                        		<%=promotion_addr.getAddr_base() %>
+				                                        		</div>
+				                                        	</div>
+				                                        	<div class="price-date">
+				                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
+				                                        		<div class="date"><%=post.getPromotionPost_day() %></div>
+				                                        	</div>
+				                                        	<div class="post-like"><%=post.getPost_like() %></div>
+				                                        </div>
+				                                    </div>
+				                                <%if((i+1) % 5 == 0) { %>
+				                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+				                               	<%} %>
+			                                <%} %>
+			                              <%} %>  
+		                       			</div>
+	                            	</div>
+	                        	</div>
+                            </div>
                         
                         <!-- 찜꽁 -->
                         <div class="area" id="select-4-area">
                             <div class="mypage-board-table">
                                 <div class="mypage-post-list">
-                                <%if(used_post.isEmpty()) { %>
+                                <%if(post_like.isEmpty()) { %>
                                 	<div style="flex: 9; width: 100%; heigth: 90%;">
                                 		게시물이 없습니다.
                                 	</div>

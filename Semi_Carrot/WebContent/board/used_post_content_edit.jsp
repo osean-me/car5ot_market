@@ -228,7 +228,7 @@ input+span {
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<form action="usedpostedit.do" method="post">
+<form action="usedpostedit.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="post_no" value="<%=post_no%>">
 	<input type="hidden" name="board_no" value="1">
 	

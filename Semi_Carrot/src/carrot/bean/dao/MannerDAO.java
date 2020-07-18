@@ -161,7 +161,7 @@ public class MannerDAO {
 	// [6-2] 회원 탈퇴 시 모든 매너 테이블의 데이터 지우기
 	public void dropManner(long this_member_no) throws Exception {
 
-		// [6-1] MEMBER_MANNER 테이블에서 해당 회원 데이터 지우
+		// [6-1] MEMBER_MANNER 테이블에서 해당 회원 데이터 지우기
 		this.deleteManner(this_member_no);
 
 		Connection con = getConnection();

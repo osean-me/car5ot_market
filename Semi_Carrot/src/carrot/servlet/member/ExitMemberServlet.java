@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import carrot.bean.dao.MannerDAO;
 import carrot.bean.dao.MemberDAO;
 import carrot.bean.dto.MemberDTO;
 
@@ -39,6 +40,11 @@ public class ExitMemberServlet extends HttpServlet {
 			
 			// 탈퇴 전 세션 삭제
 			req.getSession().removeAttribute("memberinfo");
+			
+			// 매너지수 관련 테이블에서 회원의 모든 데이터 삭제
+			MannerDAO mndao = new MannerDAO();
+			mndao.dropManner(member_no);
+			
 			// 탈퇴
 			mdao.exit(member_no);
 			

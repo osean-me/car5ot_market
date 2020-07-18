@@ -6,7 +6,10 @@
    pageEncoding="UTF-8"%>
    
       <%
+   
   	long post_no = Long.parseLong(request.getParameter("post_no"));   
+    System.out.println(post_no);
+      
   	PromotionPostDAO ppdao = new PromotionPostDAO();
   	PromotionPostDTO ppdto = ppdao.get(post_no);
   	//카테고리 이름 뽑기
@@ -262,7 +265,7 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 
-<form action="promopostedit.do" method="post">
+<form action="promopostedit.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="post_no" value="<%=post_no%>">
 	<input type="hidden" name="board_no" value="2">
 	

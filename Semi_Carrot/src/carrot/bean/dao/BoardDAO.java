@@ -95,7 +95,7 @@ public class BoardDAO {
 	public List<Object> getPostList(String post_board_name, long member_no) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT * FROM #1 WHERE MEMBER_NO = ?";
+		String sql = "SELECT * FROM #1 WHERE MEMBER_NO = ? ORDER BY POST_NO DESC";
 
 		sql = sql.replace("#1", post_board_name);
 

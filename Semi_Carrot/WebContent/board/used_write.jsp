@@ -42,7 +42,7 @@
 		var titleInfo = document.querySelector("#titleInfo");
 		var titleInfoText = document.querySelector("#titleInfoText");
 
-		var isValid = title.match(regex);
+		var isValid = title.match(regex)==null && titleInfoText == null;
 		if (isValid) {			
 			var titleInfoText = document.createElement("div");
 			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";

@@ -34,7 +34,7 @@ public class UsedPostWriteServlet extends HttpServlet {
 		try {
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
-			File baseDir = new File("D:/upload/board");
+			File baseDir = new File("F:/upload/board");
 			baseDir.mkdirs();
 
 			DiskFileItemFactory factory = new DiskFileItemFactory();

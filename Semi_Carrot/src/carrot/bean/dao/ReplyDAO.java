@@ -240,29 +240,71 @@ public class ReplyDAO {
 
 		return list;
 	}
-	
+
 	// [8] 해당 회원 댓글 리스트 조회 > 게시글 번호 반환
-		public List<Long> getMemberReplyList_promotion(long member_no) throws Exception {
-			Connection con = getConnection();
+	public List<Long> getMemberReplyList_promotion(long member_no) throws Exception {
+		Connection con = getConnection();
 
-			String sql = "SELECT POST_NO FROM PROMOTION_POST_REPLY WHERE MEMBER_NO = ? ORDER BY POST_NO DESC";
+		String sql = "SELECT POST_NO FROM PROMOTION_POST_REPLY WHERE MEMBER_NO = ? ORDER BY POST_NO DESC";
 
-			PreparedStatement ps = con.prepareStatement(sql);
+		PreparedStatement ps = con.prepareStatement(sql);
 
-			ps.setLong(1, member_no);
+		ps.setLong(1, member_no);
 
-			ResultSet rs = ps.executeQuery();
+		ResultSet rs = ps.executeQuery();
 
-			List<Long> list = new ArrayList<Long>();
+		List<Long> list = new ArrayList<Long>();
 
-			while (rs.next()) {
-				long post_no = rs.getLong("post_no");
+		while (rs.next()) {
+			long post_no = rs.getLong("post_no");
 
-				list.add(post_no);
-			}
-
-			con.close();
-
-			return list;
+			list.add(post_no);
 		}
+
+		con.close();
+
+		return list;
+	}
+
+	// [9-1] 회원 댓글 갯구 구하기
+	public long getReplyCount_used(long member_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT COUNT(*) FROM USED_POST_REPLY WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+
+		long result = rs.getLong(1);
+
+		con.close();
+
+		return result;
+	}
+
+	// [9-2] 회원 댓글 갯구 구하기
+	public long getReplyCount_promotion(long member_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT COUNT(*) FROM PROMOTION_POST_REPLY WHERE MEMBER_NO = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+
+		long result = rs.getLong(1);
+
+		con.close();
+
+		return result;
+	}
 }

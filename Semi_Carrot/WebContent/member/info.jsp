@@ -107,6 +107,9 @@
 	ReplyDAO rdao = new ReplyDAO();
 	List<Long> used_post_no = rdao.getMemberReplyList_used(member_no);
 	List<Long> promotion_post_no = rdao.getMemberReplyList_promotion(member_no);
+	
+	// 총 댓글 갯수
+	long reply_count = 0;
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -197,7 +200,15 @@
                                         게시글 수 : <%=post_count %>
                                     </div>
                                     <div id="reply-count">
-                                        댓글 수 : 150
+                                        댓글 수 : 
+                                        <%
+                                        	if(rdao.getReplyCount_used(member_no) > 0 || rdao.getReplyCount_promotion(member_no) > 0) {
+                                        		reply_count = rdao.getReplyCount_used(member_no) + rdao.getReplyCount_promotion(member_no);
+                                        %>
+                                        	<%=reply_count%>
+                                        <%}  else {%>
+                                        	0
+                                        <%} %>
                                     </div>
                                 </div>
                                 <div id="intro-bottom">

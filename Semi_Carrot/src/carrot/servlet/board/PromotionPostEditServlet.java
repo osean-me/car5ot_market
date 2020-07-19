@@ -57,6 +57,7 @@ public class PromotionPostEditServlet extends HttpServlet {
 			String post_title = map.get("post_content").get(0).getString(); // 게시글 제목
 			String post_phone = map.get("post_phone").get(0).getString(); // 전화번호
 			String post_content = map.get("post_content").get(0).getString();	//내용
+			long post_price = Long.parseLong(map.get("post_price").get(0).getString()); //
 
 		
 
@@ -107,6 +108,7 @@ public class PromotionPostEditServlet extends HttpServlet {
 						ppdto.setPost_title(post_title);
 						ppdto.setPost_phone(post_phone);
 						ppdto.setPost_content(post_content);
+						ppdto.setPost_price(post_price);
 
 						ppdao.edit(ppdto);
 						

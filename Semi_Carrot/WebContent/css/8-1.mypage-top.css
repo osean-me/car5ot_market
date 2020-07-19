@@ -132,6 +132,12 @@
 	z-index: 0;
 }
 
+#manner-count {
+	font-size: 18px;
+	color: gray;
+	text-shadow: 5px 5px 5px rgba(128, 128, 128, 0.45);
+}
+
 #nickname>div:hover {
 	color: #ff8900;
 }

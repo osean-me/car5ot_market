@@ -175,7 +175,7 @@
                             </div>
                             <div id="manner">
                                 <div>
-                                    <input type="range" value="<%=manner_count %>" readonly>
+                                   <span id="manner-count">매너 지수 </span><input type="range" value="<%=manner_count %>" readonly>
                                 </div>
                             </div>
                         </div>

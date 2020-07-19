@@ -107,7 +107,7 @@
 	String sysdate = date.format(cal.getTime()); // 현재 날짜
 	String systime = time.format(cal.getTime()); // 현재 시간 
 	
-	int syshour = Integer.parseInt(systime.substring(0, 2)) * 60; // 현재 시 * 60분 
+	int syshour = (Integer.parseInt(systime.substring(0, 2)) * 60) * 60; // 현재 시 * 60분 
 	int sysminute = Integer.parseInt(systime.substring(3, 5)) * 60; // 현재 분 * 60초
 	int syssecound = Integer.parseInt(systime.substring(6, 8)); // 현재 초 
 	

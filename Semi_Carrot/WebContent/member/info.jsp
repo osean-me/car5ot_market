@@ -456,6 +456,7 @@
                         
                         <!-- 찜꽁 -->
                         <div class="area" id="select-4-area">
+                        	<div class="empty"></div>
                             <div class="mypage-board-table">
                                 <div class="mypage-post-list">
                                 <%if(post_like.isEmpty()) { %>

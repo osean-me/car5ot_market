@@ -16,176 +16,12 @@
   	
   %>
 
-<style>
-* {
-   box-sizing: border-box;
-}
-#used-write-form {
-	margin:0px 20%;
-}
-.form-title {
-   margin-top: 40px;
-   margin-bottom: 40px;
-   width: 1000px;
-   padding: 0.9rem;
-   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
-   border: 1px solid lightgray;
-   font-size: 19px;
-   margin-left: 50px;
-}
-.form-title:focus {
-   margin-top: 40px;
-   margin-bottom: 40px;
-   width: 1000px;
-   padding: 0.9rem;
-   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
-   border: 1px solid lightgray;
-   font-size: 19px;
-   margin-left: 50px;
-   outline:1px solid orange;
-}
-.used_cate_style {
-   width: 300px; /* 너비설정 */
-   border: 1px solid lightgray; /* 테두리 설정 */
-   padding: 0.9rem;
-   font-size: 19px;
-   margin-top: 40px;
-   margin-bottom: 40px;
-   margin-left: 20px;
-}
-.used_cate_style:focus {
-   width: 300px; /* 너비설정 */
-   border: 1px solid lightgray; /* 테두리 설정 */
-   padding: 0.9rem;
-   font-size: 19px;
-   margin-top: 40px;
-   margin-bottom: 40px;
-   margin-left: 20px;
-      outline:1px solid orange;
-}
-.form-price {
-   margin-top: 40px;
-   margin-bottom: 40px;
-   width: 300px;
-   padding: 0.9rem;
-   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
-   border: 1px solid lightgray;
-   font-size: 19px;
-   margin-left: 50px;
-}
-.form-price:focus {
-   margin-top: 40px;
-   margin-bottom: 40px;
-   width: 300px;
-   padding: 0.9rem;
-   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
-   border: 1px solid lightgray;
-   font-size: 19px;
-   margin-left: 50px;
-   outline:1px solid orange;
-}
-#free {
-   margin-left: 80px;
-}
-#free:checked {
-   color: orange;
-}
-#suggest {
-   margin-left: 50px;
-}
-.first {
-   width: 1000px;
-   height: 200px;
-   border-color: lightgray;
-   font-size: 20px;
-   font-weight: normal;
-   margin-left: 50px;
-}
-.first:focus {
-   width: 1000px;
-   height: 200px;
-   font-size: 20px;
-   font-weight: normal;
-   margin-left: 50px;
-   outline:1px solid orange;
-}
-.menu {
-   width: 300px;
-   height: 40px;
-   margin-bottom: 30px;
-}
-.used_content_text {
-}
-.main .used_content_text {
-   float: left;
-   width: 50px;
-   height: 254px;
-}
-.main .content {
-   float: left;
-   width: 250px;
-   height: 250px;
-}
-.countNum {
-   margin-left: 990px;
-   margin-top: 10px;
-}
-.form-btn {
-   background-color: orange;
-   color: white;
-   cursor: pointer;
-   padding: 1rem;
-   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
-   border: 1px solid orange;
-   width: 180px;
-   font-size: 27px;
-   margin-top: 70px;
-}
-.must {
-   font-size: 20px;
-   font-weight: normal;
-   color: red;
-}
-.used_container {
-   font-size: 20px;
-   text-align:left;
-}
-.used_photo, .used_title, .used_cate, .used_price, .used_content {
-   list-style: none;
-}
-.used_photo_text {
-   margin-bottom: 10px;
-}
-.used_photo_img {
-   margin-bottom:45px;
-}
-.used_photo_explain {
-   color: lightblue;
-}
-.used_text {
-    display: inline-block;
-}
-.hr_style2 {
-   border: 0;
-   height: 3px;
-   background:orange;
-}
-.preview-wrap > img {
-   width:200px;
-   height:200px;
-   display:inline-block;
-   margin-right:10px;
-   margin:10px;
-}
-input+span {
-	color:red;
-}
-</style>
 <script>
    function calculateCount() {
       var text = document.querySelector(".first").value;
       var len = text.length;
       var countTag = document.querySelector(".letter-count");
+
       countTag.textContent = len;
    }
    
@@ -214,19 +50,57 @@ input+span {
    
    // 제목 2글자 이상 검사 
    function checkTitle() {
-	   var title=document.querySelector(".post-title").value;
-	   var len = title.length;
-	   var isValid = len > 1;
-	   
-	   if(!isValid) {
-		   var span = document.querySelector(".post-title + span");
-		   span.textContent = "제목은 2글자 이상으로 작성하세요.";
-	   }
-   }
+		var title = document.querySelector("input[name=post_title]").value;
+
+		var regex= /^.{2,30}$/;
+
+		var titleInfo = document.querySelector("#titleInfo");
+		var titleInfoText = document.querySelector("#titleInfoText");
+
+		var isValid = title.match(regex);
+		if (isValid) {			
+			var titleInfoText = document.createElement("div");
+			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
+			titleInfoText.setAttribute("id", "titleInfoText");
+			titleInfoText.setAttribute("style", "color: red; font-size: 15px;");
+			titleInfo.appendChild(titleInfoText);
+		} 
+		else if (title.match(regex) != null && titleInfoText != null) {
+				titleInfo.removeChild(titleInfo.childNodes[0]);
+		}
+	}
+// 가격 숫자만 입력 검사 
+   function checkPrice() {
+		var price = document.querySelector("input[name=post_price]").value;
+
+		var regex= /^[0-9]{1,10}$/;
+
+		var priceInfo = document.querySelector("#priceInfo");
+		var priceInfoText = document.querySelector("#priceInfoText");
+
+		var isValid = price.match(regex) == null && priceInfoText == null;
+		if (price.match(regex) == null && priceInfoText == null) {
+				
+			var priceInfoText = document.createElement("div");
+			priceInfoText.textContent = "⛔   숫자만 입력하세요.";
+			priceInfoText.setAttribute("id","priceInfoText");
+			priceInfoText.setAttribute("style","color: red; font-size: 15px;");
+			priceInfo.appendChild(priceInfoText);
+
+		} 
+		else if (price.match(regex) != null && priceInfoText != null) {
+				priceInfo.removeChild(priceInfo.childNodes[0]);
+		}
+	}
+   
+
    
 </script>
-
+<%
+	String path = request.getContextPath();
+%>
 <jsp:include page="/template/header.jsp"></jsp:include>
+<link href="<%=path%>/css/11.used_write.css" type="text/css" rel="stylesheet">
 
 <form action="usedpostedit.do" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="post_no" value="<%=post_no%>">
@@ -270,7 +144,7 @@ input+span {
             <hr>
 
             <!-- 제목 입력 -->
-            <div class="used_title" style="list-style: none;">
+            <div class="used_title" style="list-style: none; margin-bottom:40px;">
                <div class="used_text">
                   제목 <span class="must">*</span> 
                   <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." onblur="checkTitle();" value="<%=updto.getPost_title()%>">
@@ -305,7 +179,7 @@ input+span {
             <hr>
 			
             <!-- 가격 입력 -->
-            <div class="used_price">
+            <div class="used_price" style="margin-bottom:40px;">
                <div class="used_text">
                   가격 <span class="must">*</span> 
                   <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요" value="<%=updto.getPost_price()%>">원

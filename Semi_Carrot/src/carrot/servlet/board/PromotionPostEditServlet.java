@@ -33,7 +33,7 @@ public class PromotionPostEditServlet extends HttpServlet {
 			/// 1. 수정 페이지에서 등록된 데이터 처리 도구 준비하기
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
-			File baseDir = new File("F:/upload/board");
+			File baseDir = new File("D:/upload/board");
 			baseDir.mkdirs();
 
 			// 2. 공장 생성
@@ -57,6 +57,7 @@ public class PromotionPostEditServlet extends HttpServlet {
 			String post_title = map.get("post_content").get(0).getString(); // 게시글 제목
 			String post_phone = map.get("post_phone").get(0).getString(); // 전화번호
 			String post_content = map.get("post_content").get(0).getString();	//내용
+			long post_price = Long.parseLong(map.get("post_price").get(0).getString()); //
 
 		
 
@@ -74,7 +75,7 @@ public class PromotionPostEditServlet extends HttpServlet {
 				// 5-4. 받아온 예전 이미지 파일 삭제
 				for (PromotionPostImgDTO pidto : old_img_no) {
 					// 파일 본체 삭제
-					File delete_old_img = new File("F:/upload/board/" + pidto.getPost_img_no());
+					File delete_old_img = new File("D:/upload/board/" + pidto.getPost_img_no());
 					delete_old_img.delete();
 				}
 				
@@ -107,6 +108,7 @@ public class PromotionPostEditServlet extends HttpServlet {
 						ppdto.setPost_title(post_title);
 						ppdto.setPost_phone(post_phone);
 						ppdto.setPost_content(post_content);
+						ppdto.setPost_price(post_price);
 
 						ppdao.edit(ppdto);
 						

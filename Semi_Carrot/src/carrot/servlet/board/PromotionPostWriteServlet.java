@@ -35,7 +35,9 @@ public class PromotionPostWriteServlet extends HttpServlet {
 		try {
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
+
 			File baseDir = new File("D:/semi_carrot/upload/board_promotion_post");
+
 			baseDir.mkdirs();
 			
 			DiskFileItemFactory factory = new DiskFileItemFactory();

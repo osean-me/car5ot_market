@@ -250,4 +250,5 @@
 </article>
 </form>
 
+>>>>>>> refs/remotes/origin/master
 <jsp:include page="/template/footer.jsp"></jsp:include>

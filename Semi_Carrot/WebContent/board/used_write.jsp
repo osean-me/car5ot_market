@@ -42,7 +42,7 @@
 		var titleInfo = document.querySelector("#titleInfo");
 		var titleInfoText = document.querySelector("#titleInfoText");
 
-		var isValid = title.match(regex);
+		var isValid = title.match(regex)==null && titleInfoText == null;
 		if (isValid) {			
 			var titleInfoText = document.createElement("div");
 			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
@@ -78,6 +78,12 @@
 		}
 	}
    
+   function checkform() {
+	   var isTitleValid = checkTitle();
+	   var isPriceValid = checkPrice();
+	   
+	   return isTitleValid && isPriceValid;
+   }
 
    
 </script>
@@ -101,7 +107,7 @@
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
 
-      <form action="used_post_write.do" method="post"  enctype="multipart/form-data">
+      <form action="used_post_write.do" method="post"  enctype="multipart/form-data" onsubmit="return checkForm();">
       	
       	<!-- board_no 값 hidden으로 넘겨주기  -->
       	<input type="hidden" name="board_no" value="1">

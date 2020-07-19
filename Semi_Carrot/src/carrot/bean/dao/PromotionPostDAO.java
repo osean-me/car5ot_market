@@ -524,6 +524,7 @@ public class PromotionPostDAO {
       ps.setLong(1, post_no);
       ps.execute();
 
+
       con.close();
    }
    
@@ -545,4 +546,5 @@ public class PromotionPostDAO {
       
       con.close();
    }
+
 }

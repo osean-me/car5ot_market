@@ -1,3 +1,4 @@
+<%@page import="carrot.bean.dao.ReplyDAO"%>
 <%@page import="carrot.bean.dto.MannerDTO"%>
 <%@page import="carrot.bean.dao.MannerDAO"%>
 <%@page import="carrot.bean.dao.PromotionPostImgDAO"%>
@@ -97,6 +98,13 @@
 	MannerDAO mndao = new MannerDAO();
 	MannerDTO mndto = mndao.getMannerCount(member_no);
 	long manner_count = mndto.getManner_count();
+	
+	////////////////////////
+	///		댓글 게시글	///
+	//////////////////////
+	ReplyDAO rdao = new ReplyDAO();
+	List<Long> used_post_no = rdao.getMemberReplyList_used(member_no);
+	List<Long> promotion_post_no = rdao.getMemberReplyList_promotion(member_no);
 %>
 
 <jsp:include page="/template/header.jsp"></jsp:include>
@@ -175,11 +183,12 @@
                             </div>
                             <div id="manner">
                                 <div>
-                                   <span id="manner-count"><img src="<%=path %>/img/manner.png"></span><input type="range" value="<%=manner_count %>" readonly>
+                                   <span id="manner-count"><img src="<%=path %>/img/manner.png" style="width: 25px; height: auto;"></span><input type="range" value="<%=manner_count %>" readonly>
                                 </div>
                             </div>
                         </div>
                         <div id="mypage-top-right-down">
+                        
                             <div id="mypage-top-right-down-in">
                                 <div id="intro-top">
                                     <div id="post-count">
@@ -363,45 +372,48 @@
                             <div id="1-reply-area" class="area2 on">
                             	<div class="mypage-board-table">
 	                                <div class="mypage-post-list">
-	                                <%if(used_post.isEmpty()) { %>
+	                                <%if(used_post_no.isEmpty()) { %>
 	                                	<div style="flex: 9; width: 100%; heigth: 90%;">
 	                                		게시물이 없습니다.
 	                                	</div>
 	                                <%} else { %>
 		                                <%
-		                                	for(int i = 0; i < used_post.size(); i++) {
+		                                	long count = 0;
+		                                	for(int i = 0; i < used_post_no.size(); i++) {
+		                                		System.out.println(used_post_no.get(i));
+		                                		UsedPostDTO reply_used_post = updao.get(used_post_no.get(i));
 		                                		
-		                                		Object used = used_post.get(i);
-		                                		UsedPostDTO post = (UsedPostDTO) used;
-		                                		
-		                                		UsedPostImgDTO uidto = uidao.getMember(post.getPost_no());
-		                                		AddrDTO used_addr = adao.get(post.getAddr_no());
+		                                		if(count != reply_used_post.getMember_no()) {
+		                                			count = reply_used_post.getMember_no();
+			                                		UsedPostImgDTO uidto = uidao.getMember(reply_used_post.getPost_no());
+			                                		AddrDTO used_addr = adao.get(reply_used_post.getAddr_no());
 		                                		
 		                                %>
-		                                    <div class="product">
-		                                        <div class="product-inner">
-		                                        	<div class="photo">
-		                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>&board_no=<%=post.getBoard_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
-		                                        	</div>
-		                                        	<div class="product-title">
-		                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=post.getBoard_no()%>&used_cate_num=<%=post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>&board_no=<%=post.getBoard_no()%>"><%=post.getPost_title() %>...</a>	
-		                                        	</div>
-		                                        	<div class="map">
-		                                        		<div>
-			                                        		<%=used_addr.getAddr_state().substring(0, 2) %>  
-			                                        		<%=used_addr.getAddr_city() %>  
-			                                        		<%=used_addr.getAddr_base() %>
-		                                        		</div>
-		                                        	</div>
-		                                        	<div class="price-date">
-		                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(post.getPost_price()) %></div>
-		                                        		<div class="date"><%=post.getUsedPost_day() %></div>
-		                                        	</div>
-		                                        	<div class="post-like"><%=post.getPost_like() %></div>
-		                                        </div>
-		                                    </div>
-			                                <%if((i+1) % 5 == 0) { %>
-			                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+			                                    <div class="product">
+			                                        <div class="product-inner">
+			                                        	<div class="photo">
+			                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=reply_used_post.getBoard_no()%>&used_cate_num=<%=reply_used_post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>&board_no=<%=reply_used_post.getBoard_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+			                                        	</div>
+			                                        	<div class="product-title">
+			                                        		<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=reply_used_post.getBoard_no()%>&used_cate_num=<%=reply_used_post.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>&board_no=<%=reply_used_post.getBoard_no()%>"><%=reply_used_post.getPost_title() %>...</a>	
+			                                        	</div>
+			                                        	<div class="map">
+			                                        		<div>
+				                                        		<%=used_addr.getAddr_state().substring(0, 2) %>  
+				                                        		<%=used_addr.getAddr_city() %>  
+				                                        		<%=used_addr.getAddr_base() %>
+			                                        		</div>
+			                                        	</div>
+			                                        	<div class="price-date">
+			                                        		<div class="price"><%=NumberFormat.getCurrencyInstance(Locale.KOREA).format(reply_used_post.getPost_price()) %></div>
+			                                        		<div class="date"><%=reply_used_post.getUsedPost_day() %></div>
+			                                        	</div>
+			                                        	<div class="post-like"><%=reply_used_post.getPost_like() %></div>
+			                                        </div>
+			                                    </div>
+				                                <%if((i+1) % 5 == 0) { %>
+				                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+				                               	<%} %>
 			                               	<%} %>
 		                                <%} %>
 		                              <%} %>  

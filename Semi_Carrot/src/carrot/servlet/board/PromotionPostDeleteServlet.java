@@ -32,7 +32,7 @@ public class PromotionPostDeleteServlet extends HttpServlet{
 			ppidao.deletePromotionPostImg(post_no);
 			// 게시글 삭제
 			ppdao.delete(post_no);
-			resp.sendRedirect("used_all_post_list.jsp");
+			resp.sendRedirect("promotion_all_post_list.jsp");
 			
 		}
 		

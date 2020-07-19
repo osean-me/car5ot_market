@@ -218,11 +218,12 @@
 }
 
 .product-title {
+	width: 100%;
 	text-align: left;
 }
 
 .product-title>a {
-	width: 100%;
+	width: 207px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

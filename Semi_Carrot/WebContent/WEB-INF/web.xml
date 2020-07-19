@@ -45,6 +45,7 @@
 		<url-pattern>/board/used_write.jsp</url-pattern>
 		<url-pattern>/board/promotion_write.jsp</url-pattern>
 		<url-pattern>/board/used_post_content.jsp</url-pattern>
+		<url-pattern>/board/promotion_post_content.jsp</url-pattern>
 	</filter-mapping>
 
 	<!-- 회원 필터 -->

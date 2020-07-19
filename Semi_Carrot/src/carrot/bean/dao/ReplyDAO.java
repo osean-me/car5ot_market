@@ -189,30 +189,80 @@ public class ReplyDAO {
 	// [7] super_no 로 부모 댓글 작성자 조회
 	public String getMotherReplyNick(String reply_table_name, long super_no, long post_no) throws Exception {
 		Connection con = getConnection();
-		
+
 		String sql = "SELECT MEMBER_NO FROM #1 WHERE REPLY_NO = ? AND POST_NO = ?";
-		
+
 		sql = sql.replace("#1", reply_table_name);
-		
+
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setLong(1, super_no);
 		ps.setLong(2, post_no);
-		
+
 		ResultSet rs = ps.executeQuery();
-		
+
 		rs.next();
-		
+
 		long reply_member_no = rs.getLong(1);
-		
+
 		con.close();
-		
+
 		MemberDAO mdao = new MemberDAO();
-		
+
 		MemberDTO mdto = mdao.get(reply_member_no);
-		
+
 		String result = mdto.getMember_nick();
-		
+
 		return result;
 	}
+
+	// [8] 해당 회원 댓글 리스트 조회 > 게시글 번호 반환
+	public List<Long> getMemberReplyList_used(long member_no) throws Exception {
+		Connection con = getConnection();
+
+		String sql = "SELECT POST_NO FROM USED_POST_REPLY WHERE MEMBER_NO = ? ORDER BY POST_NO DESC";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setLong(1, member_no);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<Long> list = new ArrayList<Long>();
+
+		while (rs.next()) {
+			long post_no = rs.getLong("post_no");
+
+			list.add(post_no);
+		}
+
+		con.close();
+
+		return list;
+	}
+	
+	// [8] 해당 회원 댓글 리스트 조회 > 게시글 번호 반환
+		public List<Long> getMemberReplyList_promotion(long member_no) throws Exception {
+			Connection con = getConnection();
+
+			String sql = "SELECT POST_NO FROM PROMOTION_POST_REPLY WHERE MEMBER_NO = ? ORDER BY POST_NO DESC";
+
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setLong(1, member_no);
+
+			ResultSet rs = ps.executeQuery();
+
+			List<Long> list = new ArrayList<Long>();
+
+			while (rs.next()) {
+				long post_no = rs.getLong("post_no");
+
+				list.add(post_no);
+			}
+
+			con.close();
+
+			return list;
+		}
 }

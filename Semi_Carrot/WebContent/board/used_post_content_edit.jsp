@@ -1,3 +1,4 @@
+
   
 <%@page import="carrot.bean.dto.UsedBoardDTO"%>
 <%@page import="carrot.bean.dao.UsedBoardDAO"%>
@@ -16,12 +17,12 @@
   	
   %>
 
-
 <script>
    function calculateCount() {
       var text = document.querySelector(".first").value;
       var len = text.length;
       var countTag = document.querySelector(".letter-count");
+
       countTag.textContent = len;
    }
    
@@ -50,21 +51,55 @@
    
    // 제목 2글자 이상 검사 
    function checkTitle() {
-	   var title=document.querySelector(".post-title").value;
-	   var len = title.length;
-	   var isValid = len > 1;
-	   
-	   if(!isValid) {
-		   var span = document.querySelector(".post-title + span");
-		   span.textContent = "제목은 2글자 이상으로 작성하세요.";
-	   }
-   }
+		var title = document.querySelector("input[name=post_title]").value;
+
+		var regex= /^.{2,30}$/;
+
+		var titleInfo = document.querySelector("#titleInfo");
+		var titleInfoText = document.querySelector("#titleInfoText");
+
+		var isValid = title.match(regex);
+		if (isValid) {			
+			var titleInfoText = document.createElement("div");
+			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
+			titleInfoText.setAttribute("id", "titleInfoText");
+			titleInfoText.setAttribute("style", "color: red; font-size: 15px;");
+			titleInfo.appendChild(titleInfoText);
+		} 
+		else if (title.match(regex) != null && titleInfoText != null) {
+				titleInfo.removeChild(titleInfo.childNodes[0]);
+		}
+	}
+// 가격 숫자만 입력 검사 
+   function checkPrice() {
+		var price = document.querySelector("input[name=post_price]").value;
+
+		var regex= /^[0-9]{1,10}$/;
+
+		var priceInfo = document.querySelector("#priceInfo");
+		var priceInfoText = document.querySelector("#priceInfoText");
+
+		var isValid = price.match(regex) == null && priceInfoText == null;
+		if (price.match(regex) == null && priceInfoText == null) {
+				
+			var priceInfoText = document.createElement("div");
+			priceInfoText.textContent = "⛔   숫자만 입력하세요.";
+			priceInfoText.setAttribute("id","priceInfoText");
+			priceInfoText.setAttribute("style","color: red; font-size: 15px;");
+			priceInfo.appendChild(priceInfoText);
+
+		} 
+		else if (price.match(regex) != null && priceInfoText != null) {
+				priceInfo.removeChild(priceInfo.childNodes[0]);
+		}
+	}
+   
+
    
 </script>
 <%
 	String path = request.getContextPath();
 %>
-
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path%>/css/11.used_write.css" type="text/css" rel="stylesheet">
 
@@ -110,7 +145,7 @@
             <hr>
 
             <!-- 제목 입력 -->
-            <div class="used_title" style="list-style: none;">
+            <div class="used_title" style="list-style: none; margin-bottom:40px;">
                <div class="used_text">
                   제목 <span class="must">*</span> 
                   <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." onblur="checkTitle();" value="<%=updto.getPost_title()%>">
@@ -145,7 +180,7 @@
             <hr>
 			
             <!-- 가격 입력 -->
-            <div class="used_price">
+            <div class="used_price" style="margin-bottom:40px;">
                <div class="used_text">
                   가격 <span class="must">*</span> 
                   <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요" value="<%=updto.getPost_price()%>">원

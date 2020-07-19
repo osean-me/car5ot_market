@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import carrot.bean.dao.UsedPostImgDAO;
+import carrot.bean.dao.MemberDAO;
 import carrot.bean.dao.UsedPostDAO;
 import carrot.bean.dto.MemberDTO;
 import carrot.bean.dto.UsedPostImgDTO;
@@ -34,7 +35,9 @@ public class UsedPostWriteServlet extends HttpServlet {
 		try {
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
-			File baseDir = new File("F:/upload/board");
+
+			File baseDir = new File("D:/semi_carrot/upload/board_used_post");
+
 			baseDir.mkdirs();
 
 			DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -47,9 +50,10 @@ public class UsedPostWriteServlet extends HttpServlet {
 			Map<String, List<FileItem>> map = utility.parseParameterMap(req);
 
 			// 회원 정보 가져오기
+			MemberDAO mdao = new MemberDAO();
 			MemberDTO mdto = (MemberDTO) req.getSession().getAttribute("memberinfo");
 			long member_no = mdto.getMember_no();
-			long member_addr_no = mdto.getMember_addr_no();
+			MemberDTO loginmember = mdao.get(member_no);
 
 			// 중고거래 게시글 정보 가져오기
 			UsedPostDTO updto = new UsedPostDTO();
@@ -59,7 +63,7 @@ public class UsedPostWriteServlet extends HttpServlet {
 			updto.setPost_price(Long.parseLong(map.get("post_price").get(0).getString())); // 가격
 			updto.setBoard_no(Long.parseLong(map.get("board_no").get(0).getString())); // 게시판 번호
 			updto.setMember_no(member_no);
-			updto.setAddr_no(member_addr_no);
+			updto.setAddr_no(loginmember.getMember_addr_no());
 
 			// 중고거래 게시글 함수 실행
 			UsedPostDAO updao = new UsedPostDAO();

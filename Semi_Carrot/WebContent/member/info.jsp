@@ -175,7 +175,7 @@
                             </div>
                             <div id="manner">
                                 <div>
-                                   <span id="manner-count">매너 지수 </span><input type="range" value="<%=manner_count %>" readonly>
+                                   <span id="manner-count"><img src="<%=path %>/img/manner.png"></span><input type="range" value="<%=manner_count %>" readonly>
                                 </div>
                             </div>
                         </div>

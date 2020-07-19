@@ -156,7 +156,7 @@
 									%>
 									<div class="hot-product">
 										<div id="img">
-											<a href="used_post_content.jsp?board_no=<%=newpost.getBoard_no()%>&used_cate_num=<%=newpost.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
+											<a href="<%=path %>/board/used_post_content.jsp?board_no=<%=newpost.getBoard_no()%>&used_cate_num=<%=newpost.getUsed_cate_num()%>&post_no=<%=uidto.getPost_no()%>"><img src="<%=path%>/board/showImg.do?post_img_no=<%=uidto.getPost_img_no()%>"></a>
 										</div>
 										<div id="title"><%=newpost.getPost_title()%>
 											..

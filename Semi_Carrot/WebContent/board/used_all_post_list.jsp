@@ -187,7 +187,7 @@
 							<%
 									String used_post_date=dldto.getPost_date().substring(11);
 								
-									int posthour = Integer.parseInt(used_post_date.substring(0, 2)) * 60;
+									int posthour = (Integer.parseInt(used_post_date.substring(0, 2)) * 60) * 60;
 									int postminute = Integer.parseInt(used_post_date.substring(3, 5)) * 60;
 									int postsecound = Integer.parseInt(used_post_date.substring(6, 8));
 									

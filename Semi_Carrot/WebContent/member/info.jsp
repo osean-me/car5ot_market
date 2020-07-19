@@ -234,25 +234,25 @@
                 </div>
                 <div id="mypage-bottom">
                     <div id="mypage-nav">
-                        <div id="nav-1" onmouseover="radiusEdit(this);">
+                        <div id="nav-1" onmouseover="radiusEdit(this);" onchange="changeBackcolor(this);">
                             <label for="select-1">
                                 <input type="radio" name="board" id="select-1" onchange="toggleTabAuto(this);" checked>
                                 <span>중고</span>
                             </label>
                         </div>
-	                        <div id="nav-2" onmouseover="radiusEdit(this);">
+	                        <div id="nav-2" onmouseover="radiusEdit(this);" onchange="changeBackcolor(this);">
 	                            <label for="select-2">
 	                                <input type="radio" name="board" id="select-2" onchange="toggleTabAuto(this);">
 	                                <span>홍보</span>
 	                            </label>
 	                        </div>
-                        <div id="nav-3" onmouseover="radiusEdit(this);">
+                        <div id="nav-3" onmouseover="radiusEdit(this);" onchange="changeBackcolor(this);">
                             <label for="select-3">
                                 <input type="radio" name="board" id="select-3" onchange="toggleTabAuto(this);">
                                 <span>댓글</span>
                             </label>
                         </div>
-                        <div id="nav-5" onmouseover="radiusEdit(this);">
+                        <div id="nav-5" onmouseover="radiusEdit(this);" onchange="changeBackcolor(this);">
                             <label for="select-4">
                                 <input type="radio" name="board" id="select-4" onchange="toggleTabAuto(this);">
                                 <span>찜꽁</span>
@@ -304,7 +304,7 @@
 	                                        </div>
 	                                    </div>
 	                                <%if((i+1) % 5 == 0) { %>
-	                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+	                                	</div><div style="height: 100px; padding: 40px 0px;"><hr></div><div class="mypage-post-list">
 	                               	<%} %>
                                 <%} %>
                               <%} %>  
@@ -351,7 +351,7 @@
 			                                        </div>
 			                                    </div>
 			                                <%if((i+1) % 5 == 0) { %>
-			                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+			                                	</div><div style="height: 100px; padding: 40px 0px;"><hr></div><div class="mypage-post-list">
 			                               	<%} %>
 		                                <%} %>
 		                              <%} %>  
@@ -414,7 +414,7 @@
 			                                        </div>
 			                                    </div>
 				                                <%if((i+1) % 5 == 0) { %>
-				                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+				                                	</div><div style="height: 100px; padding: 40px 0px;"><hr></div><div class="mypage-post-list">
 				                               	<%} %>
 			                               	<%} %>
 		                                <%} %>
@@ -461,7 +461,7 @@
 					                                        </div>
 					                                    </div>
 					                                <%if((i+1) % 5 == 0) { %>
-					                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+					                                	</div><div style="height: 100px; padding: 40px 0px;"><hr></div><div class="mypage-post-list">
 					                               	<%} %>
 				                               	<%} %>
 			                                <%} %>
@@ -510,7 +510,7 @@
 	                                        </div>
 	                                    </div>
 	                                <%if((i+1) % 5 == 0) { %>
-	                                	</div><div style="height: 80px;"></div><div class="mypage-post-list">
+	                                	</div><div style="height: 100px; padding: 40px 0px;"><hr></div><div class="mypage-post-list">
 	                               	<%} %>
                                 <%} %>
                               <%} %>  

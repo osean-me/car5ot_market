@@ -40,6 +40,7 @@ public class UsedThumbnailServlet extends HttpServlet{
 			
 			//실제 데이터를 불러와서 사용자에게 전송
 			File target = new File("D:/upload/board", String.valueOf(upidto.getPost_img_no()));
+
 			byte[] data = FileUtils.readFileToByteArray(target);
 			resp.getOutputStream().write(data);
 		}

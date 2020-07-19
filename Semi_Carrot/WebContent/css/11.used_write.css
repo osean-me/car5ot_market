@@ -11,34 +11,33 @@
 
 #titleInfo {
 	margin-top:10px;
-	margin-bottom:5px;
-	margin-left:110px;
+	margin-left:130px;
 }
 #priceInfo {
 	margin-top:10px;
 	margin-bottom:10px;
-	margin-left:110px;
+	margin-left:130px;
 }
 .titleHeight {
 	   margin-bottom: 40px;
 }
 .form-title {
    margin-top: 40px;
-   width: 1000px;
+   width: 790px;
    padding: 0.9rem;
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
    border: 1px solid lightgray;
    font-size: 19px;
-   margin-left: 50px;
+   margin-left: 70px;
 }
 .form-title:focus {
    margin-top: 40px;
-   width: 1000px;
+   width: 800px;
    padding: 0.9rem;
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
    border: 1px solid lightgray;
    font-size: 19px;
-   margin-left: 50px;
+   margin-left: 70px;
    outline:1px solid orange;
 }
 
@@ -49,7 +48,7 @@
    font-size: 19px;
    margin-top: 40px;
    margin-bottom: 40px;
-   margin-left: 20px;
+   margin-left: 40px;
 }
 .used_cate_style:focus {
    width: 300px; /* 너비설정 */
@@ -58,7 +57,7 @@
    font-size: 19px;
    margin-top: 40px;
    margin-bottom: 40px;
-   margin-left: 20px;
+   margin-left: 40px;
       outline:1px solid orange;
 }
 
@@ -69,7 +68,7 @@
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
    border: 1px solid lightgray;
    font-size: 19px;
-   margin-left: 50px;
+   margin-left: 70px;
 }
 .form-price:focus {
    margin-top: 40px;
@@ -78,9 +77,30 @@
    outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
    border: 1px solid lightgray;
    font-size: 19px;
-   margin-left: 50px;
+   margin-left: 70px;
    outline:1px solid orange;
 }
+
+.form-phone {
+   margin-top: 40px;
+   width: 300px;
+   padding: 0.9rem;
+   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
+   border: 1px solid lightgray;
+   font-size: 19px;
+   margin-left: 40px;
+}
+.form-phone:focus {
+   margin-top: 40px;
+   width: 300px;
+   padding: 0.9rem;
+   outline: none; /* 선택 시 자동 부여되는 테두리 제거 */
+   border: 1px solid lightgray;
+   font-size: 19px;
+   margin-left: 40px;
+   outline:1px solid orange;
+}
+
 
 #free {
    margin-left: 80px;
@@ -95,19 +115,19 @@
 }
 
 .first {
-   width: 1000px;
+   width: 800px;
    height: 200px;
    border-color: lightgray;
    font-size: 20px;
    font-weight: normal;
-   margin-left: 50px;
+   margin-left: 70px;
 }
 .first:focus {
-   width: 1000px;
+   width: 800px;
    height: 200px;
    font-size: 20px;
    font-weight: normal;
-   margin-left: 50px;
+   margin-left: 70px;
    outline:1px solid orange;
 }
 .menu {
@@ -132,7 +152,7 @@
 }
 
 .countNum {
-   margin-left: 990px;
+   margin-left: 790px;
    margin-top: 10px;
 }
 
@@ -192,6 +212,3 @@
    margin:10px;
 }
 
-input+span {
-	color:red;
-}

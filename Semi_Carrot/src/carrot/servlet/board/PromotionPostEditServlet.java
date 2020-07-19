@@ -1,3 +1,4 @@
+
 package carrot.servlet.board;
 
 import java.io.File;
@@ -120,4 +121,5 @@ public class PromotionPostEditServlet extends HttpServlet {
          resp.sendError(500);
       }
    }
+
 }

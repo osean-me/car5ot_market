@@ -54,7 +54,7 @@ public class UsedPostEditServlet extends HttpServlet {
 			long board_no = Long.parseLong(map.get("board_no").get(0).getString()); // 게시판 번호
 			long used_cate_num = Long.parseLong(map.get("used_cate_num").get(0).getString()); // 카테고리 번호
 			long post_no = Long.parseLong(map.get("post_no").get(0).getString()); // 게시글 번호
-			String post_title = map.get("post_content").get(0).getString(); // 게시글 제목
+			String post_title = map.get("post_title").get(0).getString(); // 게시글 제목
 			long post_price = Long.parseLong(map.get("post_price").get(0).getString()); // 상품 가격
 			String post_content = map.get("post_content").get(0).getString();
 

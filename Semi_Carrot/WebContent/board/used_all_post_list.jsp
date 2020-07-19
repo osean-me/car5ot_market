@@ -190,13 +190,17 @@
 							<%
 									String used_post_date=dldto.getPost_date().substring(11);
 								
-									int posthour = Integer.parseInt(used_post_date.substring(0, 2)) * 60;
+									int posthour = (Integer.parseInt(used_post_date.substring(0, 2)) * 60) * 60;
 									int postminute = Integer.parseInt(used_post_date.substring(3, 5)) * 60;
 									int postsecound = Integer.parseInt(used_post_date.substring(6, 8));
 									
 									int posttime_s = posthour + postminute + postsecound;
 									
-									int compareTime = systime_s - posttime_s; 																	
+									int compareTime = systime_s - posttime_s; 
+									
+									System.out.println("현재 시각 : " + systime_s);
+									System.out.println("게시글 시각 : " + posttime_s);
+									System.out.println("결과" + compareTime);
 								%>
 								<div class="product_time">
 									<span>

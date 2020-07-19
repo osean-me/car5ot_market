@@ -467,7 +467,7 @@
 						<div class="right-item75">
 								<div class="top-margin10 left-font">
 									<!-- 작성자 -->
-									<div class="padding15 ">
+									<div>
 									<%if(ppdto.getMember_no( ) != 0){ %>
 										<div id="member-form">
 											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo(this);"><%=mdto.getMember_nick() %></label>
@@ -505,6 +505,7 @@
 					
 				</div>
 					<div class="left-font manner-margin ">
+						<p class="manner-color">매너지수</p>
 						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%; position: relative; z-index: -1;">
 					</div>
 			</div>

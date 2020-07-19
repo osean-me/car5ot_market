@@ -33,7 +33,7 @@ public class UsedPostEditServlet extends HttpServlet {
 			// 1. 수정 페이지에서 등록된 데이터 처리 도구 준비하기
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
-			File baseDir = new File("D:/upload/board");
+			File baseDir = new File("F:/upload/board");
 			baseDir.mkdirs();
 
 			// 2. 공장 생성
@@ -58,37 +58,27 @@ public class UsedPostEditServlet extends HttpServlet {
 			long post_price = Long.parseLong(map.get("post_price").get(0).getString()); // 상품 가격
 			String post_content = map.get("post_content").get(0).getString();
 
-			// 5-2. 게시글 번호로 삭제할 게시글 이미지 번호 받아오기
-			UsedPostImgDAO uidao = new UsedPostImgDAO();
-			List<UsedPostImgDTO> old_img_no = uidao.getList(post_no);
-
-			// 5-3. DB 삭제
-			uidao.deleteUsedPostImg(post_no);
-
-			// 5-4. 받아온 예전 이미지 파일 삭제
-			for (UsedPostImgDTO uidto : old_img_no) {
-				// 파일 본체 삭제
-				File delete_old_img = new File("D:/upload/board/" + uidto.getPost_img_no());
-				delete_old_img.delete();
-			}
-
-			// 6. 게시글 수정
-			UsedPostDAO updao = new UsedPostDAO();
-			UsedPostDTO updto = new UsedPostDTO();
-
-			updto.setBoard_no(board_no);
-			updto.setUsed_cate_num(used_cate_num);
-			updto.setPost_no(post_no);
-			updto.setPost_title(post_title);
-			updto.setPost_price(post_price);
-			updto.setPost_content(post_content);
-
-			updao.edit(updto);
+			
 
 			// 7. 파라미터로 받아온 파일 정보 불러와서 저장 (하드 디스크 + DB)
 			List<FileItem> new_img_list = map.get("used_post_img");
+			
+			System.out.println(!new_img_list.get(0).getName().isEmpty());
+			
+			if (!new_img_list.get(0).getName().isEmpty()) {
+				// 5-2. 게시글 번호로 삭제할 게시글 이미지 번호 받아오기
+				UsedPostImgDAO uidao = new UsedPostImgDAO();
+				List<UsedPostImgDTO> old_img_no = uidao.getList(post_no);
 
-			if (new_img_list != null) {
+				// 5-3. DB 삭제
+				uidao.deleteUsedPostImg(post_no);
+
+				// 5-4. 받아온 예전 이미지 파일 삭제
+				for (UsedPostImgDTO uidto : old_img_no) {
+					// 파일 본체 삭제
+					File delete_old_img = new File("F:/upload/board/" + uidto.getPost_img_no());
+					delete_old_img.delete();
+				}
 				for (FileItem new_img : new_img_list) {
 					UsedPostImgDTO uidto = new UsedPostImgDTO();
 
@@ -108,6 +98,20 @@ public class UsedPostEditServlet extends HttpServlet {
 					new_img.write(target);
 				}
 			}
+			
+			// 6. 게시글 수정
+						UsedPostDAO updao = new UsedPostDAO();
+						UsedPostDTO updto = new UsedPostDTO();
+
+						updto.setBoard_no(board_no);
+						updto.setUsed_cate_num(used_cate_num);
+						updto.setPost_no(post_no);
+						updto.setPost_title(post_title);
+						updto.setPost_price(post_price);
+						updto.setPost_content(post_content);
+
+						updao.edit(updto);
+			
 			resp.sendRedirect("used_post_content.jsp?board_no=" + updto.getBoard_no() + "&used_cate_num="
 					+ updto.getUsed_cate_num() + "&post_no=" + updto.getPost_no());
 

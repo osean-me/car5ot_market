@@ -213,7 +213,7 @@
 
 
 			<div>
-				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
+				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font" style="z-index:1;"></span><p>
 				
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">

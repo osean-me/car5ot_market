@@ -68,8 +68,9 @@
 	
 
 	int count; // 페이지 개수 출력하기 위함
+	int count2; // 검색어에 해당하는 게시글이 없을 경우 메시지 출력을 위한 변수 
 	int pageCount;
-	int searchCount;
+	int searchCount; 
 	
 	List<DetailList3DTO> list;
 	
@@ -78,37 +79,39 @@
 		
 		AddrDAO adao = new AddrDAO();
 		AddrDTO adto = adao.get(member.getMember_addr_no());
-		
-		
+			
 		if(isSearch){
 			count = updao.getCount(type,keyword,member.getMember_addr_no());
 			list = updao.getAreaList(type,keyword,start,finish,member.getMember_addr_no()); // (지역 상관O)지역 검색목록 출력 			
-			
+			count2 = updao.getCount(type,keyword,member.getMember_addr_no());
 		}else {
 			count = updao.getCount(member.getMember_addr_no());
 			list = updao.getAreaList(start,finish,member.getMember_addr_no()); // (지역 상관O)지역 전체목록 출력 
+			count2=1; // 전체 목록에서 게시물이 0일 경우 오류 메세지 출력 방지 위해 설정 
 		}
 		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
 		pageCount = (count + pageSize - 1) / pageSize;
 	 	if(finishBlock > pageCount){
 	 		finishBlock = pageCount;
 	 	}
-	 	searchCount=count;
+	 	searchCount=count2;
 	} 
 	else { // 비회원인 경우	
 		if(isSearch){
 			count = updao.getCount(type,keyword);
 			list = updao.getList(type,keyword,start,finish); // (지역 상관X)검색목록
+			count2=updao.getCount(type, keyword);
 		}else {
 			count = updao.getCount();
 			list = updao.getList(start,finish); // (지역 상관X)전체목록
+			count2 = 1;
 		}
 		//(** 다음 버튼의 경우 계산을 총하여 페이지 개수를 구해야 출력 여부 판단이 가능)
 		pageCount = (count + pageSize - 1) / pageSize;
 	 	if(finishBlock > pageCount){
 	 		finishBlock = pageCount;
 	 	}
-	 	searchCount=count;
+	 	searchCount=count2;
 	}
  	
 	String path = request.getContextPath();
@@ -135,7 +138,7 @@
 	</div>
 	
 <!-- 	검색어가 없는경우 -->
-	<%if(count==0){%>
+	<%if(searchCount==0 ){%>
 	<div align="center">
 		<div class="noSearch"><span style="color: orange; font-size:30px;"><%=keyword %></span><br>
 		에 대한 검색결과가 없습니다.</div>

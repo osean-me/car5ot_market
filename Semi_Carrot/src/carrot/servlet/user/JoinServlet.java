@@ -87,11 +87,11 @@ public class JoinServlet extends HttpServlet {
 			mdto.setMember_nick(member_nick);
 			mdto.setMember_phone(member_phone);
 			
-			//	매너 지수 테이블에 데이터 추가
-			mndao.insertManner(member_no);
 			// 회원 가입
 			mdao.join(mdto);
 			
+			//	매너 지수 테이블에 데이터 추가
+			mndao.insertManner(member_no);
 
 			resp.sendRedirect(req.getContextPath());
 

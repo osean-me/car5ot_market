@@ -178,7 +178,7 @@ public class LikeDAO {
 	public List<UsedPostDTO> getMemberUsedPostLike(long member_no) throws Exception {
 		Connection con = getConnection();
 
-		String sql = "SELECT * FROM USED_POST WHERE POST_NO = (SELECT POST_NO FROM POST_LIKE WHERE MEMBER_NO = ?)";
+		String sql = "SELECT POST_NO FROM POST_LIKE WHERE MEMBER_NO = ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -186,17 +186,26 @@ public class LikeDAO {
 
 		ResultSet rs = ps.executeQuery();
 
-		List<UsedPostDTO> list = new ArrayList<UsedPostDTO>();
+		List<Long> post_list = new ArrayList<Long>();
 
 		while (rs.next()) {
-			UsedPostDTO updto = new UsedPostDTO(rs);
+			Long post_no = rs.getLong("post_no");
 			
-			list.add(updto);
+			post_list.add(post_no);
 		}
 		
 		con.close();
 		
-		return list;
+		List<UsedPostDTO> post = new ArrayList<UsedPostDTO>();
+		UsedPostDAO updao = new UsedPostDAO();
+		
+		for(int i = 0; i < post_list.size(); i++) {
+			UsedPostDTO updto = updao.get(post_list.get(i));
+			
+			post.add(updto);
+		}
+		
+		return post;
 	}
 
 }

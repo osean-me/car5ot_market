@@ -214,7 +214,7 @@
 
 
 	<div>
-				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font"></span><p>
+				<p class="font27 padding25 padding-top40 left-font padding-left30 title-label">연관상품 <span class="swiper-pagination left-font" style="z-index:1;"></span><p>
 				
 				<div class="swiper-container padding40">
 					<div class="swiper-wrapper float-box float-left">
@@ -270,7 +270,7 @@
 						<div class="reply-num-border">
 							<div class="float-box float-left">
 								<div class="left-item50">
-									<p class="font12 gray-font text-padding10">30 / 100</p>
+									<p>　</p>
 								</div>
 								<div class="left-item50 text-padding10">
 									<input type="submit" class="right-float reply-button" value="☜등록">
@@ -467,7 +467,7 @@
 						<div class="right-item75">
 								<div class="top-margin10 left-font">
 									<!-- 작성자 -->
-									<div class="padding15 ">
+									<div>
 									<%if(ppdto.getMember_no( ) != 0){ %>
 										<div id="member-form">
 											<label class="font20" for="member-nick"> <input type="checkbox" id="member-nick" onchange="viewMemberInfo(this);"><%=mdto.getMember_nick() %></label>
@@ -505,6 +505,7 @@
 					
 				</div>
 					<div class="left-font manner-margin ">
+						<p class="manner-color">매너지수</p>
 						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%; position: relative; z-index: -1;">
 					</div>
 			</div>

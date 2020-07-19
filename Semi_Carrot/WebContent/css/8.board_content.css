@@ -532,3 +532,7 @@ textarea {
 .display-on {
 	display: inline-block;
 }
+.manner-color{
+	text-align:right;
+	color:#084B8A;
+}

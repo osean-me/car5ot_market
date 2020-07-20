@@ -33,6 +33,9 @@ public class PromotionPostWriteServlet extends HttpServlet {
 	// 파라미터로 받을 값 : 카테고리 번호, 제목, 내용, 가격, 상태
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		resp.setCharacterEncoding("UTF-8");
+		
 		try {
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
@@ -51,11 +54,12 @@ public class PromotionPostWriteServlet extends HttpServlet {
 			Map<String, List<FileItem>> map = utility.parseParameterMap(req);
 			
 			
-			System.out.println(map.get("promotion_post_img"));
+
 			FileItem checkImg = map.get("promotion_post_img").get(0);
-			System.out.println("이미지 존재 여부 : " + checkImg.getSize());
+			boolean check = !map.get("promotion_cate_num").get(0).getString().isEmpty() && !map.get("post_title").get(0).getString().isEmpty() && !map.get("post_content").get(0).getString().isEmpty() && !map.get("post_phone").get(0).getString().isEmpty() && !map.get("post_price").get(0).getString().isEmpty();
 			
-			if (checkImg.getSize() > 0) {
+			
+			if (checkImg.getSize() > 0 || check) {
 				// 이미지가 있을 경우
 				// 회원 정보 가져오기
 				MemberDAO mdao = new MemberDAO();
@@ -108,11 +112,13 @@ public class PromotionPostWriteServlet extends HttpServlet {
 				resp.sendRedirect("promotion_post_content.jsp?board_no=" + ppdto.getBoard_no() + "&promotion_cate_num="
 						+ ppdto.getPromotion_cate_num() + "&post_no=" + ppdto.getPost_no());
 			} else {
-				// 게시글이 없는 경우
-				resp.getWriter().println("<script>");
-				resp.getWriter().println("history.back();");
-				resp.getWriter().println("alert('이미지를 등록해주세요!');");
-				resp.getWriter().println("</script>");
+				if(checkImg.getSize() > 0) {
+					
+					resp.sendRedirect(req.getContextPath() + "/board/promotion_write.jsp?img_error");
+					
+				} else {
+					resp.sendRedirect(req.getContextPath() + "/board/promotion_write.jsp?content_error");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

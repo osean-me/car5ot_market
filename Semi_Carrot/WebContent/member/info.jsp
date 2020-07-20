@@ -245,7 +245,7 @@
                 </div>
                 <div id="mypage-bottom">
                     <div id="mypage-nav">
-                        <div id="nav-1" onmouseover="radiusEdit(this);" onchange="changeBackcolor(this);">
+                        <div id="nav-1" class="back-color"  onmouseover="radiusEdit(this);" onchange="changeBackcolor(this);">
                             <label for="select-1">
                                 <input type="radio" name="board" id="select-1" onchange="toggleTabAuto(this);" checked>
                                 <span>중고</span>

@@ -504,10 +504,12 @@
 					</div>
 					
 				</div>
+				<%if(ppdto.getMember_no() != 0) { %>
 					<div class="left-font manner-margin ">
 						<p class="manner-color">매너지수</p>
 						<input type="range" value="<%=mndto.getManner_count() %>" style="width: 100%; position: relative; z-index: -1;">
 					</div>
+					<%} %>
 			</div>
 			
 		</div>

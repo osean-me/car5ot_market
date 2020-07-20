@@ -94,7 +94,16 @@
 
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path%>/css/11.used_write.css" type="text/css" rel="stylesheet">
-
+<%if(request.getParameter("img_error") != null) { %>
+	<script>
+		alert("이미지를 1개 이상 추가해주세요.");
+	</script>
+<%} %>
+<%if(request.getParameter("content_error") != null) { %>
+	<script>	
+		alert("모든 내용을 입력해주세요.");
+	</script>	
+<%} %>
 <article style="padding-top: 200px;" id="used-write-form">
    <div class="container" align="left">
       <h1 align="left" style="font-size: 30px; font-weight: normal;">

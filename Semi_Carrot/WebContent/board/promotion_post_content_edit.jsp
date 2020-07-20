@@ -1,5 +1,22 @@
+<%@page import="carrot.bean.dto.PromotionBoardDTO"%>
+<%@page import="carrot.bean.dao.PromotionBoardDAO"%>
+<%@page import="carrot.bean.dto.PromotionPostDTO"%>
+<%@page import="carrot.bean.dao.PromotionPostDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+   
+      <%
+   
+  	long post_no = Long.parseLong(request.getParameter("post_no"));   
+    System.out.println(post_no);
+      
+  	PromotionPostDAO ppdao = new PromotionPostDAO();
+  	PromotionPostDTO ppdto = ppdao.get(post_no);
+  	//카테고리 이름 뽑기
+  	PromotionBoardDAO pbdao = new PromotionBoardDAO();
+	PromotionBoardDTO pbdto = pbdao.get(ppdto.getPromotion_cate_num());
+  	
+  %>
 
 <script>
    function calculateCount() {
@@ -39,85 +56,89 @@
    
    // 제목 2글자 이상 검사 
    function checkTitle() {
-		var title = document.querySelector("input[name=post_title]").value;
+      var title = document.querySelector("input[name=post_title]").value;
 
-		var regex= /^.{2,30}$/;
+      var regex= /^.{2,30}$/;
 
-		var titleInfo = document.querySelector("#titleInfo");
-		var titleInfoText = document.querySelector("#titleInfoText");
+      var titleInfo = document.querySelector("#titleInfo");
+      var titleInfoText = document.querySelector("#titleInfoText");
 
-		if (title.match(regex) == null && titleInfoText == null) {
-				
-			var titleInfoText = document.createElement("div");
-			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
-			titleInfoText.setAttribute("id", "titleInfoText");
-			titleInfoText.setAttribute("style", "color: red; font-size: 15px;");
-			titleInfo.appendChild(titleInfoText);
+      if (title.match(regex) == null && titleInfoText == null) {
+            
+         var titleInfoText = document.createElement("div");
+         titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
+         titleInfoText.setAttribute("id", "titleInfoText");
+         titleInfoText.setAttribute("style", "color: red; font-size: 15px;");
+         titleInfo.appendChild(titleInfoText);
 
-		} 
-		else if (title.match(regex) != null && titleInfoText != null) {
-				titleInfo.removeChild(titleInfo.childNodes[0]);
-		}
-	}
+      } 
+      else if (title.match(regex) != null && titleInfoText != null) {
+            titleInfo.removeChild(titleInfo.childNodes[0]);
+      }
+   }
 // 가격 숫자만 입력 검사 
    function checkPrice() {
-		var price = document.querySelector("input[name=post_price]").value;
+      var price = document.querySelector("input[name=post_price]").value;
 
-		var regex= /^[0-9]{1,10}$/;
+      var regex= /^[0-9]{1,10}$/;
 
-		var priceInfo = document.querySelector("#priceInfo");
-		var priceInfoText = document.querySelector("#priceInfoText");
+      var priceInfo = document.querySelector("#priceInfo");
+      var priceInfoText = document.querySelector("#priceInfoText");
 
-		if (price.match(regex) == null && priceInfoText == null) {
-				
-			var priceInfoText = document.createElement("div");
-			priceInfoText.textContent = "⛔   숫자만 입력하세요.";
-			priceInfoText.setAttribute("id", "priceInfoText");
-			priceInfoText.setAttribute("style", "color: red; font-size: 15px;");
-			priceInfo.appendChild(priceInfoText);
+      if (price.match(regex) == null && priceInfoText == null) {
+            
+         var priceInfoText = document.createElement("div");
+         priceInfoText.textContent = "⛔   숫자만 입력하세요.";
+         priceInfoText.setAttribute("id", "priceInfoText");
+         priceInfoText.setAttribute("style", "color: red; font-size: 15px;");
+         priceInfo.appendChild(priceInfoText);
 
-		} 
-		else if (price.match(regex) != null && priceInfoText != null) {
-				priceInfo.removeChild(priceInfo.childNodes[0]);
-		}
-	}
-	
+      } 
+      else if (price.match(regex) != null && priceInfoText != null) {
+            priceInfo.removeChild(priceInfo.childNodes[0]);
+      }
+   }
+   
 // 전화번호 숫자만 입력 검사 
    function checkPhone() {
-		var phone = document.querySelector("input[name=post_phone]").value;
+      var phone = document.querySelector("input[name=post_phone]").value;
 
-		var regex= /^[0-9]{1,11}$/;
+      var regex= /^[0-9]{1,11}$/;
 
-		var phoneInfo = document.querySelector("#phoneInfo");
-		var phoneInfoText = document.querySelector("#phoneInfoText");
+      var phoneInfo = document.querySelector("#phoneInfo");
+      var phoneInfoText = document.querySelector("#phoneInfoText");
 
-		if (phone.match(regex) == null && phoneInfoText == null) {
-				
-			var phoneInfoText = document.createElement("div");
-			phoneInfoText.textContent = "⛔   -를 제외한 올바른 전화번호를 입력하세요.";
-			phoneInfoText.setAttribute("id", "phoneInfoText");
-			phoneInfoText.setAttribute("style", "color: red; font-size: 15px;");
-			phoneInfo.appendChild(phoneInfoText);
+      if (phone.match(regex) == null && phoneInfoText == null) {
+            
+         var phoneInfoText = document.createElement("div");
+         phoneInfoText.textContent = "⛔   -를 제외한 올바른 전화번호를 입력하세요.";
+         phoneInfoText.setAttribute("id", "phoneInfoText");
+         phoneInfoText.setAttribute("style", "color: red; font-size: 15px;");
+         phoneInfo.appendChild(phoneInfoText);
 
-		} 
-		else if (phone.match(regex) != null && phoneInfoText != null) {
-				phoneInfo.removeChild(phoneInfo.childNodes[0]);
-		}
-	}
+      } 
+      else if (phone.match(regex) != null && phoneInfoText != null) {
+            phoneInfo.removeChild(phoneInfo.childNodes[0]);
+      }
+   }
    
 </script>
 
 <%
 	String path = request.getContextPath();
 %>
-
 <jsp:include page="/template/header.jsp"></jsp:include>
 <link href="<%=path%>/css/12.promotion_write.css" type="text/css" rel="stylesheet">
 
+
+<form action="promopostedit.do" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="post_no" value="<%=post_no%>">
+	<input type="hidden" name="board_no" value="2">
+	
 <article style="padding-top: 200px;" id="used-write-form">
    <div class="container" align="left">
       <h1 align="left" style="font-size: 30px; font-weight: normal;">
-         동네홍보 글쓰기 &nbsp; <span class="must">   *필수항목 </span>
+         동네홍보 글 수정 &nbsp; <span class="must">   *필수항목 </span>
       </h1>
       <br><br>
       <hr class="hr_style2">
@@ -127,7 +148,7 @@
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
 
-      <form action="promotion_post_write.do" method="post" enctype="multipart/form-data">
+      
          <input type="hidden" name="board_no" value="2">
          
          <div class="used_container" >
@@ -153,13 +174,11 @@
             </div>
             <hr>
 
-           <!-- 제목 입력 -->
-            <div class="used_title" style="list-style: none;">
+            <!-- 제목 입력 -->
+            <div class="used_title" style="list-style: none; margin-bottom:40px;">
                <div class="used_text">
                   제목 <span class="must">*</span> 
-                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." oninput="checkTitle();">
-                  <div id="titleInfo"></div>
-                  <div class="titleHeight"></div>
+                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." required value="<%=ppdto.getPost_title()%>">
                </div>
             </div>
             <hr>
@@ -170,7 +189,7 @@
                <div class="used_text">
                   카테고리 <span class="must">*</span>
                   <select class="promotion_cate_style" name="promotion_cate_num">
-                     <option value="">카테고리 선택</option>
+                     <option value="<%=ppdto.getPromotion_cate_num()%>"><%=pbdto.getPromotion_cate_title() %></option>
                      <option value="1">중고차/오토바이</option>
                      <option value="2">동네 구인구직</option>
                      <option value="3">부동산</option>
@@ -184,23 +203,19 @@
             <hr>
 			
 			 <!-- 전화번호 입력 -->
-            <div class="used_phone" style="list-style: none;">
+            <div class="used_phone" style="list-style: none; margin-bottom:40px;">
                <div class="used_text">
                   전화번호 <span class="must">*</span> 
-                  <input class="form-phone" type="text" name="post_phone" placeholder="전화번호를 입력해주세요."  oninput="checkPhone();">
-              	  <div id="phoneInfo"></div>
-                  <div class="titleHeight"></div>
+                  <input class="form-phone" type="text" name="post_phone" placeholder="전화번호를 입력해주세요." required value="<%=ppdto.getPost_phone()%>">
                </div>
             </div>
             <hr>
 			
             <!-- 가격 입력 -->
-            <div class="used_price">
+            <div class="used_price" style="margin-bottom:40px;">
                <div class="used_text">
                   가격 <span class="must">*</span> 
-                  <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요" oninput="checkPrice();">원
-                  <div id="priceInfo"></div>
-                  <div class="titleHeight"></div>
+                  <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요"value="<%=ppdto.getPost_price()%>">원
                </div>
             </div>
             <hr><br><br>
@@ -213,7 +228,7 @@
                   </div>
                   <div class="content">
                      <div>
-                        <textarea class="first" name="post_content" oninput="calculateCount();"></textarea>
+                        <textarea class="first" name="post_content" oninput="calculateCount();"><%=ppdto.getPost_content() %></textarea>
                         <div align="right" class="countNum">
                            <span class="letter-count">0</span>/2000
                         </div>
@@ -227,11 +242,13 @@
          </div>
          <!--  등록 버튼 -->
          <div align="right" class="form-input">
-            <input class="form-btn" type="submit" value="등록하기">
+            <input class="form-btn" type="submit" value="수정완료">
          </div>
 
-      </form>
+      
    </div>
 </article>
+</form>
 
+>>>>>>> refs/remotes/origin/master
 <jsp:include page="/template/footer.jsp"></jsp:include>

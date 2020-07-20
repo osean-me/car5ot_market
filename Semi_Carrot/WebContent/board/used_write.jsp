@@ -35,15 +35,56 @@
    
    // 제목 2글자 이상 검사 
    function checkTitle() {
-	   var title=document.querySelector(".post-title").value;
-	   var len = title.length;
-	   var isValid = len > 1;
+		var title = document.querySelector("input[name=post_title]").value;
+
+		var regex= /^.{2,30}$/;
+
+		var titleInfo = document.querySelector("#titleInfo");
+		var titleInfoText = document.querySelector("#titleInfoText");
+
+		var isValid = title.match(regex)==null && titleInfoText == null;
+		if (isValid) {			
+			var titleInfoText = document.createElement("div");
+			titleInfoText.textContent = "⛔   제목은 2자 이상 입력해주세요.";
+			titleInfoText.setAttribute("id", "titleInfoText");
+			titleInfoText.setAttribute("style", "color: red; font-size: 15px;");
+			titleInfo.appendChild(titleInfoText);
+		} 
+		else if (title.match(regex) != null && titleInfoText != null) {
+				titleInfo.removeChild(titleInfo.childNodes[0]);
+		}
+	}
+// 가격 숫자만 입력 검사 
+   function checkPrice() {
+		var price = document.querySelector("input[name=post_price]").value;
+
+		var regex= /^[0-9]{1,10}$/;
+
+		var priceInfo = document.querySelector("#priceInfo");
+		var priceInfoText = document.querySelector("#priceInfoText");
+
+		var isValid = price.match(regex) == null && priceInfoText == null;
+		if (price.match(regex) == null && priceInfoText == null) {
+				
+			var priceInfoText = document.createElement("div");
+			priceInfoText.textContent = "⛔   숫자만 입력하세요.";
+			priceInfoText.setAttribute("id","priceInfoText");
+			priceInfoText.setAttribute("style","color: red; font-size: 15px;");
+			priceInfo.appendChild(priceInfoText);
+
+		} 
+		else if (price.match(regex) != null && priceInfoText != null) {
+				priceInfo.removeChild(priceInfo.childNodes[0]);
+		}
+	}
+   
+   function checkform() {
+	   var isTitleValid = checkTitle();
+	   var isPriceValid = checkPrice();
 	   
-	   if(!isValid) {
-		   var span = document.querySelector(".post-title + span");
-		   span.textContent = "제목은 2글자 이상으로 작성하세요.";
-	   }
+	   return isTitleValid && isPriceValid;
    }
+
    
 </script>
 
@@ -66,7 +107,7 @@
           준비 : post_title(글제목), used_cate_num(카테고리 번호), used_price(가격), used_content(내용) 
       -->
 
-      <form action="used_post_write.do" method="post"  enctype="multipart/form-data">
+      <form action="used_post_write.do" method="post"  enctype="multipart/form-data" onsubmit="return checkForm();">
       	
       	<!-- board_no 값 hidden으로 넘겨주기  -->
       	<input type="hidden" name="board_no" value="1">
@@ -99,8 +140,9 @@
             <div class="used_title" style="list-style: none;">
                <div class="used_text">
                   제목 <span class="must">*</span> 
-                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." onblur="checkTitle();">
-                  <span></span>
+                  <input class="form-title" type="text" name="post_title" placeholder="상품 제목을 입력해주세요." oninput="checkTitle();">
+                  <div id="titleInfo"></div>
+                  <div class="titleHeight"></div>
                </div>
             </div>
             <hr>
@@ -134,7 +176,7 @@
             <div class="used_price">
                <div class="used_text">
                   가격 <span class="must">*</span> 
-                  <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요">원
+                  <input class="form-price" type="text" name="post_price" placeholder="숫자만 입력해주세요" oninput="checkPrice();">원
                </div>
                <div class="used_text">
                   <label for="freesShipping" id="free"> 
@@ -144,6 +186,8 @@
                      <input type="checkbox"> 가격협의가능
                   </label>
                </div>
+               <div id="priceInfo"></div>
+               <div class="titleHeight"></div>
             </div>
             <hr><br><br>
 

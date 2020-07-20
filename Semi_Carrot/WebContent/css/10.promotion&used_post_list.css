@@ -11,17 +11,17 @@
 .product {
 	border: 1px solid lightgray;
 	float: left;
-	width: 255px;
+	width: 220px;
 	margin: 5px;
 	margin-left: 15px;
 	margin-right: 13px;
 	margin-bottom: 15px;
-	height:380px;
+	height:360px;
 }
 
 .product_photo>a>img {
-	width: 253px;
-	height: 250px;
+	width: 219px;
+	height: 218px;
 }
 
 .product_title {
@@ -57,9 +57,10 @@
 }
 
 .product_like {
+	margin-top: 3px;
 	margin-right: 10px;
 	text-align: right;
-	color: gray;
+	color: #cfcfcf;
 }
 
 .hideText {

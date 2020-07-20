@@ -256,7 +256,6 @@ public class UsedPostDAO {
 		return list;
 	}
 	
-
 	// 비회원(전체)목록인 경우
 	public int getCount() throws Exception {
 		Connection con = getConnection();

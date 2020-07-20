@@ -25,14 +25,14 @@ public class PromotionPostDeleteServlet extends HttpServlet{
 			PromotionPostDAO ppdao = new PromotionPostDAO();
 			
 			//파일삭제
-			File post = new File("D:/upload/board/" + ppidto.getPost_img_no());
+			File post = new File("D:/semi_carrot/upload/board_promotion_post/" + ppidto.getPost_img_no());
 			post.delete();
 			
 			// DB 삭제
 			ppidao.deletePromotionPostImg(post_no);
 			// 게시글 삭제
 			ppdao.delete(post_no);
-			resp.sendRedirect("used_all_post_list.jsp");
+			resp.sendRedirect("promotion_all_post_list.jsp");
 			
 		}
 		

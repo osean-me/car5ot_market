@@ -74,8 +74,7 @@
 	///		자기 소개 	 ///
 	///////////////////
 	
-	IntroDAO idao = new IntroDAO();
-	
+	IntroDAO idao = new IntroDAO();	
 	String intro = idao.getIntro(member_no);
 	
 	/////////////////////////
@@ -96,6 +95,7 @@
 	
 	////////////////////////
 	///		매너 지수		///
+	
 	//////////////////////
 	MannerDAO mndao = new MannerDAO();
 	MannerDTO mndto = mndao.getMannerCount(member_no);

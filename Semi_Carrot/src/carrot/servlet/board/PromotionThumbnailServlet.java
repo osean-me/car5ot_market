@@ -40,7 +40,7 @@ public class PromotionThumbnailServlet extends HttpServlet{
 			resp.setHeader("Content-Length", String.valueOf(ppidto.getPost_img_size()));
 			
 			//실제 데이터를 불러와서 사용자에게 전송
-			File target = new File("D:/semi_carrot/upload/board_promotion_post", String.valueOf(ppidto.getPost_img_no()));
+			File target = new File("D:/upload/board", String.valueOf(ppidto.getPost_img_no()));
 
 			byte[] data = FileUtils.readFileToByteArray(target);
 			resp.getOutputStream().write(data);

@@ -22,6 +22,7 @@ import carrot.bean.dto.MemberDTO;
 import carrot.bean.dto.UsedPostImgDTO;
 import carrot.bean.dto.UsedPostDTO;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/board/used_post_write.do")
 public class UsedPostWriteServlet extends HttpServlet {
 	// 목표: 게시글 등록 후 중고거래 상세페이지로 이동

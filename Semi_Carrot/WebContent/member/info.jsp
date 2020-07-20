@@ -393,7 +393,6 @@
 		                                <%
 		                                	long count = 0;
 		                                	for(int i = 0; i < used_post_no.size(); i++) {
-		                                		System.out.println(used_post_no.get(i));
 		                                		UsedPostDTO reply_used_post = updao.get(used_post_no.get(i));
 		                                		
 		                                		if(count != reply_used_post.getPost_no()) {

@@ -414,7 +414,7 @@
 						<div class="reply-num-border">
 							<div class="float-box float-left">
 								<div class="left-item50">
-									<p class="font12 gray-font text-padding10">30 / 100</p>
+									<p class="font12 gray-font text-padding10"><p>　</p>
 								</div>
 								<div class="left-item50 text-padding10">
 									<input type="submit" class="right-float reply-button" value="☜등록">

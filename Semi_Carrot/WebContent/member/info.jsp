@@ -74,8 +74,7 @@
 	///		자기 소개 	 ///
 	///////////////////
 	
-	IntroDAO idao = new IntroDAO();
-	
+	IntroDAO idao = new IntroDAO();	
 	String intro = idao.getIntro(member_no);
 	
 	/////////////////////////
@@ -96,6 +95,7 @@
 	
 	////////////////////////
 	///		매너 지수		///
+	
 	//////////////////////
 	MannerDAO mndao = new MannerDAO();
 	MannerDTO mndto = mndao.getMannerCount(member_no);
@@ -393,7 +393,6 @@
 		                                <%
 		                                	long count = 0;
 		                                	for(int i = 0; i < used_post_no.size(); i++) {
-		                                		System.out.println(used_post_no.get(i));
 		                                		UsedPostDTO reply_used_post = updao.get(used_post_no.get(i));
 		                                		
 		                                		if(count != reply_used_post.getPost_no()) {

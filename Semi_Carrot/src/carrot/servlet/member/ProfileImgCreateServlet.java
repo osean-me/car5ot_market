@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import carrot.bean.dao.ProfileImgDAO;
 import carrot.bean.dto.ProfileImgDTO;
+import carrot.constant.FilePath;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/reg_profile.do")
@@ -34,7 +35,7 @@ public class ProfileImgCreateServlet extends HttpServlet {
 			// 1. 해석을 위한 도구 생성 옵션 설정
 			String charset = "UTF-8"; // 인코딩 방식 > UTF-8
 			int limit = 10 * 1024 * 1024; // 파일 최대 용량
-			File baseDir = new File("D:/semi_carrot/upload/member_profile");
+			File baseDir = new File(FilePath.profilePath);
 			baseDir.mkdirs();
 
 			// 2. 도구 생성을 위한 Factory 객체 생성

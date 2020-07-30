@@ -17,6 +17,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import carrot.bean.dao.ProfileImgDAO;
 import carrot.bean.dto.ProfileImgDTO;
+import carrot.constant.FilePath;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/edit_profile.do")
@@ -32,7 +33,7 @@ public class ProfileImgEditServlet extends HttpServlet {
 			// 1. 새로 등록된 사진 도구 준비하기
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
-			File baseDir = new File("D:/semi_carrot/upload/member_profile");
+			File baseDir = new File(FilePath.profilePath);
 			baseDir.mkdirs();
 
 			// 2. 공장 생성
@@ -55,7 +56,7 @@ public class ProfileImgEditServlet extends HttpServlet {
 			System.out.println("회원 이미지 번호 : " + before_img_no);
 			
 			// 6. 기존 파일 삭제
-			File profile_delete = new File("D:/semi_carrot/upload/member_profile/" + before_img_no);
+			File profile_delete = new File(FilePath.profilePath + before_img_no);
 			profile_delete.delete();
 
 			// 7. DB 삭제

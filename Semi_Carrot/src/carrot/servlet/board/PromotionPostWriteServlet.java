@@ -21,6 +21,7 @@ import carrot.bean.dao.PromotionPostImgDAO;
 import carrot.bean.dto.MemberDTO;
 import carrot.bean.dto.PromotionPostDTO;
 import carrot.bean.dto.PromotionPostImgDTO;
+import carrot.constant.FilePath;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/board/promotion_post_write.do")
@@ -40,7 +41,7 @@ public class PromotionPostWriteServlet extends HttpServlet {
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
 
-			File baseDir = new File("D:/upload/board");
+			File baseDir = new File(FilePath.promotionPath);
 
 			baseDir.mkdirs();
 

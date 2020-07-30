@@ -8,9 +8,9 @@
 				auth="Container"
 				
 				driverClassName="oracle.jdbc.OracleDriver"
-				url="jdbc:oracle:thin:@localhost:1521:xe"
-				username="C##CARROT"
-				password="C##CARROT"
+				url="jdbc:oracle:thin:@www.sysout.co.kr:1521:xe"
+				username="c##kh32"
+				password="c##kh32"
 				
 				maxTotal="20"
 				maxIdle="5"

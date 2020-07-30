@@ -20,6 +20,7 @@ import carrot.bean.dao.MemberDAO;
 import carrot.bean.dao.UsedPostDAO;
 import carrot.bean.dto.MemberDTO;
 import carrot.bean.dto.UsedPostImgDTO;
+import carrot.constant.FilePath;
 import carrot.bean.dto.UsedPostDTO;
 
 @SuppressWarnings("serial")
@@ -40,7 +41,7 @@ public class UsedPostWriteServlet extends HttpServlet {
 			String charset = "UTF-8";
 			int limit = 10 * 1024 * 1024;
 
-			File baseDir = new File("D:/semi_carrot/upload/board_used_post");
+			File baseDir = new File(FilePath.postPath);
 
 			baseDir.mkdirs();
 

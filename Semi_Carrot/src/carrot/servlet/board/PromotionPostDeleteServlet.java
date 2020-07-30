@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import carrot.bean.dao.PromotionPostDAO;
 import carrot.bean.dao.PromotionPostImgDAO;
 import carrot.bean.dto.PromotionPostImgDTO;
+import carrot.constant.FilePath;
 
 @WebServlet(urlPatterns = "/board/promopostdelete.do")
 public class PromotionPostDeleteServlet extends HttpServlet{
@@ -25,7 +26,7 @@ public class PromotionPostDeleteServlet extends HttpServlet{
 			PromotionPostDAO ppdao = new PromotionPostDAO();
 			
 			//파일삭제
-			File post = new File("D:/semi_carrot/upload/board_promotion_post/" + ppidto.getPost_img_no());
+			File post = new File(FilePath.promotionPath + ppidto.getPost_img_no());
 			post.delete();
 			
 			// DB 삭제

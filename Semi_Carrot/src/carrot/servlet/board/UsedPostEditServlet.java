@@ -20,6 +20,7 @@ import carrot.bean.dao.UsedPostDAO;
 import carrot.bean.dao.UsedPostImgDAO;
 import carrot.bean.dto.UsedPostDTO;
 import carrot.bean.dto.UsedPostImgDTO;
+import carrot.constant.FilePath;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/board/usedpostedit.do")
@@ -34,7 +35,7 @@ public class UsedPostEditServlet extends HttpServlet {
          // 1. 수정 페이지에서 등록된 데이터 처리 도구 준비하기
          String charset = "UTF-8";
          int limit = 10 * 1024 * 1024;
-         File baseDir = new File("D:/semi_carrot/upload/board_used_post");
+         File baseDir = new File(FilePath.postPath);
          baseDir.mkdirs();
 
          // 2. 공장 생성
@@ -77,7 +78,7 @@ public class UsedPostEditServlet extends HttpServlet {
             // 5-4. 받아온 예전 이미지 파일 삭제
             for (UsedPostImgDTO uidto : old_img_no) {
                // 파일 본체 삭제
-               File delete_old_img = new File("D:/semi_carrot/upload/board_used_post/" + uidto.getPost_img_no());
+               File delete_old_img = new File(FilePath.postPath + uidto.getPost_img_no());
                delete_old_img.delete();
             }
             for (FileItem new_img : new_img_list) {

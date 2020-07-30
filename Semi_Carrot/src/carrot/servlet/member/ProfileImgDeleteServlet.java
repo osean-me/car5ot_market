@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import carrot.bean.dao.ProfileImgDAO;
 import carrot.bean.dto.MemberDTO;
+import carrot.constant.FilePath;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/delete_profile.do")
@@ -39,7 +40,7 @@ public class ProfileImgDeleteServlet extends HttpServlet {
 			long member_img_no = Long.parseLong(req.getParameter("member_img_no"));
 
 			// 파일 삭제
-			File profile = new File("D:/semi_carrot/upload/member_profile/" + member_img_no);
+			File profile = new File(FilePath.profilePath + member_img_no);
 			profile.delete();
 
 			// DB 삭제

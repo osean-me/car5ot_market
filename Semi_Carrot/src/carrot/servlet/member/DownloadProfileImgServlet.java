@@ -13,6 +13,7 @@ import org.apache.commons.io.FileUtils;
 
 import carrot.bean.dao.ProfileImgDAO;
 import carrot.bean.dto.ProfileImgDTO;
+import carrot.constant.FilePath;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/member/profile_img_down.do")
@@ -41,7 +42,7 @@ public class DownloadProfileImgServlet extends HttpServlet {
 			resp.setHeader("Content-Length", String.valueOf(pidto.getMember_img_size()));
 			
 			// 4. 실제 데이터 사용자에게 전송
-			File target = new File("D:/semi_carrot/upload/member_profile",String.valueOf(pidto.getMember_img_no()));
+			File target = new File(FilePath.profilePath,String.valueOf(pidto.getMember_img_no()));
 			byte[] data = FileUtils.readFileToByteArray(target);
 			
 			resp.getOutputStream().write(data);

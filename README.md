@@ -22,7 +22,7 @@
 
 
 ## 🚀 포트폴리오
-[carrot_portfolio_심성헌.pdf](https://github.com/dip0cean/Semi_Carrot/files/5636107/carrot_portfolio_.pdf)
+[carrot_portfolio.pdf](https://github.com/dip0cean/Semi_Carrot/files/5636107/carrot_portfolio_.pdf)
 
 
 ## 💭 고민의 흔적들

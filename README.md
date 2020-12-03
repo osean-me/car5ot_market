@@ -4,8 +4,8 @@
 당근 마켓을 모티브로 Java, Javascript, Oracle을 사용해
 거주지 중심 중고거래 플랫폼을 개발하고자 하는 프로젝트입니다.
 ```
+![carrot_gif](https://user-images.githubusercontent.com/60208293/101019957-14d63c00-35b1-11eb-964e-beb1c8e395d4.gif)
 
-![Carrot_gif](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/005e542b-beb2-4fdb-9c89-52d9b78fbb91/carrot_gif.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201203%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20201203T124148Z&X-Amz-Expires=86400&X-Amz-Signature=4662b9d5f137a8f0d7570b062981446534c3d6ed9138215163ec5dac48556ea9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22carrot_gif.gif%22)
 
 ## 🧑‍💻 멤버
 | Name   | Task                                                                                                            |
@@ -20,22 +20,25 @@
 
 [어서오세요! 당근마켓!](http://www.sysout.co.kr/carrot_task/)
 
-## 🚀 포트폴리오
 
+## 🚀 포트폴리오
+[carrot_portfolio_심성헌.pdf](https://github.com/dip0cean/Semi_Carrot/files/5636107/carrot_portfolio_.pdf)
 
 
 ## 💭 고민의 흔적들
+- **스토리 보드**
+![Semi_Carrot](https://user-images.githubusercontent.com/60208293/101020004-27e90c00-35b1-11eb-9282-b7eb2c1b3afe.png)
 
 - **회원 가입**
-
+![join](https://user-images.githubusercontent.com/60208293/101020023-32a3a100-35b1-11eb-8fda-c52df12f962f.png)
 
 
 - **찜 기능**
-
+![jjim](https://user-images.githubusercontent.com/60208293/101020035-36cfbe80-35b1-11eb-8a9d-c9869b3a4161.png)
 
 
 - **회원 매너지수 기능**
-
+![manner](https://user-images.githubusercontent.com/60208293/101020045-3a634580-35b1-11eb-8644-729dac844e34.png)
 
 
 ## 🛠 사용 기술

@@ -2,7 +2,7 @@
 
 ```
 당근 마켓을 모티브로 Java, Javascript, Oracle을 사용해
-**거주지 중심 중고거래 플랫폼**을 개발하고자 하는 프로젝트입니다.
+거주지 중심 중고거래 플랫폼을 개발하고자 하는 프로젝트입니다.
 ```
 
 ![Carrot_gif](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/005e542b-beb2-4fdb-9c89-52d9b78fbb91/carrot_gif.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20201203%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20201203T124148Z&X-Amz-Expires=86400&X-Amz-Signature=4662b9d5f137a8f0d7570b062981446534c3d6ed9138215163ec5dac48556ea9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22carrot_gif.gif%22)
@@ -22,21 +22,21 @@
 
 ## 🚀 포트폴리오
 
-[carrot_portfolio_심성헌.pdf](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/957bbcef-a3d1-421a-981b-9ec9b380f535/carrot_portfolio_.pdf)
+
 
 ## 💭 고민의 흔적들
 
 - **회원 가입**
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/684b5224-27b5-42ca-b0cc-e463862410d4/join.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/684b5224-27b5-42ca-b0cc-e463862410d4/join.png)
+
 
 - **찜 기능**
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9911d07f-1375-40db-8f73-24b32ce519db/jjim.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9911d07f-1375-40db-8f73-24b32ce519db/jjim.png)
+
 
 - **회원 매너지수 기능**
 
-    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/47bf064b-e265-40df-89dc-8613a9843efc/manner.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/47bf064b-e265-40df-89dc-8613a9843efc/manner.png)
+
 
 ## 🛠 사용 기술
 
